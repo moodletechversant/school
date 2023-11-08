@@ -20,9 +20,11 @@ if ($mform->is_cancelled()) {
     redirect($returnurl);
 } 
 else if ($formdata = $mform->get_data()) {
+   
     
     $classdata= new stdclass();
     $classdata->class_name=$formdata->name;
+    
     $classdata->academic_id=$formdata->academicyear;
     $classdata->class_description=$formdata->description;
     $DB->insert_record('class',$classdata);
