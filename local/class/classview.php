@@ -27,7 +27,7 @@ echo $OUTPUT->header();
         $timestart1 = date("d-m-Y", $timestart);
         $options1[] = array('value' => $academic1->id, 'label' => $timestart1);
     }
- 
+    // print_r($options1);
     $templateData = array(
         'startYearOptions' => $options1,
         'endYearOptions' => $options2,
