@@ -23,7 +23,7 @@ else if ($formdata = $mform->get_data()) {
     
     $divdata= new stdclass();
     $divdata->div_class=$formdata->class;
-    // print_r($divdata->div_class);exit();
+    //print_r($divdata->div_class);exit();
     $divdata->div_name=$formdata->name;
     $divdata->div_strength=$formdata->strength;
     $divdata->div_bstrength=$formdata->bstrength;
