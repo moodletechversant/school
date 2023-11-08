@@ -1,0 +1,42 @@
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: #384047;
+  }
+  
+  form {
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+  }
+  
+  thead{
+    margin: 0 0 30px 0;
+    text-align: center;
+    background-color:  #97e9e5; 
+  }
+  tbody{
+    margin: 0 0 30px 0;
+    text-align: center;
+    background-color:  #dcf8f7; 
+  }
+  
+.dt-button.buttons-csv.buttons-html5{
+  background-color:  #74c2d8; 
+}
+.dt-button.buttons-excel.buttons-html5{
+  background-color:  #74c2d8; 
+}
+
+.dt-button.buttons-pdf.buttons-html5{
+  background-color:  #74c2d8; 
+}
+
+

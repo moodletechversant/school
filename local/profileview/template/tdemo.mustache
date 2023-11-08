@@ -1,0 +1,57 @@
+ <div class="wrapper">
+    <section class="content-header">
+      <h3 class="center-align" style=" text-align: center;">
+        Profile
+      </h3>
+      <br>
+    </section>
+  <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img  src="https://www.w3schools.com/w3css/img_avatar3.png" alt="User profile picture" style="margin-left: 46.5%; width: 100px;padding: 3px;border: 3px solid #d2d6de;">
+
+            <table class="center-align" align="center"> 
+            {{#students}}
+            <tr><td>
+            Name:</td><td> <h3 class="profile-username text-center"> {{name}}</h3></td>
+
+
+
+            
+              <tr><td> <p class="text-muted text-center">Email:</td><td> {{email}}</p></td>
+               <tr><td><p class="text-muted text-center">Dob:</td><td> {{dob}}</p></td>
+               <tr><td><p class="text-muted text-center">Address: </td><td>{{address}} </p></td>
+               <tr><td><p class="text-muted text-center">Mob No: </td><td>{{no}}</p></td>
+               <tr><td><p class="text-muted text-center">Class Teacher: </td><td>{{classteacher}}</p></td>
+      
+           
+            
+             {{/students}}
+               </table> 
+            </div>
+          </div>
+          </div>
+
+
+<div class="wrapper">
+    <section class="content-header">
+        <h3 class="center-align" style="text-align: center;">Courses</h3>
+        <br>
+    </section>
+    <div class="box box-primary">
+        <div class="box-body box-profile">
+            <table class="center-align" align="center">
+                {{#courses}}
+                <tr>
+                   
+                    <td>
+                        {{#subjects}}
+                        <a href="/school/course/view.php?id={{id}}">{{subjects}}: </a>
+                        {{#teacher}}{{teacher}}<br>{{/teacher}}
+                        {{/subjects}}
+                    </td>
+                </tr>
+                {{/courses}}
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container mb-3 mt-3">
+     <button class="btn btn-primary btn-grid">Grid View</button>
+     <button class="btn btn-danger btn-list">List View</button>  
+</div>
+<div class="container grid-container">
+    <div class="row">
+        {{#sub}}
+            <div class="col-12 col-md-6 col-lg-4 hover">          
+                <div class="card">                  
+                    <a href="/school/course/view.php?id={{id}}">
+                        <div class="card-img-top" style="background: linear-gradient(to bottom right, #3399ff 0%, #99ccff 100%); width: 349px; height: 180px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
+                            <span style="color: white; font-size: 30px;">{{fullname}}</span>
+                        </div>
+                    </a>
+                    <div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
+                        <p class="card-text">{{summary}}</p>
+                    </div>                            
+                </div>                 
+            </div>
+        {{/sub}}
+    </div> 
+</div>

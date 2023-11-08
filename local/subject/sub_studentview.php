@@ -1,0 +1,116 @@
+<?php
+require_once(__DIR__ . '/../../config.php');
+require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
+Mustache_Autoloader::register();
+
+$template = file_get_contents($CFG->dirroot . '/local/subject/template/sub_view.mustache');
+
+global $class,$CFG;
+$context = context_system::instance();
+require_login();
+// $classid = $class->id;
+$linktext = "Courses";
+$linkurl = new moodle_url('/local/subject/sub_studentview.php');
+
+$PAGE->set_context($context);
+//$strnewclass= get_string('studentview');
+
+$PAGE->set_url('/local/subject/sub_studentview.php');
+$PAGE->set_heading($linktext);
+// $PAGE->set_pagelayout('admin');
+$PAGE->set_title($linktext);
+
+echo $OUTPUT->header();
+$current_user_id = $USER->id;
+// print_r($current_user_id);exit();
+// $recs=$DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$current_user_id");
+// print_r($recs);exit();
+
+$data = array();
+// $rec1=$DB->get_records_sql("SELECT *
+// FROM mdl_subject
+// JOIN mdl_student_assign ON mdl_subject.sub_class COLLATE utf8mb4_unicode_ci = mdl_student_assign.s_class COLLATE utf8mb4_unicode_ci AND mdl_subject.sub_division COLLATE utf8mb4_unicode_ci = mdl_student_assign.s_division COLLATE utf8mb4_unicode_ci");
+// $rec1=$DB->get_records_sql("SELECT {course}.* FROM {enrol} JOIN {user_enrolments} ON
+// {user_enrolments}.enrolid = {enrol}.id JOIN {course}
+//   ON {course}.id = {enrol}.courseid where {user_enrolments}.userid=$current_user_id");
+$rec1=$DB->get_records_sql("SELECT {course}.* FROM {course} JOIN {enrol} ON
+  {enrol}.courseid = {course}.id JOIN {user_enrolments}
+    ON {user_enrolments}.enrolid = {enrol}.id where {user_enrolments}.userid=$current_user_id");
+//  print_r($rec1);exit();
+$mustache = new Mustache_Engine();
+foreach($rec1 as $record1){
+    $id = $record1->id;
+    $fullname = $record1->fullname;
+    $startdate = $record1->startdate;
+    $enddate = $record1->enddate;
+    $summary = $record1->summary;
+    // print_r($rec1);exit();
+    // $description = $record1->sub_description;
+    $data[] = array('id' => $id,'fullname' => $fullname, 'startdate' => $startdate, 'enddate' => $enddate, 'summary' => $summary);
+}
+// print_r($data);exit();
+
+//Multi-dimentional array
+$subjects = array('sub' => $data);
+// print_r($subjects);exit();
+echo $mustache->render($template,$subjects);
+  ?>
+
+  <?php
+    echo $OUTPUT->footer();
+    ?>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/body.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <style>
+    .card {
+      margin-bottom: 1rem;
+    }
+    
+    .list-view .row > [class*='col-'] {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+    
+    .list-view .card {
+      flex-direction: row;
+    }
+    
+    @media (max-width: 575.98px) {
+      .list-view .card {
+        flex-direction: column;
+      }
+    }
+    
+    .list-view .card > .card-img-top {
+      width: auto;
+    }
+    
+    .list-view .card .card-body {
+      display: inline-block;
+    }
+  </style>
+</head>
+  
+<script>
+  function showList(e) {
+    var $gridCont = $('.grid-container');
+    e.preventDefault();
+    $gridCont.hasClass('list-view') ? $gridCont.removeClass('list-view') : $gridCont.addClass('list-view');
+  }
+  
+  function gridList(e) {
+    var $gridCont = $('.grid-container');
+    e.preventDefault();
+    $gridCont.removeClass('list-view');
+  }
+  
+  $(document).on('click', '.btn-grid', gridList);
+  $(document).on('click', '.btn-list', showList);
+</script>

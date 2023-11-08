@@ -1,0 +1,38 @@
+<div class="center" id="bg1">
+        <br>
+        <div class="container-fluid" id="time1">
+            <div class="timetable-img text-center">
+                <img src="img/content/timetable.png" alt="">
+            </div>            
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">                    
+                    <tbody>                  
+                        <thead>                          
+                            {{#day}}
+                                <tr>
+                                    <th class="align-middle" title="click to delete">{{days}}</th>
+                                    {{#records}}
+                                        <td>
+                                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13 titlebar" title="Teacher-{{t_teacher}}">{{t_subject}}</span>
+                                            <div class="margin-10px-top font-size13">{{from_time}}-{{to_time}}</div>
+                                        </td>
+                                        {{#break_type}}
+                                            <td class="break-bg">
+                                                <div class="margin-10px-top font-size14 break-color" title="{{break_ftime}}-{{break_ttime}}">{{break_type}}</div>
+                                            </td>
+                                        {{/break_type}}
+                                    {{/records}}
+                                </tr>
+                            {{/day}}
+                           </tr>
+                        </thead>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+</div>  
+                               
+
+                                   
+                          

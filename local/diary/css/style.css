@@ -1,0 +1,95 @@
+/* My Starter Template */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* font-family: 'Space Mono', monospace; */
+  line-height: 1.6;
+  background: rgba(175, 238, 238, 0.3);
+  color: black;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 900px;
+}
+
+header {
+  text-align: center;
+  margin: 1em auto;
+}
+
+.h2{
+    font-size:large;
+}
+.form-control{
+    background-color: rgb(202 237 243);
+    border-color: rgb(202 237 243);
+}
+.form-control:focus{
+    background-color: rgb(202 237 243);
+    border-color: rgb(202 237 243);
+    box-shadow: none;
+}
+.custom-select{
+    background-color: rgb(202 237 243) !important;
+    border-color: rgb(202 237 243) !important;
+    box-shadow: none !important;
+
+}
+
+.journal-label {
+  display: block;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: rgb(68, 123, 134);
+}
+
+.btn-primary{
+    background-color: rgb(66, 144, 233);
+    border-color: rgb(66, 144, 233);
+}
+.btn-primary:hover {
+    background-color: rgb(66, 144, 233);
+    border-color: rgb(66, 144, 233);
+    color: black;
+  }
+  .btn-primary:focus {
+    background-color: rgb(66, 144, 233);
+    border-color: rgb(66, 144, 233) !important;
+  }
+  .btn-primary:active {
+    background-color: rgb(66, 144, 233) !important;
+    border-color: rgb(66, 144, 233) !important;
+  }
+  .title{
+    color: rgb(52, 112, 124);
+  }
+
+
+
+@media (min-width: 769px) {
+  .entry-text-box {
+    width: 40em;
+    height: 20em;
+    margin: 1em auto;
+    padding: 1em;
+    border-radius: 2px;
+    border: unset;
+    background-color: lightgoldenrodyellow;
+    font-family: 'Space Mono', monospace;
+  }
+}
+.stdselect{
+  padding-left: 20%;
+}
+

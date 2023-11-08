@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/school/local/css/style.css" />
+</head>
+
+<body>  
+<form action="promotion.php" method="POST" id="form_id">
+  <div class="form-wrap">
+    <div class="cointainer">
+      <div class="col-md-11 col-11 mx-auto col-lg-11"> 
+        <div class="form-card card">
+          
+          <div class="d-flex mb-3" style="align-items: center;">
+            <h4 class="mb-0">Student Promotion</h4>
+          </div>
+          <img src="/school/local/img/exclamation.svg" width="35px" />
+          <p style="margin-left:50px;margin-top:-30px"><b>Mark the Passed  and Failed students from the below list and then assign to the respective promoted and depromoted class</b> </p>
+          <br>
+           <div class="table-filter mb-3">
+              <div class="row">
+
+              <div class="col-md-6">
+                 <div class="cards-bx">
+                   <h5>Assign Passed Students to the Promoted class</h5>
+                     
+                      <div class="d-flex listing-top">
+                          <div class="form-group">
+                            <label>Academic Year</label>
+                            <select class="form-select" aria-label="Default select example" id="academic"  name="academic">
+                              <!--<option selected="">Select</option>-->
+                              {{#templateData}}
+                              {{#startYearOptions}}
+                              <option value="{{value}}">{{label}}</option>
+                              {{/startYearOptions}}
+                              {{/templateData}}
+                            </select>
+                          </div>
+
+                            <div class="form-group">
+                              <label>Class</label>
+                              <select class="form-select" aria-label="Default select example" id="class" name="class">
+                                <option selected="">Select</option>
+                              </select>
+                            </div>
+
+                              <div class="form-group">
+                                <label>Division</label>
+                                <select class="form-select" aria-label="Default select example" id="division"  name="division">
+                                  <option selected="">Select</option>
+                                </select>
+                              </div>
+                       </div>
+                 
+                   </div>
+               </div>
+
+
+               <div class="col-md-6">
+                  <div class="cards-bx">
+                    <h5>Assign Failed students to the Depromoted class</h5>
+
+                      <div class="d-flex listing-top">
+                          <div class="form-group">
+                            <label>Academic Year</label>
+                            <select class="form-select" aria-label="Default select example" id="academic1" name="academic1">
+                              <!--<option selected="">Select</option>-->
+                              {{#templateData}}
+                              {{#startYearOptions}}
+                              <option value="{{value}}">{{label}}</option>
+                              {{/startYearOptions}}
+                              {{/templateData}}
+                            </select>
+                          </div>
+
+                            <div class="form-group">
+                              <label>Class</label>
+                              <select class="form-select" aria-label="Default select example" id="class1" name="class1">
+                                <option selected="">Select</option>
+                              </select>
+                            </div>
+
+                              <div class="form-group">
+                                <label>Division</label>
+                                <select class="form-select" aria-label="Default select example" id="division1" name="division1">
+                                  <option selected="">Select</option>
+                                </select>
+                              </div>
+                       </div>
+                 </div>
+            </div>
+            
+          </div>
+     </div>
+     <div id="demo">
+
+          <div class="table-responsive custom-table">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <div class="wrap-t">Student Name</div>
+                  </th>
+                  <th scope="col">
+                    <div class="wrap-t">Class</div>
+                  </th>
+                  <th scope="col">
+                    <div class="wrap-t">Pass</div>
+                  </th>
+                  <th scope="col">
+                    <div class="wrap-t">Fail</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              {{#Promotion}}
+                <tr>
+                  <td>
+                    <div class="wrap-t">{{ftname}}{{mlname}}{{lsname}}</div>
+                  </td>
+                  <td>
+                    <div class="wrap-t">{{classname}}</div>
+                  </td>
+                 <td>
+                   <input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="pass" checked>Pass
+                 </td>
+                 <td>
+                   <input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="fail">Fail               
+                 </td>
+                </tr>
+              {{/Promotion}}
+              </tbody>
+            </table>
+          </div>
+          <div class="table-pagination">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+          </div>
+
+  
+        </div>
+      </div>
+    </div>
+      
+<button type="submit"  class="btn-primary btn ml-auto" name="submit" style="width: 100px; margin-top: 30px; margin-right: 1150px ">Submit</button>
+  </div>
+</form>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+<script>
+    $(document).ready(function() {
+        $("#academic").change(function() { // Corrected ID
+            var startYear = $(this).val();
+          
+            if (startYear != "") {
+                $.ajax({
+                    url: "test.php",
+                    data: { b_id: startYear },
+                    type: 'POST',
+                    success: function(data) {
+                        $("#class").html(data); // Corrected ID
+                                  
+                         $.ajax({
+
+                    url: "test.php",
+                    data: { c_id: 0},
+                    type: 'POST',
+                    success: function(data) {
+                  
+                        $("#division").html(data); // Corrected ID
+                    }
+                });
+                  
+                    }
+                });
+            }
+        });
+   
+   
+        $("#class").change(function() { // Corrected ID
+            var classss = $(this).val();
+           
+            if (classss != "") {
+                $.ajax({
+
+                    url: "test.php",
+                    data: { c_id: classss},
+                    type: 'POST',
+                    success: function(data) {
+                  
+                        $("#division").html(data); // Corrected ID
+                    }
+                });
+            }
+        });
+  
+     <!--FAILED-->
+
+
+ $("#academic1").change(function() { // Corrected ID
+            var academicc = $(this).val();
+          
+            if (academicc != "") {
+                $.ajax({
+                    url: "test.php",
+                    data: { b_id: academicc },
+                    type: 'POST',
+                    success: function(data) {
+                    
+                        $("#class1").html(data); // Corrected ID
+                                  
+                         $.ajax({
+
+                    url: "test.php",
+                    data: { c_id: 0},
+                    type: 'POST',
+                    success: function(data) {
+                  
+                        $("#division1").html(data); // Corrected ID
+                    }
+                });
+                  
+                    }
+                });
+            }
+        });
+   
+   
+        $("#class1").change(function() { // Corrected ID
+            var classss = $(this).val();
+           
+            if (classss != "") {
+                $.ajax({
+
+                    url: "test.php",
+                    data: { c_id: classss},
+                    type: 'POST',
+                    success: function(data) {
+                  
+                        $("#division1").html(data); // Corrected ID
+                    }
+                });
+            }
+        });
+
+
+
+    });
+
+
+</script>
+</body>

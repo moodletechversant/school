@@ -1,0 +1,19 @@
+table {
+    border-radius: 5px 25px 25px;
+    width: 100%;
+    background-color:#daecf7;
+    
+  }
+
+  table th,
+  table td {
+    
+    padding: 8px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #72aacf;
+
+  }
+
