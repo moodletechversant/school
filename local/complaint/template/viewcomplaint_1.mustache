@@ -37,6 +37,14 @@
                        
                       </select>
                     </div>
+
+                    <div class="form-group">
+                      <label>Division</label>
+                      <select class="form-select" aria-label="Select End Year" id="division">
+                        <option selected>---- Select Division ----</option>
+                       
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -77,10 +85,25 @@
                 $.ajax({
 
                     url: "test.php",
-                    data: { c_id: class_value},
+                    data: { c_id: class_value, delete: 0},
                     type: 'POST',
                     success: function(data) {
                   
+                        $("#division").html(data); // Corrected ID
+                    }
+                });
+            }
+        });
+
+
+         $("#division").change(function() { // Corrected ID
+            var sassign = $(this).val();
+            if (sassign != "") {
+                $.ajax({
+                    url: "test.php",
+                    data: {d_id: sassign,delete:0},
+                    type: 'POST',
+                    success: function(data) {
                         $("#demo").html(data); // Corrected ID
                     }
                 });
