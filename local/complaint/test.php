@@ -4,32 +4,50 @@ global $DB,$CFG;
 require_login();
 
 if (isset($_POST['b_id'])) {
-    $bid = $_POST['b_id'];
+  $bid = $_POST['b_id'];
 
-    $models = $DB->get_records_sql("SELECT * FROM {class} WHERE academic_id='$bid'");
+  $models = $DB->get_records_sql("SELECT * FROM {class} WHERE academic_id='$bid'");
 
-    if (!empty($models)) {
-        $select_data = '<option>---- Select Class ----</option>';
+  if (!empty($models)) {
+      $select_data = '<option>---- Select Class ----</option>';
 
-        foreach ($models as $model) {
-            $class_data = $model->class_name;
-            $select_data .= '<option value="' . $model->id . '">' . $class_data . '</option>';
-        }
+      foreach ($models as $model) {
+          $class_data = $model->class_name;
+          $select_data .= '<option value="' . $model->id . '">' . $class_data . '</option>';
+      }
 
-        echo $select_data;
+      echo $select_data;
+  } else {
+      $select_data .= '<option value="">No Class found</option>';
+      echo $select_data;
+  }
+}
+if (isset($_POST['c_id'])) {
+$cid = $_POST['c_id'];
+if ($cid == 0) {
+    $select_data .= '<option value="" selected disabled>---- Select Division----</option>';
+} else {
+    $models = $DB->get_records_sql("SELECT * FROM {division} WHERE div_class = '$cid'");
+    
+    $select_data .= '<option value="" selected disabled>---- Select Division----</option>';
+
+    if (empty($models)) {
+        $select_data .= '<option value="" disabled>No divisions found</option>';
     } else {
-        $select_data .= '<option value="">No Class found</option>';
-        echo $select_data;
+        foreach ($models as $model) {
+          $select_data .= '<option value="' . $model->id . '">' . $model->div_name . '</option>';
+        }
     }
 }
+echo $select_data;
+}
 
-if (isset($_POST['c_id'])) {
-    $cid = $_POST['c_id'];
+
+if (isset($_POST['d_id'])) {
+  $did = $_POST['d_id'];
  
-    $models = $DB->get_records_sql("SELECT * FROM {complaint} WHERE user_id IN (SELECT user_id FROM {student_assign} WHERE s_class='$cid')");
+    $models = $DB->get_records_sql("SELECT * FROM {complaint} WHERE user_id IN (SELECT user_id FROM {student_assign} WHERE s_division='$did')");
 
-    //$models = $DB->get_records_sql("SELECT * FROM {student_assign} WHERE s_class='$cid'");
-    //print_r($complaint_user_ids);exit();
    
     if (!empty($models)) {
         $var = '
