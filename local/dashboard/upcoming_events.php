@@ -32,7 +32,6 @@ $upcoming_events = $DB->get_records_sql("
 );
 //print_r($upcoming_events);exit();
 
-
 if (empty($upcoming_events)) {
     echo "There are no upcoming events.";
 } else {
