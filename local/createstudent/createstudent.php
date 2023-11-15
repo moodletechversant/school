@@ -15,6 +15,9 @@ $PAGE->set_title($strnewclass);
 $mform=new createstudent_form();
 echo $OUTPUT->header();
 
+
+
+//hi
 $returnurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
 if ($mform->is_cancelled()) {
     redirect($returnurl);
