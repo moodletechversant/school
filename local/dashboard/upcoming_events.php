@@ -39,11 +39,7 @@ $tableRows = [];
 $table->head = array('Event Date', 'Event Name');
 
 if (!empty($upcoming_events))  {
-    // $table = new html_table();
-    // $table->head = array('Event Date', 'Event Name');
-    // $table->data = array();
-    // $table->class = '';
-    // $table->id = 'event_list';
+   
    
     foreach ($upcoming_events as $event) {
         
@@ -57,16 +53,8 @@ if (!empty($upcoming_events))  {
             'Event_date' => $event_date,
             'Event_name' => $event_name,
         ];
-        // $table->data[] = array(
-        //     $event_date,
-        //     $event_name,
-        // );
+       
     }
-
-    // echo html_writer::table($table);
-    // $backurl = new moodle_url('/local/dashboard/dashboard.php');
-    // $backbutton = html_writer::link($backurl, '< Back');
-    // echo $backbutton;
 }
 else{
     $tableRows[] = [
