@@ -19,7 +19,7 @@ $selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : 
 //$selected_date_timestamp = strtotime($selected_date);
 
 $rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE tdate='$selected_date'");
-// print_r($selected_date);exit();
+ //print_r($rec);exit();
 
 $table = new html_table();
 echo '<form method="POST">';
@@ -39,7 +39,7 @@ foreach ($rec as $value) {
     $data1[] = [
       'id' =>$id,
       'rollno' =>$rollno,
-      'name1' =>$name1,
+      'name1' =>$name1, 
       'status' =>$status,
       'edit' =>$edit,
       'delete' =>$delete,
@@ -51,7 +51,7 @@ foreach ($rec as $value) {
 echo $mustache->render($template, ['viewattend' => $data1]);
 
     
-    //$table->data[] = array($rollno, $name1, $status, $edit, $delete);
+   
 
 echo html_writer::table($table);
 echo $OUTPUT->footer();
