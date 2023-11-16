@@ -1,5 +1,5 @@
-
-
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,9 @@
         <div class="form-card card">
           <div class="d-flex mb-3" style="align-items: center;">
             <h4 class="mb-0">View attendance</h4>
-            <div class="wrap-t"><a class="btn-primary btn ml-auto" href="/school/local/attendance/attendance.php" style="width: 180px; height: 40pxpx; margin-right: -730px;">Mark attendance</a></div>
+              <div class="wrap-t">
+                <a class="btn-primary btn ml-auto" href="/school/local/attendance/attendance.php" style="width: 180px; height: 40pxpx; margin-right: -850px;">Mark attendance</a>
+              </div>
           </div>
            <!-- <form method="POST">
                 <input type="date" id="db_picker_attend" name="attendance_date" value="' . $selected_date . '" onchange="this.form.submit()">
@@ -78,14 +80,22 @@
               </tbody>
             </table>
           </div>
-          
+         <div class="table-pagination">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+          </div>
 
+  
         </div>
       </div>
-
     </div>
-  </div>
-
 
 
 
