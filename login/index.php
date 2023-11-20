@@ -379,7 +379,7 @@ if (empty($frm->username) && $authsequence[0] != 'shibboleth') {  // See bug 518
     } else {
         $frm->username = get_moodle_cookie();
     }
-
+//hai everyone
     $frm->password = "";
 }
 
