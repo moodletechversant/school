@@ -13,6 +13,7 @@ $PAGE->set_context($context);
 echo $OUTPUT->header();
 
 $current_time = time(); 
+//print_r($current_time);exit();
 
 
 $current_userid = $USER->id;
