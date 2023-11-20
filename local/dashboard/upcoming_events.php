@@ -29,9 +29,9 @@ $current_date = time();
 $upcoming_events = $DB->get_records_sql("
     SELECT *
     FROM {event}
-    WHERE timestart >= ? AND visible = ? AND eventtype IN (?, ?)
+    WHERE timestart >= ? AND visible = ? AND eventtype IN (?,?,?,?)
     ORDER BY timestart ASC",
-    array($current_date, 1, 'user','site')
+    array($current_date, 1, 'user','site','course','category')
 );
 //print_r($upcoming_events);exit();
 $mustache = new Mustache_Engine();
