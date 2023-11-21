@@ -158,4 +158,87 @@ echo $OUTPUT->footer();
 
 
     </style>
-    
+       
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('input[name="fstname"],input[name="midlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"]').blur(function() {
+
+
+var currVal = $(this).val();
+$(this).val(currVal.charAt(0).toUpperCase() + currVal.slice(1).toLowerCase());
+
+
+});
+
+//text full lowercase
+$('input[name="username"]').blur(function() {
+var currVal = $(this).val();
+$(this).val(currVal.toLowerCase());
+
+});
+//Validation for Qulaification
+// Assuming you have jQuery loaded
+// $('input[name="qln"]').blur(function() {
+//     var currVal = $(this).val();
+
+//     // Check if the entered value is numeric
+//     if ($.isNumeric(currVal)) {
+//         alert('Invalid input. Please enter text only.');
+//         // You can also clear the input or take other actions as needed
+//         $(this).val('');
+//     }
+// });
+$('input[name="qln"]').on("keydown", function(event){
+  // Allow controls such as backspace, tab etc.
+  var allowedKeys = [8, 9, 16, 17, 20, 35, 36, 37, 38, 39, 40, 45, 46,191,190,188];
+
+  // Allow letters
+  for(var i = 65; i <= 90; i++){
+    allowedKeys.push(i);
+  }
+
+  // Prevent default if not in the allowed keys array or if it's a number
+  if(jQuery.inArray(event.which, allowedKeys) === -1 || (event.which >= 48 && event.which <= 57)){
+    event.preventDefault();
+  }
+});
+
+
+//only alphabets
+$('input[name="fstname"],input[name="midlname"],input[name="lsname"]').on("keydown", function(event){
+// Allow controls such as backspace, tab etc.
+var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
+
+// Allow letters
+for(var i = 65; i <= 90; i++){
+  arr.push(i);
+}
+
+// Prevent default if not in array
+if(jQuery.inArray(event.which, arr) === -1){
+  event.preventDefault();
+}
+
+
+});
+
+
+//only numeric value
+$('input[name="fno"],input[name="mno"],input[name="gno"],input[name="no"]').keypress
+(
+function(event)
+{
+    if (event.keyCode == 46 || event.keyCode == 8)
+    {
+    //do nothing
+    }
+    else 
+    {
+        if (event.keyCode < 48 || event.keyCode > 57 ) 
+        {
+            event.preventDefault();	
+        }	
+    }
+}
+);
+</script>
