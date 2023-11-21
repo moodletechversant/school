@@ -159,6 +159,33 @@ var currVal = $(this).val();
 $(this).val(currVal.toLowerCase());
 
 });
+//Validation for Qulaification
+// Assuming you have jQuery loaded
+// $('input[name="qln"]').blur(function() {
+//     var currVal = $(this).val();
+
+//     // Check if the entered value is numeric
+//     if ($.isNumeric(currVal)) {
+//         alert('Invalid input. Please enter text only.');
+//         // You can also clear the input or take other actions as needed
+//         $(this).val('');
+//     }
+// });
+$('input[name="qln"]').on("keydown", function(event){
+  // Allow controls such as backspace, tab etc.
+  var allowedKeys = [8, 9, 16, 17, 20, 35, 36, 37, 38, 39, 40, 45, 46,191,190,188];
+
+  // Allow letters
+  for(var i = 65; i <= 90; i++){
+    allowedKeys.push(i);
+  }
+
+  // Prevent default if not in the allowed keys array or if it's a number
+  if(jQuery.inArray(event.which, allowedKeys) === -1 || (event.which >= 48 && event.which <= 57)){
+    event.preventDefault();
+  }
+});
+
 
 //only alphabets
 $('input[name="fstname"],input[name="midlname"],input[name="lsname"]').on("keydown", function(event){
