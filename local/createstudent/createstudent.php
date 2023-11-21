@@ -98,22 +98,23 @@ $(this).val(currVal.toLowerCase());
 });
 
 //only alphabets
-$('input[name="fstname"],input[name="midlname"],input[name="lsname"]').on("keydown", function(event){
-// Allow controls such as backspace, tab etc.
-var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
+$('input[name="ftname"],input[name="mlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"]').on("keydown", function(event){
+	// Allow controls such as backspace, tab etc.
+	var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
+	
+	// Allow letters
+	for(var i = 65; i <= 90; i++){
+	arr.push(i);
+	}
+	
+	// Prevent default if not in array
+	if(jQuery.inArray(event.which, arr) === -1){
+	event.preventDefault();
+	}
+	
+	
+	});
 
-// Allow letters
-for(var i = 65; i <= 90; i++){
-  arr.push(i);
-}
-
-// Prevent default if not in array
-if(jQuery.inArray(event.which, arr) === -1){
-  event.preventDefault();
-}
-
-
-});
 
 
 //only numeric value
