@@ -133,5 +133,16 @@ class editteacher_form extends moodleform {
  
     }
     
-  
+    public function validation($data, $files) {
+        global $DB;
+        $errors = parent::validation($data, $files);
+        if (!empty($data['bg'])) {
+        $validBloodGroups = array('A', 'B', 'AB', 'O');
+        $enteredBloodGroup = strtoupper($data['bg']);
+        if (!in_array($enteredBloodGroup, $validBloodGroups)) {
+        $errors['bg'] = "Invalid blood group";
+        }
+        }
+        return $errors;
+        }
 }
