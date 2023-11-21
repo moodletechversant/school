@@ -60,8 +60,11 @@ class createteacher_form extends moodleform {
         $mform->setType('username', PARAM_RAW);
         $mform->addRule('username', 'Username missing', 'required', null);
 
-        $mform->addElement('text', 'email', 'Email Address'); 
-        $mform->addRule('email', 'email missing', 'required', null);
+        // $mform->addElement('text', 'email', 'Email Address'); 
+        // $mform->addRule('email', 'email missing', 'required', null);
+        $mform->addElement('text', 'email', 'Email Address');
+        $mform->addRule('email', 'Enter a valid email', 'email', null, 'client');
+        $mform->addRule('email', 'Email is required', 'required', null, 'client');
 
         $mform->addElement('passwordunmask', 'password', get_string('password'), 'size="20"');
         $mform->addRule('password', 'Password field missing', 'required', null);
@@ -130,6 +133,19 @@ class createteacher_form extends moodleform {
         
         $mform->addElement('html', '</div>');
     }
+
+    public function validation($data, $files) {
+        global $DB;
+        $errors = parent::validation($data, $files);
+        if (!empty($data['bg'])) {
+        $validBloodGroups = array('A', 'B', 'AB', 'O');
+        $enteredBloodGroup = strtoupper($data['bg']);
+        if (!in_array($enteredBloodGroup, $validBloodGroups)) {
+        $errors['bg'] = "Invalid blood group";
+        }
+        }
+        return $errors;
+        }
 
       
 

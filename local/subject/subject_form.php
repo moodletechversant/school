@@ -117,6 +117,27 @@ class subject_form extends moodleform {
              $mform->addElement('html', '</div>');
     }
 
+    public function validation($data, $files) {
+        global $DB;
+
+        $errors = parent::validation($data, $files);
+
+        // Check for duplicate subject entry in the selected class and division.
+        if (!empty($data['class']) && !empty($data['division']) && !empty($data['subname'])) {
+            $existingSubject = $DB->get_record('subject', array(
+                'sub_class' => $data['class'],
+                'sub_division' => $data['division'],
+                'sub_name' => $data['subname']
+            ));
+
+            if ($existingSubject) {
+                $errors['subname'] = "This subject name is already existing";
+            }
+        }
+
+        return $errors;
+    }
+
 }
 
 
