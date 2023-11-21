@@ -180,7 +180,7 @@ if(jQuery.inArray(event.which, arr) === -1){
 
 
 //only numeric value
-$('input[name="fno"],input[name="mno"],input[name="gno"]').keypress
+$('input[name="fno"],input[name="mno"],input[name="gno"],input[name="no"]').keypress
 (
 function(event)
 {
