@@ -34,6 +34,8 @@ if($mform->is_cancelled()){
  //print_r($formdata);
 // exit;
 $existing_record = $DB->get_record('new_timetable_periods', array(
+    't_class' => $formdata->class,
+    't_division' => $formdata->division,
     't_day' => $formdata->day,
 ));
 
