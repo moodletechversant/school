@@ -43,7 +43,7 @@ class complaint_form extends moodleform {
 
         $mform = $this->_form;
       
-        $mform->addElement('html', '<h2 class="text-center heading mb-5">Complaint</h2>');
+        $mform->addElement('html', '<h2 class="text-center heading mb-5">Register Complaint</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
     
@@ -62,11 +62,11 @@ class complaint_form extends moodleform {
         $mform->addElement('html', '</div>');
 
         $this->add_action_buttons();
-        
+        $mform->addElement('html','<a href = "view_complaint.php" style="text-decoration:none">');
+        $mform->addElement('button', 'btn', 'View complaints'); 
+       $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');
-        //$mform->addElement('html','<a href = "view_student.php" style="text-decoration:none">');
-        //$mform->addElement('button', 'btn', 'View students'); 
-       // $mform->addElement('html','</a>');
+      
        
        //print_r($user_record);exit();
     

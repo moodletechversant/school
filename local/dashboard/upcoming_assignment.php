@@ -28,6 +28,8 @@ echo $OUTPUT->header();
 $userid = $USER->id;
 $current_date = time();
 $enrolled_courses = enrol_get_users_courses($userid);
+$context = context_user::instance($USER->id, MUST_EXIST);
+
 //print_r($enrolled_courses);exit();
 $enrolled_course_ids = array();
 foreach ($enrolled_courses as $enrolled_course) {
@@ -43,12 +45,7 @@ if (empty($enrolled_course_ids)) {
     $data = $DB->get_records_sql("SELECT * FROM {assign} WHERE course IN ($in_clause) AND duedate >= ? ORDER BY allowsubmissionsfromdate", $params);
     $mustache = new Mustache_Engine();
     $tableRows = [];
-    if (empty($data)) {
-        echo "There are no upcoming assignment for your enrolled courses.";
-    } 
-    else{
-  
-    $context = context_user::instance($USER->id, MUST_EXIST);
+    if (!empty($data)) {
 
     foreach ($data as $value) {
        // Get the course module ID from the current row of data (assuming $value is an object)
@@ -78,6 +75,16 @@ if (empty($enrolled_course_ids)) {
 
         
     }
+    } 
+    else{
+        
+       $error= "There are no upcoming assignment for your enrolled courses.";
+       $tableRows[] = [
+        
+        'Submission_date' => $error,
+       
+    ];
+    
    // echo $view_icon;
     // echo html_writer::table($table);
     // $backurl = new moodle_url('/local/dashboard/dashboard.php');

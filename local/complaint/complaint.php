@@ -11,7 +11,6 @@ $strnewclass= "Complaint";
 $PAGE->set_url('/local/complaint/complaint.php');
 //$PAGE->set_pagelayout('admin');
 $PAGE->set_title($strnewclass);
-$PAGE->set_heading($strnewclass);
 $mform=new complaint_form();
 echo $OUTPUT->header();
 

@@ -30,7 +30,7 @@ echo $OUTPUT->header();
 $mform = new timetable_form();
 
 if($mform->is_cancelled()){
-    $cancelurl = $CFG->wwwroot.'/my';
+    $cancelurl = $CFG->wwwroot.'/local/new_timetable/admin_view_1.php';
     redirect($cancelurl);
 }else if($formdata = $mform->get_data()){ 
 //  print_r($formdata);exit;
@@ -42,23 +42,18 @@ $timetabledata_array = array();
 for ($i = 1; $i <= $num_periods; $i++) {
     $timetabledata =  new stdclass();
      // Combine the selected values into a single string
-    $from_time = $formdata->{"fromtime_$i"} . ' ' . $formdata->{"fromampm_$i"};
-    //print_r($from_time);exit;
-    // Insert the combined value into a database column
-    $timetabledata->from_time = $from_time;
-    $to_time = $formdata->{"totime_$i"} . ' ' . $formdata->{"fromampm_$i"};
-    $timetabledata->to_time = $to_time;
-    $timetabledata->t_subject = $formdata->{"subject_$i"};
-    $timetabledata->t_teacher = $formdata->{"teacher_$i"};
-     $id= $DB->get_record_sql('SELECT id,t_day FROM mdl_new_timetable_periods ORDER BY id DESC LIMIT 1');
-     $timetabledata->period_id =$id->id;
-     $timetabledata->days_id =$id->t_day;
-     if (!empty($formdata->{"break_$i"})) {
-      $timetabledata->break_type = $formdata->{"break_$i"};
-      $b_ftime = $formdata->{"b_fromtime_$i"} . ' ' . $formdata->{"b_fromampm_$i"};
-    $timetabledata->break_ftime = $b_ftime;
-    $b_ttime = $formdata->{"b_totime_$i"} . ' ' . $formdata->{"b_fromampm_$i"};
-    $timetabledata->break_ttime = $b_ttime;
+    
+     $timetabledata->from_time = $formdata->{"fromtime_$i"};
+     $timetabledata->to_time = $formdata->{"totime_$i"};
+     $timetabledata->t_subject = $formdata->{"subject_$i"};
+     $timetabledata->t_teacher = $formdata->{"teacher_$i"};
+      $id= $DB->get_record_sql('SELECT id,t_day FROM mdl_new_timetable_periods ORDER BY id DESC LIMIT 1');
+      $timetabledata->period_id =$id->id;
+      $timetabledata->days_id =$id->t_day;
+      if (!empty($formdata->{"break_$i"})) {
+       $timetabledata->break_type = $formdata->{"break_$i"};
+       $timetabledata->break_ftime = $formdata->{"b_fromtime_$i"};
+       $timetabledata->break_ttime = $formdata->{"b_totime_$i"};
   }     
   else{
     $timetabledata->break_type = '0';
@@ -184,20 +179,19 @@ $(document).ready(function() {
     });
   <?php } ?>
 });
-
 //Function for reset the values if 'remove break' button is clicked
 function resetBreak(id) {
         var breakType = document.getElementById('id_break_' + id);
         var fromTime = document.getElementById('id_b_fromtime_' + id);
-        var fromAMPM = document.getElementById('id_b_fromampm_' + id);
+        //var fromAMPM = document.getElementById('id_b_fromampm_' + id);
         var toTime = document.getElementById('id_b_totime_' + id);
-        var toAMPM = document.getElementById('id_b_toampm_' + id);
+       // var toAMPM = document.getElementById('id_b_toampm_' + id);
 
         breakType.selectedIndex = 0;
         fromTime.selectedIndex = 0;
-        fromAMPM.selectedIndex = 0;
+        //fromAMPM.selectedIndex = 0;
         toTime.selectedIndex = 0;
-        toAMPM.selectedIndex = 0;
+        //toAMPM.selectedIndex = 0;
     }
      
 </script>
