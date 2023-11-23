@@ -6,7 +6,7 @@ global $class,$CFG, $DB;
 $template = file_get_contents($CFG->dirroot . '/local/attendance/template/attendance.mustache');
 
 
-$context = context_system::instance(); 
+$context = context_system::instance();  
 // $classid = $class->id;
 $linktext = "Attendance";
 

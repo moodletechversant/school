@@ -27,7 +27,7 @@ echo '<form method="POST">';
  echo '</form>';
 
 $data1=[];  
-foreach ($rec as $value) {
+foreach ($rec as $value) { 
     $id = $value->id;
     $rollno = $value->stud_name; 
     $status = $value->attendance;
