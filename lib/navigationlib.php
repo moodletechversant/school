@@ -1373,7 +1373,7 @@ class global_navigation extends navigation_node {
                     );
                 }
                 else{
-                        //  We are using the users my moodle for the root element.
+                    //  We are using the users my moodle for the root element.
                     $properties = array(
                     'key' => 'myhome',
                     'type' => navigation_node::TYPE_SYSTEM,
