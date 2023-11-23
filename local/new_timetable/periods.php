@@ -33,7 +33,15 @@ if($mform->is_cancelled()){
 }else if($formdata = $mform->get_data()){ 
  //print_r($formdata);
 // exit;
+$existing_record = $DB->get_record('new_timetable_periods', array(
+    't_day' => $formdata->day,
+));
 
+if ($existing_record) {
+    // Record already exists for the same class, division, and day.
+    // You can handle the overlap as needed.
+    echo '<script>alert("Timetable for this day already exists.");</script>';
+} else {
     $periodsdata =  new stdclass();
     $periodsdata->t_class  = $formdata->class;
     $periodsdata->t_division = $formdata->division;
@@ -44,6 +52,7 @@ if($mform->is_cancelled()){
   
     redirect($CFG->wwwroot.'/local/new_timetable/timetable.php');
     //redirect($urlto); 
+}
 }
 
 $mform->display();
