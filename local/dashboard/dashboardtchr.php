@@ -80,13 +80,7 @@ foreach ($data1 as $record) {
     $data['myarray1'][] = array('sname' => $sname);
 }
 
-foreach ($data2 as $record) {
-    $d_content = $record->d_content;
-    $data['diary_entries'][] = array('content' => $d_content);
-    // if ($record->d_student_id == $USER->id) {
-    //     $data['user_d_content'] = $d_content;
-    // }
-}
+
 
 
 echo $mustache->render($template4, $data);

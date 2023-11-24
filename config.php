@@ -9,7 +9,7 @@ $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'localhost';
 $CFG->dbname    = 'sample_moodle';
 $CFG->dbuser    = 'root1';
-$CFG->dbpass    = 'Nikhila@123';
+$CFG->dbpass    = 'Pass@1234';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => 0,
@@ -19,6 +19,7 @@ $CFG->dboptions = array (
 );
 
 $CFG->wwwroot   = 'http://localhost/school';
+
 $CFG->dataroot  = '/var/www/schooldata';
 $CFG->admin     = 'admin';
 
