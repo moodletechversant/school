@@ -91,9 +91,10 @@ if (empty($enrolled_course_ids)) {
     // $backbutton = html_writer::link($backurl, '< Back');
     // echo $backbutton;
 }
-}
 $output = $mustache->render($template, ['tableRows' => $tableRows]);
 echo $output;
+}
+
 
 echo $OUTPUT->footer();
 ?>
