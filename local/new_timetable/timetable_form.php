@@ -55,7 +55,9 @@ class timetable_form extends moodleform {
         $num_periods = reset($rec)->t_periods;
         // print_r($period1);exit();
         $mform->addElement('text', 'last_period', 'Number of periods', array('value' => $num_periods,'disabled' => 'disabled'));
-
+        $mform->addElement('html', '<a href="edit_period.php?id=' . $id . '" style="text-decoration:none">');
+        $mform->addElement('button', 'btn', 'Edit'); 
+        $mform->addElement('html','</a>');
 
         // loop to add elements for each period
         for ($i = 1; $i <= $num_periods; $i++) {
@@ -65,28 +67,43 @@ class timetable_form extends moodleform {
             
             // From time
             $options = array();
-            for ($h = 0; $h <= 23; $h++) {
+            for ($h = 8; $h <= 18; $h++) { 
                 for ($m = 0; $m < 60; $m++) {
-                    $label = sprintf('%02d:%02d', $h, $m);
-                    $value = sprintf('%02d:%02d', $h, $m);
+                    $hour_12hr = ($h > 12) ? ($h - 12) : $h; 
+                   $am_pm = ($h >= 12) ? 'PM' : 'AM'; 
+            
+                    $hour = sprintf('%02d', $hour_12hr);
+                    $minute = sprintf('%02d', $m);
+                    $time_with_am_pm = "$hour:$minute $am_pm";
+                    $label = $time_with_am_pm;
+                    $value = $time_with_am_pm;
                     $options[$value] = $label;
                 }
             }
+            
             $mform->addElement('select', "fromtime_$i", "From", $options);
-            $mform->addElement('select', "fromampm_$i", '', array('AM' => 'AM', 'PM' => 'PM'));
-        
-            // To time
-            $options = array();
-            for ($h = 0; $h <= 23; $h++) {
-                for ($m = 0; $m < 60; $m++) {
-                    $label = sprintf('%02d:%02d', $h, $m);
-                    $value = sprintf('%02d:%02d', $h, $m);
-                    $options[$value] = $label;
-                }
-            }
-            $mform->addElement('select', "totime_$i", "To", $options);
-            $mform->addElement('select', "toampm_$i", '', array('AM' => 'AM', 'PM' => 'PM'));
+            
+           // To time
+           $options = array();
+           for ($h = 9; $h <= 18; $h++) { 
+               for ($m = 0; $m < 60; $m++) {
+                   $hour_12hr = ($h > 12) ? ($h - 12) : $h; 
+                   $am_pm = ($h >= 12) ? 'PM' : 'AM'; 
 
+                   $hour = sprintf('%02d', $hour_12hr);
+                   $minute = sprintf('%02d', $m);
+                   $time_with_am_pm = "$hour:$minute $am_pm";
+                   $label = $time_with_am_pm;
+                   $value = $time_with_am_pm;
+                   $options[$value] = $label;
+               }
+           }
+
+           // Set the default value to "10am"
+           $default_value = '9:00 AM';
+
+           $mform->addElement('select', "totime_$i", "To", $options);
+           $mform->setDefault("totime_$i", $default_value);
             // // Subject
             // $subjects = $DB->get_records('subject');
             // $options = array(''=>'---- Select a subject ----');
@@ -140,27 +157,41 @@ class timetable_form extends moodleform {
 
             // Break fromtime
             $options = array();
-            for ($h = 0; $h <= 23; $h++) {
+            $options[''] = 'Select start time';
+            for ($h = 9; $h <= 18; $h++) { 
                 for ($m = 0; $m < 60; $m++) {
-                    $label = sprintf('%02d:%02d', $h, $m);
-                    $value = sprintf('%02d:%02d', $h, $m);
+                    $hour_12hr = ($h > 12) ? ($h - 12) : $h; 
+                    $am_pm = ($h >= 12) ? 'PM' : 'AM'; 
+            
+                    $hour = sprintf('%02d', $hour_12hr);
+                    $minute = sprintf('%02d', $m);
+                    $time_with_am_pm = "$hour:$minute $am_pm";
+                    $label = $time_with_am_pm;
+                    $value = $time_with_am_pm;
                     $options[$value] = $label;
                 }
             }
             $mform->addElement('select', "b_fromtime_$i", "Break from-time", $options);
-            $mform->addElement('select', "b_fromampm_$i", '', array('AM' => 'AM', 'PM' => 'PM'));
+            //$mform->addElement('select', "b_fromampm_$i", '', array('AM' => 'AM', 'PM' => 'PM'));
 
             // Break totime
             $options = array();
-            for ($h = 0; $h <= 23; $h++) {
+            $options[''] = 'Select end time';
+            for ($h = 9; $h <= 18; $h++) { 
                 for ($m = 0; $m < 60; $m++) {
-                    $label = sprintf('%02d:%02d', $h, $m);
-                    $value = sprintf('%02d:%02d', $h, $m);
+                    $hour_12hr = ($h > 12) ? ($h - 12) : $h; 
+                    $am_pm = ($h >= 12) ? 'PM' : 'AM'; 
+            
+                    $hour = sprintf('%02d', $hour_12hr);
+                    $minute = sprintf('%02d', $m);
+                    $time_with_am_pm = "$hour:$minute $am_pm";
+                    $label = $time_with_am_pm;
+                    $value = $time_with_am_pm;
                     $options[$value] = $label;
                 }
             }
             $mform->addElement('select', "b_totime_$i", "Break to-time", $options);
-            $mform->addElement('select', "b_toampm_$i", '', array('AM' => 'AM', 'PM' => 'PM'));
+            //$mform->addElement('select', "b_toampm_$i", '', array('AM' => 'AM', 'PM' => 'PM'));
 
             // Remove break button
             $mform->addElement('button', "hidetextbutton_$i", 'Remove break', array('onclick' => "resetBreak($i); document.getElementById('text_$i').style.display = 'none';"));        
@@ -171,6 +202,55 @@ class timetable_form extends moodleform {
             $this->add_action_buttons();
             $mform->addElement('html', '</div>');
 
+}
+public function validation($data, $files) {
+    $errors = parent::validation($data, $files);
+    $selectedTimes = array();
+    $breakselectedTimes = array();
+
+
+    for ($i = 1; $i <= $data['last_period']; $i++) {
+        $fromTime = $data["fromtime_$i"];
+        $toTime = $data["totime_$i"];
+
+        $fromTimestamp = strtotime($fromTime);
+        $toTimestamp = strtotime($toTime);
+
+        if ($fromTimestamp === false || $toTimestamp === false) {
+            // Invalid time format
+            $errors["fromtime_$i"] = 'Invalid time format';
+            $errors["totime_$i"] = 'Invalid time format';
+        } elseif ($fromTimestamp >= $toTimestamp) {
+            // Invalid time range
+            $errors["fromtime_$i"] = 'Invalid time range';
+            $errors["totime_$i"] = 'Invalid time range';
+        } else {
+            // Check for overlap with previously selected time ranges
+            $overlap = false;
+            foreach ($selectedTimes as $selectedTime) {
+                list($selectedFrom, $selectedTo) = explode(' - ', $selectedTime);
+                $selectedFromTimestamp = strtotime($selectedFrom);
+                $selectedToTimestamp = strtotime($selectedTo);
+
+                if (
+                    ($fromTimestamp >= $selectedFromTimestamp && $fromTimestamp < $selectedToTimestamp) ||
+                    ($toTimestamp > $selectedFromTimestamp && $toTimestamp <= $selectedToTimestamp)
+                ) {
+                    $overlap = true;
+                    break;
+                }
+            }
+
+            if ($overlap) {
+                // Overlapping time range
+                $errors["fromtime_$i"] = 'Already selected, choose another time range';
+                $errors["totime_$i"] = 'Already selected, choose another time range';
+            } else {
+                $selectedTimes[] = "$fromTime - $toTime";
+            }
+        }
+    }
+    return $errors;
 }
 
 }
