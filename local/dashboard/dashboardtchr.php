@@ -12,7 +12,7 @@ $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$user
 if(!empty($tid) && $tid->user_id==$userid){
 $template4 = file_get_contents($CFG->dirroot . '/local/dashboard/templates/teacher.mustache');
 
-
+//1234
 // require_once($CFG->dirroot.'/local/createstudent/demo.html');
 global $class,$CFG;
 $context = context_system::instance();
@@ -80,13 +80,7 @@ foreach ($data1 as $record) {
     $data['myarray1'][] = array('sname' => $sname);
 }
 
-foreach ($data2 as $record) {
-    $d_content = $record->d_content;
-    $data['diary_entries'][] = array('content' => $d_content);
-    // if ($record->d_student_id == $USER->id) {
-    //     $data['user_d_content'] = $d_content;
-    // }
-}
+
 
 
 echo $mustache->render($template4, $data);

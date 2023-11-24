@@ -24,6 +24,7 @@ else if ($formdata = $mform->get_data()) {
         $start_year = $formdata->timestart;
         $end_year = $formdata->timefinish;
     
+
         // Check if end year is greater than start year
         if ($end_year > $start_year) {
             $academicdata = new stdClass();
