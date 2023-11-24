@@ -12,7 +12,7 @@ $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$user
 if(!empty($tid) && $tid->user_id==$userid){
 $template4 = file_get_contents($CFG->dirroot . '/local/dashboard/templates/teacher.mustache');
 
-
+//1234
 // require_once($CFG->dirroot.'/local/createstudent/demo.html');
 global $class,$CFG;
 $context = context_system::instance();
