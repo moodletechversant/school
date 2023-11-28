@@ -67,10 +67,17 @@ class editsubject_form extends moodleform {
         $options1 [$academic1->id] = $timestart1.'----'.$timeend1;
         }
     
-        $mform->addElement('select', 'academicyear','academicyear',$options1);
-        $mform->addRule('academicyear', 'academic year missing', 'required', null);
+        $mform->addElement('select', 'academicyear','Academic year',$options1);
     
-    
+        $js = <<<JS
+        document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.getElementById("id_academicyear");
+        selectElement.disabled = true;
+        });
+        JS;
+
+        // Add the JavaScript to the form
+        $mform->addElement('html', "<script>{$js}</script>");
     
                                   
          //Class 
@@ -84,6 +91,15 @@ class editsubject_form extends moodleform {
 
          $mform->addElement('select', 'class','Class',$options1);
 
+         $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_class");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
       //Division 
 
          $divisions  = $DB->get_records('division');
@@ -93,7 +109,15 @@ class editsubject_form extends moodleform {
          $options2 [$division->id] = $division->div_name;
          }
          $mform->addElement('select', 'division','Division',$options2);
-                  
+         $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_division");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
          //Subject name
 
              $mform->addElement('text', 'subname','Subject Name',$attributes);
