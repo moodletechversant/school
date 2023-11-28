@@ -38,7 +38,6 @@ if (empty($enrolled_course_ids)) {
 } else {
     $in_clause = implode(',', array_fill(0, count($enrolled_course_ids), '?'));
     $params = array_merge($enrolled_course_ids, array($current_date));
-    //print_r($params);exit();
 
     $data = $DB->get_records_sql("SELECT * FROM {quiz} WHERE course IN ($in_clause) AND timeclose >= ?", $params);
     //print_r($data);exit();
