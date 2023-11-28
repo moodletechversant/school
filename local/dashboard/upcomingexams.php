@@ -1,21 +1,22 @@
 <?php
 
 require(__DIR__.'/../../config.php');
+require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
+Mustache_Autoloader::register();
 
-global $DB, $USER;
+$template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/upcoming_exam.mustache');
+
+global $DB, $USER,$OUTPUT, $PAGE;
 
 $context = context_system::instance();
 require_login();
 
-$linktext = "Upcoming Exams";
-
 $linkurl = new moodle_url('/local/dashboard/upcomingexams.php');
-// Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
-// Set the page heading.
+
 $PAGE->set_heading($linktext);
 $PAGE->navbar->add('Upcoming Exams', new moodle_url($CFG->wwwroot.'/local/dashboard/upcomingexams.php'));
 
@@ -34,44 +35,47 @@ if (empty($enrolled_course_ids)) {
 } else {
     $in_clause = implode(',', array_fill(0, count($enrolled_course_ids), '?'));
     $params = array_merge($enrolled_course_ids, array($current_date));
-    //print_r($params);exit();
 
     $data = $DB->get_records_sql("SELECT * FROM {quiz} WHERE course IN ($in_clause) AND timeclose >= ?", $params);
     //print_r($data);exit();
-    if (empty($data)) {
-        echo "There are no upcoming exams for your enrolled courses.";
-    } 
-    else{
-    $table = new html_table();
-    $table->head = array('timeopen','timeclose', 'Quiz name');
-    $table->data = array();
-    $table->class = '';
-    $table->id = 'quiz';
-    $context = context_user::instance($USER->id, MUST_EXIST);
+    $mustache = new Mustache_Engine();
+    $tableRows = [];
+    if (!empty($data)) {
 
     foreach ($data as $value) {
-        // $add = $CFG->wwwroot.'/local/reply/view_reply.php?id='.$value->id;//Add icon
-        // $edit = $CFG->wwwroot.'/local/complaint/edit.php?id='.$value->id;//Edit
-        // $delete = $CFG->wwwroot.'/local/complaint/delete.php?id='.$value->id;//Delete
-        $dates1=date('d/m/Y',$value->timeopen);
-        $dates=date('d/m/Y',$value->timeclose);
-        $table->data[] = array(
-            $dates1,
-            $dates,
-            $value->name,
-           
-            // html_writer::link($add, $OUTPUT->pix_icon('i/addblock','Add','moodle')), // Add icon
-            // html_writer::link($edit, $OUTPUT->pix_icon('i/edit', 'Edit me', 'moodle')), // Edit icon
-            // html_writer::link($delete, $OUTPUT->pix_icon('i/delete','Delete me','moodle')), // Delete icon
-        ); 
+        $cmid = $value->id;
+        $cm = get_coursemodule_from_instance('quiz', $cmid, 0, false, MUST_EXIST);
+        $view = $CFG->wwwroot.'/mod/quiz/view.php?id='.$cm->id;
+
+        $dates1=date('d-m-Y',$value->timeopen);
+        $dates=date('d-m-Y',$value->timeclose);
+        $exam_name=$value->name;
+        $view_icon=html_writer::link(
+            $view,
+            '<span class="custom-icon" aria-label="' . get_string('view') . '">👁️</span>'
+        );
+        $tableRows[] = [
+            'id'=> $id,
+            'Start_date' => $dates1,
+            'End_date' => $dates,
+            'Exam_name' => $exam_name,
+            'View'=>$view_icon,
+        ];
     }
+}
+else{
+        
+    $error= "There are no upcoming exams for your enrolled courses.";
+    $tableRows[] = [
+     
+     'Submission_date' => $error,
+    
+ ];
+}
+}
+$output = $mustache->render($template, ['tableRows' => $tableRows]);
+echo $output;
 
-    echo html_writer::table($table);
-    $backurl = new moodle_url('/local/dashboard/dashboard.php');
-    $backbutton = html_writer::link($backurl, 'Back');
-    echo $backbutton;
-}
-}
 echo $OUTPUT->footer();
-
 ?>
+
