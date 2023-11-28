@@ -16,7 +16,7 @@ $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
-// Set the page heading.
+
 $PAGE->set_heading($linktext);
 $PAGE->navbar->add('Upcoming Exams', new moodle_url($CFG->wwwroot.'/local/dashboard/upcomingexams.php'));
 
