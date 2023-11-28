@@ -9,7 +9,7 @@ global $class,$CFG;
 $context = context_system::instance();
 require_login();
 // $classid = $class->id;
-$linktext = "Courses";
+$linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/sub_studentview.php');
 
 $PAGE->set_context($context);

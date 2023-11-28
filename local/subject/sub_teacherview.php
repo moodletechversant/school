@@ -7,7 +7,7 @@ $template = file_get_contents($CFG->dirroot . '/local/subject/template/subjectvi
 
 global $class,$CFG;
 $context = context_system::instance();
-$linktext = "Courses";
+$linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/sub_teacherview.php');
 
 $PAGE->set_context($context);

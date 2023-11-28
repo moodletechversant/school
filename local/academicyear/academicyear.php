@@ -18,23 +18,32 @@ echo $OUTPUT->header();
 $returnurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
 if ($mform->is_cancelled()) {
     redirect($returnurl);
-} 
+}  
 else if ($formdata = $mform->get_data()) {
-    
-    $academicdata= new stdclass();
-   
-    $academicdata->start_year=$formdata->timestart;
-    $academicdata->end_year=$formdata->timefinish;
-    $DB->insert_record('academic_year',$academicdata);
-    $urlto=$CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
-    redirect($urlto, 'Data Saved Successfully '); 
-  
 
-}
+        $start_year = $formdata->timestart;
+        $end_year = $formdata->timefinish;
+    
+
+        // Check if end year is greater than start year
+        if ($end_year > $start_year) {
+            $academicdata = new stdClass();
+            $academicdata->start_year = $start_year;
+            $academicdata->end_year = $end_year;
+            
+            // Insert record into the 'academic_year' table
+            $DB->insert_record('academic_year', $academicdata);
+            
+            $urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
+            redirect($urlto, 'Data Saved Successfully '); 
+        } else {
+            
+            echo "End year must be greater than start year.";
+        }
+    }
+
 $mform->display();
 echo $OUTPUT->footer();
-  
-   
 ?>
 
 <style>

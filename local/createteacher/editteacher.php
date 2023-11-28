@@ -19,7 +19,7 @@ $linkurl = new moodle_url('/local/createteacher/editteacher.php');
 
 // Print the page header.
 $PAGE->set_context($context);
-$PAGE->set_url($linkurl);
+$PAGE->set_url($linkurl); 
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 // Set the page heading.

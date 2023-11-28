@@ -44,10 +44,15 @@ echo $output;
 echo $OUTPUT->footer();
 ?>
 
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1Z1eSd3qWzVnUVlTf1d9S5u0XwH7OuHfjI=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-//  $(document).ready(function() {
+
    
+
+    $(".button_eye").click(function(){
+    alert("test")
+})
+
 function deletestudent(id)
     {   
         var confirmation = confirm("Are you sure you want to delete this item?");
@@ -71,5 +76,48 @@ function deletestudent(id)
             // location.reload(true) 
     }
 }
-// });
-    </script>
+
+
+/*
+function suspend_eye(userid) {     
+    var user_id = userid;  // corrected variable declaration
+
+    var icon = $('#eye-' + user_id);
+    var isEyeVisible = icon.hasClass('fa-eye');
+    var action = isEyeVisible ? 'close' : 'open'; // Determine the action based on the current state
+
+    // corrected exit() to return false to prevent further execution
+    // also, removed unnecessary alert
+    alert(userid);
+    // exit();
+
+    $.ajax({
+        url:  "test.php", // Your server-side script to handle the update
+        data: { user_id: user_id, action: action },
+        type: 'POST',
+        success: function(response) {
+            if ($.trim(response) == 'success') {
+                if (action === 'close') {
+                    icon.removeClass('fa-eye');
+                    icon.addClass('fa-eye-slash');
+                } else {
+                    icon.removeClass('fa-eye-slash');
+                    icon.addClass('fa-eye');
+                }
+            } else {
+                alert('Failed to update eye status.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Ajax request failed. Status: ' + status + ', Error: ' + error);
+        }
+    });
+
+    // corrected to return false to prevent further execution
+    return false;
+} */
+
+
+
+
+</script>

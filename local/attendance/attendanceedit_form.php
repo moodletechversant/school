@@ -14,7 +14,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
+ 
 /**
  * User sign-up form.
  *
@@ -43,17 +43,8 @@ class attendanceedit_form  extends moodleform {
         $mform->addElement('hidden','id',$id);
         
         $mform->addElement('hidden','id',$id);
-        $rec=$DB->get_records_sql("SELECT * FROM {student}");
-
-        
-        
-       
-        
-        
+        $rec=$DB->get_records_sql("SELECT * FROM {student}");       
 }
-
-
-
 
     }
             $rec=$DB->get_records_sql("SELECT * FROM {student}");

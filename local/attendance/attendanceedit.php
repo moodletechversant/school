@@ -9,7 +9,7 @@ $linkurl = new moodle_url('/local/attendance/attendanceedit.php');
 
 $PAGE->set_context($context);
 $strnewclass = $linktext;
-
+ 
 $PAGE->set_url('/local/attendance/attendanceedit.php');
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($strnewclass);
@@ -30,7 +30,7 @@ echo "<tr><th>Roll no</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 
 foreach ($rec1 as $student) {
     $rollno = $student->stud_name;
-    // print_r( $rollno);exit();
+     
     $rec = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$rollno");
     echo "<tr>";
     echo "<td>".$student->stud_name."</td>";
@@ -38,7 +38,7 @@ foreach ($rec1 as $student) {
     echo "<td><input type='radio' name='attendance[$student->stud_name]' value='P'> Present<input type='radio' name='attendance[$student->stud_name]' value='A'> Absent</td>";
     echo "</tr>";
 }
-
+//print_r( $rollno);exit();
 echo "<tr><td colspan='4'><input type='submit' class='btns' name='submit' value='Save Attendance'></td></tr>";
 echo "</table>";
 echo "</form>";
