@@ -11,10 +11,7 @@ global $DB, $USER,$OUTPUT, $PAGE;
 $context = context_system::instance();
 require_login();
 
-//$linktext = "Upcoming Exams";
-
 $linkurl = new moodle_url('/local/dashboard/upcomingexams.php');
-// Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
 $PAGE->set_pagelayout('admin');
