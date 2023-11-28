@@ -33,9 +33,15 @@ $current_userid = $USER->id;
 
 $current_timestamp = strtotime('now');
 $sql = "SELECT s_name
-FROM {leave}
-WHERE DATE(FROM_UNIXTIME(f_date)) <= CURDATE() 
-  AND DATE(FROM_UNIXTIME(t_date)) >= CURDATE()";
+        FROM {leave}
+        WHERE DATE(FROM_UNIXTIME(f_date)) <= CURDATE() 
+          AND DATE(FROM_UNIXTIME(t_date)) >= CURDATE()
+          AND s_id IN (
+            SELECT user_id
+            FROM mdl_student_assign
+            INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
+            WHERE mdl_division.div_teacherid = $current_userid
+          )";
 $data1 = $DB->get_records_sql($sql);
 //print_r($data1);exit();
 $student_id = $USER->id;
@@ -45,6 +51,11 @@ $data = array(
     'myarray1' => array(),
    
 );
+$leaveteacher = $DB->get_records_sql("SELECT user_id FROM mdl_student_assign
+    INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
+    WHERE mdl_division.div_teacherid = $current_userid");
+    // print_r($leaveteacher);exit();
+    
 $data3 = $DB->get_records_sql("SELECT mdl_division.div_class, mdl_division.id
 FROM mdl_division JOIN mdl_class ON mdl_division.div_class=mdl_class.id WHERE mdl_division.div_teacherid=$student_id");
 
