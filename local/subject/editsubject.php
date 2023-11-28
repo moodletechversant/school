@@ -37,8 +37,8 @@ if($mform->is_cancelled()){
      $subjectdata =  new stdclass();
 
      $subjectdata->id  = $formdata->id;
-     $subjectdata->sub_class  = $formdata->class;
-     $subjectdata->sub_division = $formdata->division;
+    //  $subjectdata->sub_class  = $formdata->class;
+    //  $subjectdata->sub_division = $formdata->division;
      $subjectdata->sub_name = $formdata->subname;
      $subjectdata->sub_shortname = $formdata->shortname;
      $subjectdata->sub_description = $formdata->description;
