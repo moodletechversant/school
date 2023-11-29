@@ -23,8 +23,10 @@ $current_timestamp = strtotime('now');
 $sql = "SELECT s_name
 FROM {leave}
 WHERE DATE(FROM_UNIXTIME(f_date)) <= CURDATE() 
-  AND DATE(FROM_UNIXTIME(t_date)) >= CURDATE()";
+  AND DATE(FROM_UNIXTIME(t_date)) >= CURDATE()
+  AND (l_status = 'approved' OR l_status = 'pending')";
 $data1 = $DB->get_records_sql($sql);
+
 //  print_r($data1);exit();
 
 $sql2 = "SELECT *
