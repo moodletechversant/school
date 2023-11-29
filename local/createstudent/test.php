@@ -14,13 +14,13 @@ if(isset($_POST['action'])){
    $action= $_POST['action'];
 // if($action!==NULL){
    if ($action === 'close') {
-    $DB->execute("UPDATE {user} SET suspended = 0 WHERE id = $userid");
+    $DB->execute("UPDATE {user} SET suspended = 1 WHERE id = $userid");
        
    } elseif ($action === 'open') {
-    $DB->execute("UPDATE {user} SET suspended = 1 WHERE id = $userid");
+    $DB->execute("UPDATE {user} SET suspended = 0 WHERE id = $userid");
    
    }
-  //  $enrolmentTimestamp = $DB->get_record_sql("SELECT timeend FROM {user_enrolments} WHERE userid=$userid");
+ 
   echo 'success';
 }
 
@@ -164,12 +164,11 @@ $user = $DB->get_record_sql("SELECT * FROM {user} WHERE id= $uid");
 $isSuspended = $user->suspended;
        
 if ($isSuspended == 1) {
-  $iconClass='fa-eye-slash';
-   
-    
-}
- else {
-  $iconClass='fa-eye';
+  $iconClass = 'fa-eye-slash';
+  $actionText = 'Unsuspend';
+} else {
+  $iconClass = 'fa-eye';
+  $actionText = 'Suspend';
 }
 
 
@@ -196,9 +195,10 @@ if ($isSuspended == 1) {
                 <td><div class="wrap-t">'.$editLink.'
                  
                 <a href="#" class="action-table button_eye " style="text-decoration:none">
-                       
-                <i   class="fa '.$iconClass.' button_eye" id="eye-'.$userid.'" style="cursor: pointer;"> Suspend</i>
-                 </a>
+                <i onclick="suspend_eye(' . $uid . ')" class="fa ' . $iconClass . ' button_eye" id="eye-' . $uid . '" style="cursor: pointer;">
+                    ' . $actionText . '
+                </i>
+            </a>
                       <!--<a onclick="deletestudent('.$id.')" href="#"  class="action-table"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16 1.75V3h5.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H8V1.75C8 .784 8 .784 8 .784h.006C8 .784 8 .784 8 .784h4.5C15.216 0 16 .784 16 1.75Zm-6.5 0V3h5V1.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25ZM4.997 6.178a.75.75 0 1 0-1.493.144L4.916 20.92a1.75 1.75 0 0 0 1.742 1.58h10.684a1.75 1.75 0 0 0 1.742-1.581l1.413-14.597a.75.75 0 0 0-1.494-.144l-1.412 14.596a.25.25 0 0 1-.249.226H6.658a.25.25 0 0 1-.249-.226L4.997 6.178Z"></path><path d="M9.206 7.501a.75.75 0 0 1 .793.705l.5 8.5A.75.75 0 1 1 9 16.794l-.5-8.5a.75.75 0 0 1 .705-.793Zm6.293.793A.75.75 0 1 0 14 8.206l-.5 8.5a.75.75 0 0 0 1.498.088l.5-8.5Z"></path></svg> Delete</a>--!>
                     </div>
                 </td>
@@ -227,41 +227,3 @@ if ($isSuspended == 1) {
     echo $var;
 }
 ?>
-<script type="text/javascript">
-
-   
-
-$(".button_eye").click(function(){
-alert("test")
-
-
-
-$.ajax({
-        url:  "test.php", // Your server-side script to handle the update
-        data: { user_id: user_id, action: action },
-        type: 'POST',
-        success: function(response) {
-            if ($.trim(response) == 'success') {
-                if (action === 'close') {
-                    icon.removeClass('fa-eye');
-                    icon.addClass('fa-eye-slash');
-                } else {
-                    icon.removeClass('fa-eye-slash');
-                    icon.addClass('fa-eye');
-                }
-            } else {
-                alert('Failed to update eye status.');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Ajax request failed. Status: ' + status + ', Error: ' + error);
-        }
-    });
-
-
-})
-
-
-
-
-</script>
