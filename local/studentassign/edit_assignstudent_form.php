@@ -79,8 +79,17 @@ class edit_assignstudent_form extends moodleform {
          }
 
          $mform->addElement('select', 'class','Class',$options1);
-
-         //Division 
+          
+         $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_class");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
+        //  //Division 
          $divisions  = $DB->get_records('division');
          $options2 = array();
          $options2=array(''=>'---- Select a division ----');
