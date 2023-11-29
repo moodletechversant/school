@@ -41,8 +41,11 @@ $sql = "SELECT s_name
             FROM mdl_student_assign
             INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
             WHERE mdl_division.div_teacherid = $current_userid
-          )";
+          )
+          AND l_status IN ('approved', 'pending')";
 $data1 = $DB->get_records_sql($sql);
+//print_r($data1);exit();
+
 //print_r($data1);exit();
 $student_id = $USER->id;
 
