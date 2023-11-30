@@ -70,6 +70,15 @@ class edit_assignstudent_form extends moodleform {
         $mform->addElement('select', 'academicyear','Academic start',$options1);
         $mform->addRule('academicyear', 'academic year missing', 'required', null);
 
+        $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_academicyear");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
         // //Class       
         $classes = $DB->get_records_sql("SELECT * FROM {class}");     
          $options1 = array();
