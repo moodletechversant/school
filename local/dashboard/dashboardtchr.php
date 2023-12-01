@@ -15,19 +15,19 @@ $template4 = file_get_contents($CFG->dirroot . '/local/dashboard/templates/teach
 //1234
 // require_once($CFG->dirroot.'/local/createstudent/demo.html');
 
-$currentMonth = date('n');
-$currentWeek = ceil(date('j') / 7); // Calculate the current week of the month
+// $currentMonth = date('n');
+// $currentWeek = ceil(date('j') / 7); // Calculate the current week of the month
 
-if ($currentMonth >= 4 && $currentMonth <= 5) {
-    $disablePromotionDiv = ''; // Enable the div
-    $disablecomment = '';
-} elseif (($currentMonth == 3 && $currentWeek >= 3) || ($currentMonth == 4)) {
-    $disablePromotionDiv = 'pointer-events: none; '; // Disable the div
-    $disablecomment1 = "this will open soon";
-} else {
-    $disablePromotionDiv ='pointer-events: none; '; // Disable the div
-    $disablecomment = "temporarily closed";
-}
+// if ($currentMonth >= 4 && $currentMonth <= 5) {
+//     $disablePromotionDiv = ''; // Enable the div
+//     $disablecomment = '';
+// } elseif (($currentMonth == 3 && $currentWeek >= 3) || ($currentMonth == 4)) {
+//     $disablePromotionDiv = 'pointer-events: none; '; // Disable the div
+//     $disablecomment1 = "this will open soon";
+// } else {
+//     $disablePromotionDiv ='pointer-events: none; '; // Disable the div
+//     $disablecomment = "temporarily closed";
+// }
 
 global $class,$CFG;
 $context = context_system::instance();
@@ -67,9 +67,9 @@ $student_id = $USER->id;
 $mustache = new Mustache_Engine();
 $data = array(
   'myarray1' => array(),
-  'disablePromotionDiv' => $disablePromotionDiv,
-  'disablecomment' => $disablecomment,
-  'disablecomment1' => $disablecomment1,
+  // 'disablePromotionDiv' => $disablePromotionDiv,
+  // 'disablecomment' => $disablecomment,
+  // 'disablecomment1' => $disablecomment1,
 );
 
 $leaveteacher = $DB->get_records_sql("SELECT user_id FROM mdl_student_assign
