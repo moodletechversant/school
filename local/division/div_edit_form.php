@@ -82,9 +82,17 @@ class edit_form extends moodleform {
     }
 
     $mform->addElement('select', 'academicyear','',$options1);
-    $mform->addRule('academicyear', 'academic year missing', 'required', null);
+    
 
+    $js = <<<JS
+    document.addEventListener("DOMContentLoaded", function() {
+    var selectElement = document.getElementById("id_academicyear");
+    selectElement.disabled = true;
+    });
+    JS;
 
+    // Add the JavaScript to the form
+    $mform->addElement('html', "<script>{$js}</script>");
 
                                 $mform->addElement('html', ' </div>
 
@@ -103,7 +111,15 @@ class edit_form extends moodleform {
                                 
                                         $mform->addElement('select', 'class','',$options1);
                                         
+                                        $js = <<<JS
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                        var selectElement = document.getElementById("id_class");
+                                        selectElement.disabled = true;
+                                        });
+                                        JS;
                                     
+                                        // Add the JavaScript to the form
+                                        $mform->addElement('html', "<script>{$js}</script>");
                                            
 
                                     $mform->addElement('html', '</div>
