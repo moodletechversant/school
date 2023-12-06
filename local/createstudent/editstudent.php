@@ -30,7 +30,7 @@ echo $OUTPUT->header();
 $mform = new editstudent_form ();
 
 if($mform->is_cancelled()){
-    $cancelurl = $CFG->wwwroot.'/local/createstudent/view_student.php';
+    $cancelurl = $CFG->wwwroot.'/local/createstudent/view_student_1.php';
     redirect($cancelurl);
 }else if($formdata = $mform->get_data()){ 
 //print_r($formdata);exit();
