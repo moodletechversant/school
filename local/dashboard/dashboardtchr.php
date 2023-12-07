@@ -81,7 +81,12 @@ $data = array(
 );
 
 
-$data['leavecount'][] = array('count' =>  $pendingcount);
+if ($pendingcount == 0) {
+  $data['leavecount'][] = array('display' => 'none');
+} else {
+  $data['leavecount'][] = array('count' => $pendingcount);
+}
+
 
 $data3 = $DB->get_records_sql("SELECT mdl_division.div_class, mdl_division.id
 FROM mdl_division JOIN mdl_class ON mdl_division.div_class=mdl_class.id WHERE mdl_division.div_teacherid=$student_id");
