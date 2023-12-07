@@ -93,13 +93,26 @@ foreach ($data3 as $record) {
   $data['myarray2'][] = array('div_class' => $div_class,'tid' => $id);
 }
 //print_r($data);exit();
+
+$bnamesCount = 1; // Counter for names
+$showMore = false; // Flag to indicate if more names are available
+// $sname1="click view all";
 foreach ($data1 as $record) {
   $sname = $record->s_name;
   $firstLetter = substr($sname, 0, 1); // Extract the first letter
-// 
 
-  $data['myarray1'][] = array('sname' => $sname, 'initial' => $firstLetter);
-  
+  if ($bnamesCount <= 4) {
+      $data['myarray1'][] = array('sname' => $sname, 'initial' => $firstLetter);
+      $bnamesCount++;
+  } else {
+      $showMore = true; // Set the flag if more names are available
+      break; // Exit the loop as we only need 4 names
+  }
+}
+
+// Add the dot entry if more names are available
+if ($showMore) {
+  $data['myarray1'][] = array('initial' => '.....');
 }
 
 //print_r($data);exit();
