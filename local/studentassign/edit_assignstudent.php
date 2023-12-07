@@ -159,7 +159,7 @@ $(document).ready(function() {
     if(brand_id != ""){
         $.ajax({
             url:"test.php",
-            data:{b_id:brand_id},
+            data:{c_id:brand_id},
             type:'POST',
             success: function(data){
         	$("#id_division").html(data);
@@ -170,6 +170,26 @@ $(document).ready(function() {
    
 });
 });
+
+$(document).ready(function() {
+    $("#id_class").change(function() {
+    var brand_id = $(this).val();
+    if(brand_id != ""){
+        $.ajax({
+            url:"test.php",
+            data:{s_id:brand_id},
+            type:'POST',
+            success: function(data){
+        	$("#id_student").html(data);
+        	}
+        });
+    }
+    
+   
+});
+});     
+
+                                                                                                                                                                                                                                                                                                                                                              
 </script>
 <style>
     .container{

@@ -52,32 +52,26 @@
                             
                         </div>
 
-                        <div class="col" style="flex: 2;">
-                            <div class="cards" style="flex-direction: row;
-                            align-items: baseline;">
+                       <div class="col" style="flex: 2;">
+    <div class="cards" style="flex-direction: row; align-items: baseline;">
+        <div class="box">
+            <h4 style="margin-bottom: 20px;">On Leave Today</h4>
+            <div class="users">
+                {{#data.myarray1}}
+                    <label for="one">
+                        <input type="radio" name="user" />
+                        <div style="text-transform: uppercase;">{{initial}}</div>
+                        <span style="font-size: 14px;">{{sname}}</span>
+                       
+                    </label>
+                     {{#dots}}<p>.....</p>{{/dots}}
+                {{/data.myarray1}}
+            </div>
+        </div>
+        <div><a href="viewall.php">VIEW ALL</a></div>
+    </div>
+</div>
 
-                                <div class="box">
-                                    <h4 style="margin-bottom: 20px;">On Leave Today</h4>
-                                    <div class="users">
-
-                                    <!--{{#data.myarray1}}
-                                        <p style="font-size: 18px;">{{sname}}</p>
-                                            {{/data.myarray1}}-->
-
-                                        {{#data.myarray1}}
-                                       <label for="one">
-                                            <input type="radio" name="user" />
-                                            <div style="text-transform : uppercase;">{{initial}}</div>
-                                                <span style="font-size : 14px;">{{sname}}</span>
-                                        </label>
-                                        {{/data.myarray1}}
-                                        
-                                    </div>
-                                </div>
-                                <div>VIEW ALL</div>
-                            </div>
-                        </div>
-                        
                         <div class="col" style="flex: 2;">
                            <a href="/school/local/profileview/viewprofile.php" style="text-decoration:none"><div class="cards">
                                 <img src="/school/local/img/ic-12.svg" width="45px" />
