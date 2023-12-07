@@ -129,6 +129,9 @@
                                     <div>
                                         <h4>Leave Requests</h4>
                                         <p>View Requests</p>
+                                        {{#leavecount}}
+                                         <p style="color:red;">Pending Requests:{{count}}</p>
+                                         {{/leavecount}}
                                     </div>
                                     <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

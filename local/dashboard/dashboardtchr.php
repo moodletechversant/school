@@ -63,20 +63,26 @@ $data1 = $DB->get_records_sql($sql);
 
 //print_r($data1);exit();
 $student_id = $USER->id;
+$leaveteacher = $DB->get_records_sql("SELECT user_id FROM mdl_student_assign
+    INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
+    WHERE mdl_division.div_teacherid = $current_userid");
+    // print_r($leaveteacher);exit();
 
+    $pendingcount = $DB->count_records_sql("SELECT COUNT(*) FROM {leave} WHERE l_status = 'pending'");
+
+    // print_r($pendingcount);exit();
 $mustache = new Mustache_Engine();
 $data = array(
   'myarray1' => array(),
+  
   // 'disablePromotionDiv' => $disablePromotionDiv,
   // 'disablecomment' => $disablecomment,
   // 'disablecomment1' => $disablecomment1,
 );
 
-$leaveteacher = $DB->get_records_sql("SELECT user_id FROM mdl_student_assign
-    INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
-    WHERE mdl_division.div_teacherid = $current_userid");
-    // print_r($leaveteacher);exit();
-    
+
+$data['leavecount'][] = array('count' =>  $pendingcount);
+
 $data3 = $DB->get_records_sql("SELECT mdl_division.div_class, mdl_division.id
 FROM mdl_division JOIN mdl_class ON mdl_division.div_class=mdl_class.id WHERE mdl_division.div_teacherid=$student_id");
 
