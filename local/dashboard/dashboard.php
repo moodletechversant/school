@@ -53,7 +53,7 @@ $data = array(
 // }
 $bnamesCount = 1; // Counter for names
 $showMore = false; // Flag to indicate if more names are available
-$sname1="click view all";
+// $sname1="click view all";
 foreach ($data1 as $record) {
     $sname = $record->s_name;
     $firstLetter = substr($sname, 0, 1); // Extract the first letter
