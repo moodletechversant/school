@@ -136,15 +136,37 @@ echo $OUTPUT->footer();
 <script>
 
 $(document).ready(function() {
-  $('#id_division').empty()
-  $("#id_class").prepend("<option value='' selected='selected'>none</option>");
+    $('#id_class').empty().prepend("<option value='' selected='selected'>none</option>");
+    $("#id_academic").prepend("<option value='' selected='selected' disabled>---Select academic year---</option>");
+
+
+    $("#id_academic").change(function() {
+    var brand_id = $(this).val();
+    if(brand_id != ""){
+        $.ajax({
+            url:"test.php",
+            data:{b_id:brand_id},
+            type:'POST',
+            success: function(data){
+        	$("#id_class").html(data);
+        	}
+        });
+    }
+    
+   
+});
+});
+
+$(document).ready(function() {
+  $('#id_division').empty().prepend("<option value='' selected='selected'>none</option>");
+  //$("#id_class").prepend("<option value='' selected='selected'>none</option>");
 
     $("#id_class").change(function() {
     var brand_id = $(this).val();
     if(brand_id != ""){
         $.ajax({
             url:"test.php",
-            data:{b_id:brand_id},
+            data:{c_id:brand_id},
             type:'POST',
             success: function(data){
         	$("#id_division").html(data);
