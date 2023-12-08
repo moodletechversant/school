@@ -16,13 +16,15 @@ $linktext = "View students";
 
 $linkurl = new moodle_url('/local/dashboard/dashboardadmin.php');
 
+$csspath = new moodle_url("/local/css/style.css");
+
 $PAGE->set_context($context);
 $strnewclass= 'Admin Dasboard';
 $PAGE->set_url('/local/dashboard/dashboardadmin.php');
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template4);
+echo $mustache->render($template4,['csspath' => $csspath]);
 echo $OUTPUT->footer();
 }
 else{
