@@ -1,11 +1,16 @@
 <table class="table table-striped">
-<thead>My Notification</thead>
-  <tbody>
-  {{#day}}
+  <thead>
     <tr>
-      <td>{{content}}</td>
-
+      <th>All notifications</th>
+      <th>Start date - End date</th>
     </tr>
- {{/day}}
+  </thead>
+  <tbody>
+    {{#day}}
+      <tr>
+        <td>{{content}}</td>
+        <td>{{s_time}} - {{e_time}}</td>
+      </tr>
+    {{/day}}
   </tbody>
 </table>
