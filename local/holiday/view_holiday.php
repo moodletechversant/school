@@ -14,7 +14,7 @@ $linkurl = new moodle_url('/local/holiday/addholiday.php');
 $css_link = new moodle_url('/local/css/style.css');
 $editholiday = new moodle_url('/local/holiday/editholiday.php?id');
 $deleteholiday = new moodle_url('/local/holiday/deleteholiday.php?id');
-$addholiday = new moodle_url('/local/holiday/addholiday.php');
+$addholidayy = new moodle_url('/local/holiday/addholiday.php');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentcreation');
@@ -65,7 +65,7 @@ foreach ($rec as $records) {
     ];
 }
 
-$output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'addholiday'=>$addholiday]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'addholidayy'=>$addholidayy]);
 echo $output;
 
 echo $OUTPUT->footer();
