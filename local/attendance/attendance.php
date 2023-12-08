@@ -11,6 +11,10 @@ $context = context_system::instance();
 $linktext = "Attendance";
 
 $linkurl = new moodle_url('/local/attendance/attendance.php');
+$css_link = new moodle_url('/local/css/style.css');
+$view_attendance = new moodle_url('/local/attendance/viewattend.php');
+$attendance_page = new moodle_url('/local/attendance/attendance.php');
+
 $teacher_id = $USER->id;
 $PAGE->set_context($context);
 $strnewclass=$linktext; 
@@ -53,7 +57,7 @@ else{
     'lsname'=>$lsname
    ];
     }
-echo $mustache->render($template, ['attendance' => $data1]);
+echo $mustache->render($template, ['attendance' => $data1,'css_link'=>$css_link,'view_attendance'=>$view_attendance,'attendance_page'=>$attendance_page]);
    }
 
 if (isset($_POST['submit'])) {

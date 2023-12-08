@@ -12,17 +12,17 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="/school/local/css/style.css" />
+  <link rel="stylesheet" href={{css_link}} />
 </head> 
   
 <body> 
  
-<form action="attendance.php" method="POST" id="form_id">
+<form action={{attendance_page}} method="POST" id="form_id">
 <input type='date' name='atdate' style='margin-right:1110px'>
 <div class="dashboard-wrap pt-5">      
 <div class="container">
     <h1 style="font-family: 'Poppins', sans-serif;">Attendance</h1>
-   <div class="wrap-t"><a class="btn-primary btn ml-auto" href="/school/local/attendance/viewattend.php" style="width: 180px; height: 40pxpx; margin-right: -1250px;">View Attendance</a></div>
+   <div class="wrap-t"><a class="btn-primary btn ml-auto" href={{view_attendance}} style="width: 180px; height: 40pxpx; margin-right: -1250px;">View Attendance</a></div>
 
     <div class="cards" style="height: auto;">
         <table class="table table-striped">

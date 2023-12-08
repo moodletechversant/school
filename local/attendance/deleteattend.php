@@ -9,6 +9,7 @@ $id = required_param('id', PARAM_INT);
 
 // require_login();
 $context = context_course::instance($COURSE->id);
+$view_attendance= new moodle_url('/local/attendance/viewattend.php');
 // require_capability('moodle/site:manageblocks', $context);
 
 // the name of the table in the database
@@ -16,7 +17,7 @@ $table = 'attendance';
 // delete the record
 	$DB->delete_records($table, array('id'=>$id));
  
-header("Location:/school/local/attendance/viewattend.php");
+header("Location:".$view_attendance);
 
 
 

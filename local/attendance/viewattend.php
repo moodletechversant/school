@@ -7,7 +7,10 @@ $template = file_get_contents($CFG->dirroot . '/local/attendance/template/viewat
 global $class, $CFG;
 $context = context_system::instance();
 $linkurl = new moodle_url('/local/attendance/viewattend.php');
- 
+$css_line=new moodle_url('/local/css/style.css');
+$mark_attendance=new moodle_url('/local/attendance/attendance.php');
+
+
 $PAGE->set_context($context);
 $PAGE->set_url('/local/attendance/viewattend.php');
 $PAGE->set_title('Attendance'); 
@@ -48,7 +51,7 @@ foreach ($rec as $value) {
     ];
 } 
 //print_r($data1);exit();
-echo $mustache->render($template, ['viewattend' => $data1]);
+echo $mustache->render($template, ['viewattend' => $data1,'css_line'=>$css_line,'mark_attendance'=>$mark_attendance]);
 
     
    
