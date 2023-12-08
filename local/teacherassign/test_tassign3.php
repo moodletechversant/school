@@ -24,7 +24,7 @@ $context = context_system::instance();
 if(isset($_POST['option'])){
     $option1 = $_POST['option']; 
 
-    $id  = optional_param('id', 0, PARAM_INT);
+    // $id  = optional_param('id', 0, PARAM_INT);
     $courseid = $option1;
     $modinfo = get_fast_modinfo($courseid);
     $sections = $modinfo->get_section_info_all();

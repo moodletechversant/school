@@ -51,6 +51,21 @@
                         <option selected>---- Select Division ----</option>
                       </select>
                     </div>
+                     
+                  </div>
+                  <div class="d-flex listing-top">
+                  <div class="form-group">
+                      <label>student</label>
+                      <select class="form-select" aria-label="Select student" id="student">
+                      <option selected>---- Select student ----</option>
+                      </select>
+                    </div>
+                     <div class="form-group">
+                      <label>subject</label>
+                      <select class="form-select" aria-label="Select subject" id="subject">
+                      <option selected>---- Select subject ----</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -104,12 +119,42 @@
             var option2 = $(this).val();
              
                 $.ajax({
-                    url: "test_tassign2.php",
-                    data: {option: option2},
+                    url: "test_tassgn.php",
+                    data: {option2: option2},
+                    type: 'POST',
+                    success: function(response) {
+                         $("#student").html(response);
+                     
+                     }
+                 });
+           });
+
+        $("#student").change(function() { // Corrected ID
+            var option3 = $(this).val();
+             
+                $.ajax({
+                    url: "test_tassgn.php",
+                    data: {option3: option3},
                     type: 'POST',
                     success: function(response) {
                       
-                        $("#demo").html(response); // Corrected ID
+                        $("#subject").html(response); // Corrected ID
+                     }
+                 });
+           });
+
+        $("#subject").change(function() { // Corrected ID
+            var option4 = $(this).val();
+           
+             var option3 = $("#student").val();
+               
+                $.ajax({
+                    type: "POST",
+                    url: "test_tassign3.php", 
+                    data: {option: option4, id: option3},
+                    success: function(response){ 
+                          $("#demo").html(response); 
+                          $("#demo").css("display", "block")
                      }
                  });
            });
