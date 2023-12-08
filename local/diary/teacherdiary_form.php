@@ -34,6 +34,8 @@ class teacherdiary_form extends moodleform {
 
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
+        $var1=$CFG->wwwroot.'/local/diary/view_diary.php';
+
         $mform = $this->_form;
         $attributes = 'size="30"';
         $attributes1 = array('style' => 'width:500px; height:50px;');
@@ -130,7 +132,7 @@ $mform->addElement('html','</div>');
         $this->add_action_buttons(array('class' => 'btn-main'));
         // $mform->addElement('html','</div>');
 
-        $mform->addElement('html','<a href = "view_diary.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$var1.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View Diary'); 
         $mform->addElement('html','</a>');
   

@@ -20,6 +20,8 @@ $linktext = "View diary";
 
 $linkurl = new moodle_url('/local/diary/view_diary.php');
 
+$css1 = new moodle_url('/local/diary/css/style.css');
+
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
 // $PAGE->set_pagelayout('admin');
@@ -37,7 +39,7 @@ echo $OUTPUT->header();
      $table = new html_table();
      $mustache = new Mustache_Engine();
 
-     echo $mustache->render($template,$data);
+     echo $mustache->render($template,['css1'=>$css1]);
      if (!empty($rec)) {
     foreach ($rec as $records) {
     $id = $records->id; 

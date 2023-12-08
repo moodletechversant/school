@@ -147,14 +147,17 @@ foreach ($leaveData as $record) {
 
 $chartData2 = json_encode($ldata); 
 
-$mustacheData = array(
-    'chartData1' => $chartData1,
-    'chartData2' => $chartData2,
-    'data' => $data
-);
+// $mustacheData = array(
+//     'chartData1' => $chartData1,
+//     'chartData2' => $chartData2,
+//     'data' => $data
+// );
 // print_r($mustacheData);exit();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template, $mustacheData,['css_link'=>$css_link,'viewprofile'=>$viewprofile,
+echo $mustache->render($template, ['chartData1' => $chartData1,
+'chartData2' => $chartData2,
+'data' => $data,
+'css_link'=>$css_link,'viewprofile'=>$viewprofile,
 'ic12'=>$ic12,'sub_studentview'=>$sub_studentview,'ic5'=>$ic5,'student_learningpath'=>$student_learningpath,
 'ic2'=>$ic2,'viewattendstd'=>$viewattendstd,'ic6'=>$ic6,'studentview_1'=>$studentview_1,
 'ic13'=>$ic13,'studentview_diary'=>$studentview_diary,'ic14'=>$ic14,'upcoming'=>$upcoming,

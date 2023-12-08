@@ -44,11 +44,11 @@ echo $OUTPUT->header();
 if (has_capability('moodle/site:config', $context)) {
     // User is a site admin, display admin template
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateAdmin, $data, ['csspath'=>$csspath,'calendar'=>$calendar,'courses'=>$courses,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
+    echo $mustache->render($templateAdmin, ['csspath'=>$csspath,'calendar'=>$calendar,'courses'=>$courses,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
 } else {
     // User is a regular user, display user template
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateUser, $data,['csspath'=>$csspath,'upcoming_events'=>$upcoming_events,'upcoming_assignment'=>$upcoming_assignment,'upcomingexams'=>$upcomingexams,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
+    echo $mustache->render($templateUser,['csspath'=>$csspath,'upcoming_events'=>$upcoming_events,'upcoming_assignment'=>$upcoming_assignment,'upcomingexams'=>$upcomingexams,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
 }
 
 echo $OUTPUT->footer();

@@ -19,6 +19,11 @@ require_login();
 $linktext = "Student diary";
 
 $linkurl = new moodle_url('/local/diary/studentview_diary.php');
+$css_link = new moodle_url('/local/diary/css/style2.css');
+
+$editdiary = new moodle_url('/local/diary/editdiary.php?id=');
+$deletediary = new moodle_url('/local/diary/deletediary.php?id=');
+
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -43,7 +48,7 @@ $recs=$DB->get_record_sql($var);
     //print_r($rec);exit();
      $table = new html_table();
      $mustache = new Mustache_Engine();
-     echo $mustache->render($template,$data);
+     echo $mustache->render($template,['css_link'=>$css_link]);
      if (!empty($rec)) {
     foreach ($rec as $records) {
     $id = $records->id; 
@@ -53,8 +58,8 @@ $recs=$DB->get_record_sql($var);
     $option = $records->d_option;
     $suboption =$records->d_suboption;
 
-    $data =  array('id'=>$id, 'd_studentname' => $studname,'d_subject' => $subject,'d_content' => $content,'d_option' => $option, 'd_suboption' => $suboption); 
-    echo $mustache->render($template1,$data); 
+    $data =  array(); 
+    echo $mustache->render($template1,['editdiary'=>$editdiary,'deletediary'=>$deletediary,'id'=>$id, 'd_studentname' => $studname,'d_subject' => $subject,'d_content' => $content,'d_option' => $option, 'd_suboption' => $suboption]); 
  } 
 } else{
   echo '<div class="mt-5" style="color: rgb(52, 112, 124); font-size: 20px; text-align: center;"><b>There is nothing to display...</b></div>';
