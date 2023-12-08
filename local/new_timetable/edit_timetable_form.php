@@ -33,9 +33,9 @@ require_once($CFG->dirroot.'/user/lib.php');
 class edit_timetable_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
-
-
+        global $DB, $USER, $CFG, $COURSE;   
+        $delerte_timetable=$CFG->wwwroot('delete_timetable.php?id');
+        
         $mform = $this->_form;
         // $editorclasslist = null;
         // $filemanagerclasslist = null;
@@ -216,7 +216,7 @@ class edit_timetable_form extends moodleform {
         $this->add_action_buttons();
 
        // $mform->addElement('html','<a href = "delete_timetable.php?id=' . $id . '&period_id='.$editdata->period_id.'" onclick="return confirm(\'Are you sure you want to delete this period?\')" style="text-decoration:none">');
-        $mform->addElement('html','<a href="delete_timetable.php?id=' . $id . '&period_id=' . $editdata->period_id . '" onclick="return confirm(\'Are you sure you want to delete this period?\')" style="text-decoration:none">');
+        $mform->addElement('html','<a href="'.$delerte_timetable.'=' . $id . '&period_id=' . $editdata->period_id . '" onclick="return confirm(\'Are you sure you want to delete this period?\')" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'Delete this period'); 
         $mform->addElement('html','</a>');
 
