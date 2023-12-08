@@ -9,6 +9,8 @@ $context = context_system::instance();
 $linktext = "View divisions";
 
 $linkurl = new moodle_url('/local/division/div_view.php');
+$css_link = new moodle_url('/local/css/style.css');
+$div_creation = new moodle_url('/local/division/div_creation.php');
 
 $PAGE->set_context($context);
 $strnewclass = get_string('divcreation');
@@ -43,7 +45,7 @@ $templateData = array(
 );
 
 
-$output = $mustache->render($template, ['tableRows' => $tableRows,'templateData'=>$templateData]);
+$output = $mustache->render($template, ['css_link'=>$css_link,'div_creation'=>$div_creation,'tableRows' => $tableRows,'templateData'=>$templateData]);
 echo $output;
 echo $OUTPUT->footer();
 ?>

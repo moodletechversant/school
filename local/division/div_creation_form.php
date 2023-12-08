@@ -35,7 +35,7 @@ class div_creation_form extends moodleform {
         global $USER, $CFG, $DB;
 
         $mform = $this->_form;
-
+        $div_view=$CFG->wwwroot.'/local/division/div_view.php';
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Division creation</h2>');
         $mform->addElement('html', '<div class="container">');
@@ -95,7 +95,7 @@ class div_creation_form extends moodleform {
         $mform->addElement('html', '</div>');
 
         $this->add_action_buttons();
-        $mform->addElement('html','<a href = "div_view.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$div_view.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View divisions'); 
         $mform->addElement('html','</a>');
 
