@@ -43,11 +43,15 @@
                                             <div style="text-transform : uppercase;">{{initial}}</div>
                                                 <span style="font-size : 14px;">{{sname}}</span>
                                         </label>
+                                                             {{#dots}}<p>.....</p>{{/dots}}
+                     {{#dots}}<p>.....</p>{{/dots}}
+
                                         {{/myarray1}}
                                         
                                     </div>
                                 </div>
-                                <div>VIEW ALL</div>
+                                       <div><a href="viewall.php">VIEW ALL</a></div>
+
                             </div>
                         </div>
 
@@ -125,6 +129,15 @@
                                     <div>
                                         <h4>Leave Requests</h4>
                                         <p>View Requests</p>
+                                        {{#leavecount}}
+  {{#count}}
+    <p style="color:red;">Pending Requests: {{count}}</p>
+  {{/count}}
+  {{^count}}
+    <p style="display: none;">No Pending Requests</p>
+  {{/count}}
+{{/leavecount}}
+
                                     </div>
                                     <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

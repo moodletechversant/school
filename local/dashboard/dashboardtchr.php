@@ -63,20 +63,31 @@ $data1 = $DB->get_records_sql($sql);
 
 //print_r($data1);exit();
 $student_id = $USER->id;
+$leaveteacher = $DB->get_records_sql("SELECT user_id FROM mdl_student_assign
+    INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
+    WHERE mdl_division.div_teacherid = $current_userid");
+    // print_r($leaveteacher);exit();
 
+    $pendingcount = $DB->count_records_sql("SELECT COUNT(*) FROM {leave} WHERE l_status = 'pending'");
+
+    // print_r($pendingcount);exit();
 $mustache = new Mustache_Engine();
 $data = array(
   'myarray1' => array(),
+  
   // 'disablePromotionDiv' => $disablePromotionDiv,
   // 'disablecomment' => $disablecomment,
   // 'disablecomment1' => $disablecomment1,
 );
 
-$leaveteacher = $DB->get_records_sql("SELECT user_id FROM mdl_student_assign
-    INNER JOIN mdl_division ON mdl_division.id = mdl_student_assign.s_division
-    WHERE mdl_division.div_teacherid = $current_userid");
-    // print_r($leaveteacher);exit();
-    
+
+if ($pendingcount == 0) {
+  $data['leavecount'][] = array('display' => 'none');
+} else {
+  $data['leavecount'][] = array('count' => $pendingcount);
+}
+
+
 $data3 = $DB->get_records_sql("SELECT mdl_division.div_class, mdl_division.id
 FROM mdl_division JOIN mdl_class ON mdl_division.div_class=mdl_class.id WHERE mdl_division.div_teacherid=$student_id");
 
@@ -93,13 +104,26 @@ foreach ($data3 as $record) {
   $data['myarray2'][] = array('div_class' => $div_class,'tid' => $id);
 }
 //print_r($data);exit();
+
+$bnamesCount = 1; // Counter for names
+$showMore = false; // Flag to indicate if more names are available
+// $sname1="click view all";
 foreach ($data1 as $record) {
   $sname = $record->s_name;
   $firstLetter = substr($sname, 0, 1); // Extract the first letter
-// 
 
-  $data['myarray1'][] = array('sname' => $sname, 'initial' => $firstLetter);
-  
+  if ($bnamesCount <= 4) {
+      $data['myarray1'][] = array('sname' => $sname, 'initial' => $firstLetter);
+      $bnamesCount++;
+  } else {
+      $showMore = true; // Set the flag if more names are available
+      break; // Exit the loop as we only need 4 names
+  }
+}
+
+// Add the dot entry if more names are available
+if ($showMore) {
+  $data['myarray1'][] = array('initial' => '.....');
 }
 
 //print_r($data);exit();
