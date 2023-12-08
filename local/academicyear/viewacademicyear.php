@@ -27,8 +27,6 @@ $academic_yr_delete = new moodle_url("/local/academicyear/delete.php");
 
 $tableRows = [];
 
-$table->head = array('Academic Start', 'Academic End', 'Edit', 'Delete');
-
 foreach ($rec as $records) {
     $id = $records->id;
     $timestart = $records->start_year;
