@@ -13,6 +13,8 @@ require_login();
 $linktext = "Complaint List";
 
 $linkurl = new moodle_url('/local/complaint/view_complaint.php');
+$css_link = new moodle_url('/local/css/style.css');
+$complaint_link = new moodle_url('/local/complaint/complaint.php');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -70,7 +72,7 @@ if (!empty($sid) && $sid->user_id == $userid) {
              ];
     }
 } 
-$output = $mustache->render($template, ['tableRows' => $tableRows ,'templateData' => $templateData]);
+$output = $mustache->render($template, ['tableRows' => $tableRows ,'templateData' => $templateData,'css_link'=>$css_link,'complaint_link'=>$complaint_link]);
     echo $output;
 echo $OUTPUT->footer();
 ?>

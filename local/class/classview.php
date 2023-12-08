@@ -9,9 +9,17 @@ $context = context_system::instance();
 // $id = $class->id;
 
 $linkurl = new moodle_url('/local/class/classview.php');
+$css_link = new moodle_url('/local/css/style.css');
+$class_creation = new moodle_url('/local/class/class_creation.php');
+
+
+
 $PAGE->set_context($context);
 $strnewclass= get_string('classcreation');
 $PAGE->set_url('/local/class/classview.php');
+
+
+
 
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
@@ -33,7 +41,7 @@ echo $OUTPUT->header();
         'endYearOptions' => $options2,
     );
     
-    $output = $mustache->render($template, ['templateData'=>$templateData]);
+    $output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'class_creation'=>$class_creation]);
     echo $output;
 echo $OUTPUT->footer();
 

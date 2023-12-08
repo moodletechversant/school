@@ -10,6 +10,8 @@ $context = context_system::instance();
 $linktext = "View students";
 
 $linkurl = new moodle_url('/local/createstudent/view_student_1.php');
+$css_link = new moodle_url('/local/css/style.css');
+$new_student = new moodle_url('/local/createstudent/createstudent.php');
 
 $PAGE->set_context($context);
 $strnewclass = get_string('studentview');
@@ -39,7 +41,7 @@ $templateData = array(
 );
 
 
-$output = $mustache->render($template, ['tableRows' => $tableRows,'templateData'=>$templateData]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'templateData'=>$templateData,'css_link'=>$css_link,'new_student'=>$new_student]);
 echo $output;
 echo $OUTPUT->footer();
 ?>

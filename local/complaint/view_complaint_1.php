@@ -13,6 +13,7 @@ require_login();
 $linktext = "Complaint List";
 
 $linkurl = new moodle_url('/local/complaint/view_complaint_1.php');
+$css_link = new moodle_url('/local/css/style.css');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -100,7 +101,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link]);
 
 echo $output;
 

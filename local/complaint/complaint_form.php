@@ -39,7 +39,7 @@ require_once($CFG->dirroot.'/user/lib.php');
 class complaint_form extends moodleform {
 
     public function definition() {
-        
+        $view_complaint=new moodle_url('/local/complaint/view_complaint.php');
 
         $mform = $this->_form;
       
@@ -62,7 +62,7 @@ class complaint_form extends moodleform {
         $mform->addElement('html', '</div>');
 
         $this->add_action_buttons();
-        $mform->addElement('html','<a href = "view_complaint.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$view_complaint.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View complaints'); 
        $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');

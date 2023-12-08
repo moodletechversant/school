@@ -33,6 +33,7 @@ require_login();
 class createstudent_form extends moodleform {
     function definition() {
         global $USER, $CFG, $DB;
+        $returnurl = $CFG->wwwroot.'/local/createstudent/view_student_1.php';
 
         $mform = $this->_form;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Student creation</h2>');
@@ -148,36 +149,11 @@ class createstudent_form extends moodleform {
                }
       
               $mform->addElement('select', 'class','Select Class you applying',$options1);
-
-    
-   
-        //$mform->addRule('bg', 'div name missing', 'required', null);
-
-
-        // $clist  = $DB->get_records('class');
-        // $options1 = array();
-        // foreach($clist as $list){
-        // $options1 [$list->class_name] = $list->class_name;
-        // }
-        // $mform->addElement('select', 'cname', 'Class Name', $options1); 
-
-      
-        // $dlist  = $DB->get_records('division');
-        // $options2 = array();
-
-        // foreach($dlist as $list){
-        // $options2 [$list->div_name] = $list->div_name;
-        // }
-        // $mform->addElement('select', 'dname','Division', $options2); 
-
-      
-        
-       
       
         $mform->addElement('html', '</div>');
       
         $this->add_action_buttons();
-        $mform->addElement('html','<a href = "view_student_1.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$returnurl.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View students'); 
         $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');

@@ -34,6 +34,7 @@ class assignclsteacher_form extends moodleform {
 
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
+        $clsteacher_assign=$CFG->wwwroot.'/local/clsteacherassign/view_clsteacherassign.php';
 
         $mform = $this->_form;
 
@@ -109,7 +110,7 @@ class assignclsteacher_form extends moodleform {
 
          
              $this->add_action_buttons();
-             $mform->addElement('html','<a href = "view_clsteacherassign.php" style="text-decoration:none">');
+             $mform->addElement('html','<a href = "'.$clsteacher_assign.'" style="text-decoration:none">');
              $mform->addElement('button', 'btn', 'View Assigned Class Teacher'); 
              $mform->addElement('html','</a>');
              $mform->addElement('html', '</div>');
