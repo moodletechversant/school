@@ -13,6 +13,9 @@ require_login();
 //$linktext = "enquiry List";
 
 $linkurl = new moodle_url('/local/enquiry/view_enquiry.php');
+$css_link = new moodle_url('/local/css/style.css');
+
+
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
@@ -40,7 +43,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link]);
 
 echo $output;
 

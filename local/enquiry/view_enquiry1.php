@@ -13,6 +13,8 @@ require_login();
 $linktext = "Enquiry List";
 
 $linkurl = new moodle_url('/local/enquiry/view_enquiry1.php');
+$css_link = new moodle_url('/local/css/style.css');
+$enquiry_link = new moodle_url('/local/enquiry/enquiry.php');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -52,7 +54,7 @@ if (!empty($sid) && $sid->user_id == $userid) {
     }
 }
 
-$output = $mustache->render($template, ['tableRows' => $tableRows]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'enquiry_link'=>$enquiry_link]);
     echo $output;
 echo $OUTPUT->footer();
 ?>

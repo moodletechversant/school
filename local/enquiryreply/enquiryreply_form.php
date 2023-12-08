@@ -33,7 +33,7 @@ class enquiryreply_form extends moodleform {
 
     public function definition() {
         global $PAGE, $DB, $USER, $CFG, $COURSE;
-
+        $enquiry = $CFG->wwwroot.'/local/enquiry/view_enquiry.php';
         $mform = $this->_form;
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Enquiry Reply</h2>');
@@ -54,7 +54,7 @@ class enquiryreply_form extends moodleform {
 
        $mform->addElement('html', '</div>');
        $this->add_action_buttons();
-       $mform->addElement('html','<a href = "/school/local/enquiry/view_enquiry.php" style="text-decoration:none">');
+       $mform->addElement('html','<a href = "'.$enquiry.'" style="text-decoration:none">');
        $mform->addElement('button', 'btn', 'View Enquiry list'); 
        $mform->addElement('html','</a>');
 

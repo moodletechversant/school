@@ -137,7 +137,7 @@ if ($showMore) {
 
 //print_r($data);exit();
 
-echo $mustache->render($template4, $data,['css_link'=>$css_link,'profile_view'=>$profile_view,'image1'=>$image1,'subject_enroled'=>$subject_enroled,
+echo $mustache->render($template4,[$data,'css_link'=>$css_link,'profile_view'=>$profile_view,'image1'=>$image1,'subject_enroled'=>$subject_enroled,
 'image2'=>$image2,'attendance'=>$attendance,
 'image3'=>$image3,'leaverequest'=>$leaverequest,'image4'=>$image4,'promotion'=>$promotion,
 'image5'=>$image5,'holiday'=>$holiday,'image6'=>$image6,'upcoming'=>$upcoming,
