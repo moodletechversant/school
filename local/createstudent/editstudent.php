@@ -59,13 +59,8 @@ if($mform->is_cancelled()){
      $stddata->s_gender=$formdata->gender;   
      $stddata->s_district=$formdata->district;
      if (empty($sid_data)) {
-        $classes = $DB->get_records('class');
-        $options1 = array('' => '---- Select a class ----');
-        foreach ($classes as $class) {
-            $options1[$class->id] = $class->class_name;
-        }
-    
-        $mform->addElement('select', 'class', 'Select Class you applying', $options1);
+       
+        $stddata->s_class =$formdata->class;
     } else {
         $stddata->s_class = !empty($formdata->class) ? $formdata->class : 'default_class_value';
 
