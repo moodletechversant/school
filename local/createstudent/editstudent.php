@@ -27,6 +27,10 @@ $PAGE->set_title($linktext);
 $PAGE->navbar->add('Student', new moodle_url($CFG->wwwroot.'/local/createstudent/editstudent.php'));
 
 echo $OUTPUT->header();
+$id  = optional_param('id', 0, PARAM_INT);
+$editdata=$DB->get_record('student',array('id'=>$id));
+$sid=$editdata->user_id;
+$sid_data=$DB->get_record('student_assign',array('user_id'=>$sid));
 $mform = new editstudent_form ();
 
 if($mform->is_cancelled()){
@@ -54,7 +58,16 @@ if($mform->is_cancelled()){
      $stddata->s_bg=$formdata->bg;
      $stddata->s_gender=$formdata->gender;   
      $stddata->s_district=$formdata->district;
-     $stddata->s_class=$formdata->class;
+     if (empty($sid_data)) {
+       
+        $stddata->s_class =$formdata->class;
+    } else {
+        $stddata->s_class = !empty($formdata->class) ? $formdata->class : 'default_class_value';
+
+    }
+        $update = $DB->update_record('student', $stddata);
+        
+    
      
      $update=$DB->update_record('student',$stddata);
      $urlto = $CFG->wwwroot.'/local/createstudent/view_student_1.php';
