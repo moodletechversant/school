@@ -14,6 +14,8 @@ $context = context_system::instance();
 $linktext = "Holiday Calendar";
 
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
+$editholiday = new moodle_url('/local/holiday/editholiday.php?id');
+$deleteholiday = new moodle_url('/local/holiday/deleteholiday.php?id');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentcreation');
@@ -52,8 +54,8 @@ $PAGE->set_title($linktext);
 
        $holiday =$records->holiday_name;
     
-       $edit = '<a href="/school/local/holiday/editholiday.php?id='.$id.'"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
-       $delete = '<a href="/school/local/holiday/deleteholiday.php?id='.$id.'"><i class="fa fa-trash" style="font-size:24px;color:#0055ff"></i></a>';
+       $edit = '<a href="'.$editholiday.'='.$id.'"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
+       $delete = '<a href="'.$deleteholiday.'='.$id.'"><i class="fa fa-trash" style="font-size:24px;color:#0055ff"></i></a>';
         
        $tableRows[] =  ['date1' => $date1,'date2' => $date2,'holiday' => $holiday,'day'=>$day,'month'=>$month,'dayName'=>$dayName]; 
     //    echo $mustache->render($template1,$data); 

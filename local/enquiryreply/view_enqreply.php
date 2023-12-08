@@ -24,6 +24,8 @@ require_login();
 $linktext = "Reply Message";
 
 $linkurl = new moodle_url('/local/enquiryreply/view_enqreply.php');
+$view_enquiry = new moodle_url('/local/enquiry/view_enquiry.php');
+
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
@@ -36,7 +38,7 @@ $PAGE->navbar->add('Reply List', new moodle_url($CFG->wwwroot.'/local/enquiryrep
 
 echo $OUTPUT->header();
 
-echo'<a href="/school/local/enquiry/view_enquiry.php" class="next">&laquo; Previous</a><br><br>';
+echo'<a href="'.$view_enquiry.'" class="next">&laquo; Previous</a><br><br>';
 
 // $backurl = new moodle_url('/local/enquiry/view_enquiry.php');
 // $backbutton = html_writer::link($backurl, '< Back');

@@ -6,7 +6,7 @@ require_once dirname(__FILE__)."/../../config.php";
 global $DB,$CFG;
 $id = required_param('id', PARAM_INT);
 // confirm_sesskey();
-
+$delete = $CFG->wwwroot.'/local/holiday/view_holiday.php';
 
 $context = context_course::instance($COURSE->id);
 require_capability('moodle/site:manageblocks', $context);
@@ -18,7 +18,7 @@ $table = 'addholiday';
 	//$DB->delete_records('user', array('id'=>$id2));
 
 	
-header("Location:/school/local/holiday/view_holiday.php");
+header("Location:".$delete);
 
 ?>
 

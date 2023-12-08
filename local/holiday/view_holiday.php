@@ -11,6 +11,10 @@ $context = context_system::instance();
 $linktext = "Holiday List";
 
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
+$css_link = new moodle_url('/local/css/style.css');
+$editholiday = new moodle_url('/local/holiday/editholiday.php?id');
+$deleteholiday = new moodle_url('/local/holiday/deleteholiday.php?id');
+$addholiday = new moodle_url('/local/holiday/addholiday.php');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentcreation');
@@ -48,8 +52,8 @@ foreach ($rec as $records) {
         $edit = '<a href="#" disabled><i class="fa fa-edit" style="font-size:24px;color:#ccc"></i></a>';
         $delete = '<a href="#" disabled><i class="fa fa-trash" style="font-size:24px;color:#ccc"></i></a>';
     } else {
-        $edit = '<a href="/school/local/holiday/editholiday.php?id=' . $id . '"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
-        $delete = '<a href="/school/local/holiday/deleteholiday.php?id=' . $id . '" style="color:blue;" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i style="font-size:24px" class="fa fa-trash-o" ></i><a>';
+        $edit = '<a href="'.$editholiday.'=' . $id . '"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
+        $delete = '<a href="'.$deleteholiday.'' . $id . '" style="color:blue;" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i style="font-size:24px" class="fa fa-trash-o" ></i><a>';
     }
 
     $tableRows[] = [
@@ -61,7 +65,7 @@ foreach ($rec as $records) {
     ];
 }
 
-$output = $mustache->render($template, ['tableRows' => $tableRows]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'addholiday'=>$addholiday]);
 echo $output;
 
 echo $OUTPUT->footer();
