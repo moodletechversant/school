@@ -37,9 +37,29 @@ class periods_form extends moodleform {
     <div class="container">
         <div class="col-md-10 col-10 mx-auto col-lg-6">
             <div class="form-card card">
-            <h4>Time-Table creation</h4> 
+            <h4>Time-Table creation</h4>
 
-                <div class="row">
+            <div class="row">
+                        <div class="form-group">
+                        ');
+            $academic  = $DB->get_records('academic_year');
+            $options1 = array();
+            //$options1=array(''=>'---- Select academic_year ----');
+            foreach($academic as $academics){
+                $timestart = $academics->start_year;
+                $timeend = $academics->end_year;
+            $timestart1 = date("d/m/Y", $timestart);
+            $timeend1 = date("d/m/Y", $timeend);
+            $options1 [$academics->id] =$timestart1.'-'.$timeend1;
+            }
+            $mform->addElement('select', 'academic','Academic Year',$options1);
+            $mform->updateAttributes('academic', array('academic' => 'form-control'));
+
+
+            $mform->addElement('html','
+            </div>
+            </div>
+            <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Class</label>

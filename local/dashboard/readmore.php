@@ -25,22 +25,30 @@ $PAGE->set_url('/local/dashboard/readmore.php');
 $PAGE->set_title($strnewclass);
 
 echo $OUTPUT->header();
+$var="SELECT * FROM {student} WHERE user_id=$userid";
+$recs=$DB->get_record_sql($var);
 
-$sql2 = "SELECT *
-FROM {diary} WHERE d_student_id=$userid  ORDER BY d_starttime DESC" ;
-
-$rec1 = $DB->get_records_sql($sql2);
+$sql2 = "SELECT * FROM {diary} WHERE (d_student_id = '{$recs->user_id}' OR d_student_id LIKE '%,{$recs->user_id},%' OR d_student_id LIKE '{$recs->user_id},%' OR d_student_id LIKE '%,{$recs->user_id}') OR d_student_id = 'all'";
+    $rec1 = $DB->get_records_sql($sql2);
 // print_r($rec1);exit();
     $table = new html_table();
     $mustache = new Mustache_Engine();
     $data = array();
     foreach ($rec1 as $records) {
         $content=$records->d_content;
-        // print_r($content);exit();
+
+        $dateFormat = 'd-m-Y';
+        $s_timestamp=$records->d_starttime;
+        $stime = date($dateFormat, $s_timestamp);
+
+        $e_timestamp=$records->d_endtime;
+        $etime = date($dateFormat, $e_timestamp);
        
         // print_r($day_records);exit();
             $data[] = array(
-                'content' => $content);
+                'content' => $content,
+                's_time' =>$stime,
+                'e_time' =>$etime);
         // print_r($data);exit();       
             }     
     //multi-dimentional array
