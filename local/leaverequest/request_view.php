@@ -14,6 +14,11 @@ $linktext = "View Leave Request";
  
 
 $linkurl = new moodle_url('/local/leaverequest/templates/request_view.mustache');
+$css_link = new moodle_url('/local/css/style.css');
+$img1 = new moodle_url('/local/img/tick.svg');
+$img2 = new moodle_url('/local/img/untick.svg');
+$leaverequest = new moodle_url('/school/local/leaverequest/editleave.php?id');
+
 
 $PAGE->set_context($context);
 $strnewclass= 'View requests'; 
@@ -94,7 +99,7 @@ $status = $value->l_status;
           // $data3=['showContent' => ($current_time >= $tdate)];
     }
     // echo $mustache->render($template,$data3);
- echo $mustache->render($template, ['leave' => $data1 ,'templateData' =>$templateData]);
+ echo $mustache->render($template, ['leave' => $data1 ,'templateData' =>$templateData,'css_link'=>$css_link,'img1'=>$img1,'img2'=>$img2,'leaverequest'=>$leaverequest]);
 
 echo html_writer::table($table);
 echo $OUTPUT->footer();

@@ -34,7 +34,7 @@ class editleave_form extends moodleform {
     function definition() {
         global $USER, $CFG, $DB;
         $urlto=$CFG->wwwroot.'/local/leaverequest/editleave.php';
-       
+        $request_view=$CFG->wwwroot.'/local/leaverequest/request_view.php';
        
         $mform = $this->_form;
 
@@ -45,12 +45,6 @@ class editleave_form extends moodleform {
         $id  = optional_param('id', 0, PARAM_INT);
 
         $mform->addElement('hidden','id',$id);
-
-  
-
-
-
-
        
         $mform->addElement('date_selector', 'fedate','From Date', get_string('from'));
         $mform->addRule('fedate', 'From date missing', 'required', null);
@@ -66,17 +60,12 @@ class editleave_form extends moodleform {
         $mform->addElement('textarea', 'reason', 'Reason for edit', array('rows' => 4,'style' =>'width:300px')); 
         $mform->addRule('reason', 'reason missing', 'required', null);
 
-
-
-     
-
         $editdata=$DB->get_record('leave',array('id'=>$id));
  
 //print_r($editdata);exit();
         $mform->setDefault('fedate',$editdata->f_date);
         $mform->setDefault('tedate',$editdata->t_date);
         $mform->setDefault('nleave',$editdata->n_leave);
-       
        
         $mform->addElement('html', '</div>');
 
@@ -85,17 +74,11 @@ class editleave_form extends moodleform {
         // $mform->addElement('button', 'btn', 'View divisions'); 
         // $mform->addElement('html','</a>');
  
-
-
-        $mform->addElement('html','<a href = "request_view.php">');
+        $mform->addElement('html','<a href = "'.$request_view.'">');
         $mform->addElement('button', 'btn_btn', 'View Requests'); 
         $mform->addElement('html','</a>');
 
-
-
         $mform->addElement('html', '</div>');
-
-
 
     }
 

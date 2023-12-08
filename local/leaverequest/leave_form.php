@@ -43,10 +43,6 @@ class leave_form extends moodleform {
 
         $mform->addElement('hidden','id',$id);
 
-  
-
-
-
 
         $mform->addElement('html', '<div class="dbpicker">');
         $mform->addElement('date_selector', 'fdate','From Date', get_string('from'));
