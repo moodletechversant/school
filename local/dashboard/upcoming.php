@@ -19,7 +19,18 @@ require_login();
 // $classid = $class->id;
 
 $linkurl = new moodle_url('/local/dashboard/upcoming.php');
+$csspath = new moodle_url('/local/css/style.css');
+$calendar = new moodle_url('/calendar/view.php');
+$courses = new moodle_url('/my/courses.php');
+$img1 = new moodle_url('/local/img/ic-20.svg');
+$img2 = new moodle_url('/local/img/ic-21.svg');
+$img3 = new moodle_url('/local/img/ic-22.svg');
 
+$upcoming_events = new moodle_url('/local/dashboard/upcoming_events.php');
+$upcomingexams = new moodle_url('/local/dashboard/upcomingexams.php');
+$upcoming_assignment = new moodle_url('/local/dashboard/upcoming_assignment.php');
+
+ 
 $PAGE->set_context($context);
 
 $strnewclass= 'Student Dashboard';
@@ -33,11 +44,11 @@ echo $OUTPUT->header();
 if (has_capability('moodle/site:config', $context)) {
     // User is a site admin, display admin template
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateAdmin, $data);
+    echo $mustache->render($templateAdmin, $data, ['csspath'=>$csspath,'calendar'=>$calendar,'courses'=>$courses,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
 } else {
     // User is a regular user, display user template
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateUser, $data);
+    echo $mustache->render($templateUser, $data,['csspath'=>$csspath,'upcoming_events'=>$upcoming_events,'upcoming_assignment'=>$upcoming_assignment,'upcomingexams'=>$upcomingexams,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
 }
 
 echo $OUTPUT->footer();

@@ -12,28 +12,37 @@ $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$user
 if(!empty($tid) && $tid->user_id==$userid){
 $template4 = file_get_contents($CFG->dirroot . '/local/dashboard/templates/teacher.mustache');
 
-//1234
-// require_once($CFG->dirroot.'/local/createstudent/demo.html');
-
-// $currentMonth = date('n');
-// $currentWeek = ceil(date('j') / 7); // Calculate the current week of the month
-
-// if ($currentMonth >= 4 && $currentMonth <= 5) {
-//     $disablePromotionDiv = ''; // Enable the div
-//     $disablecomment = '';
-// } elseif (($currentMonth == 3 && $currentWeek >= 3) || ($currentMonth == 4)) {
-//     $disablePromotionDiv = 'pointer-events: none; '; // Disable the div
-//     $disablecomment1 = "this will open soon";
-// } else {
-//     $disablePromotionDiv ='pointer-events: none; '; // Disable the div
-//     $disablecomment = "temporarily closed";
-// }
-
 global $class,$CFG;
 $context = context_system::instance();
 // $classid = $class->id;
 
 $linkurl = new moodle_url('/local/dashboard/dashboardtchr.php');
+
+$css_link = new moodle_url('/local/css/style.css');
+$profile_view = new moodle_url('/local/profileview/viewprofilet.php');
+$image1 = new moodle_url('/local/img/ic-12.svg');
+$subject_enroled = new moodle_url('/local/subject/sub_teacherview.php');
+$image2 = new moodle_url('/local/img/ic-23.svg');
+$attendance = new moodle_url('/local/attendance/attendance.php');
+$image3 = new moodle_url('/local/img/ic-24.svg');
+$leaverequest = new moodle_url('/local/leaverequest/request_view.php');
+$image4 = new moodle_url('/local/img/ic-25.svg');
+$promotion = new moodle_url('/local/promotion/promotion.php');
+$image5 = new moodle_url('/local/img/ic-26.svg');
+$holiday = new moodle_url('/local/holiday/holiday_calendar.php');
+$image6 = new moodle_url('/local/img/ic-27.svg');
+$upcoming = new moodle_url('/local/dashboard/upcoming.php');
+$image7 = new moodle_url('/local/img/ic-28.svg');
+$new_timetable = new moodle_url('/local/new_timetable/teacherview.php');
+$image8 = new moodle_url('/local/img/ic-7.svg');
+$diary = new moodle_url('/local/diary/view_diary.php');
+$image10 = new moodle_url('/local/img/ic-29.svg');
+$enquiry = new moodle_url('/local/enquiry/view_enquiry.php');
+$image11 = new moodle_url('/local/img/ic-31.svg');
+$teacherassign = new moodle_url('/local/teacherassign/teacherlearningpath.php');
+$image12 = new moodle_url('/local/img/ic-32.svg');
+
+
 
 $PAGE->set_context($context);
 $strnewclass= 'Teacher Dashboard';
@@ -128,7 +137,12 @@ if ($showMore) {
 
 //print_r($data);exit();
 
-echo $mustache->render($template4, $data);
+echo $mustache->render($template4, $data,['css_link'=>$css_link,'profile_view'=>$profile_view,'image1'=>$image1,'subject_enroled'=>$subject_enroled,
+'image2'=>$image2,'attendance'=>$attendance,
+'image3'=>$image3,'leaverequest'=>$leaverequest,'image4'=>$image4,'promotion'=>$promotion,
+'image5'=>$image5,'holiday'=>$holiday,'image6'=>$image6,'upcoming'=>$upcoming,
+'image7'=>$image7,'new_timetable'=>$new_timetable,'image8'=>$image8,'diary'=>$diary,'image10'=>$image10,
+'enquiry'=>$enquiry,'image11'=>$image11,'teacherassign'=>$teacherassign,'image12'=>$image12]);
 
 
 echo $OUTPUT->footer();

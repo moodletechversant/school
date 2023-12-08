@@ -9,6 +9,9 @@ global $class,$CFG;
 $context = context_system::instance();
 $linkurl = new moodle_url('/local/dashboard/demo_learningpath.php');
 
+$csspath = new moodle_url('/local/css/style.css');
+$image1 = new moodle_url('/local/img/sub-icon-1.svg');
+
 $PAGE->set_context($context);
 $strnewclass= get_string('studentview');
 $PAGE->set_url('/local/dashboard/demo_learningpath.php');
@@ -101,7 +104,7 @@ foreach ($sections as $section_item) {
 }
 
 $sections=array('sections' => $data,'course_namee'=>$course_namee);
-echo $mustache->render($template,$sections);
+echo $mustache->render($template,$sections,['csspath'=>$csspath,'image1'=>$image1]);
 // $output = $mustache->render($template,$sections); 
 echo $OUTPUT->footer();
 ?>

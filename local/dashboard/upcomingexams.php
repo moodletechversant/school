@@ -12,6 +12,9 @@ $context = context_system::instance();
 require_login();
 
 $linkurl = new moodle_url('/local/dashboard/upcomingexams.php');
+$csspath = new moodle_url('/local/css/style.css');
+$dashboard = new moodle_url('/local/dashboard/upcoming.php');
+
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
 $PAGE->set_pagelayout('admin');
@@ -73,7 +76,7 @@ else{
  ];
 }
 }
-$output = $mustache->render($template, ['tableRows' => $tableRows]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'csspath' => $csspath,'dashboard'=>$dashboard]);
 echo $output;
 
 echo $OUTPUT->footer();

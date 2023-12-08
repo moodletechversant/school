@@ -12,6 +12,9 @@ $context = context_system::instance();
 require_login();
 
 $linkurl = new moodle_url('/local/event/upcoming_events.php');
+$csspath = new moodle_url('/local/css/style.css');
+$dashboard = new moodle_url('/local/dashboard/upcoming.php');
+
 
 // Print the page header.
 $PAGE->set_context($context);
@@ -63,7 +66,7 @@ else{
    
 }
 
-$output = $mustache->render($template, ['tableRows' => $tableRows]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'csspath' => $csspath,'dashboard'=>$dashboard]);
 echo $output;
 
 echo $OUTPUT->footer();
