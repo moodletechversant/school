@@ -36,7 +36,7 @@ class editsubject_form extends moodleform {
 
         $mform = $this->_form;
 
-        $mform->addElement('html', '<h2 class="text-center heading mb-5">Subject Creation</h2>');
+        $mform->addElement('html', '<h2 class="text-center heading mb-5">Edit subject</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
