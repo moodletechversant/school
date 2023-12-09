@@ -15,6 +15,7 @@ $linkurl = new moodle_url('/local/leaverequest/request_view.php');
 $deleteee = new moodle_url('/local/leaverequest/delete.php?id');
 $css_link = new moodle_url('/local/css/style.css');
 $leave = new moodle_url('/local/leaverequest/leave.php');
+$delete_leave = new moodle_url('/local/leaverequest/delete.php');
 
 $PAGE->set_context($context);
 $strnewclass= 'View requests';
@@ -135,7 +136,7 @@ echo $OUTPUT->footer();
     if (confirmDelete) {
         $.ajax({
             type: 'POST',
-            url: '/school/local/leaverequest/delete.php',
+            url:  $delete_leave,
             data: { id: id },
             success: function(response) {
                 // Handle the response from the server here
