@@ -2,7 +2,7 @@
         <br>
         <div class="container-fluid" id="time1">
             <div class="timetable-img text-center">
-                <img src="img/content/timetable.png" alt="">
+                <img src={{timetable_content}} alt="">
             </div>       
             <div class="table-responsive">
                 <table class="table table-bordered text-center">
@@ -15,7 +15,7 @@
         <th class="align-middle" title="click to delete">{{days}}</th>
         {{#records}}
             <td>
-                <a href="edit_timetable.php?id={{id}}">
+                <a href={{new_timetable_edit_timetable}}={{id}}>
                     <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13 titlebar" title="Teacher-{{t_teacher}}">{{t_subject}}</span>
                 </a>
                 <div class="margin-10px-top font-size13">{{from_time}}-{{to_time}}</div>
@@ -28,7 +28,7 @@
         {{/records}}
         <td class="col-1"> 
             {{#periods}}
-                <a href="new_period.php?id={{period_id}}">
+                <a href={{new_periods}}={{period_id}}>
                     <i class='fa fa-plus mt-4' style='font-size:24px' title="Add new period"></i>
                 </a>
             {{/periods}} 

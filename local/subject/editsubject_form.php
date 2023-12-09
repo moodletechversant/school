@@ -33,6 +33,7 @@ class editsubject_form extends moodleform {
 
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
+        $var12=$CFG->wwwroot.'/local/subject/viewsubject.php';
 
         $mform = $this->_form;
 
@@ -158,7 +159,7 @@ class editsubject_form extends moodleform {
 
              $this->add_action_buttons();
 
-             $mform->addElement('html','<a href = "viewsubject.php" style="text-decoration:none">');
+             $mform->addElement('html','<a href = "'.$var12.'" style="text-decoration:none">');
              $mform->addElement('button', 'btn', 'View subjects'); 
              $mform->addElement('html','</a>');
              

@@ -25,6 +25,8 @@ class periods_form extends moodleform {
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
 
+        $new_timetable_admin_view_1 = $CFG->wwwroot.'/local/new_timetable/admin_view_1.php';
+
         $mform = $this->_form;
 
         $attributes = 'size="30"';
@@ -137,7 +139,7 @@ class periods_form extends moodleform {
         $mform->addElement('html', '<br>');
         $this->add_action_buttons(false, 'cancel');
         $mform->addElement('html', '<br>');
-        $mform->addElement('html','<a href = "/school/local/new_timetable/admin_view_1.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$new_timetable_admin_view_1.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn','View',array('class' => 'btn btn-primary ms-5')); 
         $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>

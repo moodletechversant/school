@@ -13,6 +13,10 @@ $user=$USER->id;
 $template = file_get_contents($CFG->dirroot . '/local/profileview/template/profilet.mustache');
 
 $linkurl = new moodle_url('/local/profileview/viewprofilet.php');
+$css_link = new moodle_url('/local/css/style.css');
+$img_link = new moodle_url('/local/img/logo.svg');
+$img_link1 = new moodle_url('/local/img/dummy-user.png');
+$img_link2 = new moodle_url('/local/img/tabler_dots.svg');
 
 $PAGE->set_context($context);
 $strnewclass= 'Profile';

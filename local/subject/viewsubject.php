@@ -16,6 +16,9 @@ $linktext = "View subjects";
 //$linktext = get_string('plugin','new_plugin');
 // Set the url.
 $linkurl = new moodle_url('/local/subject/viewsubject.php');
+$css_link = new moodle_url('/local/css/style.css');
+$subjectss = new moodle_url('/local/subject/subject.php');
+$css_link = new moodle_url('/local/css/style.css');
 
 // Print the page header.
 $PAGE->set_context($context);
@@ -47,7 +50,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'subjectss'=>$subjectss]);
 echo $output;
 echo $OUTPUT->footer();
 ?>

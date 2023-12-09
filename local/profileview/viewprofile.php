@@ -13,6 +13,10 @@ $user=$USER->id;
 $template = file_get_contents($CFG->dirroot . '/local/profileview/template/profile.mustache');
 
 $linkurl = new moodle_url('/local/profileview/viewprofile.php');
+$css_link = new moodle_url('/local/css/style.css');
+$img_link = new moodle_url('/local/img/logo.svg');
+$img_link1 = new moodle_url('/local/img/dummy-user.png');
+$img_link2 = new moodle_url('/local/img/tabler_dots.svg');
 
 $PAGE->set_context($context);
 $strnewclass= 'Profile';
@@ -94,13 +98,13 @@ $rec1 = $DB->get_records_sql("SELECT {course}.fullname,{course}.id FROM {course}
 
   $scourses1=array('courses' => $subjects);
   //print_r( $scourses1);exit();
-$sprofile1 = array('students' => $sprofile);
+  $sprofile1 = array('students' => $sprofile);
 // print_r($sprofile1);exit();
 $mustache = new Mustache_Engine();
 
 
 
-$mergedArray = array_merge($scourses1, $sprofile1);
+$mergedArray = array_merge($scourses1, $sprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link]);
 //print_r($mergedArray);exit();
 
 

@@ -10,6 +10,8 @@ $context = context_system::instance();
 // $classid = $class->id;
 //$linktext = "Time Table";
 $linkurl = new moodle_url('/local/new_timetable/view_timetable.php');
+$css_link = new moodle_url('/local/css/style.css');
+
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentview');
@@ -70,10 +72,10 @@ foreach ($rec1 as $records) {
     // print_r($data);exit();       
         }     
 //multi-dimentional array
-$days=array('day' => $data);
+
 //print_r($days);exit();
 
-echo $mustache->render($template,$days);
+echo $mustache->render($template,['day' => $data,'css_link'=>$css_link]);
 ?>
 <?php
 echo $OUTPUT->footer();

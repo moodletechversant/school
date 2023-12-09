@@ -7,12 +7,12 @@ $template = file_get_contents($CFG->dirroot . '/local/new_timetable/templates/st
 
 global $class,$CFG;
 $context = context_system::instance();
-// $classid = $class->id;
 $linktext = "Time Table";
 $linkurl = new moodle_url('/local/new_timetable/view_timetable.php');
+$css_link = new moodle_url('/local/css/style.css');
+$addholiday = new moodle_url('/local/holiday/addholiday.php');
 
 $PAGE->set_context($context);
-//$strnewclass= get_string('studentview');
 
 $PAGE->set_url('/local/new_timetable/view_timetable.php');
 $PAGE->set_heading($linktext);
@@ -23,9 +23,6 @@ echo $OUTPUT->header();
 $current_user_id = $USER->id;
 // $user_id=11;
     $rec1=$DB->get_records_sql("SELECT {new_timetable_periods}.* FROM {new_timetable_periods} INNER JOIN {student_assign} ON {student_assign}.s_division={new_timetable_periods}.t_division WHERE {student_assign}.user_id=$current_user_id");
-// $rec1=$DB->get_records_sql("SELECT Orders.OrderID, student_assign.CustomerName, Orders.OrderDate
-// FROM Orders
-// INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID");
 
     $table = new html_table();
     $mustache = new Mustache_Engine();
@@ -73,9 +70,9 @@ $current_user_id = $USER->id;
         //print_r($data);exit();       
             }     
     //multi-dimentional array
-    $days=array('day' => $data);
+ 
    
-    echo $mustache->render($template,$days);
+    echo $mustache->render($template,['day' => $data,'css_link'=>$css_link,'addholiday'=>$addholiday]);
   ?>
 
   <?php

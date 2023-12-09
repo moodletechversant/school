@@ -11,6 +11,7 @@ require_login();
 // $classid = $class->id;
 $linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/sub_studentview.php');
+$course_view = new moodle_url('/course/view.php?id');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentview');
@@ -51,9 +52,9 @@ foreach($rec1 as $record1){
 // print_r($data);exit();
 
 //Multi-dimentional array
-$subjects = array('sub' => $data);
+// $subjects = array();
 // print_r($subjects);exit();
-echo $mustache->render($template,$subjects);
+echo $mustache->render($template,['sub' => $data,'course_view'=>$course_view]);
   ?>
 
   <?php

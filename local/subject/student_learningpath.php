@@ -11,6 +11,8 @@ require_login();
 // $classid = $class->id;
 $linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/student_learningpath.php');
+$demo_learningpath = new moodle_url('/local/dashboard/demo_learningpath.php?id');
+
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentview');
@@ -49,9 +51,9 @@ foreach($rec1 as $record1){
 // print_r($data);exit();
 
 //Multi-dimentional array
-$subjects = array('sub' => $data);
+// $subjects = array();
 // print_r($subjects);exit();
-echo $mustache->render($template,$subjects);
+echo $mustache->render($template,['sub' => $data,'demo_learningpath'=>$demo_learningpath]);
   ?>
 <?php
     echo $OUTPUT->footer();
