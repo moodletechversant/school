@@ -34,6 +34,8 @@ $data=$DB->get_records_sql("SELECT * FROM {leave} WHERE s_id=$userid AND YEAR(FR
 $current_time = time(); 
 
 $mustache = new Mustache_Engine();
+$table = new html_table();
+
 $academic = $DB->get_records('academic_year');
    
 $options1 = array();
@@ -117,7 +119,7 @@ $tableRows = [];
 
 }
 
-$output = $mustache->render($template, ['tableRows' => $tableRows, 'templateData' => $templateData,]);
+$output = $mustache->render($template, ['leave'=>$leave,'tableRows' => $tableRows, 'templateData' => $templateData,'css_link'=>$css_link,]);
     echo $output;
    
    

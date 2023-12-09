@@ -4,7 +4,7 @@ require_once($CFG->dirroot.'/local/leaverequest/leave_form.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
-//$template = file_get_contents($CFG->dirroot . '/local/leaverequest/templates/leave.mustache');
+$template = file_get_contents($CFG->dirroot . '/local/leaverequest/templates/leave.mustache');
 global $class,$CFG,$USER,$DB;
 
 
@@ -14,6 +14,10 @@ $context = context_system::instance();
 // $classid = $class->id;
 
 $linkurl = new moodle_url('/local/leaverequest/leave.php');
+//$css_link = new moodle_url('/local/css/style.php');
+$css_link = new moodle_url('/local/css/style.css');
+$leaverequest = new moodle_url('/school/local/leaverequest/leave.php');
+
 $PAGE->set_context($context);
 $strnewclass= "Request Leave ";
 $PAGE->set_url('/local/leaverequest/leave.php');
@@ -33,7 +37,7 @@ $currentTimestamp = time();
 
 //print_r($currentTimestamp);exit();
 echo $OUTPUT->header();
-//$mustache = new Mustache_Engine();
+$mustache = new Mustache_Engine();
 //echo $mustache->render($template);
 $returnurl = $CFG->wwwroot.'/local/leaverequest/std_viewrequest.php';
 if ($mform->is_cancelled()) {
