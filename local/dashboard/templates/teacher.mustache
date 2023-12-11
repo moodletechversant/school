@@ -37,7 +37,7 @@
                                         <p style="font-size: 18px;">{{sname}}</p>
                                             {{/data.myarray1}}-->
 
-                                        {{#myarray1}}
+                                        {{#data.myarray1}}
                                        <label for="one">
                                             <input type="radio" name="user" />
                                             <div style="text-transform : uppercase;">{{initial}}</div>
@@ -46,7 +46,7 @@
                                                              {{#dots}}<p>.....</p>{{/dots}}
                      {{#dots}}<p>.....</p>{{/dots}}
 
-                                        {{/myarray1}}
+                                        {{/data.myarray1}}
                                         
                                     </div>
                                 </div>
@@ -129,14 +129,14 @@
                                     <div>
                                         <h4>Leave Requests</h4>
                                         <p>View Requests</p>
-                                        {{#leavecount}}
+                                        {{#data.leavecount}}
                                             {{#count}}
                                                 <p style="color:red;">Pending Requests: {{count}}</p>
                                             {{/count}}
                                             {{^count}}
                                                 <p style="display: none;">No Pending Requests</p>
                                             {{/count}}
-                                        {{/leavecount}}
+                                        {{/data.leavecount}}
 
                                     </div>
                                     <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
