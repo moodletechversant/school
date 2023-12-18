@@ -62,7 +62,7 @@ if($mform->is_cancelled()){
        
         $stddata->s_class =$formdata->class;
     } else {
-        $stddata->s_class = !empty($formdata->class) ? $formdata->class : 'default_class_value';
+        $stddata->s_class = !empty($formdata->class) ? $formdata->class :$editdata->s_class;
 
     }
         $update = $DB->update_record('student', $stddata);
