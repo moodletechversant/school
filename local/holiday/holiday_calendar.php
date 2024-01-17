@@ -60,7 +60,7 @@ $PAGE->set_title($linktext);
     //    echo $mustache->render($template1,$data); 
    
     }
-    echo $mustache->render($template1, ['tableRows' => $tableRows ,'csslink' =>$css_link]);
+    echo $mustache->render($template1, ['tableRows' => $tableRows ,'css_link' =>$css_link]);
     // <input type="submit" name="edit" value="edit">
 
 echo $OUTPUT->footer();
