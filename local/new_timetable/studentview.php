@@ -19,6 +19,7 @@ $PAGE->set_heading($linktext);
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 
+
 echo $OUTPUT->header();
 $current_user_id = $USER->id;
 // $user_id=11;
