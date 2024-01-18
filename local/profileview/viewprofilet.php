@@ -17,6 +17,7 @@ $css_link = new moodle_url('/local/css/style.css');
 $img_link = new moodle_url('/local/img/logo.svg');
 $img_link1 = new moodle_url('/local/img/dummy-user.png');
 $img_link2 = new moodle_url('/local/img/tabler_dots.svg');
+$course_view = new moodle_url('/course/view.php?id');
 
 $PAGE->set_context($context);
 $strnewclass= 'Profile';
@@ -89,7 +90,7 @@ $mustache = new Mustache_Engine();
 
 
 
-$mergedArray = array_merge($scourses1, $tprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link]);
+$mergedArray = array_merge($scourses1, $tprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link,'course_view'=>$course_view]);
 
 
 echo $mustache->render($template,$mergedArray);
