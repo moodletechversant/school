@@ -89,8 +89,8 @@ $mustache = new Mustache_Engine();
 
 
 
+$mergedArray = array_merge($scourses1, $tprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link]);
 
-$mergedArray = array_merge($scourses1, $tprofile1);
 
 echo $mustache->render($template,$mergedArray);
 
