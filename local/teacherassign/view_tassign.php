@@ -8,6 +8,7 @@ global $class,$CFG, $DB;
 
 
 $css_link = new moodle_url('/local/css/style.css');
+$add_new = new moodle_url('/local/teacherassign/teacherassign.php');
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "admin_view";
@@ -41,7 +42,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'add_new'=>$add_new]);
 echo $output;
 echo $OUTPUT->footer();
 ?>
