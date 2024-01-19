@@ -6,7 +6,8 @@ Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/clsteacherassign/template/clsteacherassign.mustache');
 
 global $class, $CFG, $DB, $USER;
-
+$css_link = new moodle_url('/local/css/style.css');
+$add_new = new moodle_url('/local/clsteacherassign/assignclsteacher.php');
 $context = context_system::instance();
 require_login();
 
@@ -47,7 +48,7 @@ $templateData = array(
 );
 
 
-$output = $mustache->render($template, ['tableRows' => $tableRows,'templateData'=>$templateData]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'templateData'=>$templateData,'css_link'=>$css_link,'add_new'=>$add_new]);
 echo $output;
 echo $OUTPUT->footer();
 
