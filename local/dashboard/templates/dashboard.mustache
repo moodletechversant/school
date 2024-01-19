@@ -52,25 +52,28 @@
                             
                         </div>
 
-                       <div class="col" style="flex: 2;">
-    <div class="cards" style="flex-direction: row; align-items: baseline;">
-        <div class="box">
-            <h4 style="margin-bottom: 20px;">On Leave Today</h4>
-            <div class="users">
-                {{#data.myarray1}}
-                    <label for="one">
-                        <input type="radio" name="user" />
-                        <div style="text-transform: uppercase;">{{initial}}</div>
-                        <span style="font-size: 14px;">{{sname}}</span>
-                       
-                    </label>
-                     {{#dots}}<p>.....</p>{{/dots}}
-                {{/data.myarray1}}
+                   <div class="col" style="flex: 2;">
+    <a href="viewall.php" style="text-decoration: none; color: inherit;">
+        <div class="cards" style="flex-direction: row; align-items: baseline;">
+            <div class="box">
+                <h4 style="margin-bottom: 20px;">On Leave Today</h4>
+                <div class="users">
+                    {{#data.myarray1}}
+                        <label for="one">
+                            <input type="radio" name="user" />
+                            <div style="text-transform: uppercase;">{{initial}}</div>
+                            <span style="font-size: 14px;">{{sname}}</span>
+                        </label>
+                        {{#dots}}<p>.....</p>{{/dots}}
+                    {{/data.myarray1}}
+                </div>
             </div>
+            <div style="text-align: right; margin-top: 10px; color:#0d6efd"><span>VIEW ALL</span></div>
         </div>
-        <div><a href="viewall.php">VIEW ALL</a></div>
-    </div>
+        
+    </a>
 </div>
+
 
                         <div class="col" style="flex: 2;">
                            <a href={{viewprofile}} style="text-decoration:none"><div class="cards">
