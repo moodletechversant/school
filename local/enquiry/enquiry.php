@@ -25,6 +25,7 @@ $context = context_system::instance();
 // $classid = $class->id;
 
 $linkurl = new moodle_url('/local/enquiry/enquiry.php');
+$linkurl1 = new moodle_url('/local/enquiry/view_enquiry1.php');
 $PAGE->set_context($context);
 $strnewclass= "enquiry";
 $PAGE->set_url('/local/enquiry/enquiry.php');
@@ -34,7 +35,7 @@ $PAGE->set_title($strnewclass);
 $mform=new enquiry_form();
 echo $OUTPUT->header();
 
-echo'<a href="/school/local/enquiry/view_enquiry1.php" class="next round">&laquo; Previous</a><br><br>';
+echo '<a href="' . $linkurl1 . '" class="next round">&laquo; Previous</a><br><br>';
 
 $returnurl = $CFG->wwwroot.'/local/enquiry/view_enquiry1.php';
 if ($mform->is_cancelled()) {
