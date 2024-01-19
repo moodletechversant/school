@@ -7,7 +7,9 @@ Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/studentassign/template/viewassign.mustache');
 
 // $template = file_get_contents($CFG->dirroot . '/local/studentassign/template/assignedstudent.mustache');
-
+global $class, $CFG, $DB, $USER;
+$css_link = new moodle_url('/local/css/style.css');
+$add_new = new moodle_url('/local/studentassign/assign_student.php');
 $context = context_system::instance();
 $linktext = "View assigned students";
 $linkurl = new moodle_url('/local/studentassign/view_sassign.php');
@@ -37,7 +39,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'add_new'=>$add_new]);
 echo $output;
 
 echo $OUTPUT->footer();

@@ -9,7 +9,7 @@ global $class,$CFG, $DB;
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "attendance";
-
+$css_link = new moodle_url('/local/css/style.css');
 $linkurl = new moodle_url('/local/promotion/template/promotion.mustache');
 
 $PAGE->set_context($context);
@@ -84,7 +84,7 @@ $mustache = new Mustache_Engine();
                 // echo $mustache->render($template, ['Promotion' => $data1]);
 
                 
-      $output = $mustache->render($template, ['tableRows' => $tableRows,'Promotion' => $data1,'classData' => $classData,'templateData'=>$templateData]);
+      $output = $mustache->render($template, ['tableRows' => $tableRows,'Promotion' => $data1,'classData' => $classData,'templateData'=>$templateData,'css_link'=>$css_link]);
       echo $output;
     }
 //            // Display the Moodle form

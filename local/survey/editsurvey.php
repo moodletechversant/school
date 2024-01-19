@@ -29,8 +29,11 @@ $PAGE->navbar->add('Survey', new moodle_url($CFG->wwwroot.'/local/survey/editsur
 
 echo $OUTPUT->header();
 $mform = new editsurvey_form();
-
-if ($formdata = $mform->get_data()) {
+if($mform->is_cancelled()){
+    $cancelurl = $CFG->wwwroot.'/local/survey/survey_adminview.php';
+    redirect($cancelurl);
+}
+else if ($formdata = $mform->get_data()) {
         // print_r($formdata);exit();
 
     $surveydata = new stdClass();
@@ -63,7 +66,6 @@ if ($formdata = $mform->get_data()) {
         $DB->insert_record('customsurvey_question', $questiondata);
         }
     }
-
     $urlto = $CFG->wwwroot . '/local/survey/survey_adminview.php';
     redirect($urlto, 'Data Saved Successfully');
 }

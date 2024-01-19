@@ -4,15 +4,14 @@ global $class,$CFG;
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
-$template = file_get_contents($CFG->dirroot . '/local/holiday/templates/head.mustache');
 $template1 = file_get_contents($CFG->dirroot . '/local/holiday/templates/head1.mustache');
-$template2 = file_get_contents($CFG->dirroot . '/local/holiday/templates/head2.mustache');
 
 
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "Holiday Calendar";
 
+$css_link = new moodle_url('/local/css/style.css');
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
 $editholiday = new moodle_url('/local/holiday/editholiday.php?id');
 $deleteholiday = new moodle_url('/local/holiday/deleteholiday.php?id');
@@ -61,7 +60,7 @@ $PAGE->set_title($linktext);
     //    echo $mustache->render($template1,$data); 
    
     }
-    echo $mustache->render($template1, ['tableRows' => $tableRows]);
+    echo $mustache->render($template1, ['tableRows' => $tableRows ,'css_link' =>$css_link]);
     // <input type="submit" name="edit" value="edit">
 
 echo $OUTPUT->footer();
