@@ -53,7 +53,7 @@ foreach ($rec as $records) {
         $delete = '<a href="#" disabled><i class="fa fa-trash" style="font-size:24px;color:#ccc"></i></a>';
     } else {
         $edit = '<a href="'.$editholiday.'=' . $id . '"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
-        $delete = '<a href="'.$deleteholiday.'' . $id . '" style="color:blue;" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i style="font-size:24px" class="fa fa-trash-o" ></i><a>';
+        $delete = '<a href="'.$deleteholiday.'=' . $id . '" style="color:blue;" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i style="font-size:24px" class="fa fa-trash-o" ></i><a>';
     }
 
     $tableRows[] = [
