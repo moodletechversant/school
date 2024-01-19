@@ -8,7 +8,7 @@ $id = required_param('id', PARAM_INT);
 $id1= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE id= '$id'");
 $id2=$id1->user_id;
 $context = context_course::instance($COURSE->id);
-$delete=new moodle_url('local/createteacher/view_teacher.php');
+$delete=new moodle_url('/local/createteacher/view_teacher.php');
 require_capability('moodle/site:manageblocks', $context);
 
 // the name of the table in the database
