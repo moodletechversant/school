@@ -2,10 +2,12 @@
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
-global $class,$CFG, $DB;
-
 $template = file_get_contents($CFG->dirroot . '/local/teacherassign/template/assignteacher_view.mustache');
 
+global $class,$CFG, $DB;
+
+
+$css_link = new moodle_url('/local/css/style.css');
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "admin_view";
@@ -39,7 +41,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link]);
 echo $output;
 echo $OUTPUT->footer();
 ?>
