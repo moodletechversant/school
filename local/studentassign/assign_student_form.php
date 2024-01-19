@@ -82,26 +82,11 @@ class assign_student_form extends moodleform {
          }
          $mform->addElement('select', 'division','Division',$options2);
 
-
-        //Students 
-        // $students = $DB->get_records('student');
-        // $options3 = array();
-        // $options3=array(''=>'---- Select students ----');
-        // foreach ($students as $student) {
-        //     // Check if the student is already assigned to the selected class
-        //     // $assigned = $DB->get_record('student_assign', array('user_id' => $student->user_id));
-        //     // if (!$assigned) {
-        //         $options3[$student->user_id] = $student->s_ftname;
-        //     // }
-        // }
-        // // Add student element to the form
-        //     $mform->addElement('select', 'student', 'Student', $options3);
-
-
         // Auto complete......................................
 
         $students = $DB->get_records('student');
         $studentNames = array();
+        $studentNames[]='';
         foreach ($students as $student) {
             $studentNames[$student->user_id] = $student->s_ftname; // Assuming the name field in the student table is 'name'
         }
@@ -113,6 +98,9 @@ class assign_student_form extends moodleform {
         // $mform->addElement('autocomplete', 'areaids', get_string('searcharea', 'search'), $areanames, $options);
 
         $mform->addElement('autocomplete', 'student', 'Students', $studentNames, $options);
+
+  
+    
 
         $mform->addElement('html', '</div>');
         //moodle button      
