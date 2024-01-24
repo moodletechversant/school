@@ -19,16 +19,17 @@ $current_user_id = $USER->id;
 
 // Assuming there is a table named mdl_parent with a field user_id
 $parent = $DB->get_record('parent', array('user_id' => $current_user_id));
-
+//print_r($parent);exit();
 if ($parent) {
     // Assuming there is a table named mdl_student_assign with fields s_division and user_id
     $rec1 = $DB->get_records_sql("
         SELECT {new_timetable_periods}.*
         FROM {new_timetable_periods}
         INNER JOIN {student_assign} ON {student_assign}.s_division = {new_timetable_periods}.t_division
-        WHERE {student_assign}.user_id = :current_user_id
-    ", ['current_user_id' => $current_user_id]);
-print_r($rec1);exit();
+        WHERE {student_assign}.user_id = :child_user_id
+    ", ['child_user_id' => $parent->child_id]);
+    
+//print_r($rec1);exit();
     $mustache = new Mustache_Engine();
     $tableRows = [];
 
