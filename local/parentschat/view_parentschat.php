@@ -24,22 +24,26 @@ echo $OUTPUT->header();
 
 $userid = $USER->id;
 
-$pid1 = $DB->get_records_sql("SELECT user_id FROM {parent} WHERE user_id = ?", array($userid));
-//print_r($pid1 );exit();
+$pid1 = $DB->get_record_sql("SELECT user_id FROM {parent} WHERE user_id = ?", array($userid));
+
+
 
 $mustache = new Mustache_Engine();
-if (!empty($pid) && $pid == $userid) {
+if ($pid1->user_id == $userid) {
 
-    $data = $DB->get_records_sql("SELECT * FROM {parentschat} WHERE pid = ?", array($pid1));
-  
+    $data = $DB->get_records_sql("SELECT * FROM {parentschat} WHERE pid = ?", array($pid1->user_id));
     $tableRows = [];
 
     foreach ($data as $value) {
         $add = $CFG->wwwroot . '/local/reply/view_reply.php?id=' . $value->id;
-        
+        $tid1 = $value->tid;
+        $teacher_info = $DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id = ?", array( $tid1));
+        $teachername = $teacher_info->t_fname . ' ' . $teacher_info->t_mname . ' ' . $teacher_info->t_lname;
         $tableRows[] = [
             'date' => $value->date,
-            'teacher_name' => $value->tid,
+            'teacher_name' =>$teachername ,
+
+
             'message' => $value->message,
            
             'viewReplyLink' => html_writer::link($add, $OUTPUT->pix_icon('i/addblock', 'Add', 'moodle'))
@@ -52,9 +56,3 @@ echo $output;
 
 echo $OUTPUT->footer();
 ?>
-
-
-
-
-
-
