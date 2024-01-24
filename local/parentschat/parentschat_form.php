@@ -85,11 +85,10 @@ class parentschat_form extends moodleform {
        $mform->addRule('teachername', 'Teacher name missing', 'required', null);
        
         
-        //parentschat date
-        //$mform->addElement('date_selector', 'cdate','Date');
-        //$mform->addRule('cdate', 'date missing', 'required', null);
+        
+
+
        
-        //subject
       
         //parentschat message
         $mform->addElement('textarea', 'cmessage','message','wrap="virtual" rows="6" cols="5"');
