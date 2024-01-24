@@ -7,11 +7,11 @@ $context = context_system::instance();
 
 $linkurl = new moodle_url('/local/holiday/editholiday.php');
 $PAGE->set_context($context);
-$strnewclass= "Edit Holiday";
+// $strnewclass= "Edit Holiday";
 $PAGE->set_url($linkurl);
 //$PAGE->set_pagelayout('admin');
 $PAGE->set_title($strnewclass);
-$PAGE->set_heading($strnewclass);
+// $PAGE->set_heading($strnewclass);
 $mform=new editholiday_form();
 echo $OUTPUT->header();
 

@@ -20,9 +20,9 @@ $dashboard = new moodle_url('/local/dashboard/upcoming.php');
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
 //$PAGE->set_pagelayout('admin');
-$PAGE->set_title($linktext);
+//$PAGE->set_title($linktext);
 // Set the page heading.
-$PAGE->set_heading($linktext);
+//$PAGE->set_heading($linktext);
 $PAGE->navbar->add('Upcoming Activities', new moodle_url($CFG->wwwroot.'/local/dashboard/upcoming_activities.php'));
 
 echo $OUTPUT->header();
@@ -39,7 +39,7 @@ $upcoming_events = $DB->get_records_sql("
 //print_r($upcoming_events);exit();
 $mustache = new Mustache_Engine();
 $tableRows = [];
-$table->head = array('Event Date', 'Event Name');
+// $table->head = array('Event Date', 'Event Name');
 
 if (!empty($upcoming_events))  {
    

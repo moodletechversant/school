@@ -91,7 +91,8 @@
            {{#subjects}}
             <div class="course-list">
              
-               <a  href="/school/course/view.php?id={{id}}">{{subjects}}: </a>
+               <a  href={{course_view}}={{id}}>{{ subjects }}: </a>
+
                         {{#teacher}}{{teacher}}<br>{{/teacher}}
             </div>
            
