@@ -1,3 +1,4 @@
+
 <?php
 require(__DIR__.'/../../config.php');
 require_once($CFG->dirroot.'/local/parentschat/parentschat_form.php');
@@ -21,15 +22,16 @@ if ($mform->is_cancelled()) {
 else if ($formdata = $mform->get_data()) {
     
     $parentschatdata = new stdClass();
+   
     $current_date = date('Y-m-d');
     $parentschatdata->date = $current_date;
 
     $user_id = $USER->id;
-    $user_record = $DB->get_record('user', array('id' => $user_id));
-    $parentschatdata->user_id = $user_id; 
+   
+    $parentschatdata->pid = $user_id; 
     //print_r($user_record);exit();
-    $parentschatdata->subject = $formdata->csubject;
-    $parentschatdata->parentschat = $formdata->cmessage;    
+    $parentschatdata->tid = $formdata->teachername;
+    $parentschatdata->message = $formdata->cmessage;    
 
     $DB->insert_record('parentschat',$parentschatdata);
     $urlto = $CFG->wwwroot.'/local/parentschat/view_parentschat.php';
@@ -42,7 +44,6 @@ echo $OUTPUT->footer();
   
    
 ?>
-
 
 
 <style>
