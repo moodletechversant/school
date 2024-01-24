@@ -34,6 +34,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot.'/lib/formslib.php');
 require_once($CFG->dirroot.'/user/lib.php');
+require_login();
 
 
 class complaint_form extends moodleform {

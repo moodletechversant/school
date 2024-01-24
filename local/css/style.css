@@ -1000,3 +1000,6 @@ h4.uk-margin-remove-bottom {
 .hide{
   display: none;
 }
+.table-responsive.custom-table{
+  border: 1px solid #dee2e6;
+}

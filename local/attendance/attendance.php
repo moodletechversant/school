@@ -30,11 +30,10 @@ $recs=$DB->get_record_sql("SELECT * FROM {division} WHERE div_teacherid=$teacher
 //print_r($recs);exit();
 if(empty($recs))
 {
-    echo "you are not assigned to the class incharge of any class ...you can't mark attendance of any student";
-
+echo "you are not assigned to the class incharge of any class ...you can't mark attendance of any student";
 }
 else{
-    $division=$recs->id;
+$division=$recs->id;
     $rec=$DB->get_records_sql("SELECT * FROM {student_assign} WHERE s_division=$division");
 
     // foreach ($rec as $student) {
