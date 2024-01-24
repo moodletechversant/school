@@ -28,7 +28,7 @@ if ($parent) {
         INNER JOIN {student_assign} ON {student_assign}.s_division = {new_timetable_periods}.t_division
         WHERE {student_assign}.user_id = :current_user_id
     ", ['current_user_id' => $current_user_id]);
-
+print_r($rec1);exit();
     $mustache = new Mustache_Engine();
     $tableRows = [];
 

@@ -42,6 +42,10 @@ function xmldb_local_parentschat_upgrade($oldversion) {
     //
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
+        if ($oldversion < 2023121015) {
+            // Report_user_logins savepoint reached.
+       upgrade_plugin_savepoint(true, 2023121015, 'local', 'parentschat');
+       }
 
     return true;
 }
