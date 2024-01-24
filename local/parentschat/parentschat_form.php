@@ -84,11 +84,9 @@ class parentschat_form extends moodleform {
        $mform->addElement('select', 'teachername', 'Teacher Name', $options1);
        $mform->addRule('teachername', 'Teacher name missing', 'required', null);
        
-        
-        
 
 
-       
+
       
         //parentschat message
         $mform->addElement('textarea', 'cmessage','message','wrap="virtual" rows="6" cols="5"');

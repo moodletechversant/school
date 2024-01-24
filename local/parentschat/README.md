@@ -14,6 +14,7 @@ TODO Provide more detailed description here.
 
 ## Installing manually ##
 
+
 The plugin can be also installed by putting the contents of this directory to
 
     {your/moodle/dirroot}/local/parentschat

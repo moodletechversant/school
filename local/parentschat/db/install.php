@@ -32,3 +32,7 @@ function xmldb_local_parentschat_install() {
 
     return true;
 }
+
+
+
+

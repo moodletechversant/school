@@ -45,3 +45,8 @@ function xmldb_local_parentschat_upgrade($oldversion) {
 
     return true;
 }
+
+
+
+
+
