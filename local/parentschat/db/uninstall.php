@@ -32,3 +32,8 @@ function xmldb_local_parentschat_uninstall() {
 
     return true;
 }
+
+
+
+
+

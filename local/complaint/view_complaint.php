@@ -3,6 +3,7 @@ require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
+
 $template = file_get_contents($CFG->dirroot . '/local/complaint/template/viewcomplaint.mustache');
 
 global $DB, $USER, $CFG, $PAGE;

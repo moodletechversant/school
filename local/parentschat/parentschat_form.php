@@ -34,44 +34,72 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot.'/lib/formslib.php');
 require_once($CFG->dirroot.'/user/lib.php');
-
+require_login();
+global $DB,$class,$CFG,$USER;
+$userid=$USER->id;
+//print_r($userid);exit();
 
 class parentschat_form extends moodleform {
 
     public function definition() {
+        global $DB, $USER;
+        $userid=$USER->id;
+
         $view_parentschat=new moodle_url('/local/parentschat/view_parentschat.php');
-
-        $mform = $this->_form;
-      
-        $mform->addElement('html', '<h2 class="text-center heading mb-5">Chat section</h2>');
-        $mform->addElement('html', '<div class="container">');
-        $mform->addElement('html', '<div class="form-class">');
-    
-        //parentschat date
-        //$mform->addElement('date_selector', 'cdate','Date');
-        //$mform->addRule('cdate', 'date missing', 'required', null);
        
-        //subject
-        $mform->addElement('textarea', 'csubject','Subject','wrap="virtual" rows="4" cols="5"');
-        $mform->addRule('csubject', 'sub description missing', 'required', null);
-        
-        //parentschat message
-        $mform->addElement('textarea', 'cmessage','parentschat','wrap="virtual" rows="6" cols="5"');
-        $mform->addRule('cmessage', 'sub description missing', 'required', null);
-
-        $mform->addElement('html', '</div>');
-
-        $this->add_action_buttons();
+     
+    
+        $mform = $this->_form;
         $mform->addElement('html','<a href = "'.$view_parentschat.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View parentschats'); 
        $mform->addElement('html','</a>');
-        $mform->addElement('html', '</div>');
+
+    //    $parent = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id='$userid'");
+    //    $sid = $parent->child_id;
+    //    $student = $DB->get_record_sql("SELECT * FROM {student_assign} WHERE user_id='$sid'");
+    //    $did = $student->s_division;
+
+       $parent_join = $DB->get_record_sql("SELECT {student_assign}.* FROM {student_assign} JOIN {parent} ON {student_assign}.user_id={parent}.child_id WHERE {parent}.user_id='$userid'");
+      
+       $did = $parent_join->s_division;
+       $teacher_assignments = $DB->get_records_sql("SELECT * FROM {teacher_assign} WHERE t_division = ?", array($did));
+     
+       $options1 = array('' => '---------------------------- Select Teacher ---------------------------- ');
+       
+       foreach ($teacher_assignments as $teacher_assignment) {
+           $teacher1 = $teacher_assignment->user_id;
+           $subid = $teacher_assignment->t_subject;
+       
+           $teacher_info = $DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id = ?", array($teacher1));
+           $teachername = $teacher_info->t_fname . ' ' . $teacher_info->t_mname . ' ' . $teacher_info->t_lname;
+       
+           $subject = $DB->get_record_sql("SELECT * FROM {subject} WHERE course_id = ?", array($subid));
+       
+           if ($subject) {
+               $subject_name = $subject->sub_name;
+               $options1[$teacher1] = $teachername . '-' . $subject_name;
+           }
+       }
+       
+       $mform->addElement('select', 'teachername', 'Teacher Name', $options1);
+       $mform->addRule('teachername', 'Teacher name missing', 'required', null);
+       
+
+
+
+      
+        //parentschat message
+        $mform->addElement('textarea', 'cmessage','message','wrap="virtual" rows="6" cols="5"');
+        $mform->addRule('cmessage', 'message missing', 'required', null);
+
+        //$mform->addElement('html', '</div>');
+
+        $this->add_action_buttons();
+      
+       // $mform->addElement('html', '</div>');
       
        
-       //print_r($user_record);exit();
-    
-        //$addholiday = '<button style="float:right; margin-right: 20px;margin-bottom:20px; background-color: #0f6cbf; color: white; border: none; border-radius: 5px; padding: 10px 20px;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:white;"><strong>Add Holiday</strong></a></button>';
-
+      
     }
 
 }
