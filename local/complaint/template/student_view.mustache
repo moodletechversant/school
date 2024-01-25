@@ -17,37 +17,35 @@
       <div class="col-md-11 col-11 mx-auto col-lg-11">
         <div class="form-card card">
                  <div class="d-flex mb-3" style="align-items: center;">
-                  <h4 class="mb-0">Complaint List</h4>
-                
-                <a href={{complaint_link}} class="ml-auto" style="text-decoration:none">
-                <button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
-              </a>
+                  <h4 class="mb-0">Complaint Details</h4>
+                <a href="{{complaint_link}}" class="ml-auto" style="text-decoration:none">
+              <button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
+            </a>
               </div>
           <div class="table-responsive custom-table">
             <table class="table mb-0">
               <thead>
                 <tr>
-                <th scope="col">
-                    <div class="wrap-t">Date</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Student name</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Subject</div>
-                  </th>
                    <th scope="col">
-                    <div class="wrap-t">View Complaint</div>
+                    <div class="wrap-t">Complaint</div>
+                  </th>
+                  <th scope="col">
+                    <div class="space-between-columns"></div>
+                  </th>
+                  <th scope="col">
+                    <div class="wrap-t">Reply</div>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {{#tableRows}}
                 <tr>
-                  <td><div class="wrap-t">{{date}}</div></td>
-                  <td><div class="wrap-t">{{student_name}}</div></td>
-                  <td><div class="wrap-t">{{subject}}</div></td>
-                   <td><div class="wrap-t">{{{complaint}}}</div></td>
+                   <td><div class="wrap-t">{{complaint}}</div></td>
+                   <td class="space-between-columns"></td> <!-- Add an empty column for space -->
+
+                  <td><div class="wrap-t">{{{viewReplyLink}}}</div></td>
+                                    <td class="space-between-columns"></td> <!-- Add an empty column for space -->
+
                 </tr>
                 {{/tableRows}}
               </tbody>
