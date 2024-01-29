@@ -49,11 +49,12 @@
               <tbody>
                 {{#tableRows}}
                 <tr>
+                <td><div class="wrap-t">{{user_id}}</div></td>
                   <td><div class="wrap-t">{{date}}</div></td>
                   <td><div class="wrap-t">{{student_name}}</div></td>
                   <td><div class="wrap-t">{{subject}}</div></td>
                    <td><div class="wrap-t">{{enquiry}}</div></td>
-                  <td><div class="wrap-t">{{{viewReplyLink}}}</div></td>
+                  <td><div class="wrap-t"><a href="/school/local/enquiryreply/enquiryreply.php?id={{viewReplyLink}}"><button type="button" class="btn btn-outline-secondary">Reply</button></a></div></td>
                   
                 </tr>
                 {{/tableRows}}

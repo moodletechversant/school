@@ -34,11 +34,11 @@ if ($complaint) {
 
         $template = file_get_contents($templatePath);
         $mustache = new Mustache_Engine();
-        $view = '<a href="'.$view_reply.'"><i class="fa '.$iconClass.'" style="font-size:24px;color:#0055ff"></i></a>';
+        //$view = '<a href="'.$view_reply.'"><i class="fa '.$iconClass.'" style="font-size:24px;color:#0055ff"></i></a>';
 
         $templateData = [
             'complaint' => $complaint->complaint,
-            'viewReplyLink' => $view,
+            'viewReplyLink' => $complaint->id,
             
         ];
         

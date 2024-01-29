@@ -42,11 +42,12 @@ class enquiryreply_form extends moodleform {
         // $editoroptions = null;
         // $filemanageroptions = null;
         $id  = optional_param('id', 0, PARAM_INT);
+        //print_r($id);exit();
         $mform->addElement('hidden','id',$id);
 
         $u_id  = optional_param('user_id', 0, PARAM_INT);
         $mform->addElement('hidden','user_id',$u_id);
-        //print_r($u_id);exit();
+        print_r($u_id);exit();
        //replay message
        
        $mform->addElement('textarea', 'ereply','Reply message','wrap="virtual" rows="6" cols="5"');
