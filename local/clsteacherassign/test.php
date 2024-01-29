@@ -110,7 +110,7 @@ if (isset($_POST['c_id'])) {
     $var .='</tbody>
         </table>
     </div>
-    <div class="table-pagination">
+    <!--<div class="table-pagination">
         <nav aria-label="Page navigation example">
         <ul class="pagination">    
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -120,7 +120,7 @@ if (isset($_POST['c_id'])) {
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
         </nav>
-    </div>';
+    </div>-->';
 }
 else{
     $var = '<div class="error-message">No Details are found for this selected class.</div>';

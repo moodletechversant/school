@@ -28,6 +28,7 @@
    
    require_once($CFG->dirroot.'/lib/formslib.php');
    require_once($CFG->dirroot.'/user/lib.php');
+   require_login();
    
    class sampele extends moodleform {
     public function definition() {

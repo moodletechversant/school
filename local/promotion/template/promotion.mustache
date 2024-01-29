@@ -105,46 +105,29 @@
           </div>
      </div>
      <div id="demo">
-
           <div class="table-responsive custom-table">
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th scope="col">
-                    <div class="wrap-t">Student Name</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Class</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Pass</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Fail</div>
-                  </th>
+                  <th scope="col"><div class="wrap-t">Student Name</div></th>
+                  <th scope="col"><div class="wrap-t">Class</div></th>
+                  <th scope="col"><div class="wrap-t">Pass</div></th>
+                  <th scope="col"><div class="wrap-t">Fail</div></th>
                 </tr>
               </thead>
               <tbody>
               {{#Promotion}}
                 <tr>
-                  <td>
-                    <div class="wrap-t">{{ftname}}{{mlname}}{{lsname}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{classname}}</div>
-                  </td>
-                 <td>
-                   <input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="pass" checked>Pass
-                 </td>
-                 <td>
-                   <input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="fail">Fail               
-                 </td>
+                  <td><div class="wrap-t">{{ftname}}{{mlname}}{{lsname}}</div></td>
+                  <td><div class="wrap-t">{{classname}}</div></td>
+                  <td><input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="pass" checked>Pass</td>
+                  <td><input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="fail">Fail</td>
                 </tr>
               {{/Promotion}}
               </tbody>
             </table>
           </div>
-          <div class="table-pagination">
+          <!--<div class="table-pagination">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -154,7 +137,7 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
               </ul>
             </nav>
-          </div>
+          </div>-->
 
   
         </div>

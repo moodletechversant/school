@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../../config.php');
 global $class,$CFG;
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
+require_login();
 Mustache_Autoloader::register();
 
 $template1 = file_get_contents($CFG->dirroot . '/local/holiday/templates/head1.mustache');

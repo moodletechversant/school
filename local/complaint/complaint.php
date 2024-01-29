@@ -1,6 +1,7 @@
 <?php
 require(__DIR__.'/../../config.php');
 require_once($CFG->dirroot.'/local/complaint/complaint_form.php');
+require_login();
 global $class,$CFG,$USER;
 $context = context_system::instance();
 // $classid = $class->id;
