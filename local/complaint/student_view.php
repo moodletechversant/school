@@ -42,7 +42,7 @@ if ($complaint) {
 
     ];
     $mustache = new Mustache_Engine();
-    $output = $mustache->render($template,  ['tableRows' => $templateData]);
+    $output = $mustache->render($template,  ['tableRows' => $templateData,'css_link'=>$css_link,'complaint_link'=>$linkurl]);
     echo $output;
 } else {
     echo '<div class="error-message">Complaint not found.</div>';

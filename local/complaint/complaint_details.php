@@ -9,6 +9,7 @@ $context = context_system::instance();
 require_login();
 
 $view_reply = new moodle_url('/local/reply/reply.php?id');
+// $complaint_link = new moodle_url('/local/complaint/view_complaint_1.php');
 
 // Assuming you get the complaint ID from the URL parameter
 $complaintId = optional_param('id', 0, PARAM_INT);
@@ -41,7 +42,7 @@ if ($complaint) {
             
         ];
         
-        $output = $mustache->render($template, ['tableRows' => [$templateData]]);
+        $output = $mustache->render($template, ['tableRows' => [$templateData],'css_link'=>$css_link,'complaint_link'=>$linkurl]);
         echo $output;
     } else {
         echo '<div class="error-message">Template file not found.</div>';
