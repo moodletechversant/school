@@ -1,3 +1,5 @@
+
+
 <?php
 require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
@@ -14,7 +16,7 @@ $linktext = "Message List";
 
 $linkurl = new moodle_url('/local/parentschat/view_parentschat_1.php');
 $css_link = new moodle_url('/local/css/style.css');
-$view_message =  new moodle_url('/local/parentschat/view_message');
+$view_message =  new moodle_url('/local/parentschat/view_message.php');
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
 $PAGE->set_title($linktext);

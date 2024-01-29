@@ -1,3 +1,5 @@
+
+
 <?php
 require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
@@ -15,6 +17,7 @@ $linktext = "Message List";
 $linkurl = new moodle_url('/local/parentschat/view_parentschat.php');
 $css_link = new moodle_url('/local/css/style.css');
 $parentschat_link= new moodle_url('/local/parentschat/parentschat.php');
+$view_message =  new moodle_url('/local/parentschat/message_reply.php');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -44,9 +47,9 @@ if ($pid1->user_id == $userid) {
             'teacher_name' =>$teachername ,
 
 
-            'message' => $value->message,
+            'view_message' =>  $view_message,
            
-            'viewReplyLink' => html_writer::link($add, $OUTPUT->pix_icon('i/addblock', 'Add', 'moodle'))
+            
         ];
     }
 } 
@@ -56,3 +59,6 @@ echo $output;
 
 echo $OUTPUT->footer();
 ?>
+
+
+
