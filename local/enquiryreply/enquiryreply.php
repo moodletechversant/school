@@ -38,7 +38,7 @@ else if ($formdata = $mform->get_data()) {
     //print_r($replydata->enquiry_id);exit();
     $var1= $replydata->enquiry_id;
     $user_record = $DB->get_record('enquiry', array('id' => $var1));
-    print_r($user_record);exit();
+    //print_r($user_record);exit();
 
     $replydata->user_id = $user_record ->user_id; 
     //print_r($replydata->user_id);exit();
