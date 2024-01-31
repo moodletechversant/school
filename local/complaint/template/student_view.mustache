@@ -11,35 +11,26 @@
   <link rel="stylesheet" href={{css_link}} />
 </head>
 <body>
-<header></header>
-
-<div class="form-wrap">
-<div class="container">
-<div class="col-md-11 col-11 mx-auto col-lg-11">
-<div class="form-card card">
-<div class="d-flex mb-3" style="align-items: center;">
-<h4 class="mb-0">Enquiry List</h4>
-<a href={{enquiry_link}} class="ml-auto" style="text-decoration:none">
-<button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
- </a>
-</div>
-          <div class="table-filter mb-3">
-          </div>
+  <header></header>
+  <div class="form-wrap">
+    <div class="container">
+      <div class="col-md-11 col-11 mx-auto col-lg-11">
+        <div class="form-card card">
+                 <div class="d-flex mb-3" style="align-items: center;">
+                  <h4 class="mb-0">Complaint Details</h4>
+                <a href="{{complaint_link}}" class="ml-auto" style="text-decoration:none">
+              <button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">Go Back</button>
+            </a>
+              </div>
           <div class="table-responsive custom-table">
             <table class="table mb-0">
               <thead>
                 <tr>
-                <th scope="col">
-                    <div class="wrap-t">Date</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Student name</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Subject</div>
-                  </th>
                    <th scope="col">
-                    <div class="wrap-t">Enquiry</div>
+                    <div class="wrap-t">Complaint</div>
+                  </th>
+                  <th scope="col">
+                    <div class="space-between-columns"></div>
                   </th>
                   <th scope="col">
                     <div class="wrap-t">Reply</div>
@@ -49,19 +40,18 @@
               <tbody>
                 {{#tableRows}}
                 <tr>
-                <td><div class="wrap-t">{{user_id}}</div></td>
-                  <td><div class="wrap-t">{{date}}</div></td>
-                  <td><div class="wrap-t">{{student_name}}</div></td>
-                  <td><div class="wrap-t">{{subject}}</div></td>
-                   <td><div class="wrap-t">{{enquiry}}</div></td>
-                  <td><div class="wrap-t"><a href="/school/local/enquiryreply/enquiryreply.php?id={{viewReplyLink}}"><button type="button" class="btn btn-outline-secondary">Reply</button></a></div></td>
-                  
+                   <td><div class="wrap-t">{{complaint}}</div></td>
+                   <td class="space-between-columns"></td> <!-- Add an empty column for space -->
+
+                  <td><div class="wrap-t">{{{viewReplyLink}}}</div></td>
+                                    <td class="space-between-columns"></td> <!-- Add an empty column for space -->
+
                 </tr>
                 {{/tableRows}}
               </tbody>
             </table>
           </div>
-         <!-- <div class="table-pagination">
+          <!--<div class="table-pagination">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>

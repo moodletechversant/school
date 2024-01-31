@@ -21,10 +21,6 @@
     margin: 0 0 30px 0;
     text-align: center;
   }
-  .space-between-columns {
-    margin-right: 20px; /* Adjust the margin value as needed */
-  }
-
   
   input[type="text"],
   input[type="password"],

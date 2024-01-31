@@ -45,7 +45,7 @@ class reply_form extends moodleform {
         // $filemanageroptions = null;
         $id  = optional_param('id', 0, PARAM_INT);
         $mform->addElement('hidden','id',$id);
-        // print_r($id);exit();
+
         $u_id  = optional_param('user_id', 0, PARAM_INT);
         $mform->addElement('hidden','user_id',$u_id);
         //print_r($u_id);exit();
