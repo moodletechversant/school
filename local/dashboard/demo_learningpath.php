@@ -102,9 +102,10 @@ foreach ($sections as $section_item) {
         );  
         // $data['sections'][] = $sectionData;
 }
+echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_namee,'csspath'=>$csspath,'image1'=>$image1]);
 
-$sections=array('sections' => $data,'course_namee'=>$course_namee);
-echo $mustache->render($template,$sections,['csspath'=>$csspath,'image1'=>$image1]);
+//$sections=array('sections' => $data,'course_namee'=>$course_namee);
+//echo $mustache->render($template,$sections,['csspath'=>$csspath,'image1'=>$image1]);
 // $output = $mustache->render($template,$sections); 
 echo $OUTPUT->footer();
 ?>
