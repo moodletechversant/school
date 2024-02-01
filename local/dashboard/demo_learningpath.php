@@ -92,3 +92,4 @@ echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_na
 echo $OUTPUT->footer();
 ?>
 
+
