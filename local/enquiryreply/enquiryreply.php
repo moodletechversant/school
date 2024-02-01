@@ -29,7 +29,7 @@ else if ($formdata = $mform->get_data()) {
 
     $user_id = $USER->id;
   // print_r($USER->id);exit();
-
+   //echo "Form Data ID: {$formdata->id}";
     // $user_record = $DB->get_record('enquiry', array('id' => $user_id));
     // $replydata->user_id = $user_record->user_id; 
 
@@ -50,6 +50,7 @@ else if ($formdata = $mform->get_data()) {
     //print_r($replydata->replymsg);exit();
 
     $DB->insert_record('enquiryreply',$replydata);
+
     $urlto = $CFG->wwwroot.'/local/enquiryreply/view_enqreply.php';
     redirect($urlto, 'Data Saved Successfully '); 
   
