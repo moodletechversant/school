@@ -134,8 +134,8 @@ class createteacher_form extends moodleform {
         global $DB;
         $errors = parent::validation($data, $files);
         if (!empty($data['bg'])) {
-        $validBloodGroups = array('A', 'B', 'AB', 'O');
-        $enteredBloodGroup = strtoupper($data['bg']);
+            $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
+            $enteredBloodGroup = strtoupper($data['bg']);
         if (!in_array($enteredBloodGroup, $validBloodGroups)) {
         $errors['bg'] = "Invalid blood group";
         }
