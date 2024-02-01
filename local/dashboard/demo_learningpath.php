@@ -82,12 +82,9 @@ foreach ($sections as $section_item) {
 }
 echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_namee,'csspath'=>$csspath,'image1'=>$image1]);
 
-<<<<<<< HEAD
 //$sections=array('sections' => $data,'course_namee'=>$course_namee);
 //echo $mustache->render($template,$sections,['csspath'=>$csspath,'image1'=>$image1]);
-=======
-echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_namee,'csspath'=>$csspath,'image1'=>$image1]);
->>>>>>> 81aeea61082685cd69f83b8dcc1a91431cc8ef07
+//echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_namee,'csspath'=>$csspath,'image1'=>$image1]);
 // $output = $mustache->render($template,$sections); 
 echo $OUTPUT->footer();
 ?>
