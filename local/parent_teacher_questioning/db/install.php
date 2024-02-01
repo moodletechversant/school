@@ -15,19 +15,20 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin administration pages are defined here.
+ * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
- * @package     local_teacher_reply_chat
- * @category    admin
+ * @package     local_parent_teacher_questioning
+ * @category    upgrade
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-if ($hassiteconfig) {
-    // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
-    if ($ADMIN->fulltree) {
-        // TODO: Define the plugin settings page - {@link https://docs.moodle.org/dev/Admin_settings}.
-    }
+/**
+ * Custom code to be run on installing the plugin.
+ */
+function xmldb_local_parent_teacher_questioning_install() {
+
+    return true;
 }

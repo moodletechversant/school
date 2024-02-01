@@ -1,21 +1,21 @@
 
 <?php
 require(__DIR__.'/../../config.php');
-require_once($CFG->dirroot.'/local/parentschat/parentschat_form.php');
+require_once($CFG->dirroot.'/local/parent_teacher_questioning/parentschat_form.php');
 global $class,$CFG,$USER;
 $context = context_system::instance();
 // $classid = $class->id;
 
-$linkurl = new moodle_url('/local/parentschat/parentschat.php');
+$linkurl = new moodle_url('/local/parent_teacher_questioning/parentschat.php');
 $PAGE->set_context($context);
 $strnewclass= "Chat";
-$PAGE->set_url('/local/parentschat/parentschat.php');
+$PAGE->set_url('/local/parent_teacher_questioning/parentschat.php');
 //$PAGE->set_pagelayout('admin');
 $PAGE->set_title($strnewclass);
 $mform=new parentschat_form();
 echo $OUTPUT->header();
 
-$returnurl = $CFG->wwwroot.'/local/parentschat/view_parentschat.php';
+$returnurl = $CFG->wwwroot.'/local/parent_teacher_questioning/view_parentschat.php';
 if ($mform->is_cancelled()) {
     redirect($returnurl);
 } 
@@ -33,8 +33,8 @@ else if ($formdata = $mform->get_data()) {
     $parentschatdata->tid = $formdata->teachername;
     $parentschatdata->message = $formdata->cmessage;    
 
-    $DB->insert_record('parentschat',$parentschatdata);
-    $urlto = $CFG->wwwroot.'/local/parentschat/view_parentschat.php';
+    $DB->insert_record('parents_enquiry',$parentschatdata);
+    $urlto = $CFG->wwwroot.'/local/parent_teacher_questioning/view_parentschat.php';
     redirect($urlto, 'Data Saved Successfully '); 
   
 

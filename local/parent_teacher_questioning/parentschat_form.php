@@ -45,7 +45,7 @@ class parentschat_form extends moodleform {
         global $DB, $USER;
         $userid=$USER->id;
 
-        $view_parentschat=new moodle_url('/local/parentschat/view_parentschat.php');
+        $view_parentschat=new moodle_url('/local/parent_teacher_questioning/view_parentschat.php');
        
      
     

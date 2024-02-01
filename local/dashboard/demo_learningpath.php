@@ -47,16 +47,7 @@ foreach ($sections as $section_item) {
     /////*******************************/
         // print_r($module_completed);exit(); 
         $total_modules=$DB->get_records_sql("SELECT COUNT(*) AS total_records FROM {course_modules} where course=$course AND section=$section_id");                                              
-        
-        // $sectionData = [
-        //     'course'=>$course,
-        //     'section_id'=>$section_id,
-        //     'section_name' =>  $section_name,
-        //     'userid'=>$userid,
-        //     'completed' => ($module_completed == $total_modules),
-        //     'modules' => [],
-        // ];
-
+  
         $modules = $DB->get_records_sql("SELECT * FROM {course_modules} WHERE course = $course AND section = $section_id");
         $day_records= array();
         foreach ($modules as $module) {
@@ -75,20 +66,7 @@ foreach ($sections as $section_item) {
                 'module_id' => $miid,
                 'course1' => $course1,
                 'completeed' =>  (count($total_modules2) > 0) ); 
-
-
-
-
-            //     $moduleData = [
-            //     'module_name' => $module_name,
-            //     'module_section'=>$mid,
-            //     'module_id'=>$miid,
-            //     'course1'=>$course1,
-            //     'completeed' => (count($total_modules2) > 0),
-            // ];
-            // $sectionData['modules'][] = $moduleData;
         }
-
       
         }
         $data[] = array(
@@ -104,8 +82,12 @@ foreach ($sections as $section_item) {
 }
 echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_namee,'csspath'=>$csspath,'image1'=>$image1]);
 
+<<<<<<< HEAD
 //$sections=array('sections' => $data,'course_namee'=>$course_namee);
 //echo $mustache->render($template,$sections,['csspath'=>$csspath,'image1'=>$image1]);
+=======
+echo $mustache->render($template,['sections' => $data,'course_namee'=>$course_namee,'csspath'=>$csspath,'image1'=>$image1]);
+>>>>>>> 81aeea61082685cd69f83b8dcc1a91431cc8ef07
 // $output = $mustache->render($template,$sections); 
 echo $OUTPUT->footer();
 ?>

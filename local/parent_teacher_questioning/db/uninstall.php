@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin upgrade helper functions are defined here.
+ * Code that is executed before the tables and data are dropped during the plugin uninstallation.
  *
- * @package     local_teacher_reply_chat
+ * @package     local_parent_teacher_questioning
  * @category    upgrade
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,13 +26,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Helper function used by the upgrade.php file.
+ * Custom uninstallation procedure.
  */
-function local_teacher_reply_chat_helper_function() {
-    global $DB;
+function xmldb_local_parent_teacher_questioning_uninstall() {
 
-    // Please note: you can only use raw low level database access here.
-    // Avoid Moodle API calls in upgrade steps.
-    //
-    // For more information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
+    return true;
 }

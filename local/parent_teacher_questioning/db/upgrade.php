@@ -17,7 +17,7 @@
 /**
  * Plugin upgrade steps are defined here.
  *
- * @package     local_teacher_reply_chat
+ * @package     local_parent_teacher_questioning
  * @category    upgrade
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,12 +28,12 @@ defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__.'/upgradelib.php');
 
 /**
- * Execute local_teacher_reply_chat upgrade from the given old version.
+ * Execute local_parent_teacher_questioning upgrade from the given old version.
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_local_teacher_reply_chat_upgrade($oldversion) {
+function xmldb_local_parent_teacher_questioning_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
@@ -44,11 +44,10 @@ function xmldb_local_teacher_reply_chat_upgrade($oldversion) {
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
 
 
-        if ($oldversion < 2024012402) {
+        if ($oldversion < 2024013102) {
             // Report_user_logins savepoint reached.
-       upgrade_plugin_savepoint(true, 2024012402, 'local', 'teacher_reply_chat');
+       upgrade_plugin_savepoint(true, 2024013102, 'local', 'parent_teacher_questioning');
        }
-
 
     return true;
 }

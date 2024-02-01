@@ -16,6 +16,7 @@ $linktext = "Complaint List";
 $linkurl = new moodle_url('/local/complaint/view_complaint.php');
 $css_link = new moodle_url('/local/css/style.css');
 $complaint_link = new moodle_url('/local/complaint/complaint.php');
+$view_link = new moodle_url('/local/complaint/student_view.php?id');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -53,24 +54,24 @@ if (!empty($sid) && $sid->user_id == $userid) {
     $templateData = array(
         'startYearOptions' => $options1,
     );
-    
-    
-    
 
     $tableRows = [];
 
     foreach ($data as $value) {
+        $id = $value->id;
         $add = $CFG->wwwroot . '/local/reply/view_reply.php?id=' . $value->id;
         $student = $DB->get_record('student', array('user_id' => $value->user_id));
         $student_name = $student ? $student->s_ftname : 'Unknown';
-        $tableRows[] = [
+        $view = '<a href="' . $view_link . '=' . $id . '"><button style="font-size: 14px; background-color: #5e4ec2 ; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">View</button></a>';
+
+             $tableRows[] = [
             'date' => $value->date,
             'student_name' => $student_name,
             'subject' => $value->subject,
-            'complaint' => $value->complaint,
-            'viewReplyLink' => html_writer::link($add, $OUTPUT->pix_icon('i/addblock', 'Add', 'moodle'))
-       
-             ];
+           // 'complaint' => $view,
+            //'complaint' =>$complaintLink,
+            'complaint' => $view,
+        ];
     }
 } 
 $output = $mustache->render($template, ['tableRows' => $tableRows ,'templateData' => $templateData,'css_link'=>$css_link,'complaint_link'=>$complaint_link]);

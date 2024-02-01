@@ -15,17 +15,19 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Plugin administration pages are defined here.
  *
- * @package     local_teacher_reply_chat
+ * @package     local_parent_teacher_questioning
+ * @category    admin
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_teacher_reply_chat';
-$plugin->release = '0.1.0';
-$plugin->version = 2024012402;
-$plugin->requires = 2021051700;
-$plugin->maturity = MATURITY_ALPHA;
+if ($hassiteconfig) {
+    // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
+    if ($ADMIN->fulltree) {
+        // TODO: Define the plugin settings page - {@link https://docs.moodle.org/dev/Admin_settings}.
+    }
+}
