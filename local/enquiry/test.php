@@ -85,13 +85,8 @@ if (isset($_POST['d_id'])) {
                 $user_ids_string = implode(',', $user_ids);
                 //print_r($value );exit();
                 $userdata = $DB->get_record_sql(" SELECT * FROM {student} WHERE user_id IN ($user_ids_string)");
-<<<<<<< HEAD
                 $user_id=$userdata->user_id;
                 $id = $value->id;
-=======
-                //print_r($userdata);exit();
-                $user_id=$userdata->user_id;
->>>>>>> 81aeea61082685cd69f83b8dcc1a91431cc8ef07
                 $name = $userdata->s_ftname;
                 $date = $value->date;
                 $subject = $value->subject;
@@ -104,12 +99,8 @@ if (isset($_POST['d_id'])) {
                 <td><div class="wrap-t">' . $name . '</div></td>
                 <td><div class="wrap-t">' . $subject . '</div></td>
                 <td><div class="wrap-t">' . $enquiry . '</div></td>
-<<<<<<< HEAD
                 <td><div class="wrap-t"><a href="/local/enquiryreply/enquiryreply.php?id=' .$id. '"><button style="font-size: 14px; background-color: #5e4ec2 ; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">Reply</button></a></div></td>
 
-=======
-                <td><div class="wrap-t"><a href="/school/local/enquiryreply/enquiryreply.php?id=' .$viewReplyLink. '"><button style="font-size: 14px; background-color: #5e4ec2 ; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">Reply</button></a></div></td>
->>>>>>> 81aeea61082685cd69f83b8dcc1a91431cc8ef07
             </tr>';
             }
         }
