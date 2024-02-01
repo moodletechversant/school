@@ -1,3 +1,85 @@
+
+#timeline {
+  width: 100%;
+  position: relative;
+  list-style: none;
+  padding: 0;
+}
+#timeline a {
+  text-decoration: none;
+}
+#timeline:after {
+  content: "";
+  width: 1px;
+  background: 1px #e6e7e9;
+  height: 90%;
+  position: absolute;
+  top: 3em;
+  left: 3em;
+  z-index: 0;
+}
+#timeline .listing {
+  background-color: white;
+  border: 1px solid #e6e7e9;
+  border-radius: 0.3em;
+  padding: 1em;
+  margin-bottom: 1em;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+.listing:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 40px 0 rgba(0, 0, 0, 0.1);
+}
+#timeline .listing img,
+.info,
+.job_type {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 0.9em;
+  color: #74718f;
+}
+#timeline .image_wrapper {
+  width: 60px;
+}
+#timeline .image_wrapper img {
+  width: 60px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.25em;
+}
+
+.info {
+  line-height: 1.25;
+  /* width: 640px; */
+  padding-left: 15px;
+  margin-right: 15px;
+}
+.diary_title {
+  font-weight: 600;
+  font-size: 18px;
+  color: #34324b;
+}
+
+
+.title-arrow {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.title-arrow img {
+  min-width: 30px;
+  opacity: 0.2;
+  height: 30px;
+}
+
+
+
+
+
 body {
   font-family: 'Poppins', sans-serif;
 }

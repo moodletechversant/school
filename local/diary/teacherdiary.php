@@ -54,7 +54,9 @@ if ($mform->is_cancelled()) {
     $diarydata->d_starttime = $formdata->sdate;
     $diarydata->d_endtime = $formdata->edate;
     $diarydata->d_option = $formdata->option;
-
+    $crnt=time();
+    // print_r($crnt);exit();
+   
     if (!empty($formdata->suboption_text)) {
         $diarydata->d_suboption = $formdata->suboption_text;
     } elseif (!empty($formdata->suboption)) {
@@ -82,7 +84,7 @@ if ($mform->is_cancelled()) {
             $diarydata->d_studentname .= $rec->s_ftname . ',';
         }
     }
-    
+    $diarydata->d_diary_created = $crnt;
      //print_r($diarydata);exit();
     $DB->insert_record('diary', $diarydata);
     $urlto = $CFG->wwwroot.'/local/diary/teacherdiary.php';
