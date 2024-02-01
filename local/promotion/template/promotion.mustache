@@ -111,8 +111,8 @@
                 <tr>
                   <th scope="col"><div class="wrap-t">Student Name</div></th>
                   <th scope="col"><div class="wrap-t">Class</div></th>
-                  <th scope="col"><div class="wrap-t">Pass</div></th>
-                  <th scope="col"><div class="wrap-t">Fail</div></th>
+                  <th scope="col"><div class="wrap-t">status</div></th>
+                
                 </tr>
               </thead>
               <tbody>
@@ -120,9 +120,12 @@
                 <tr>
                   <td><div class="wrap-t">{{ftname}}{{mlname}}{{lsname}}</div></td>
                   <td><div class="wrap-t">{{classname}}</div></td>
-                  <td><input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="pass" checked>Pass</td>
-                  <td><input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="fail">Fail</td>
-                </tr>
+                    <td><div class="wrap-t">
+                            <label><input type="radio" name="attendance[{{user_id}}]" value="pass" checked/><span>Pass</span></label>
+                            <label><input type="radio" name="attendance[{{user_id}}]" value="fail"/><span>Fail</span></label>
+                            </div>
+                    </td>
+                    </tr>
               {{/Promotion}}
               </tbody>
             </table>

@@ -51,8 +51,9 @@ echo $OUTPUT->header();
     $content = $records->d_content;
     $option = $records->d_option;
     $suboption =$records->d_suboption;
+    $diary_created =date('d-m-Y / H:m', $records->d_diary_created);
 
-    $data =  array('id'=>$id, 'd_studentname' => $studname,'d_subject' => $subject,'d_content' => $content,'d_option' => $option, 'd_suboption' => $suboption,'editdiary' =>$editdiary,'deletediary' =>$deletediary); 
+    $data =  array('id'=>$id, 'd_studentname' => $studname,'d_subject' => $subject,'d_content' => $content,'d_option' => $option, 'd_suboption' => $suboption,'editdiary' =>$editdiary,'deletediary' =>$deletediary,'diary_created'=>$diary_created); 
     echo $mustache->render($template1,$data); 
  } 
 } else{
