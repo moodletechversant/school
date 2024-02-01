@@ -15,20 +15,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Code that is executed before the tables and data are dropped during the plugin uninstallation.
+ * Plugin strings are defined here.
  *
- * @package     local_teacher_reply_chat
- * @category    upgrade
+ * @package     local_parent_teacher_questioning
+ * @category    string
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * Custom uninstallation procedure.
- */
-function xmldb_local_teacher_reply_chat_uninstall() {
-
-    return true;
-}
+$string['pluginname'] = 'parent_teacher_questioning';

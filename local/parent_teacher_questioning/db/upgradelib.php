@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Code to be executed after the plugin's database scheme has been installed is defined here.
+ * Plugin upgrade helper functions are defined here.
  *
- * @package     local_teacher_reply_chat
+ * @package     local_parent_teacher_questioning
  * @category    upgrade
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,9 +26,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Custom code to be run on installing the plugin.
+ * Helper function used by the upgrade.php file.
  */
-function xmldb_local_teacher_reply_chat_install() {
+function local_parent_teacher_questioning_helper_function() {
+    global $DB;
 
-    return true;
+    // Please note: you can only use raw low level database access here.
+    // Avoid Moodle API calls in upgrade steps.
+    //
+    // For more information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
 }

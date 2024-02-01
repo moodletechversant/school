@@ -34,7 +34,7 @@ if ($pid1->user_id == $userid) {
     $data = $DB->get_records_sql("SELECT * FROM {parentschat} WHERE pid = ?", array($pid1->user_id));
 
     foreach ($data as $value) {
-        $add = $CFG->wwwroot . '/local/reply/view_reply.php?id=' . $value->id;
+       
         $tid1 = $value->tid;
 
         // Create an instance of messagereply_form for each record
