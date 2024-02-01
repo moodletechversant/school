@@ -5,7 +5,7 @@ require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
-$template = file_get_contents($CFG->dirroot . '/local/parentschat/template/viewparentschat.mustache');
+$template = file_get_contents($CFG->dirroot . '/local/parent_teacher_questioning/template/viewparentschat.mustache');
 
 global $DB, $USER, $CFG, $PAGE;
 
@@ -14,10 +14,10 @@ require_login();
 
 $linktext = "Message List";
 
-$linkurl = new moodle_url('/local/parentschat/view_parentschat.php');
+$linkurl = new moodle_url('/local/parent_teacher_questioning/view_parentschat.php');
 $css_link = new moodle_url('/local/css/style.css');
-$parentschat_link= new moodle_url('/local/parentschat/parentschat.php');
-$view_message =  new moodle_url('/local/parentschat/parent_message.php?id');
+$parentschat_link= new moodle_url('/local/parent_teacher_questioning/parentschat.php');
+$view_message =  new moodle_url('/local/parent_teacher_questioning/parent_message.php?id');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -34,8 +34,7 @@ $pid1 = $DB->get_record_sql("SELECT user_id FROM {parent} WHERE user_id = ?", ar
 $mustache = new Mustache_Engine();
 if ($pid1->user_id == $userid) {
 
-    $data = $DB->get_records_sql("SELECT * FROM {parentschat} WHERE pid = ?", array($pid1->user_id));
-    
+    $data = $DB->get_records_sql("SELECT * FROM {parents_enquiry} WHERE pid = ?", array($pid1->user_id));
     $tableRows = [];
 
     foreach ($data as $value) {

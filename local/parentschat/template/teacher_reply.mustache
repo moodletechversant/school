@@ -19,13 +19,11 @@
                  <div class="d-flex mb-3" style="align-items: center;">
             <h4 class="mb-0">Message List</h4>
           </div>
-   <a href={{parentschat_link}} class="ml-auto" style="text-decoration:none">
-  <button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
-</a>
-<br>
+  
 
 
           <div class="table-responsive custom-table">
+
             <table class="table mb-0">
               <thead>
                 <tr>
@@ -37,22 +35,33 @@
                     <div class="wrap-t">Reply</div>
                   </th>
                  
-                
+                <th></th>
                 </tr>
               </thead>
               <tbody>
                 {{#tableRows}}
-                <tr>
-                  <td><div class="wrap-t">{{view_message}}</div></td>
-                                    <td><div class="wrap-t">{{reply_message}}</div></td>
+                    <tr>
+                      <td><div class="wrap-t">{{view_message}}</div></td>
+                      {{#teacherchat}}
+                            <td><div class="wrap-t">{{replymessage}}</div></td>
+                      {{/teacherchat}} 
 
-                </tr>
-                  
+                      {{^teacherchat}}
+                            <form method="POST" id="form_id">
+                            <td>
+                                <div class="wrap-t">
+                                <input type="hidden" name="hiddn" id="hiddn" value={{messageid}}>
+                                <textarea name="reply_message" id="reply_message"></textarea></div>
+                            </td>
+                            <td><button onclick="replysubmit()" type="submit"  class="btn-primary btn ml-auto" name="submit" style="width: 100px; margin-top: 5px; ">Submit</button></td>
+                            </form>
+                      {{/teacherchat}}
+                   </tr>
                 {{/tableRows}}
               </tbody>
             </table>
           </div>
-          <div class="table-pagination">
+        <!--  <div class="table-pagination">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -62,7 +71,7 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
               </ul>
             </nav>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

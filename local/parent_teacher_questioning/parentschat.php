@@ -1,56 +1,40 @@
+
 <?php
 require(__DIR__.'/../../config.php');
-require_once($CFG->dirroot.'/local/reply/reply_form.php');
+require_once($CFG->dirroot.'/local/parent_teacher_questioning/parentschat_form.php');
 global $class,$CFG,$USER;
 $context = context_system::instance();
 // $classid = $class->id;
 
-$linkurl = new moodle_url('/local/reply/reply.php');
+$linkurl = new moodle_url('/local/parent_teacher_questioning/parentschat.php');
 $PAGE->set_context($context);
-$strnewclass= "Reply";
-$PAGE->set_url('/local/reply/reply.php');
+$strnewclass= "Chat";
+$PAGE->set_url('/local/parent_teacher_questioning/parentschat.php');
 //$PAGE->set_pagelayout('admin');
 $PAGE->set_title($strnewclass);
-// $PAGE->set_heading($strnewclass);
-$mform=new reply_form();
+$mform=new parentschat_form();
 echo $OUTPUT->header();
 
-$returnurl = $CFG->wwwroot.'/local/complaint/view_complaint_1.php';
+$returnurl = $CFG->wwwroot.'/local/parent_teacher_questioning/view_parentschat.php';
 if ($mform->is_cancelled()) {
     redirect($returnurl);
 } 
 else if ($formdata = $mform->get_data()) {
     
-    $replydata = new stdClass();
+    $parentschatdata = new stdClass();
+   
     $current_date = date('Y-m-d');
-    $replydata->date = $current_date;
-    
-    $replydata->user_id =$id->user_id;
+    $parentschatdata->date = $current_date;
 
     $user_id = $USER->id;
-    //print_r($user_id);exit();
-
-    // $user_record = $DB->get_record('complaint', array('id' => $user_id));
-    // $replydata->user_id = $user_record->user_id; 
-
-    // print_r($replydata->user_id);exit();
-    $replydata->complaint_id = $formdata->id; 
-    //print_r($replydata->complaint_id);exit();
-    $var1= $replydata->complaint_id;
-    $user_record = $DB->get_record('complaint', array('id' => $var1));
+   
+    $parentschatdata->pid = $user_id; 
     //print_r($user_record);exit();
+    $parentschatdata->tid = $formdata->teachername;
+    $parentschatdata->message = $formdata->cmessage;    
 
-    $replydata->user_id = $user_record ->user_id; 
-    //print_r($replydata->user_id);exit();
-    $var2= $replydata->user_id;
-    // print_r($var2);exit();
-    $user_record2 = $DB->get_record('complaint', array('user_id' => $var2));
-    //print_r($user_record2);exit();
-    $replydata->replymsg = $formdata->creplay;    
-    //print_r($replydata->replymsg);exit();
-
-    $DB->insert_record('reply',$replydata);
-    $urlto = $CFG->wwwroot.'/local/complaint/view_complaint_1.php';
+    $DB->insert_record('parents_enquiry',$parentschatdata);
+    $urlto = $CFG->wwwroot.'/local/parent_teacher_questioning/view_parentschat.php';
     redirect($urlto, 'Data Saved Successfully '); 
   
 
@@ -60,8 +44,6 @@ echo $OUTPUT->footer();
   
    
 ?>
-
-
 
 
 <style>
@@ -134,3 +116,7 @@ echo $OUTPUT->footer();
 
 
     </style>
+
+
+
+

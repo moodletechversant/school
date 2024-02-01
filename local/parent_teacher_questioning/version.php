@@ -15,14 +15,17 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin strings are defined here.
+ * Plugin version and other meta-data are defined here.
  *
- * @package     local_teacher_reply_chat
- * @category    string
+ * @package     local_parent_teacher_questioning
  * @copyright   2022 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'teacher_reply_chat';
+$plugin->component = 'local_parent_teacher_questioning';
+$plugin->release = '0.1.0';
+$plugin->version = 2024013102;
+$plugin->requires = 2021051700;
+$plugin->maturity = MATURITY_ALPHA;

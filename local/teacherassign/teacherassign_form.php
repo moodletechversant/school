@@ -108,7 +108,7 @@ class teacherassign_form extends moodleform {
              $this->add_action_buttons();
 
              $mform->addElement('html','<a href = "view_tassign.php" style="text-decoration:none">');
-             $mform->addElement('button', 'btn', 'Assign teacher'); 
+             $mform->addElement('button', 'btn', 'View Assign teacher'); 
              $mform->addElement('html','</a>');
 
              $mform->addElement('html', '</div>');
