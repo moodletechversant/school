@@ -40,7 +40,8 @@ if (!empty($sid) && $sid->user_id == $userid) {
     $tableRows = [];
 
     foreach ($data as $value) {
-        $add = $CFG->wwwroot . '/local/enquiryreply/view_enqreply.php?id=' . $value->id;
+        $add = $value->id;
+        //print_r($add);exit();
         $student = $DB->get_record('student', array('user_id' => $value->user_id));
         $student_name = $student ? $student->s_ftname : 'Unknown';
         $tableRows[] = [
@@ -48,7 +49,7 @@ if (!empty($sid) && $sid->user_id == $userid) {
             'student_name' => $student_name,
             'subject' => $value->subject,
             'enquiry' => $value->enquiry,
-            'viewReplyLink' => html_writer::link($add, $OUTPUT->pix_icon('i/addblock', 'Add', 'moodle'))
+            'viewReplyLink' => $add,
        
              ];
     }
