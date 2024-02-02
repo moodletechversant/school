@@ -85,24 +85,24 @@
             </div>
             {{/students}}  
           </div>
-          <h4 class="mt-3 mb-2">Courses</h4>
-         <div class="cards" style="height: auto;">
-          {{#courses}}
-           {{#subjects}}
-            <div class="course-list">
-             
-               <a  href={{course_view}}={{id}}>{{ subjects }}: </a>
-
-                        {{#teacher}}{{teacher}}<br>{{/teacher}}
-            </div>
-           
-           {{/subjects}}
-  {{/courses}}
-          
-          </div>
+              {{#empty_course}}
+                  <h4 class="mt-3 mb-2">Courses</h4>
+                  <div class="cards" style="height: auto;">
+                      {{#courses}}
+                        {{#subjects}}
+                          <div class="course-list">
+                            <a  href={{course_view}}={{id}} style="text-decoration:none">{{ subjects }}: </a>
+                            {{#teacher}}{{teacher}}<br>{{/teacher}}
+                          </div>
+                        {{/subjects}}
+                      {{/courses}}
+                  </div>
+              {{/empty_course}}
+              {{^empty_course}}
+              <p><font color="red">Enroled Course Will list below.But you are not assigned to any class please contact your class teacher.</font></p>
+              {{/empty_course}}
         </div>
        </div>
-    
    </div>
 
 
