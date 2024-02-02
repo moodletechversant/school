@@ -17,6 +17,11 @@ $css_link = new moodle_url('/local/css/style.css');
 $img_link = new moodle_url('/local/img/logo.svg');
 $img_link1 = new moodle_url('/local/img/dummy-user.png');
 $img_link2 = new moodle_url('/local/img/tabler_dots.svg');
+
+$img_link3 = new moodle_url('/local/img/circum_mobile-3.svg');
+$img_link4 = new moodle_url('/local/img/uiw_date.svg');
+$img_link5 = new moodle_url('/local/img/ph_address-book.svg');
+
 $course_view = new moodle_url('/course/view.php?id');
 
 $PAGE->set_context($context);
@@ -91,7 +96,7 @@ $clstcher1=$value1->t_fname;
     $scourses1=array('courses' => $subjects,'empty_course'=>!empty($rec1));
   $sprofile1 = array('students' => $sprofile);
 $mustache = new Mustache_Engine();
-$mergedArray = array_merge($scourses1, $sprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link,'course_view'=>$course_view]);
+$mergedArray = array_merge($scourses1, $sprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link,'course_view'=>$course_view,'img_link3'=>$img_link3,'img_link4'=>$img_link4,'img_link5'=>$img_link5]);
 echo $mustache->render($template,$mergedArray);
 echo $OUTPUT->footer();
 ?>
