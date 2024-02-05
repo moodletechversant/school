@@ -1,65 +1,54 @@
 <?php
 require(__DIR__.'/../../config.php');
 require_once($CFG->dirroot.'/local/enquiryreply/enquiryreply_form.php');
-global $class,$CFG,$USER;
-$context = context_system::instance();
-// $classid = $class->id;
+global $class, $CFG, $USER;
 
+$context = context_system::instance();
 $linkurl = new moodle_url('/local/enquiryreply/enquiryreply.php');
 $PAGE->set_context($context);
-//$strnewclass= "Reply";
 $PAGE->set_url('/local/enquiryreply/enquiryreply.php');
-//$PAGE->set_pagelayout('admin');
-$PAGE->set_title($strnewclass);
-//$PAGE->set_heading($strnewclass);
-$mform=new enquiryreply_form();
+$mform = new enquiryreply_form();
 echo $OUTPUT->header();
 
 $returnurl = $CFG->wwwroot.'/local/enquiry/view_enquiry.php';
+
 if ($mform->is_cancelled()) {
     redirect($returnurl);
-} 
-else if ($formdata = $mform->get_data()) {
-    
+} elseif ($formdata = $mform->get_data()) {
     $replydata = new stdClass();
     $current_date = date('Y-m-d');
     $replydata->date = $current_date;
-    
-    $replydata->user_id =$id->user_id;
+    $replydata->enquiry_id = $formdata->id;
+    $replydata->replymsg = $formdata->ereply;
 
-    $user_id = $USER->id;
-  // print_r($USER->id);exit();
-   //echo "Form Data ID: {$formdata->id}";
-    // $user_record = $DB->get_record('enquiry', array('id' => $user_id));
-    // $replydata->user_id = $user_record->user_id; 
+    // Fetch 'user_id' from the 'enquiry' table
+    $enquiry_record = $DB->get_record('enquiry', array('id' => $replydata->enquiry_id));
+    if ($enquiry_record) {
+        $replydata->user_id = $enquiry_record->user_id;
+    } else {
+        $message = 'No Data Found';
+    }
 
-    // print_r($replydata->user_id);exit();
-    $replydata->enquiry_id = $formdata->id; 
-    //print_r($replydata->enquiry_id);exit();
-    $var1= $replydata->enquiry_id;
-    $user_record = $DB->get_record('enquiry', array('id' => $var1));
-    //print_r($user_record);exit();
+    // Check if the enquiryreply table already contains a record for the specified enquiry ID
+    $existing_record = $DB->get_record('enquiryreply', array('enquiry_id' => $replydata->enquiry_id));
 
-    $replydata->user_id = $user_record ->user_id; 
-    //print_r($replydata->user_id);exit();
-    $var2= $replydata->user_id;
-    // print_r($var2);exit();
-    $user_record2 = $DB->get_record('enquiry', array('user_id' => $var2));
-    //print_r($user_record2);exit();
-    $replydata->replymsg = $formdata->ereply;    
-    //print_r($replydata->replymsg);exit();
+    if ($existing_record) {
+        // If record exists, update the reply message
+        $replydata->id = $existing_record->id; // Add the 'id' field for update
+        $DB->update_record('enquiryreply', $replydata);
+        $message = 'Data Updated Successfully';
+    } else {
+        // If record does not exist, insert a new record
+        $DB->insert_record('enquiryreply', $replydata);
+        $message = 'Data Saved Successfully';
+    }
 
-    $DB->insert_record('enquiryreply',$replydata);
-
-    $urlto = $CFG->wwwroot.'/local/enquiryreply/view_enqreply.php';
-    redirect($urlto, 'Data Saved Successfully '); 
-  
-
+    $urlto = $CFG->wwwroot.'/local/enquiry/view_enquiry.php';
+    redirect($urlto, $message);
 }
+
 $mform->display();
 echo $OUTPUT->footer();
-  
-   
 ?>
 
 

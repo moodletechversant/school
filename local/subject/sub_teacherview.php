@@ -18,12 +18,6 @@ $logo5 = new moodle_url('/course/view.php?id');
 $logo6 = new moodle_url('/local/img/tabler_dots.svg');
 // $logo5 = new moodle_url('/course/view.php?id');
 
-
-
-
-
-
-
 $PAGE->set_context($context);
 $PAGE->set_url('/local/subject/sub_teacherview.php');
 $PAGE->set_heading($linktext);
