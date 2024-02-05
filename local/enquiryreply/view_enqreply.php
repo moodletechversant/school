@@ -36,7 +36,7 @@ $rec = $DB->get_records_sql("SELECT enquiry_id,date,replymsg FROM {enquiryreply}
 //$addholiday = '<a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:#0f6cbf;"><strong>Add Holiday</strong></a>';
 $view_enquiry = '<button style="float:right; margin-right: 20px;margin-bottom:20px; background-color: #0f6cbf; color: white; border: none; border-radius: 5px; padding: 10px 20px;"><a href="/school/local/enquiry/view_enquiry.php" style="text-decoration:none; color:white;"><strong>Add Holiday</strong></a></button>';
 
-$rec = $DB->get_records_sql("SELECT * FROM {enquiryreply}");
+$rec = $DB->get_records_sql("SELECT * FROM {enquiryreply} WHERE enquiry_id = ?", array($replyid));
 $mustache = new Mustache_Engine();
 
 
