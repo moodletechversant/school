@@ -30,7 +30,9 @@
                 <div class="col-md-4">
                   <div class="form-group">
                   <label>Select Attandence Marking Date</label>
-                  <input type="date" name='atdate' class="form-control" placeholder="" />
+                  <input type="hidden" name='division' class="form-control" value={{division}} />
+                  <span style="color: red;">*</span><input type="date" name='atdate' class="form-control" placeholder="" required />
+                  
                   </div>
                 </div>
                 <div class="col-md-8">
