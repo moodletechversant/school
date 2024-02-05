@@ -36,7 +36,7 @@ $rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey}");
 $mustache = new Mustache_Engine();
 
 $current_time =time();
-//  date('d-m-Y');
+$current_date=date('d-m-Y');
 // print_r($current_time);exit();
 
 foreach ($rec1 as $record1) {
@@ -51,7 +51,7 @@ foreach ($rec1 as $record1) {
   $to = date("d-m-Y", $surveyto);
   // $surveyto = strtotime($to);
 
-  if ($current_time >= $surveyfrom && $current_time <= $surveyto) {
+  if ($current_date >=$from && $current_date<= $to) {
       $surveyfromFormatted = $from;
       $surveytoFormatted = $to;
 
