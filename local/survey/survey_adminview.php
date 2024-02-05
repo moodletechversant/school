@@ -34,7 +34,8 @@ $rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey}");
 
 $mustache = new Mustache_Engine();
 
-$current_time = date('d-m-Y');
+$current_time =time();
+//  date('d-m-Y');
 // print_r($current_time);exit();
 
 foreach ($rec1 as $record1) {
@@ -49,7 +50,7 @@ foreach ($rec1 as $record1) {
   $to = date("d-m-Y", $surveyto);
   // $surveyto = strtotime($to);
 
-  if ($current_time >= $from && $current_time <= $to) {
+  if ($current_time >= $surveyfrom && $current_time <= $surveyto) {
       $surveyfromFormatted = $from;
       $surveytoFormatted = $to;
 
@@ -66,9 +67,28 @@ foreach ($rec1 as $record1) {
 
           $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
       }
+      $disabled = true;
+      $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled2' =>  $disabled);
+    }
+      elseif($current_time >$surveyto) {
+        $surveyfromFormatted = date("d-m-Y", $surveyfrom);
+        $surveytoFormatted = date("d-m-Y", $surveyto);
+  
+        $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
+        $survey_questions = array();
+  
+        foreach ($rec2 as $record2) {
+            $id2 = $record2->id;
+            $surveyid = $record2->survey_id;
+            $surquestion = $record2->survey_question;
+  
+            $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
+        }
+        $disabled = true;
+        $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled' =>  $disabled);
+    }
 
-      $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions);
-  } else {
+  elseif($current_time < $surveyfrom ) {
       $surveyfromFormatted = date("d-m-Y", $surveyfrom);
       $surveytoFormatted = date("d-m-Y", $surveyto);
 
@@ -82,8 +102,8 @@ foreach ($rec1 as $record1) {
 
           $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
       }
-
-      $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled' => true);
+      $disabled = true;
+      $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled1' =>  $disabled);
   }
 }
 
