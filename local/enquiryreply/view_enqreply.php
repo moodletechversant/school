@@ -38,8 +38,6 @@ $view_enquiry = '<button style="float:right; margin-right: 20px;margin-bottom:20
 
 $rec = $DB->get_records_sql("SELECT * FROM {enquiryreply} WHERE enquiry_id = ?", array($replyid));
 $mustache = new Mustache_Engine();
-
-
 $tableRows = [];
 
 foreach ($rec as $records) {
