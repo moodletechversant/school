@@ -91,8 +91,14 @@ if (isset($_POST['d_id'])) {
             <tr>
                 <td><div class="wrap-t">'.$name.'</div></td>
                 <td><div class="wrap-t">'.$sub.'</div></td>
-                <td><div class="wrap-t"><a href="complaint_details.php?id=' . $id . '"><button style="font-size: 14px; background-color: #5e4ec2 ; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">View</button></a></div></td>;
-
+                <td>
+                <div class="wrap-t">
+                    <a href="complaint_details.php?id=' . $id . '">
+                        <button style="font-size: 14px; background-color: #5e4ec2; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">View</button>
+                    </a>
+                </div>
+            </td>
+            
 
             </tr>';
         }
