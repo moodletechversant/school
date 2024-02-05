@@ -8,6 +8,7 @@ require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/survey/templates/survey_adminview.mustache');
+$delete = new moodle_url('/local/survey/deletesurvey.php?id');
 
 // require_once($CFG->dirroot.'/local/createstudent/demo.html');
 global $class,$CFG;
@@ -107,7 +108,7 @@ foreach ($rec1 as $record1) {
   }
 }
 
-$surveyname = array('survey' => $data);
+$surveyname = array('survey' => $data,'delete' => $delete);
 echo $mustache->render($template, $surveyname);
 
         // print_r($data2);exit();
