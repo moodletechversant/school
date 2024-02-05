@@ -27,9 +27,6 @@ if ($mform->is_cancelled()) {
         $replydata->user_id = $enquiry_record->user_id;
     } else {
         $message = 'No Data Found';
-
-        // Handle the case where the 'enquiry' record doesn't exist
-        // You might want to redirect or display an error message here
     }
 
     // Check if the enquiryreply table already contains a record for the specified enquiry ID
