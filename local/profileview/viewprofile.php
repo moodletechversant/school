@@ -67,10 +67,6 @@ $clstcher1=$value1->t_fname;
   $rec1 = $DB->get_records_sql("SELECT {course}.fullname,{course}.id FROM {course} JOIN {enrol} ON
     {enrol}.courseid = {course}.id JOIN {user_enrolments}
     ON {user_enrolments}.enrolid = {enrol}.id where {user_enrolments}.userid=$user");
-// print_r($rec1);exit();
-    // $subjects = array(); // Create a new subjects array for each student
-    // $empty=!empty($rec1);
-    // if(!empty($rec1)){
       foreach ($rec1 as $course) {
         $cid = $course->id;
         $subjects1 = $course->fullname;
@@ -82,16 +78,8 @@ $clstcher1=$value1->t_fname;
             $teachername = $teacher_info->t_fname.''.$teacher_info->t_mname.' '.$teacher_info->t_lname;
             // Now you can use $teachername for further processing.
         }
-    
           $subjects[] = array('subjects' => $subjects1,'id' =>$cid,'teacher' => $teachername);
-  
       }
-    // }
-    // else{
-    //   $subjects1="you are not assigned to any classes contact your class teacher";
-    //   $subjects[] = array('subjects' => $subjects1);
-    // }
-    
     $sprofile[] = array('name' => $fname, 'email' => $email, 'dob' => $dob1, 'address' => $address, 'no' => $no,'classname'=>$rec2->class_name ,'divisionname'=>$rec2->div_name,'classteacher' =>$clstcher1, 'subjects' =>$subjects);
     $scourses1=array('courses' => $subjects,'empty_course'=>!empty($rec1));
   $sprofile1 = array('students' => $sprofile);

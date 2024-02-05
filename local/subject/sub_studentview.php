@@ -11,10 +11,13 @@ require_login();
 $linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/sub_studentview.php');
 $course_view = new moodle_url('/course/view.php?id');
+$css_link = new moodle_url('/local/css/style.css');
+$logo4 = new moodle_url('/local/img/sub-math.jpg');
+$logo6 = new moodle_url('/local/img/tabler_dots.svg');
 $PAGE->set_context($context);
 
 $PAGE->set_url('/local/subject/sub_studentview.php');
-$PAGE->set_heading($linktext);
+// $PAGE->set_heading($linktext);
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 
@@ -35,7 +38,7 @@ foreach($rec1 as $record1){
     $summary = $record1->summary;
     $data[] = array('id' => $id,'fullname' => $fullname, 'startdate' => $startdate, 'enddate' => $enddate, 'summary' => $summary);
 }
-echo $mustache->render($template,['sub' => $data,'course_view'=>$course_view]);
+echo $mustache->render($template,['sub' => $data,'course_view'=>$course_view,'css_link'=>$css_link,'logo4'=>$logo4,'logo6'=>$logo6,'empty_course'=>!empty($rec1)]);
   ?>
 
   <?php
