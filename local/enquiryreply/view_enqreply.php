@@ -12,7 +12,7 @@ $linktext = "Reply Message";
 
 $linkurl = new moodle_url('/local/enquiryreply/view_enqreply.php');
 $css_link = new moodle_url('/local/css/style.css');
-$view_enquiry = new moodle_url('/local/enquiry/view_enquiry.php');
+$view_enquiry = new moodle_url('/local/enquiry/view_enquiry1.php');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentcreation');
@@ -34,12 +34,10 @@ $rec = $DB->get_records_sql("SELECT enquiry_id,date,replymsg FROM {enquiryreply}
 //$addholiday='<button style="background:transparent;border:none;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>Add Holiday</font></a></button>';
 //$addholiday = '<a href="/school/local/holiday/addholiday.php"><i class="fa fa-plus-circle" style="font-size: 50px; color: #0f6cbf;"></i></a>';
 //$addholiday = '<a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:#0f6cbf;"><strong>Add Holiday</strong></a>';
-$view_enquiry = '<button style="float:right; margin-right: 20px;margin-bottom:20px; background-color: #0f6cbf; color: white; border: none; border-radius: 5px; padding: 10px 20px;"><a href="/school/local/enquiry/view_enquiry.php" style="text-decoration:none; color:white;"><strong>Add Holiday</strong></a></button>';
+//$view_enquiry = '<button style="float:right; margin-right: 20px;margin-bottom:20px; background-color: #0f6cbf; color: white; border: none; border-radius: 5px; padding: 10px 20px;"><a href="/school/local/enquiry/view_enquiry.php" style="text-decoration:none; color:white;"><strong>Add Holiday</strong></a></button>';
 
-$rec = $DB->get_records_sql("SELECT * FROM {enquiryreply}");
+$rec = $DB->get_records_sql("SELECT * FROM {enquiryreply} WHERE enquiry_id = ?", array($replyid));
 $mustache = new Mustache_Engine();
-
-
 $tableRows = [];
 
 foreach ($rec as $records) {
