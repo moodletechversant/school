@@ -66,8 +66,8 @@ if (isset($_POST['s_id'])) {
     $bid = $_POST['s_id'];
     $models = $DB->get_records_sql(" SELECT s_ftname, user_id FROM {student} WHERE s_class = '$bid' AND NOT EXISTS (
             SELECT * FROM {student_assign} WHERE s_class = '$bid' AND FIND_IN_SET({student}.user_id, user_id))");
-    $select_data = '';
-    foreach($models as $keys =>$model){
+    $select_data = '<option></option>';
+    foreach($models as $model){
             $select_data .='<option value =' .$model->user_id.'>' .$model->s_ftname.'</option>';
             }
             echo $select_data;
