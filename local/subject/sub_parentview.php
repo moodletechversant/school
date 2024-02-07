@@ -45,24 +45,28 @@ $mustache = new Mustache_Engine();
 
 foreach ($rec1 as $record1) {
     $id = $record1->id;
+    // print_r($id);
     $fullname = $record1->fullname;
     $startdate = $record1->startdate;
     $enddate = $record1->enddate;
     $summary = $record1->summary;
     $teacher_assignments = $DB->get_records_sql("SELECT * FROM {teacher_assign} WHERE t_subject = ?", array($id));
+    // print_r($teacher_assignments);
     foreach ($teacher_assignments as $teacher_assignment) {
         $teacher1 = $teacher_assignment->user_id;
+        // print_r($teacher1);
         $teacher_info = $DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id = ?", array($teacher1));
         $teachername = $teacher_info->t_fname.''.$teacher_info->t_mname.' '.$teacher_info->t_lname;
+            //  print_r($teachername);
         // Now you can use $teachername for further processing.
     }
 // print_r($teachername);exit();
 
 
-    $data[] = array('id' => $id, 'fullname' => $fullname, 'startdate' => $startdate, 'enddate' => $enddate, 'summary' => $summary);
+    $data[] = array('id' => $id, 'fullname' => $fullname, 'startdate' => $startdate, 'enddate' => $enddate, 'summary' => $summary ,'teacher'=>$teachername);
 }
 
-echo $mustache->render($template, ['sub' => $data, 'course_view' => $course_view ,'css_link'=>$css_link,'logo4'=>$logo4,'logo6'=>$logo6,'teacher'=>$teachername]);
+echo $mustache->render($template, ['sub' => $data, 'course_view' => $course_view ,'css_link'=>$css_link,'logo4'=>$logo4,'logo6'=>$logo6]);
 } else {
     echo "Parent not found for the current user.";
 }
