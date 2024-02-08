@@ -58,15 +58,16 @@ class leave_form extends moodleform {
 
         $mform->setDefault('nleave', 1);
 
-        $options = array();
-        $options ['sickleave'] = 'Sick leave';
-        $options ['casual'] = 'Casual leave';
-        $options ['duty'] = 'Duty leave';
-        
+        $options = array(
+            '' => 'Select leave type', // Empty option added as the default/select option
+            'sickleave' => 'Sick leave',
+            'casual' => 'Casual leave',
+            'duty' => 'Duty leave'
+        );
         
         $mform->addElement('select', 'ltype', 'Leave type', $options);
         $mform->addRule('ltype', 'Leave type missing', 'required', null);
- 
+        
         $mform->addElement('textarea', 'subject', 'Subject', array('style' =>'width:300px')) ;
 
        // $mform->addElement('textarea', 'subject', 'Textarea Label', array('rows' => 3,'style' => 'font-size: 16px; padding: 1px; border: 1px solid #ccc; border-radius: 5px; box-shadow: inset 0 1px 1px rgba(0,0,0,0.075); '));
