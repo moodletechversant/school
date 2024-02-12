@@ -16,6 +16,7 @@ $complaintId = optional_param('id', 0, PARAM_INT);
 
 // Fetch complaint details based on the complaint ID
 $complaint = $DB->get_record('complaint', array('id' => $complaintId));
+// print_r($complaint);exit();
 $linkurl = new moodle_url('/local/complaint/parent_view.php');
 $css_link = new moodle_url('/local/css/style.css');
 
@@ -31,7 +32,7 @@ echo $OUTPUT->header();
 if ($complaint) {
     $iconClass='fa-eye';
     // Load and render the Mustache template
-    $template = file_get_contents($CFG->dirroot . '/local/complaint/template/complaint/parent_complaint.mustache');
+    $template = file_get_contents($CFG->dirroot . '/local/complaint/template/parent_complaint.mustache');
     $add = $CFG->wwwroot . '/local/reply/view_reply.php?id=' . $complaint->id;
     //$view = '<a href="' . $add . '=' . $complaint->id . '"><button style="font-size: 14px; background-color: #5e4ec2 ; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">View Reply</button></a>';
     $view = '<a href="'.$add.'"><i class="fa '.$iconClass.'" style="font-size:24px;color:#0055ff"></i></a>';
