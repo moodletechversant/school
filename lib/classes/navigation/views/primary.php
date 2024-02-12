@@ -78,7 +78,7 @@ class primary extends view {
                         self::TYPE_SETTING, null, 'myhome', new \pix_icon('i/dashboard', ''));
                     }
                     else if(!empty($pid) && $pid->user_id==$usr){
-                        $this->add(get_string('myhome'), new \moodle_url('/local/dashboard/dashboardparent.php?id='.$tid->user_id),
+                        $this->add(get_string('myhome'), new \moodle_url('/local/dashboard/dashboardparent.php?id='.$pid->user_id),
                         self::TYPE_SETTING, null, 'myhome', new \pix_icon('i/dashboard', ''));
                     }
                     else{

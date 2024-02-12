@@ -40,10 +40,12 @@ if(isset($_POST['d_id'])){
     if( $delete>0){
         $DB->delete_records('subject', array('course_id'=> $delete));
         $DB->delete_records('course', array('id'=> $delete));
-     
+        
     }
-    $models = $DB->get_records_sql(" SELECT * FROM {subject} WHERE sub_division = $did");
-    // print_r( $models);exit();
+    
+    $models = $DB->get_records_sql(" SELECT * FROM mdl_subject JOIN mdl_course ON mdl_subject.course_id = mdl_course.id
+  WHERE sub_division = $did; ");
+ //print_r( $models);exit();
     if(!empty($models)){
         $var = '
         <div class="table-responsive custom-table">
@@ -79,7 +81,7 @@ if(isset($_POST['d_id'])){
     $division = $DB->get_record_sql(" SELECT * FROM {division} WHERE id = $model->sub_division");
 
     $id = $model->course_id;
-    $sub_name = $model->sub_name;
+    $sub_name = $model->fullname;
     $sub_description = $model->sub_description;
     $class = $class->class_name;
     $division = $division->div_name;

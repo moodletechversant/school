@@ -62,7 +62,8 @@ if ($testsession) {
 //custom login condition//////////
         $sid= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE user_id= '$testsession'");
         $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$testsession'");
-        
+        $pid= $DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$testsession'");
+
         if(!empty($tid) && $tid->user_id==$testsession){
 
             $surl=$CFG->wwwroot.'/local/dashboard/dashboardtchr.php?id='.$tid->user_id;
@@ -72,6 +73,12 @@ if ($testsession) {
         if(!empty($sid) && $sid->user_id==$testsession)
         {            
             $surl=$CFG->wwwroot.'/local/dashboard/dashboard.php?id='.$sid->user_id;
+            redirect($surl);
+            
+        }
+        if(!empty($pid) && $pid->user_id==$testsession)
+        {            
+            $surl=$CFG->wwwroot.'/local/dashboard/dashboardparent.php?id='.$sid->user_id;
             redirect($surl);
             
         }
