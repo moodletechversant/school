@@ -157,11 +157,12 @@ if($proctoring == 1){
 <script>
 // websocket.js - start
 // get video dom element
+
 var userid=<?php echo $userid; ?>;
 var quizid=<?php echo $quizid; ?>;
 var ws;
 const video = document.querySelector('video');
-// alert(video);
+alert(video);
 // roomName should be unique user_name or user_id
 
 var roomName =userid+'_'+quizid;
@@ -169,6 +170,7 @@ var roomName =userid+'_'+quizid;
 console.log(roomName);
 // request access to webcam
 navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+// alert('hey!');exit();
 
 // returns a frame encoded in base64
 const getFrame = () => {

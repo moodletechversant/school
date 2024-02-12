@@ -36,6 +36,8 @@ require_once($CFG->dirroot . '/mod/quiz/accessrule/securewindow/rule.php');
  * @covers \quizaccess_securewindow
  */
 class rule_test extends \basic_testcase {
+    public static $includecoverage = array('mod/quiz/accessrule/securewindow/rule.php');
+
     // Nothing very testable in this class, just test that it obeys the general access rule contact.
     public function test_securewindow_access_rule() {
         $quiz = new \stdClass();

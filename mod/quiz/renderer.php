@@ -436,7 +436,11 @@ class mod_quiz_renderer extends plugin_renderer_base {
         $output .= $this->footer();
         return $output;
     }
-
+////////////////
+//////////////// Techversant
+/////Start////// Edited By Arjun
+//////////////// Purpose : For Proctoring
+////////////////
     /**
      * Attempt Page
      *
@@ -451,15 +455,44 @@ class mod_quiz_renderer extends plugin_renderer_base {
      */
     public function attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id,
             $nextpage) {
+        global $DB;
         $output = '';
         $output .= $this->header();
+
+        $attempt = $attemptobj->get_attempt();
+
         $output .= $this->during_attempt_tertiary_nav($attemptobj->view_url());
         $output .= $this->quiz_notices($messages);
         $output .= $this->countdown_timer($attemptobj, time());
         $output .= $this->attempt_form($attemptobj, $page, $slots, $id, $nextpage);
+
+
+        $proctoring = $DB->get_record_sql("SELECT eproctoringrequired from {quizaccess_eproctoring} where quizid = $attempt->quiz")->eproctoringrequired;
+        // print_r($proctoring);exit();
+        if($proctoring == 1){
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>';
+            $output .= '<video  width="500px" height="500px" autoplay style="display:none;"></video>
+            <div class="recorder" style="display:none;">
+                    <span id="status">Checking background noise.</span>
+                    <!-- Volume bar -->
+                    <div id="volumeBar">
+                        <div id="voiceVolume" ></div> 
+                    </div>';
+            // echo '<script src="http://localhost/gurukul/local/custompage/js/volume_check.js"></script><script src="http://localhost/gurukul/local/custompage/js/volume-meter.js"></script>
+            // <script src="http://localhost/gurukul/local/custompage/js/websocket.js"></script>';
+            echo '<script src="'.$CFG->wwwroot.'/local/custompage/js/volume-meter.js"></script>';
+        }
+
+
         $output .= $this->footer();
         return $output;
     }
+
+////////////////
+////////////////    
+//////End///////
+////////////////
+////////////////
 
     /**
      * Render the tertiary navigation for pages during the attempt.
