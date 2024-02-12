@@ -21,6 +21,7 @@ $linktext = "Teacher diary";
 //$linktext = get_string('plugin','new_plugin');
 // Set the url.
 $linkurl = new moodle_url('/local/diary/editdiary.php');
+$css_link = new moodle_url('/local/diary/css/style.css');
 
 // Print the page header.
 $PAGE->set_context($context);

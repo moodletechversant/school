@@ -10,6 +10,10 @@ $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "Time Table";
 $linkurl = new moodle_url('/local/new_timetable/view_timetable.php');
+$new_timetable_period= new moodle_url('/local/new_timetable/periods.php');
+$timetable_content= new moodle_url('/img/content/timetable.png');
+$new_timetable_edit_timetable= new moodle_url('/local/new_timetable/edit_timetable.php');
+$new_periods= new moodle_url('/local/new_timetable/new_period.php');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentview');
@@ -67,12 +71,12 @@ echo $OUTPUT->header();
         // print_r($data);exit();       
             }     
     //multi-dimentional array
-    $days=array('day' => $data);
+    // $days=array('new_periods'=>$new_periods,'day' => $data,'timetable_content'=>$timetable_content,'new_timetable_edit_timetable'=>$new_timetable_edit_timetable);
    
-    echo $mustache->render($template,$days);
+    echo $mustache->render($template,['new_periods'=>$new_periods,'day' => $data,'timetable_content'=>$timetable_content,'new_timetable_edit_timetable'=>$new_timetable_edit_timetable]);
   ?>
 
-    <a href="periods.php"><button class="btn btn-secondary add-btn mt-5"type="button">Add</button></a>
+    <a href="'.<?php $new_timetable_period ?>.'"><button class="btn btn-secondary add-btn mt-5"type="button">Add</button></a>
 
   <?php
     echo $OUTPUT->footer();

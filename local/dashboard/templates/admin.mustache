@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/school/local/css/style.css" />
+    <link rel="stylesheet" href={{csspath}} />
 </head>
 
 <body>
@@ -30,9 +30,9 @@
                         
 
                         <div class="col" style="flex: 2">
-                            <a href="/school/local/academicyear/viewacademicyear.php"style="color: inherit; text-decoration: none;">
+                            <a href={{academicyr_view}} style="color: inherit; text-decoration: none;">
                                <div class="cards">
-                                   <img src="/school/local/img/academic.svg" width="45px" />
+                                   <img src={{academicyr_img}} width="45px" />
                                    <div class="cards-titles">
                                        <div>
                                            <h4>Academic Year</h4>
@@ -51,9 +51,9 @@
 
 
                            <div class="col" style="flex: 2;">
-                            <a href="/school/local/class/classview.php"style="color: inherit; text-decoration: none;">
+                            <a href={{class_view}} style="color: inherit; text-decoration: none;">
                                <div class="cards">
-                                   <img src="/school/local/img/ic-3.svg" width="45px" />
+                                   <img src={{class_img}} width="45px" />
                                    <div class="cards-titles">
                                        <div>
                                            <h4>Class</h4>
@@ -71,9 +71,9 @@
                            </div>
 
                            <div class="col" style="">
-                            <a href="/school/local/division/div_view.php"style="color: inherit; text-decoration: none;">
+                            <a href={{div_view}} style="color: inherit; text-decoration: none;">
                                <div class="cards">
-                                   <img src="/school/local/img/ic-4.svg" width="45px" />
+                                   <img src={{div_img}} width="45px" />
                                    <div class="cards-titles">
                                        <div>
                                            <h4>Division</h4>
@@ -94,14 +94,14 @@
 
                     <div class="row">   
                         <div class="col" style="flex: 2;">
-                            <a href="/school/local/subject/viewsubject.php"style="color: inherit; text-decoration: none;">
+                            <a href={{subject_view}} style="color: inherit; text-decoration: none;">
                                <div class="cards">
-                                   <img src="/school/local/img/ic-5.svg" width="45px" />
+                                   <img src={{subject_img}} width="45px" />
                                    <div class="cards-titles">
                                        <div>
-                                           <h4>Course</h4>
-                                           <!--<a href="/school/local/subject/admin_courseview.php"><p>View Course(click here)</p></a>-->
-                                            <p>View Course</p>
+                                           <h4>Subject</h4>
+                                           <!--<a href="/school/local/subject/admin_courseview.php"><p>View Subjects(click here)</p></a>-->
+                                            <p>View Subjects</p>
                                        </div>
                                        <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
                                            xmlns="http://www.w3.org/2000/svg">
@@ -115,9 +115,9 @@
                         </div>               
 
                         <div class="col" style="">
-                            <a href="/school/local/createteacher/view_teacher.php"style="color: inherit; text-decoration: none;">
+                            <a href={{teacher_view}} style="color: inherit; text-decoration: none;">
                             <div class="cards">
-                                <img src="/school/local/img/ic-2.svg" width="45px" />
+                                <img src={{teacher_img}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Teacher</h4>
@@ -135,10 +135,10 @@
                         </div>
 
                         <div class="col" style="flex: 2;">
-                            <a href="/school/local/createstudent/view_student_1.php"style="color: inherit; text-decoration: none;">
+                            <a href={{student_view}} style="color: inherit; text-decoration: none;">
     
                                 <div class="cards">
-                                    <img src="/school/local/img/ic-1.svg" width="45px" />
+                                    <img src={{student_img}} width="45px" />
                                     <div class="cards-titles">
                                         <div>
                                             <h4>Student</h4>
@@ -157,9 +157,9 @@
 
 
                         <div class="col" style="">
-                            <a href="/school/local/dashboard/assignts.php"style="color: inherit; text-decoration: none;">
+                            <a href={{assign_view}} style="color: inherit; text-decoration: none;">
                                 <div class="cards">
-                                    <img src="/school/local/img/ic-6.svg" width="45px" />
+                                    <img src={{assign_img}} width="45px" />
                                     <div class="cards-titles">
                                         <div>
                                             <h4>Assign</h4>
@@ -184,9 +184,9 @@
                              
             
                         <div class="col" style="flex: 2;">
-                        <a href="/school/local/new_timetable/admin_view_1.php"style="color: inherit; text-decoration: none;">
+                        <a href={{timetable_view}} style="color: inherit; text-decoration: none;">
                             <div class="cards">
-                                <img src="/school/local/img/ic-7.svg" width="45px" />
+                                <img src={{timetable_img}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Timetable</h4>
@@ -204,9 +204,9 @@
                         </div>
 
                         <div class="col" style="flex:2">
-                        <a href="/school/local/holiday/view_holiday.php"style="color: inherit; text-decoration: none;">
+                        <a href={{holidays_view}} style="color: inherit; text-decoration: none;">
                             <div class="cards">
-                                <img src="/school/local/img/ic-8.svg" width="45px" />
+                                <img src={{holidays_img}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Holidays</h4>
@@ -223,9 +223,9 @@
                             </a>
                         </div>
                           <div class="col" style="">
-                            <a href="/school/local/survey/survey_adminview.php"style="color: inherit; text-decoration: none;">
+                            <a href={{survey_view}} style="color: inherit; text-decoration: none;">
                                 <div class="cards">
-                                    <img src="/school/local/img/ic-21.svg" width="60px" />
+                                    <img src={{survey_img}} width="60px" />
                                     <div class="cards-titles">
                                         <div>
                                             <h4>Survey</h4>
@@ -245,9 +245,9 @@
 
                     <div class="row">
                         <div class="col" style="flex:2">
-                            <a href="/school/local/complaint/view_complaint_1.php"style="color: inherit; text-decoration: none;">
+                            <a href={{complaint_view}} style="color: inherit; text-decoration: none;">
                               <div class="cards">
-                                  <img src="/school/local/img/ic-9.svg" width="45px" />
+                                  <img src={{complaint_img}} width="45px" />
                                   <div class="cards-titles">
                                       <div>
                                           <h4>Complaint</h4>
@@ -267,9 +267,9 @@
 
 
                         <div class="col" style="flex:2">
-                         <a href="/school/local/dashboard/upcoming.php"style="color: inherit; text-decoration: none;">
+                         <a href={{upcoming_view}} style="color: inherit; text-decoration: none;">
                             <div class="cards">
-                                <img src="/school/local/img/ic-10.svg" width="45px" />
+                                <img src={{upcoming_img}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Upcomings</h4>

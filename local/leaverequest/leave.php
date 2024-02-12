@@ -4,7 +4,7 @@ require_once($CFG->dirroot.'/local/leaverequest/leave_form.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
-//$template = file_get_contents($CFG->dirroot . '/local/leaverequest/templates/leave.mustache');
+$template = file_get_contents($CFG->dirroot . '/local/leaverequest/templates/leave.mustache');
 global $class,$CFG,$USER,$DB;
 
 
@@ -14,6 +14,10 @@ $context = context_system::instance();
 // $classid = $class->id;
 
 $linkurl = new moodle_url('/local/leaverequest/leave.php');
+//$css_link = new moodle_url('/local/css/style.php');
+$css_link = new moodle_url('/local/css/style.css');
+$leaverequest = new moodle_url('/school/local/leaverequest/leave.php');
+
 $PAGE->set_context($context);
 $strnewclass= "Request Leave ";
 $PAGE->set_url('/local/leaverequest/leave.php');
@@ -33,7 +37,7 @@ $currentTimestamp = time();
 
 //print_r($currentTimestamp);exit();
 echo $OUTPUT->header();
-//$mustache = new Mustache_Engine();
+$mustache = new Mustache_Engine();
 //echo $mustache->render($template);
 $returnurl = $CFG->wwwroot.'/local/leaverequest/std_viewrequest.php';
 if ($mform->is_cancelled()) {
@@ -41,34 +45,70 @@ if ($mform->is_cancelled()) {
 } 
 else if ($formdata = $mform->get_data()) {
 
-  $lvedata= new stdclass();
-  $fdate=$formdata->fdate;
+    // $user_id = 3;
+    $new_leave_sdate = $formdata->fdate; // The date for which the user is applying for leave
+    $new_leave_edate = $formdata->tdate;
+
+    $sdate = date('Ymd',$new_leave_sdate);
+    $edate = date('Ymd',$new_leave_edate);
+
+    $result =$DB->get_records_sql(" SELECT * FROM {leave} WHERE
+    s_id = $current_user_id AND (
+    (
+        DATE_FORMAT(FROM_UNIXTIME(f_date), '%Y%m%d') <= $sdate AND DATE_FORMAT(FROM_UNIXTIME(t_date), '%Y%m%d') >= $sdate
+    )
+    OR
+    (
+        DATE_FORMAT(FROM_UNIXTIME(f_date), '%Y%m%d') <= $edate AND DATE_FORMAT(FROM_UNIXTIME(t_date), '%Y%m%d') >= $edate
+    ))");
+// print_r($result);
+    // $result =$DB->get_record_sql("SELECT * FROM {{leave}} WHERE s_id = $current_user_id AND f_date <= $new_leave_sdate AND end_date >= $new_leave_sdate OR   (DATE_FORMAT(FROM_UNIXTIME(end_date), '%Y%m%d') <= $new_leave_edate AND end_date >= $new_leave_edate");
+    // $result = $conn->query($sql);
+    if ($new_leave_edate >= $new_leave_sdate) {   
+            if(!empty($result)){ 
+                // Leave request already exists for the specified date
+                echo '<script>alert("Error: Leave request already exists for the specified date");</script>';
+
+                $urlto = $CFG->wwwroot.'/local/leaverequest/leave.php';
+                redirect($urlto); 
+            
+            } else {
+                        $lvedata= new stdclass();
+                        $fdate=$formdata->fdate;
 
 
-  $lvedata->f_date=$formdata->fdate;
-  $lvedata->t_date=$formdata->tdate;
-  $lvedata->n_leave=$formdata->nleave;
+                        $lvedata->f_date=$formdata->fdate;
+                        $lvedata->t_date=$formdata->tdate;
+                        $lvedata->n_leave=$formdata->nleave;
 
 
-  $lvedata->type=$formdata->ltype;
-  $lvedata->subject=$formdata->subject;
-$lvedata->s_id=$current_user_id;
-$lvedata->s_name=$name->s_ftname;  
-  $lvedata->note=$formdata->note;
-  $lvedata->l_status='pending';
-  $lvedata->created_date=$currentTimestamp;
-  $lvedata->created_by=$current_user_id;
-  $lvedata->modified_date=$currentTimestamp;
-  $lvedata->modified_by=$current_user_id;
- //print_r($lvedata);exit();
+                        $lvedata->type=$formdata->ltype;
+                        $lvedata->subject=$formdata->subject;
+                        $lvedata->s_id=$current_user_id;
+                        $lvedata->s_name=$name->s_ftname;  
+                        $lvedata->note=$formdata->note;
+                        $lvedata->l_status='pending';
+                        $lvedata->created_date=$currentTimestamp;
+                        $lvedata->created_by=$current_user_id;
+                        $lvedata->modified_date=$currentTimestamp;
+                        $lvedata->modified_by=$current_user_id;
+                        //print_r($lvedata);exit();
 
-  
-    $DB->insert_record('leave',$lvedata);
-    // $sql = "UPDATE mdl_leave SET created_date = '$currentTimestamp' WHERE id";
-    // $DB->execute($sql);
-    $urlto = $CFG->wwwroot.'/local/leaverequest/std_viewrequest.php';
-    redirect($urlto, 'Data Saved Successfully '); 
-  
+        
+                        $DB->insert_record('leave',$lvedata);
+                        // $sql = "UPDATE mdl_leave SET created_date = '$currentTimestamp' WHERE id";
+                        // $DB->execute($sql);
+                        $urlto = $CFG->wwwroot.'/local/leaverequest/std_viewrequest.php';
+                        redirect($urlto, 'Data Saved Successfully '); 
+                    
+            } 
+    }
+    else {
+           echo '<script>alert("Error: End year must be greater than start year");</script>';
+           $urlto = $CFG->wwwroot.'/local/leaverequest/leave.php';
+           redirect($urlto); 
+    }
+
 
 }
 $mform->display();
@@ -214,3 +254,19 @@ $(".dbpicker").click(function(){
 
 
     </style>
+    <!-- $user_id = 3;
+$new_leave_date = "2023-11-04";  // The date for which the user is applying for leave
+
+// Check if leave already exists for the given date and user
+$sql = "SELECT * FROM leave_table WHERE user_id = $user_id AND start_date <= '$new_leave_date' AND end_date >= '$new_leave_date'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Leave request already exists for the specified date
+    echo "Leave is already applied for this date.";
+} else {
+    // Process the new leave request (insert into the database, etc.)
+    // For simplicity, let's assume you have a function called applyLeave() for this
+    applyLeave($user_id, $new_leave_date);
+    echo "Leave request successful!";
+} -->

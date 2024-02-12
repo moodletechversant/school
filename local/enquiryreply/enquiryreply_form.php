@@ -33,7 +33,7 @@ class enquiryreply_form extends moodleform {
 
     public function definition() {
         global $PAGE, $DB, $USER, $CFG, $COURSE;
-
+        $enquiry = $CFG->wwwroot.'/local/enquiry/view_enquiry.php';
         $mform = $this->_form;
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Enquiry Reply</h2>');
@@ -42,11 +42,12 @@ class enquiryreply_form extends moodleform {
         // $editoroptions = null;
         // $filemanageroptions = null;
         $id  = optional_param('id', 0, PARAM_INT);
+        //print_r($id);exit();
         $mform->addElement('hidden','id',$id);
 
         $u_id  = optional_param('user_id', 0, PARAM_INT);
         $mform->addElement('hidden','user_id',$u_id);
-        //print_r($u_id);exit();
+       // print_r($u_id);exit();
        //replay message
        
        $mform->addElement('textarea', 'ereply','Reply message','wrap="virtual" rows="6" cols="5"');
@@ -54,7 +55,7 @@ class enquiryreply_form extends moodleform {
 
        $mform->addElement('html', '</div>');
        $this->add_action_buttons();
-       $mform->addElement('html','<a href = "/school/local/enquiry/view_enquiry.php" style="text-decoration:none">');
+       $mform->addElement('html','<a href = "'.$enquiry.'" style="text-decoration:none">');
        $mform->addElement('button', 'btn', 'View Enquiry list'); 
        $mform->addElement('html','</a>');
 

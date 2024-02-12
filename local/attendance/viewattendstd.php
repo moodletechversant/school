@@ -15,6 +15,7 @@ $PAGE->set_title('Attendance');
 
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine(); 
+$css_link = new moodle_url('/local/css/style.css');
 
 $selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : date('Y-m-d');
 $selected_date_formatted = date_format(date_create($selected_date), 'Y-m-d');
@@ -42,7 +43,7 @@ foreach ($rec as $records) {
         'status'=>$status
     ];
 }
-echo $mustache->render($template,['viewattendstd'=>$data1]);
+echo $mustache->render($template,['viewattendstd'=>$data1,'css_link'=>$css_link]);
 echo html_writer::table($table);
 echo $OUTPUT->footer();
 ?>

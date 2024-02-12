@@ -70,6 +70,15 @@ class edit_assignstudent_form extends moodleform {
         $mform->addElement('select', 'academicyear','Academic start',$options1);
         $mform->addRule('academicyear', 'academic year missing', 'required', null);
 
+        $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_academicyear");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
         // //Class       
         $classes = $DB->get_records_sql("SELECT * FROM {class}");     
          $options1 = array();
@@ -79,14 +88,23 @@ class edit_assignstudent_form extends moodleform {
          }
 
          $mform->addElement('select', 'class','Class',$options1);
-
-         //Division 
+          
+         $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_class");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
+        //  //Division 
          $divisions  = $DB->get_records('division');
          $options2 = array();
          $options2=array(''=>'---- Select a division ----');
          foreach($divisions as $division){
-         $options2 [$division->id] = $division->div_name;
-         }
+            $options2 [$division->id] = $division->div_name;
+            }
          $mform->addElement('select', 'division','Division',$options2);
 
         $editdata=$DB->get_record('student_assign',array('id'=>$id));
@@ -107,10 +125,7 @@ class edit_assignstudent_form extends moodleform {
         $this->add_action_buttons();
 
         $mform->addElement('html', '</div>');
-        // $mform->addElement('html','<a href = "div_view.php" style="text-decoration:none">');
-        // $mform->addElement('button', 'btn', 'View divisions'); 
-        // $mform->addElement('html','</a>');
- 
+       
     }
     
   

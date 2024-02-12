@@ -1,15 +1,15 @@
  <div class="row mt-5">
         <div class="col-12">
              <div class="note">
-            
-                 <h3 class="sub"><br>{{d_subject}}<a href="editdiary.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>  
+                  <h6>Date:{{diary_created}}</h6>
+                 <h3 class="sub"><br>{{d_subject}}<a href={{editdiary}}={{id}}><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>  
                  <p class="hide">{{d_content}}</p>
-                 <p class="send">Send to:<br>{{d_studentname}}<br><br><a href="deletediary.php?id={{id}}"><button type="button" class="btn btn-outline-secondary del">Delete diary</button></a></p>
+                 <p class="send">Send to:<br>{{d_studentname}}<br><br><a href={{deletediary}}={{id}}><button type="button" class="btn btn-outline-secondary del">Delete diary</button></a></p>
                  
                  <div class="icon-d">
                  <i class='fas fa-angle-down arrow' style='font-size:24px'></i>
                  </div>
-              
+                 <hr>
             </div>
                
         </div>

@@ -15,6 +15,10 @@ require_login();
 //$linktext = "Upcoming Assignment";
 
 $linkurl = new moodle_url('/local/dashboard/upcoming_assignment.php');
+$csspath = new moodle_url('/local/css/style.css');
+$dashboard = new moodle_url('/local/dashboard/upcoming.php');
+
+
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
@@ -91,9 +95,10 @@ if (empty($enrolled_course_ids)) {
     // $backbutton = html_writer::link($backurl, '< Back');
     // echo $backbutton;
 }
-}
-$output = $mustache->render($template, ['tableRows' => $tableRows]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'csspath'=>$csspath,'dashboard'=>$dashboard]);
 echo $output;
+}
+
 
 echo $OUTPUT->footer();
 ?>

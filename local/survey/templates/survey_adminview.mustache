@@ -43,34 +43,53 @@ li{
               <div class="note">
                 {{#disabled}}
                     <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
-                    <p style="color: red;">This survey is no longer available</p>
+                    <p style="color: #867c7c;">This survey is no longer available</p>
                     <div class="hide"> 
                     <ol>                
                           {{#q_survey}}                                                     
                                  <li>{{survey_question}}</li>                   
                           {{/q_survey}}
                           </ol>
-                          <a href="deletesurvey.php?id={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
+                          <a href="{{delete}}={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
                       </div>
                       <div class="icon-d">
                            <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
                      </div>  
                 {{/disabled}}
-                {{^disabled}}
+
+                 {{#disabled1}}
+                    <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
+                    <p style="color: red;">This will be available from {{survey_from}}</p>
+                    <div class="hide"> 
+                    <ol>                
+                          {{#q_survey}}                                                     
+                                 <li>{{survey_question}}</li>                   
+                          {{/q_survey}}
+                          </ol>
+                          <a href="{{delete}}={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
+                      </div>
+                      <div class="icon-d">
+                           <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
+                     </div>  
+                {{/disabled1}}
+
+
+                
+                {{#disabled2}}
                     <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>              
-                    <p>{{survey_from}} - {{survey_to}}</p>
+                    <p style="color:green;">{{survey_from}} - {{survey_to}}</p>
                       <div class="hide">   
                       <ol>              
                           {{#q_survey}}                                                     
                                  <li>{{survey_question}}</li>                  
                           {{/q_survey}}
                            </ol>
-                          <a href="deletesurvey.php?id={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
+                          <a href="{{delete}}={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
                       </div>
                       <div class="icon-d">
                            <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
                      </div>  
-             {{/disabled}}                
+             {{/disabled2}}                
          </div>
          <br>
        {{/survey}}

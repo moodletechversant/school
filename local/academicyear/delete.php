@@ -15,8 +15,9 @@ require_capability('moodle/site:manageblocks', $context);
 $table = 'academic_year';
 // delete the record
 	$DB->delete_records($table, array('id'=>$id));
-
-header("Location:/school/local/academicyear/viewacademicyear.php");
+	
+	$view_academic_yr=new moodle_url('/local/academicyear/viewacademicyear.php');
+	header("Location:".$view_academic_yr);
 
 
 

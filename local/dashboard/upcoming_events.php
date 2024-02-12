@@ -12,14 +12,17 @@ $context = context_system::instance();
 require_login();
 
 $linkurl = new moodle_url('/local/event/upcoming_events.php');
+$csspath = new moodle_url('/local/css/style.css');
+$dashboard = new moodle_url('/local/dashboard/upcoming.php');
+
 
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
 //$PAGE->set_pagelayout('admin');
-$PAGE->set_title($linktext);
+//$PAGE->set_title($linktext);
 // Set the page heading.
-$PAGE->set_heading($linktext);
+//$PAGE->set_heading($linktext);
 $PAGE->navbar->add('Upcoming Activities', new moodle_url($CFG->wwwroot.'/local/dashboard/upcoming_activities.php'));
 
 echo $OUTPUT->header();
@@ -36,7 +39,7 @@ $upcoming_events = $DB->get_records_sql("
 //print_r($upcoming_events);exit();
 $mustache = new Mustache_Engine();
 $tableRows = [];
-$table->head = array('Event Date', 'Event Name');
+// $table->head = array('Event Date', 'Event Name');
 
 if (!empty($upcoming_events))  {
    
@@ -63,7 +66,7 @@ else{
    
 }
 
-$output = $mustache->render($template, ['tableRows' => $tableRows]);
+$output = $mustache->render($template, ['tableRows' => $tableRows,'csspath' => $csspath,'dashboard'=>$dashboard]);
 echo $output;
 
 echo $OUTPUT->footer();

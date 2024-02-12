@@ -36,6 +36,9 @@ class class_creation_form extends moodleform {
        // $userid  = optional_param('userid', 0, PARAM_INT);
         $urlto=$CFG->wwwroot.'/local/class/class_creation.php';
         global $USER, $CFG, $DB;
+        $classview=$CFG->wwwroot.'/local/class/classview.php';
+
+
         $table = new html_table();
 
         $mform = $this->_form;
@@ -62,9 +65,6 @@ class class_creation_form extends moodleform {
         $mform->addElement('select', 'academicyear','Academic start',$options1);
         $mform->addRule('academicyear', 'academic year missing', 'required', null);
         
-
-
-    
         $options2 = array();
         $options2=array(''=>'---- Select academic end year ----');
         foreach($academic  as $academic2 ){
@@ -72,9 +72,7 @@ class class_creation_form extends moodleform {
         $timestart1 = date("d-m-Y", $timestart);
         $options2 [$academic2 ->id] = $timestart1;
         }
-// print_r($options2);exit();
         $mform->addElement('select', 'academicyear1','Academic end',$options2);
-        // $mform->addRule('academicyear1', 'academic year missing', 'required', null);
 
         $js = <<<JS
         document.addEventListener("DOMContentLoaded", function() {
@@ -86,13 +84,12 @@ class class_creation_form extends moodleform {
         // Add the JavaScript to the form
         $mform->addElement('html', "<script>{$js}</script>");
 
-
         $mform->addElement('textarea', 'description', 'Description about Class');
         // $mform->addElement('textarea', 'description', 'Description about Class');
         $mform->addElement('html', '</div>');
         $this->add_action_buttons();
 
-        $mform->addElement('html','<a href = "/school/local/class/classview.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href ='. $classview.'  style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View Class list'); 
         $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');

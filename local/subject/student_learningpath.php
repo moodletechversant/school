@@ -9,14 +9,18 @@ global $class,$CFG;
 $context = context_system::instance();
 require_login();
 // $classid = $class->id;
-$linktext = "Courses";
+$linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/student_learningpath.php');
+$demo_learningpath = new moodle_url('/local/dashboard/demo_learningpath.php?id');
+$logo4 = new moodle_url('/local/img/sub-math.jpg');
+$css_link = new moodle_url('/local/css/style.css');
+$logo6 = new moodle_url('/local/img/tabler_dots.svg');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentview');
 
 $PAGE->set_url('/local/subject/student_learningpath.php');
-$PAGE->set_heading($linktext);
+// $PAGE->set_heading($linktext);
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 
@@ -49,9 +53,9 @@ foreach($rec1 as $record1){
 // print_r($data);exit();
 
 //Multi-dimentional array
-$subjects = array('sub' => $data);
+// $subjects = array();
 // print_r($subjects);exit();
-echo $mustache->render($template,$subjects);
+echo $mustache->render($template,['sub' => $data,'demo_learningpath'=>$demo_learningpath,'logo4'=>$logo4,'logo6'=>$logo6,'css_link'=>$css_link,'empty_course'=>!empty($rec1)]);
   ?>
 <?php
     echo $OUTPUT->footer();

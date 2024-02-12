@@ -108,13 +108,15 @@ else if($formdata = $mform->get_data()){
 
 $mform->display();
 echo '<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>';
+echo '<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>';
 echo $OUTPUT->footer();
 ?>
+
 <script>
 
-/*Script for making first character uppercase*/
 
 function changeTheText(string) {
+    // alert("second");
 	string = string.toLowerCase();
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -123,13 +125,7 @@ jQuery('input').on('mouseout', function() {
 			jQuery(this).val(changeTheText(jQuery(this).val()));
 });
 
-/*Script for entering only alphabetic characters*/
 
-// $('input[name="subname"]').bind('keyup blur', function() { 
-//     $(this).val(function(i, val) {
-//         return val.replace(/[^a-z\s]/gi,''); 
-//     });
-// });
 
 $('input[name="subname"]').on("keydown", function(event){
     // Allow controls such as backspace, tab etc.
@@ -149,8 +145,11 @@ $('input[name="subname"]').on("keydown", function(event){
   });
 
   $(document).ready(function() {
+    // var iddd=document.getElementById('id_academicyear');
+    // alert(iddd);
     $("#id_academicyear").change(function() {
     var brand_id = $(this).val();
+    
     if(brand_id != ""){
         $.ajax({
             url:"test.php",
@@ -272,6 +271,12 @@ $(document).ready(function() {
     .footer-content-debugging{
         display : none;
     }
- 
+    .form-autocomplete-suggestions li:first-child{
+        background-color: white;
+        box-shadow:none;
+        height:.5px;
+        pointer-events:none;
+    }
+
 
     </style>

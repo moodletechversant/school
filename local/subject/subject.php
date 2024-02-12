@@ -8,7 +8,7 @@ global $USER;
 
 $context = context_system::instance();
 require_login();
-
+//1234
 
 // Correct the navbar .
 // Set the name for the page.

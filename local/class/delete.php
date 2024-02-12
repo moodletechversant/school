@@ -9,6 +9,8 @@ $id = required_param('id', PARAM_INT);
 
 // require_login();
 $context = context_course::instance($COURSE->id);
+$delete = new moodle_url('/local/class/classview.php');
+
 require_capability('moodle/site:manageblocks', $context);
 
 // the name of the table in the database
@@ -16,7 +18,7 @@ $table = 'class';
 // delete the record
 	$DB->delete_records($table, array('id'=>$id));
 
-header("Location:/school/local/class/classview.php");
+header("Location:".$delete);
 
 
 

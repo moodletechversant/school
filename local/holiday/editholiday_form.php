@@ -39,7 +39,7 @@ class editholiday_form extends moodleform {
         $urlto=$CFG->wwwroot.'local/holiday/editholiday.php';
 
         $mform = $this->_form;
-        $mform->addElement('html', '<h2 class="text-center heading mb-5">Add Holiday</h2>');
+        $mform->addElement('html', '<h2 class="text-center heading mb-5">Edit Holiday</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 

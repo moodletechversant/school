@@ -1,3 +1,6 @@
+<?php
+$css_link = new moodle_url('/local/css/style.css');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/school/local/css/style.css" />
+    <link rel="stylesheet" href="<?php echo $css_link->out(); ?>" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -25,6 +28,8 @@ class periods_form extends moodleform {
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
 
+        $new_timetable_admin_view_1 = $CFG->wwwroot.'/local/new_timetable/admin_view_1.php';
+
         $mform = $this->_form;
 
         $attributes = 'size="30"';
@@ -37,9 +42,29 @@ class periods_form extends moodleform {
     <div class="container">
         <div class="col-md-10 col-10 mx-auto col-lg-6">
             <div class="form-card card">
-            <h4>Time-Table creation</h4> 
+            <h4>Time-Table creation</h4>
 
-                <div class="row">
+            <div class="row">
+                        <div class="form-group">
+                        ');
+            $academic  = $DB->get_records('academic_year');
+            $options1 = array();
+            //$options1=array(''=>'---- Select academic_year ----');
+            foreach($academic as $academics){
+                $timestart = $academics->start_year;
+                $timeend = $academics->end_year;
+            $timestart1 = date("d/m/Y", $timestart);
+            $timeend1 = date("d/m/Y", $timeend);
+            $options1 [$academics->id] =$timestart1.'-'.$timeend1;
+            }
+            $mform->addElement('select', 'academic','Academic Year',$options1);
+            $mform->updateAttributes('academic', array('academic' => 'form-control'));
+
+
+            $mform->addElement('html','
+            </div>
+            </div>
+            <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Class</label>
@@ -117,7 +142,7 @@ class periods_form extends moodleform {
         $mform->addElement('html', '<br>');
         $this->add_action_buttons(false, 'cancel');
         $mform->addElement('html', '<br>');
-        $mform->addElement('html','<a href = "/school/local/new_timetable/admin_view_1.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$new_timetable_admin_view_1.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn','View',array('class' => 'btn btn-primary ms-5')); 
         $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>

@@ -33,7 +33,8 @@ require_login();
 class createteacher_form extends moodleform {
     function definition() {
         global $USER, $CFG, $DB;
-
+        $view_teacher = $CFG->wwwroot.'/local/createteacher/view_teacher.php';
+        
         $mform = $this->_form;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Teacher creation</h2>');
         $mform->addElement('html', '<div class="container">');
@@ -72,12 +73,7 @@ class createteacher_form extends moodleform {
 
         // $mform->addHelpButton('password', 'password');
         $mform->setType('password', core_user::get_property_type('password'));
-        // if (!empty($CFG->passwordpolicy)) {
-        //     $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
-        // }
-        // $mform->addElement('static', 'password_validation', '');
-        // $mform->addElement('header', 'supplyinfo', get_string('supplyinfo'),'');
-
+        
         $mform->addElement('date_selector', 'dob','Dob', get_string('from'));
         $mform->addRule('dob', 'dob missing', 'required', null);
 
@@ -127,7 +123,7 @@ class createteacher_form extends moodleform {
 
         $mform->addElement('html', '</div>');
         $this->add_action_buttons();
-        $mform->addElement('html','<a href = "view_teacher.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = "'.$view_teacher.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View teachers'); 
         $mform->addElement('html','</a>');
         
@@ -138,8 +134,8 @@ class createteacher_form extends moodleform {
         global $DB;
         $errors = parent::validation($data, $files);
         if (!empty($data['bg'])) {
-        $validBloodGroups = array('A', 'B', 'AB', 'O');
-        $enteredBloodGroup = strtoupper($data['bg']);
+            $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
+            $enteredBloodGroup = strtoupper($data['bg']);
         if (!in_array($enteredBloodGroup, $validBloodGroups)) {
         $errors['bg'] = "Invalid blood group";
         }

@@ -8,6 +8,7 @@ $context = context_system::instance();
 $linktext = "admin_view";
 
 $linkurl = new moodle_url('/local/new_timetable/admin_view.php');
+$periods = new moodle_url('/local/new_timetable/periods.php');
 
 $PAGE->set_context($context);
 $strnewclass= get_string('studentview');
@@ -21,7 +22,7 @@ echo $OUTPUT->header();
 $students = $DB->get_records_sql("SELECT * FROM {student}");
 $academic = $DB->get_records_sql("SELECT * FROM {academic_year}");
 echo '<div class="d-flex mb-3" style="align-items: center;">
-<a href="/school/local/new_timetable/periods.php" class="ml-auto" style="text-decoration:none">
+<a href="'.$periods.'" class="ml-auto" style="text-decoration:none">
   <button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
 </a>
 </div>

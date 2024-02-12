@@ -28,21 +28,19 @@
    
    require_once($CFG->dirroot.'/lib/formslib.php');
    require_once($CFG->dirroot.'/user/lib.php');
+   require_login();
    
    class sampele extends moodleform {
-   
+    public function definition() {
+    $mform->addElement('html', '<div>');
+    $mform->addElement('button', 'minus_button', '-', array('onclick' => 'decrement(); return false;'));
+    $mform->addElement('text', 'number', '', array('size' => 3, 'maxlength' => 3, 'style' => 'text-align: center;', 'readonly' => true));
+    $mform->addElement('button', 'plus_button', '+', array('onclick' => 'increment(); return false;'));
+    $mform->addElement('html', '</div>');
 
-
-
-
-$mform->addElement('html', '<div>');
-$mform->addElement('button', 'minus_button', '-', array('onclick' => 'decrement(); return false;'));
-$mform->addElement('text', 'number', '', array('size' => 3, 'maxlength' => 3, 'style' => 'text-align: center;', 'readonly' => true));
-$mform->addElement('button', 'plus_button', '+', array('onclick' => 'increment(); return false;'));
-$mform->addElement('html', '</div>');
-
-$mform->addElement('hidden', 'current_value', '0');
+    $mform->addElement('hidden', 'current_value', '0');
    }
+  }
 ?>
 // Add this code to your Moodle JavaScript file, such as mod.js
 <script>

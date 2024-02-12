@@ -38,7 +38,7 @@ function xmldb_local_attendance_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
    
-    if ($oldversion < 2023033002) {
+    if ($oldversion < 2023033003) {
         $table = new xmldb_table('attendance');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10',null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
         $table->add_field('stud_name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
@@ -49,7 +49,13 @@ function xmldb_local_attendance_upgrade($oldversion) {
             $dbman->create_table($table);
         }
         }
-       upgrade_plugin_savepoint(true,2023033002,'local','attendance');
+        // $table5 = new xmldb_table('user');
+		$divfield = new xmldb_field('div_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+		if (!$dbman->field_exists($table, $divfield)) {
+		$dbman->add_field($table, $divfield);
+		}
+       upgrade_plugin_savepoint(true,2023033003,'local','attendance');
 
 
     return true;

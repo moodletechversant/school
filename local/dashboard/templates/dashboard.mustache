@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/school/local/css/style.css" />
+    <link rel="stylesheet" href={{css_link}} />
 </head>
 
 <body>
@@ -52,35 +52,32 @@
                             
                         </div>
 
+                   <div class="col" style="flex: 2;">
+    <a href="viewall.php" style="text-decoration: none; color: inherit;">
+        <div class="cards" style="flex-direction: row; align-items: baseline;">
+            <div class="box">
+                <h4 style="margin-bottom: 20px;">On Leave Today</h4>
+                <div class="users">
+                    {{#data.myarray1}}
+                        <label for="one">
+                            <input type="radio" name="user" />
+                            <div style="text-transform: uppercase;">{{initial}}</div>
+                            <span style="font-size: 14px;">{{sname}}</span>
+                        </label>
+                        {{#dots}}<p>.....</p>{{/dots}}
+                    {{/data.myarray1}}
+                </div>
+            </div>
+            <div style="text-align: right; margin-top: 10px; color:#0d6efd"><span>VIEW ALL</span></div>
+        </div>
+        
+    </a>
+</div>
+
+
                         <div class="col" style="flex: 2;">
-                            <div class="cards" style="flex-direction: row;
-                            align-items: baseline;">
-
-                                <div class="box">
-                                    <h4 style="margin-bottom: 20px;">On Leave Today</h4>
-                                    <div class="users">
-
-                                    <!--{{#data.myarray1}}
-                                        <p style="font-size: 18px;">{{sname}}</p>
-                                            {{/data.myarray1}}-->
-
-                                        {{#data.myarray1}}
-                                       <label for="one">
-                                            <input type="radio" name="user" />
-                                            <div style="text-transform : uppercase;">{{initial}}</div>
-                                                <span style="font-size : 14px;">{{sname}}</span>
-                                        </label>
-                                        {{/data.myarray1}}
-                                        
-                                    </div>
-                                </div>
-                                <div>VIEW ALL</div>
-                            </div>
-                        </div>
-                        
-                        <div class="col" style="flex: 2;">
-                           <a href="/school/local/profileview/viewprofile.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-12.svg" width="45px" />
+                           <a href={{viewprofile}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic12}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Student</h4>
@@ -99,11 +96,11 @@
                             </div></a>
                         </div>
                         <div class="col" style="flex: 2;">
-                            <a href="/school/local/subject/sub_studentview.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-5.svg" width="45px" />
+                            <a href={{sub_studentview}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic5}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
-                                        <h4>Courses</h4>
+                                        <h4>Subjects</h4>
                                         <p>Taken</p>
                                     </div>
                                     <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
@@ -119,8 +116,8 @@
                             </div></a>
                         </div>
                         <div class="col">
-                            <a href="/school/local/subject/student_learningpath.php" style="text-decoration:none"><div class="cards"> 
-                              <img src="/school/local/img/ic-2.svg" width="45px" />
+                            <a href={{student_learningpath}} style="text-decoration:none"><div class="cards"> 
+                              <img src={{ic2}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Learning Path</h4>
@@ -141,8 +138,8 @@
                     </div>
                     <div class="row">
                         <div class="col" style="">
-                            <a href="/school/local/attendance/viewattendstd.php" style="text-decoration:none"><div class="cards">
-                             <img src="/school/local/img/ic-6.svg" width="45px" />
+                            <a href={{viewattendstd}} style="text-decoration:none"><div class="cards">
+                             <img src={{ic6}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                          <h4>Attendance</h4>
@@ -161,8 +158,8 @@
                             </div></a>
                         </div>
                         <div class="col" style="">
-                            <a href="/school/local/new_timetable/studentview_1.php" style="text-decoration:none"><div class="cards">
-                              <img src="/school/local/img/ic-13.svg" width="45px" />
+                            <a href={{studentview_1}} style="text-decoration:none"><div class="cards">
+                              <img src={{ic13}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Time Table</h4>
@@ -181,8 +178,8 @@
                             </div></a>
                         </div>
                         <div class="col" style="flex:2">
-                            <a href="/school/local/diary/studentview_diary.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-14.svg" width="45px" />
+                            <a href={{studentview_diary}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic14}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>My Diary</h4>
@@ -205,8 +202,8 @@
                     <div class="hide">
                     <div class="row">
                         <div class="col" style="">
-                            <a href="upcoming.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-7.svg" width="45px" />
+                            <a href={{upcoming}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic7}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Upcoming</h4>
@@ -225,8 +222,8 @@
                             </div></a>
                         </div>
                         <div class="col" style="flex:2">
-                             <a href="/school/local/holiday/holiday_calendar.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-8.svg" width="45px" />
+                             <a href={{holiday_calendar}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic8}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Holidays</h4>
@@ -245,8 +242,8 @@
                             </div></a>
                         </div>
                         <div class="col" style="flex:2">
-                            <a href="/school/local/leaverequest/std_viewrequest.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-15.svg" width="45px" />
+                            <a href={{std_viewrequest}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic15}} width="45px" />
 
                                 <div class="cards-titles">
                                     <div>
@@ -271,8 +268,8 @@
 
                    <div class="row">
                         <div class="col" style="">
-                            <a href="/school/local/complaint/view_complaint.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-9.svg" width="45px" />
+                            <a href={{view_complaint}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic9}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Complaint</h4>
@@ -293,8 +290,8 @@
                         </div>
 
                         <div class="col" style="flex:2">
-                         <a href="/school/local/survey/survey_studentview.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-17.svg" width="45px" />
+                         <a href={{survey_studentview}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic17}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Survey</h4>
@@ -314,11 +311,11 @@
                         </div>
                         
                          <div class="col" style="">
-                            <a href="/school/local/enquiry/view_enquiry1.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-18.svg" width="45px" />
+                            <a href={{view_enquiry1}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic18}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
-                                        <h4>Enguiry</h4>
+                                        <h4>Enquiry</h4>
                                         <p>Ask</p>
                                     </div>
                                     <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
@@ -339,8 +336,8 @@
 
                     <div class="row justify-content-center">
                     <div class="col-4">
-                         <a href="/school/local/division/student_div_analyticalview.php" style="text-decoration:none"><div class="cards">
-                                <img src="/school/local/img/ic-19.svg" width="45px" />
+                         <a href={{student_div_analyticalview}} style="text-decoration:none"><div class="cards">
+                                <img src={{ic19}} width="45px" />
                                 <div class="cards-titles">
                                     <div>
                                         <h4>Analytical view</h4>

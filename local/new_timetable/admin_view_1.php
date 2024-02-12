@@ -9,6 +9,9 @@ $context = context_system::instance();
 $linktext = "View assigned students";
 $linkurl = new moodle_url('/local/new_timetable/admin_view_1.php');
 
+$css_link = new moodle_url('/local/css/style.css');
+$periods = new moodle_url('/local/new_timetable/periods.php');
+
 $PAGE->set_context($context);
 $strnewclass = 'studentview';
 $PAGE->set_url('/local/new_timetable/admin_view_1.php');
@@ -36,7 +39,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'periods'=>$periods]);
 
 echo $output;
 

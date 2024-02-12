@@ -36,12 +36,22 @@ class editstudent_form extends moodleform {
 
         $urlto=$CFG->wwwroot.'/local/createstudent/editstudent.php';
         global $USER, $CFG, $COURSE, $DB;
+
+        $id  = optional_param('id', 0, PARAM_INT);
+        $editdata=$DB->get_record('student',array('id'=>$id));
+        $sid=$editdata->user_id;
+        $sid_data=$DB->get_record('student_assign',array('user_id'=>$sid));
+
+        // print_r($sid);exit();
+        // print_r($sid);exit();
         $mform = $this->_form;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Student creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
         // $table = new html_table();
-        $id  = optional_param('id', 0, PARAM_INT);
+      
+        // print_r($id);exit();
+
         $mform->addElement('hidden','id',$id);
 
         //Academic Year 
@@ -132,21 +142,27 @@ class editstudent_form extends moodleform {
         
         $mform->addElement('select', 'district', 'District', $options);
 
-
-        $classes  = $DB->get_records('class');
-        $options1 = array();
-        $options1=array(''=>'---- Select a class ----');
-        foreach($classes as $class){
-            $options1 [$class->id] = $class->class_name;
+        if (empty($sid_data)){
+            $classes  = $DB->get_records('class');
+            $options1 = array();
+            $options1=array(''=>'---- Select a class ----');
+            foreach($classes as $class){
+                $options1 [$class->id] = $class->class_name;
+            }
+    
+           $mform->addElement('select', 'class','Select Class you applying',$options1);
+    
         }
+        // else{
 
-       $mform->addElement('select', 'class','Select Class you applying',$options1);
-
+        // }
+   
     
         
 
 
         $editdata=$DB->get_record('student',array('id'=>$id));
+        // print_r($editdata);exit();
  
         $academic=$DB->get_record('class',array('id'=>$editdata->s_class));
 
@@ -170,13 +186,31 @@ class editstudent_form extends moodleform {
         $mform->setDefault('class',$editdata->s_class);
         
         $mform->addElement('html', '</div>');
+        
 
         $this->add_action_buttons();
         // $mform->addElement('html','<a href = "div_view.php" style="text-decoration:none">');
         // $mform->addElement('button', 'btn', 'View divisions'); 
         // $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');
+      
+    }
+    public function validation($data, $files) {
+        global $DB;
+        $errors = parent::validation($data, $files);
+        if (!empty($data['bg'])) {
+        $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
+        $enteredBloodGroup = strtoupper($data['bg']);
+        if (!in_array($enteredBloodGroup, $validBloodGroups)) {
+        $errors['bg'] = "Invalid blood group";
+        }
+        }
+        return $errors;
+        }
+
+      
+
     }
     
+
   
-}

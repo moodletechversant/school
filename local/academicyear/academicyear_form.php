@@ -37,6 +37,8 @@ class academicyear_form extends moodleform {
     function definition() {
 
         $urlto=$CFG->wwwroot.'/local/academicyear/academicyear.php';
+        $view_academic_yr=new moodle_url('/local/academicyear/viewacademicyear.php');
+
         global $USER, $CFG, $COURSE, $DB;
         $mform = $this->_form;
 
@@ -63,16 +65,11 @@ class academicyear_form extends moodleform {
             'timezone'  => 99,
             'optional'  => false
         ));
-
-        
- 
-       
       
         $mform->addElement('html', '</div>');
 
-
         $this->add_action_buttons();
-        $mform->addElement('html','<a href = "/school/local/academicyear/viewacademicyear.php" style="text-decoration:none">');
+        $mform->addElement('html','<a href = '.$view_academic_yr.' style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View Academic year  list'); 
         $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');

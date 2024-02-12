@@ -9,6 +9,8 @@ global $class,$CFG, $DB;
 $context = context_system::instance();
 $linktext = "Learning Path";
 $linkurl = new moodle_url('/local/teacherassign/template/teacherlearningpath.mustache');
+$css_link=new moodle_url('/local/css/style.css');
+
 $PAGE->set_context($context);
 $strnewclass= get_string('studentview');
 $PAGE->set_url('/local/teacherassign/teacherlearningpath.php');
@@ -34,7 +36,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData]);
+$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link]);
 
 echo $output;
 

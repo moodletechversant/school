@@ -15,7 +15,7 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="/school/local/css/style.css" />
+  <link rel="stylesheet" href={{css_link}} />
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 <!--<header>
     <nav class="navbar navbar-expand-lg nav-bar-new ">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="/school/local/img/logo.svg" style="
+        <a class="navbar-brand" href="#"><img src={{img_link}} style="
    "></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
           aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,51 +59,50 @@
           <div class="cards" style="height: auto;">
             <div class="profile-cover" ></div>
             <div class="user-avatar-wp">
-              <img class="user-image" src="/school/local/img/dummy-user.png"/> 
-              <img class="more-dots" src="/school/local/img/tabler_dots.svg"  />
+              <img class="user-image" src={{img_link1}}/> 
+              <img class="more-dots" src={{img_link2}}  />
             </div>
              <h4 class="mt-3 mb-2">{{name}}</h4>
-
-
-             <p>{{email}}</p><br>
-<p>Class Teacher:{{classteacher}}</p><br>
-<p>Class :{{classname}}</p><br>
-<p>Division:{{divisionname}}</p>
+              <p>{{email}}</p><br>
+              <p>Class Teacher:{{classteacher}}</p><br>
+              <p>Class :{{classname}}</p><br>
+              <p>Division:{{divisionname}}</p>
             <div>
               <div class="user-d-wrap">
                 <div class="user-d-inner">
-                  <img src="/school/local/img/circum_mobile-3.svg"/> 
+                  <img src={{img_link3}} /> 
                   <p>{{no}}</p>
                 </div>
                 <div class="user-d-inner">
-                  <img src="/school/local/img/uiw_date.svg"/> 
+                  <img src={{img_link4}} /> 
                   <p>{{dob}}</p>
                 </div>
                 <div class="user-d-inner">
-                  <img src="/school/local/img/ph_address-book.svg"/> 
+                  <img src={{img_link5}} /> 
                   <p>{{address}}</p>
                 </div>
               </div>
             </div>
             {{/students}}  
           </div>
-          <h4 class="mt-3 mb-2">Courses</h4>
-         <div class="cards" style="height: auto;">
-          {{#courses}}
-           {{#subjects}}
-            <div class="course-list">
-             
-               <a  href="/school/course/view.php?id={{id}}">{{subjects}}: </a>
-                        {{#teacher}}{{teacher}}<br>{{/teacher}}
-            </div>
-           
-           {{/subjects}}
-  {{/courses}}
-          
-          </div>
+              {{#empty_course}}
+                  <h4 class="mt-3 mb-2">Courses</h4>
+                  <div class="cards" style="height: auto;">
+                      {{#courses}}
+                        {{#subjects}}
+                          <div class="course-list">
+                            <a  href={{course_view}}={{id}} style="text-decoration:none">{{ subjects }}: </a>
+                            {{#teacher}}{{teacher}}<br>{{/teacher}}
+                          </div>
+                        {{/subjects}}
+                      {{/courses}}
+                  </div>
+              {{/empty_course}}
+              {{^empty_course}}
+              <p><font color="red">Enroled Course Will list below.But you are not assigned to any class please contact your class teacher.</font></p>
+              {{/empty_course}}
         </div>
        </div>
-    
    </div>
 
 

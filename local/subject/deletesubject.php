@@ -7,7 +7,7 @@
     $id1= $DB->get_record_sql("SELECT course_id FROM mdl_subject WHERE id= '$id'");
     $id2=$id1->course_id;
  // confirm_sesskey();
-
+$delete=new moodle_url('local/subject/viewsubject.php');
  // require_login();
     $context = context_course::instance($COURSE->id);
     require_capability('moodle/site:manageblocks', $context);
@@ -19,7 +19,7 @@
    $DB->delete_records('course', array('id'=>$id));
 
 
-    header("Location:/school/local/subject/viewsubject.php");
+    header("Location:".$delete);
 
 
 

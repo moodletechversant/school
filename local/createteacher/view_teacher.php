@@ -55,6 +55,10 @@ $context = context_system::instance();
 $linktext = "View teachers";
 
 $linkurl = new moodle_url('/local/createteacher/view_teacher.php');
+$css_link = new moodle_url('/local/css/style.css');
+$create_teacher = new moodle_url('/local/createteacher/createteacher.php');
+$edit_teacher = new moodle_url('/local/createteacher/editteacher.php?id');
+$delete_teacher = new moodle_url('/local/createteacher/deleteteacher.php?id');
 
 $PAGE->set_context($context);
 $strnewclass= get_string('teachercreation');
@@ -70,28 +74,16 @@ echo $OUTPUT->header();
 
     //echo $mustache->render($template);
     $table = new html_table();
-
-
-
-   $tableRows = [];
+    $tableRows = [];
     //$table->head = array("Full Name","Username","Email ID","DoB","Address","Mobile no","Blood group","Qualification","Experience","Gender","District",'Edit','Delete');
     foreach ($rec as $records) {
-       
-   
        $id = $records->id; 
        $name = $records->t_fname. $records->t_mname.$records->t_lname;
-
        $username = $records->t_username;
        $email = $records->t_email;
-      //  $dob1 =$records->t_dob;
        $dob=date("d-m-Y", $records->t_dob);
-    //    $dob =$records->t_dob;
        $address =$records->t_address;
        $number =$records->t_mno;
-       
-    //    $fname  = $records->t_fname; 
-    //    $mname =$records->t_mname;
-       
        $bg =$records->t_bloodgrp;
        $qln =$records->t_qlificatn;
        $exp =$records->t_exp;
@@ -121,7 +113,7 @@ echo $OUTPUT->header();
      ];
     }
     //print_r($tableRows);exit();
-    $output = $mustache->render($template, ['tableRows' => $tableRows]);
+    $output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'create_teacher'=>$create_teacher,'edit_teacher'=>$edit_teacher,'delete_teacher'=>$delete_teacher]);
     echo $output;
     // <input type="submit" name="edit" value="edit">
     //echo html_writer::table($table);

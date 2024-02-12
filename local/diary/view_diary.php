@@ -20,6 +20,11 @@ $linktext = "View diary";
 
 $linkurl = new moodle_url('/local/diary/view_diary.php');
 
+$css1 = new moodle_url('/local/diary/css/style.css');
+$add_diary =  new moodle_url('/local/diary/teacherdiary.php');
+
+$editdiary = new moodle_url('/local/diary/editdiary.php?id');
+$deletediary = new moodle_url('/local/diary/deletediary.php?id');
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
 // $PAGE->set_pagelayout('admin');
@@ -37,7 +42,7 @@ echo $OUTPUT->header();
      $table = new html_table();
      $mustache = new Mustache_Engine();
 
-     echo $mustache->render($template,$data);
+     echo $mustache->render($template,['css1'=>$css1,'add_diary'=>$add_diary]);
      if (!empty($rec)) {
     foreach ($rec as $records) {
     $id = $records->id; 
@@ -46,8 +51,9 @@ echo $OUTPUT->header();
     $content = $records->d_content;
     $option = $records->d_option;
     $suboption =$records->d_suboption;
+    $diary_created =date('d-m-Y / H:m', $records->d_diary_created);
 
-    $data =  array('id'=>$id, 'd_studentname' => $studname,'d_subject' => $subject,'d_content' => $content,'d_option' => $option, 'd_suboption' => $suboption); 
+    $data =  array('id'=>$id, 'd_studentname' => $studname,'d_subject' => $subject,'d_content' => $content,'d_option' => $option, 'd_suboption' => $suboption,'editdiary' =>$editdiary,'deletediary' =>$deletediary,'diary_created'=>$diary_created); 
     echo $mustache->render($template1,$data); 
  } 
 } else{

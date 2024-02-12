@@ -13,6 +13,9 @@ $context = context_system::instance();
 
 
 $linkurl = new moodle_url('/local/dashboard/cmplnt_feedbck.php');
+$complaint = new moodle_url('/local/complaint/view_complaint.php');
+$feedback= new moodle_url('/local/school_feedback/feedback_list.php');
+
 
 $PAGE->set_context($context);
 $strnewclass= 'Teacher Dashboard';
@@ -23,7 +26,7 @@ echo $OUTPUT->header();
 $current_time = time(); 
 
 $mustache = new Mustache_Engine();
-echo $mustache->render($template4);
+echo $mustache->render($template4,['complaint'=>$complaint,'feedback'=>$feedback]);
 echo $OUTPUT->footer();
 
 

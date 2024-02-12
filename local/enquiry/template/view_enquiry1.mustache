@@ -8,21 +8,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/school/local/css/style.css" />
+  <link rel="stylesheet" href={{css_link}} />
 </head>
 <body>
-  <header></header>
-  <div class="form-wrap">
-    <div class="container">
-      <div class="col-md-11 col-11 mx-auto col-lg-11">
-        <div class="form-card card">
-          <div class="d-flex mb-3" style="align-items: center;">
-            <h4 class="mb-0">Enquiry List</h4>
-            <a href="/school/local/enquiry/enquiry.php" class="ml-auto" style="text-decoration:none">
-  <button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
-</a>
+<header></header>
 
-          </div>
+<div class="form-wrap">
+<div class="container">
+<div class="col-md-11 col-11 mx-auto col-lg-11">
+<div class="form-card card">
+<div class="d-flex mb-3" style="align-items: center;">
+<h4 class="mb-0">Enquiry List</h4>
+<a href={{enquiry_link}} class="ml-auto" style="text-decoration:none">
+<button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>
+ </a>
+</div>
           <div class="table-filter mb-3">
           </div>
           <div class="table-responsive custom-table">
@@ -53,14 +53,14 @@
                   <td><div class="wrap-t">{{student_name}}</div></td>
                   <td><div class="wrap-t">{{subject}}</div></td>
                    <td><div class="wrap-t">{{enquiry}}</div></td>
-                  <td><div class="wrap-t">{{{viewReplyLink}}}</div></td>
+                  <td><div class="wrap-t"><a href="/local/enquiryreply/view_enqreply.php?id={{{viewReplyLink}}}"><button type="button" class="btn btn-outline-secondary">Reply</button></a></div></td>
                   
                 </tr>
                 {{/tableRows}}
               </tbody>
             </table>
           </div>
-          <div class="table-pagination">
+         <!-- <div class="table-pagination">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -70,7 +70,7 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
               </ul>
             </nav>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

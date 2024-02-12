@@ -13,7 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="/school/local/css/style.css" />
+  <link rel="stylesheet" href={{css_link}} />
 </head>
 
 <body>  
@@ -105,46 +105,32 @@
           </div>
      </div>
      <div id="demo">
-
           <div class="table-responsive custom-table">
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th scope="col">
-                    <div class="wrap-t">Student Name</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Class</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Pass</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Fail</div>
-                  </th>
+                  <th scope="col"><div class="wrap-t">Student Name</div></th>
+                  <th scope="col"><div class="wrap-t">Class</div></th>
+                  <th scope="col"><div class="wrap-t">status</div></th>
+                
                 </tr>
               </thead>
               <tbody>
               {{#Promotion}}
                 <tr>
-                  <td>
-                    <div class="wrap-t">{{ftname}}{{mlname}}{{lsname}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{classname}}</div>
-                  </td>
-                 <td>
-                   <input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="pass" checked>Pass
-                 </td>
-                 <td>
-                   <input class="form-check-input" type="radio" name="attendance[{{user_id}}]" value="fail">Fail               
-                 </td>
-                </tr>
+                  <td><div class="wrap-t">{{ftname}}{{mlname}}{{lsname}}</div></td>
+                  <td><div class="wrap-t">{{classname}}</div></td>
+                    <td><div class="wrap-t">
+                            <label><input type="radio" name="attendance[{{user_id}}]" value="pass" checked/><span>Pass</span></label>
+                            <label><input type="radio" name="attendance[{{user_id}}]" value="fail"/><span>Fail</span></label>
+                            </div>
+                    </td>
+                    </tr>
               {{/Promotion}}
               </tbody>
             </table>
           </div>
-          <div class="table-pagination">
+          <!--<div class="table-pagination">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -154,7 +140,7 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
               </ul>
             </nav>
-          </div>
+          </div>-->
 
   
         </div>

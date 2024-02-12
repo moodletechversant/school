@@ -33,10 +33,11 @@ class editsubject_form extends moodleform {
 
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
+        $var12=$CFG->wwwroot.'/local/subject/viewsubject.php';
 
         $mform = $this->_form;
 
-        $mform->addElement('html', '<h2 class="text-center heading mb-5">Subject Creation</h2>');
+        $mform->addElement('html', '<h2 class="text-center heading mb-5">Edit subject</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
@@ -67,10 +68,17 @@ class editsubject_form extends moodleform {
         $options1 [$academic1->id] = $timestart1.'----'.$timeend1;
         }
     
-        $mform->addElement('select', 'academicyear','academicyear',$options1);
-        $mform->addRule('academicyear', 'academic year missing', 'required', null);
+        $mform->addElement('select', 'academicyear','Academic year',$options1);
     
-    
+        $js = <<<JS
+        document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.getElementById("id_academicyear");
+        selectElement.disabled = true;
+        });
+        JS;
+
+        // Add the JavaScript to the form
+        $mform->addElement('html', "<script>{$js}</script>");
     
                                   
          //Class 
@@ -84,6 +92,15 @@ class editsubject_form extends moodleform {
 
          $mform->addElement('select', 'class','Class',$options1);
 
+         $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_class");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
       //Division 
 
          $divisions  = $DB->get_records('division');
@@ -93,7 +110,15 @@ class editsubject_form extends moodleform {
          $options2 [$division->id] = $division->div_name;
          }
          $mform->addElement('select', 'division','Division',$options2);
-                  
+         $js = <<<JS
+         document.addEventListener("DOMContentLoaded", function() {
+         var selectElement = document.getElementById("id_division");
+         selectElement.disabled = true;
+         });
+         JS;
+ 
+         // Add the JavaScript to the form
+         $mform->addElement('html', "<script>{$js}</script>");
          //Subject name
 
              $mform->addElement('text', 'subname','Subject Name',$attributes);
@@ -134,7 +159,7 @@ class editsubject_form extends moodleform {
 
              $this->add_action_buttons();
 
-             $mform->addElement('html','<a href = "viewsubject.php" style="text-decoration:none">');
+             $mform->addElement('html','<a href = "'.$var12.'" style="text-decoration:none">');
              $mform->addElement('button', 'btn', 'View subjects'); 
              $mform->addElement('html','</a>');
              

@@ -38,7 +38,7 @@ class timetable_form extends moodleform {
         $mform = $this->_form;
         // $editorclasslist = null;
         // $filemanagerclasslist = null;
-
+        $edit_periods=$CFG->wwwroot.'/local/edit_period.php?id';
         $attributes = 'size="30"';
 
         //-----------Form creation-----------
@@ -55,7 +55,7 @@ class timetable_form extends moodleform {
         $num_periods = reset($rec)->t_periods;
         // print_r($period1);exit();
         $mform->addElement('text', 'last_period', 'Number of periods', array('value' => $num_periods,'disabled' => 'disabled'));
-        $mform->addElement('html', '<a href="edit_period.php?id=' . $id . '" style="text-decoration:none">');
+        $mform->addElement('html', '<a href="'.$edit_periods.'=' . $id . '" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'Edit'); 
         $mform->addElement('html','</a>');
 

@@ -34,18 +34,6 @@ else if ($formdata = $mform->get_data()) {
  //$lvedata->s_id=$id->id;
 //   $lvedata= new stdclass();
 
-
-
-// $lvedata->id=$formdata->id;
-// $lvedata->f_date=$formdata->fdate;
-// $lvedata->t_date=$formdata->tdate;
-//   $lvedata->n_leave=$formdata->nleave;
- 
-// $update=$DB->update_record('leave',$lvedata);
-
-
-
-
 $lvedata = new stdClass();
 
 $lvedata->id = $formdata->id;

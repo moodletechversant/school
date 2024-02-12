@@ -38,11 +38,11 @@ class periods_form extends moodleform {
         // $editorclasslist = null;
         // $filemanagerclasslist = null;
 
+        $new_timetable_periods = $CFG->wwwroot.'/local/new_timetable/periods.php';
+
         $attributes = 'size="30"';
 
         $id  = optional_param('id', 0, PARAM_INT);
-        // print_r($id);exit();
-
         //-----------Form creation-----------
 
             $mform->addElement('html', '<h2 class="text-center heading mb-5">Time-table creation</h2>');
@@ -82,30 +82,17 @@ class periods_form extends moodleform {
             }
             $mform->addElement('select', 'day', 'Day', $days2);
 
-            // if($selected_day = $mform->getElementValue('day')){
-            //     $mform->disabledIf('day', "id=$selected_day");
-            // }
-
             //Number of periods
             $mform->addElement('text', 'periods','Number of periods', array('style' => 'width: 120px;'));
             // $mform->getElement('periods')->setAttributes(array('style' => 'width: 130px;'));
-
-
             $mform->addElement('html', '</div>');
+            $this->add_action_buttons();
 
-
-             $this->add_action_buttons();
-
-             $mform->addElement('html','<a href = "/school/local/new_timetable/admin_view.php" style="text-decoration:none">');
+             $mform->addElement('html','<a href = "'.$new_timetable_periods.'" style="text-decoration:none">');
              $mform->addElement('button', 'btn', 'View'); 
              $mform->addElement('html','</a>');
 
              $mform->addElement('html', '</div>');
-
-  
-
-            
-  
   
     }
 

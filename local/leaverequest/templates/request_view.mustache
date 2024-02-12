@@ -12,178 +12,107 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="/school/local/css/style.css" />
+  <link rel="stylesheet" href={{css_link}} />
 </head>
 
 <body> 
 
  <div class="table-filter mb-3">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="cards-bx">
-                 
-                  <div class="d-flex listing-top">
-                 <div class="form-group">
-    <label for="selectYear">Previous Year</label>
-    <select class="form-select" aria-label="Select Start Year" id="yearDropdown" onchange="onYearChange()">
-        <option value="" id="" selected>------------ Select Year ------------</option>
-        {{#templateData}}
-            {{#startYearOptions}}
-                <option value="{{label}}">{{label}}</option>
-            {{/startYearOptions}}
-        {{/templateData}}
-    </select>
-</div>
-
-
-
-
-                   
-                  <div class="form-group">
-    <label>Status</label>
-    <select class="form-select" aria-label="Select status" id="id_status" onchange="onYearChange()">
-       
-          <option value="" id="" selected>------------ Select Status ------------</option>
-            <option value="approved" id="approved">approved</option>
-            <option value="pending" id="pending">pending</option>
-            <option value="denied" id="denied">denied</option>
-
-    </select>
-</div>
-
-        
-           </div>
-                </div>
-              </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="cards-bx">
+          <div class="d-flex listing-top">
+            <div class="form-group">
+              <label for="selectYear">Previous Year</label>
+              <select class="form-select" aria-label="Select Start Year" id="yearDropdown" onchange="onYearChange()">
+                  <option value="" id="" selected>------------ Select Year ------------</option>
+                  {{#templateData}}
+                      {{#startYearOptions}}
+                          <option value="{{label}}">{{label}}</option>
+                      {{/startYearOptions}}
+                  {{/templateData}}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-select" aria-label="Select status" id="id_status" onchange="onYearChange()">
+                    <option value="" id="" selected>------------ Select Status ------------</option>
+                    <option value="approved" id="approved">approved</option>
+                    <option value="pending" id="pending">pending</option>
+                    <option value="denied" id="denied">denied</option>
+              </select>
             </div>
           </div>
-
-         <div id="demo"> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="demo"> </div>
 
   <div class="form-wrap">
     <div class="cointainer">
       <div class="col-md-11 col-11 mx-auto col-lg-11">
         <div class="form-card card">
-          
           <div class="d-flex mb-3" style="align-items: center;">
             <h4 class="mb-0">Leave Request</h4>
           </div>
-
-         
-                  <div class="table-responsive custom-table" id="leaveTable">
-
+          <div class="table-responsive custom-table" id="leaveTable">
             <table class="table mb-0">
               <thead>
                 <tr>
-                 
-                   <th scope="col">
-                    <div class="wrap-t">Id</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Roll no</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Student name</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">From</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">To</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">No of Leave days</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Reason</div>
-                  </th>
-                   <th scope="col">
-                    <div class="wrap-t">Approved/denied</div>
-                 
-            
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t my-status">Status</div>
-                  </th>
-                  <th scope="col">
-                    <div class="wrap-t">Edit</div>
-                  </th>  
+                  <th scope="col"><div class="wrap-t">Id</div></th>
+                  <th scope="col"><div class="wrap-t">Roll no</div></th>
+                  <th scope="col"><div class="wrap-t">Student name</div></th>
+                  <th scope="col"><div class="wrap-t">From</div></th>
+                  <th scope="col"><div class="wrap-t">To</div></th>
+                  <th scope="col"><div class="wrap-t">No of Leave days</div> </th>
+                  <th scope="col"><div class="wrap-t">Reason</div></th>
+                  <th scope="col"><div class="wrap-t">Approved/denied</div></th>
+                  <th scope="col"><div class="wrap-t my-status">Status</div></th>
+                  <th scope="col"> <div class="wrap-t">Edit</div> </th>  
                 </tr>
               </thead>
               <tbody>
               {{#leave}}
                 <tr>
-                  <td>
-                    <div class="wrap-t">{{id}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{sid}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{sname}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{fdate1}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{tdate1}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{nleave}}</div>
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{sub}}</div>
-                  </td>
-                  <td>
-                      <img class="click_ok fa fa-check" src="/school/local/img/tick.svg" width="20px" />
-             
-                      <img class="click_not fa fa-close" src="/school/local/img/untick.svg" width="20px" />
-                  </td>
-                  <td>
-                    <div class="wrap-t">{{status}}
-                    
-                    </div>
-                  </td>
-                  <td>
-                      
-                      <div class="wrap-t">
-                     
-         {{#showContent}} 
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-    <!-- SVG path for the edit icon -->
-    <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251 .93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
-    </path>
-  </svg>
-  <span>Edit</span>
-{{/showContent}} 
-
-{{^showContent}} 
-  <a href="/school/local/leaverequest/editleave.php?id={{id}}">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-      <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251 .93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
-      </path>
-    </svg>
-    Edit
-  </a>
-{{/showContent}}
-
-                   </div>
+                  <td><div class="wrap-t">{{id}}</div> </td>
+                  <td><div class="wrap-t">{{sid}}</div></td>
+                  <td><div class="wrap-t">{{sname}}</div></td>
+                  <td><div class="wrap-t">{{fdate1}}</div></td>
+                  <td><div class="wrap-t">{{tdate1}}</div></td>
+                  <td><div class="wrap-t">{{nleave}}</div></td>
+                  <td><div class="wrap-t">{{sub}}</div> </td>
+                  <td><img class="click_ok fa fa-check" src={{img1}} width="20px" />
+                      <img class="click_not fa fa-close" src={{img2}} width="20px" /></td>
+                  <td><div class="wrap-t">{{status}}</div></td>
+                  <td><div class="wrap-t">
+                            {{#showContent}} 
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                              <!-- SVG path for the edit icon -->
+                              <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251 .93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
+                              </path>
+                            </svg>
+                            <span>Edit</span>
+                           {{/showContent}} 
+                          {{^showContent}} 
+                            <a href={{leaverequest}}={{id}}>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251 .93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
+                                </path>
+                              </svg>
+                              Edit
+                            </a>
+                          {{/showContent}}</div>
                   </td>
                 </tr>
               {{/leave}}
-                
               </tbody>
             </table>
           </div>
-          
-
         </div>
       </div>
-
     </div>
   </div>
-
-
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
@@ -192,8 +121,6 @@
 function onYearChange() {
     var selectedYear = $('#yearDropdown').val();
     var selectedstatus = $('#id_status').val();
-    
-    
    // 
     $.ajax({
      

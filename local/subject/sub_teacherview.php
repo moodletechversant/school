@@ -7,8 +7,16 @@ $template = file_get_contents($CFG->dirroot . '/local/subject/template/subjectvi
 
 global $class,$CFG;
 $context = context_system::instance();
-$linktext = "Courses";
+$linktext = "Subjects";
 $linkurl = new moodle_url('/local/subject/sub_teacherview.php');
+$css_link = new moodle_url('/local/css/style.css');
+$logo1 = new moodle_url('/local/img/logo.svg');
+$logo2 = new moodle_url('/local/img/grid.svg');
+$logo3 = new moodle_url('/local/img/list.svg');
+$logo4 = new moodle_url('/local/img/sub-math.jpg');
+$logo5 = new moodle_url('/course/view.php?id');
+$logo6 = new moodle_url('/local/img/tabler_dots.svg');
+// $logo5 = new moodle_url('/course/view.php?id');
 
 $PAGE->set_context($context);
 $PAGE->set_url('/local/subject/sub_teacherview.php');
@@ -32,8 +40,8 @@ foreach($rec1 as $record1){
     $data[] = array('id' => $id,'fullname' => $fullname, 'startdate' => $startdate, 'enddate' => $enddate, 'summary' => $summary);
 }
 //Multi-dimentional array
-$subjects = array('sub' => $data);
-echo $mustache->render($template,$subjects);
+// $subjects = array();
+echo $mustache->render($template,['sub' => $data,'logo6'=>$logo6,'logo1'=>$logo1,'logo2'=>$logo2,'logo3'=>$logo3,'logo4'=>$logo4,'logo5'=>$logo5,'css_link'=>$css_link]);
 echo $OUTPUT->footer();
 
   ?>

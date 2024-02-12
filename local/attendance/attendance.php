@@ -11,6 +11,10 @@ $context = context_system::instance();
 $linktext = "Attendance";
 
 $linkurl = new moodle_url('/local/attendance/attendance.php');
+$css_link = new moodle_url('/local/css/style.css');
+$view_attendance = new moodle_url('/local/attendance/viewattend.php');
+$attendance_page = new moodle_url('/local/attendance/attendance.php');
+
 $teacher_id = $USER->id;
 $PAGE->set_context($context);
 $strnewclass=$linktext; 
@@ -26,67 +30,51 @@ $recs=$DB->get_record_sql("SELECT * FROM {division} WHERE div_teacherid=$teacher
 //print_r($recs);exit();
 if(empty($recs))
 {
-    echo "you are not assigned to the class incharge of any class ...you can't mark attendance of any student";
-
+echo "you are not assigned to the class incharge of any class ...you can't mark attendance of any student";
 }
 else{
     $division=$recs->id;
     $rec=$DB->get_records_sql("SELECT * FROM {student_assign} WHERE s_division=$division");
-
-    // foreach ($rec as $student) {
-    // $studentnames = explode(',', $student->user_id);
-
     $data1=array();
     foreach ($rec as $studentid) {
-   $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$studentid->user_id");  
-   //print_r($student);exit();
+        $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$studentid->user_id");  
 
-   $id=$student->user_id;
-   $ftname=$student->s_ftname;
-   $mlname=$student->s_mlname;
-   $lsname=$student->s_lsname;
+        $id=$student->user_id;
+        $ftname=$student->s_ftname;
+        $mlname=$student->s_mlname;
+        $lsname=$student->s_lsname;
 
-   $data1[] = [
-    'id'=>$id,
-    'ftname'=>$ftname,
-    'mlname'=>$mlname,
-    'lsname'=>$lsname
-   ];
+        $data1[] = [ 'id'=>$id,'ftname'=>$ftname,'mlname'=>$mlname,'lsname'=>$lsname];
     }
-echo $mustache->render($template, ['attendance' => $data1]);
+    echo $mustache->render($template, ['attendance' => $data1,'css_link'=>$css_link,'view_attendance'=>$view_attendance,'attendance_page'=>$attendance_page,'division'=>$division]);
    }
 
 if (isset($_POST['submit'])) {
 
     $radioVal = $_POST["attendance"];
     $tdate = $_POST["atdate"];
- 
-    foreach($radioVal as $x => $val) { 
- 
-    if($val == 'P')
-    {
-        $record = new stdClass();
+    $division = $_POST["division"];
 
+    foreach($radioVal as $x => $val) { 
+
+        $record = new stdClass();
         $record->stud_name=$x;
-        $record->attendance='Present';
         $record->tdate= $tdate;
-   
+        $record->div_id= $division;
+        if($val == 'P')
+        {
+            $record->attendance='Present';
+        }
+        else if ($val == 'A')
+        {
+            $record->attendance='Absent';
+        }
+        $DB->insert_record('attendance',$record);
     }
-        
-    else if ($val == 'A')
-    {
-         // Do something with the attendance data here
-         $record = new stdClass();
-         $record->stud_name=$x;
-         $record->attendance='Absent';
-         $record->tdate= $tdate;
-    }
-  
-     
-    $DB->insert_record('attendance',$record);
+
+    echo '</div>';
+    $urlto = $CFG->wwwroot.'/local/attendance/viewattend.php';
+    redirect($urlto, 'Data Saved Successfully '); 
 }
-echo '</div>';
-$urlto = $CFG->wwwroot.'/local/attendance/viewattend.php';
-redirect($urlto, 'Data Saved Successfully '); 
-}
+echo $OUTPUT->footer();
 ?>

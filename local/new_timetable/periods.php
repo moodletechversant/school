@@ -34,6 +34,8 @@ if($mform->is_cancelled()){
  //print_r($formdata);
 // exit;
 $existing_record = $DB->get_record('new_timetable_periods', array(
+    't_class' => $formdata->class,
+    't_division' => $formdata->division,
     't_day' => $formdata->day,
 ));
 
@@ -60,89 +62,43 @@ echo '<script type="text/javascript" charset="utf8" src="https://code.jquery.com
 echo $OUTPUT->footer();
 
 ?>
-<!-- <style>
-.container{
-        padding-left : 20%;
-        padding-top : 50px;
-        padding-bottom : 50px;
-        background-color : #72aacf;  
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);      
-    }
-    .heading{
-        font-family : "Times New Roman", Times, serif;
-
-    }
-    .form-class{
-        font-weight : bold; 
-    }
-    .form-control{
-        border-radius : 15px;
-        background-color : #FFFFFF;
-
-    }
-    .form-control:focus{
-        background-color : #CAE9F5;
-        box-shadow : none;
-    }
-    
-    .custom-select{
-        border-radius : 15px;
-    }
-    .custom-select:focus{
-        background-color : #CAE9F5;
-        box-shadow : none;
-    }
-    /* .btn{
-        background-color : black;
-    } */
-    .fa-calendar{
-        color : black;
-    }  
-    .btn-primary{
-        background-color : #000000de;
-        border-color : black;
-        border-radius : 15px;
-    }
-    .btn-primary:hover{
-        background-color : black;
-        border-color : black;
-        border-radius : 15px;
-    }
-    .btn-primary:focus{
-        background-color : black;
-        border-color : black;
-        border-radius : 15px;
-    }
-    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show>.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: black;
-    border-color: black;
-    }
-    .btn-secondary{
-        border-radius : 15px;
-    }
-    .fdescription{
-        display : none;
-    }
-    .footer-content-debugging{
-        display : none;
-    }
-    </style> -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 <script>
 
 $(document).ready(function() {
-  $('#id_division').empty()
-  $("#id_class").prepend("<option value='' selected='selected'>none</option>");
+    $('#id_class').empty().prepend("<option value='' selected='selected'>none</option>");
+    $("#id_academic").prepend("<option value='' selected='selected' disabled>---Select academic year---</option>");
+
+
+    $("#id_academic").change(function() {
+    var brand_id = $(this).val();
+    if(brand_id != ""){
+        $.ajax({
+            url:"test.php",
+            data:{b_id:brand_id},
+            type:'POST',
+            success: function(data){
+        	$("#id_class").html(data);
+        	}
+        });
+    }
+    
+   
+});
+});
+
+$(document).ready(function() {
+  $('#id_division').empty().prepend("<option value='' selected='selected'>none</option>");
+  //$("#id_class").prepend("<option value='' selected='selected'>none</option>");
 
     $("#id_class").change(function() {
     var brand_id = $(this).val();
     if(brand_id != ""){
         $.ajax({
             url:"test.php",
-            data:{b_id:brand_id},
+            data:{c_id:brand_id},
             type:'POST',
             success: function(data){
         	$("#id_division").html(data);
