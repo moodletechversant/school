@@ -1321,6 +1321,8 @@ class global_navigation extends navigation_node {
         $usr = $USER->id;
         $sid= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE user_id= '$usr'");
         $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$usr'");
+        $pid= $DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$usr'");
+
 
         if (during_initial_install()) {
             return;
@@ -1369,6 +1371,16 @@ class global_navigation extends navigation_node {
                         'type' => navigation_node::TYPE_SYSTEM,
                         'text' => get_string('myhome'),
                         'action' => new moodle_url('/local/dashboard/dashboardtchr.php?id='.$tid->user_id),
+                        'icon' => new pix_icon('i/dashboard', '')
+                    );
+                }
+                else if(!empty($pid) && $pid->user_id==$usr){
+                    // We are using the users my moodle for the root element.
+                    $properties = array(
+                        'key' => 'myhome',
+                        'type' => navigation_node::TYPE_SYSTEM,
+                        'text' => get_string('myhome'),
+                        'action' => new moodle_url('/local/dashboard/dashboardparent.php?id='.$tid->user_id),
                         'icon' => new pix_icon('i/dashboard', '')
                     );
                 }
