@@ -21,7 +21,7 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 
 $PAGE->set_heading($linktext);
-$PAGE->navbar->add('Upcoming Exams', new moodle_url($CFG->wwwroot.'/local/dashboard/upcomingexams.php'));
+//$PAGE->navbar->add('Upcoming Exams', new moodle_url($CFG->wwwroot.'/local/dashboard/upcomingexams.php'));
 
 echo $OUTPUT->header();
 $userid = $USER->id;
