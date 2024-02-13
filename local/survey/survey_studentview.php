@@ -40,7 +40,9 @@ $imagePaths = $DB->get_records_sql("SELECT * FROM {customsurvey_answer}");
 $dataa['imagePaths'] = array();
 
 foreach ($imagePaths as $imagePath) {
-    $dataa['imagePaths'][] = array('src' => $imagePath->imo_path,'id'=>$imagePath->id,'answer'=>$imagePath->survey_answer);
+    $imo_path = new moodle_url($imagePath->imo_path);
+
+    $dataa['imagePaths'][] = array('src' => $imo_path,'id'=>$imagePath->id,'answer'=>$imagePath->survey_answer);
 }
 // print_r($dataa);exit();
 foreach ($rec1 as $record1) {
