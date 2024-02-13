@@ -11,7 +11,7 @@ $context = context_system::instance();
 $linktext = "attendance";
 $css_link = new moodle_url('/local/css/style.css');
 $linkurl = new moodle_url('/local/promotion/template/promotion.mustache');
-
+$exclamation = new moodle_url('/local/img/exclamation.svg');
 $PAGE->set_context($context);
 $strnewclass= get_string('studentview');
 
@@ -84,7 +84,7 @@ $mustache = new Mustache_Engine();
                 // echo $mustache->render($template, ['Promotion' => $data1]);
 
                 
-      $output = $mustache->render($template, ['tableRows' => $tableRows,'Promotion' => $data1,'classData' => $classData,'templateData'=>$templateData,'css_link'=>$css_link]);
+      $output = $mustache->render($template, ['tableRows' => $tableRows,'Promotion' => $data1,'classData' => $classData,'templateData'=>$templateData,'css_link'=>$css_link , 'exclamation'=>$exclamation]);
       echo $output;
     }
 //            // Display the Moodle form
