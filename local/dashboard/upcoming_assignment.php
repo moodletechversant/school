@@ -26,7 +26,7 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 // Set the page heading.
 $PAGE->set_heading($linktext);
-$PAGE->navbar->add('Upcoming Assignmnet', new moodle_url($CFG->wwwroot.'/local/dashboard/upcoming_assignment.php'));
+//$PAGE->navbar->add('Upcoming Assignmnet', new moodle_url($CFG->wwwroot.'/local/dashboard/upcoming_assignment.php'));
 
 echo $OUTPUT->header();
 $userid = $USER->id;

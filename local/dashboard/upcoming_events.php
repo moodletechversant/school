@@ -23,7 +23,7 @@ $PAGE->set_url($linkurl);
 //$PAGE->set_title($linktext);
 // Set the page heading.
 //$PAGE->set_heading($linktext);
-$PAGE->navbar->add('Upcoming Activities', new moodle_url($CFG->wwwroot.'/local/dashboard/upcoming_activities.php'));
+//$PAGE->navbar->add('Upcoming Activities', new moodle_url($CFG->wwwroot.'/local/dashboard/upcoming_activities.php'));
 
 echo $OUTPUT->header();
 $userid = $USER->id;
