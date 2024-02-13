@@ -139,18 +139,19 @@ class editsubject_form extends moodleform {
          //Edit
 
              $editdata=$DB->get_record('subject',array('course_id'=>$id));
+             $models = $DB->get_record_sql(" SELECT * FROM mdl_subject JOIN mdl_course ON mdl_subject.course_id = mdl_course.id WHERE course_id=$id");
+//print_r($models);exit();
 
-
-             $academic=$DB->get_record('class',array('id'=>$editdata->sub_class));
+             $academic=$DB->get_record('class',array('id'=> $models->sub_class));
 
              $mform->setDefault('academicyear',$academic->academic_id);
 
         //  print_r($editdata);exit();
-             $mform->setDefault('class',$editdata->sub_class);
-             $mform->setDefault('division',$editdata->sub_division);
-             $mform->setDefault('subname',$editdata->sub_name);
-             $mform->setDefault('shortname',$editdata->sub_shortname);
-             $mform->setDefault('description',$editdata->sub_description);
+             $mform->setDefault('class', $models->sub_class);
+             $mform->setDefault('division', $models->sub_division);
+             $mform->setDefault('subname', $models->fullname);
+             $mform->setDefault('shortname', $models->sub_shortname);
+             $mform->setDefault('description', $models->sub_description);
              
 
              $mform->addElement('html', '</div>');
