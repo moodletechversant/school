@@ -5,6 +5,7 @@ require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/upcoming_exam.mustache');
+$template2 = file_get_contents($CFG->dirroot . '/local/dashboard/templates/parentviewupcoming_exam.mustache');
 
 global $DB, $USER,$OUTPUT, $PAGE;
 
@@ -27,6 +28,55 @@ echo $OUTPUT->header();
 $userid = $USER->id;
 $current_date = time();
 $enrolled_courses = enrol_get_users_courses($userid);
+$pid = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id = ?", array($userid));
+
+if ($pid) {
+    $penrolled_courses = enrol_get_users_courses($pid->child_id);
+    $enrolled_course_ids = array();
+foreach ($penrolled_courses as $enrolled_course) {
+    $enrolled_course_ids[] = $enrolled_course->id;
+}
+$in_clause = implode(',', array_fill(0, count($enrolled_course_ids), '?'));
+$params = array_merge($enrolled_course_ids, array($current_date));
+
+$data = $DB->get_records_sql("SELECT * FROM {quiz} WHERE course IN ($in_clause) AND timeclose >= ?", $params);
+//print_r($data);exit();
+$mustache = new Mustache_Engine();
+$tableRows = [];
+if (!empty($data)) {
+
+foreach ($data as $value) {
+    $cmid = $value->id;
+    $cm = get_coursemodule_from_instance('quiz', $cmid, 0, false, MUST_EXIST);
+    //$view = $CFG->wwwroot.'/mod/quiz/view.php?id='.$cm->id;
+
+    $dates1=date('d-m-Y',$value->timeopen);
+    $dates=date('d-m-Y',$value->timeclose);
+    $exam_name=$value->name;
+    
+    $tableRows[] = [
+        'id'=> $id,
+        'Start_date' => $dates1,
+        'End_date' => $dates,
+        'Exam_name' => $exam_name,
+        // 'View'=>$view_icon,
+    ];
+}
+}
+else{
+    
+$error= "There are no upcoming exams.";
+$tableRows[] = [
+ 
+ 'Submission_date' => $error,
+
+];
+}
+
+$output = $mustache->render($template2, ['tableRows' => $tableRows,'csspath'=>$csspath,'dashboard'=>$dashboard]);
+echo $output;
+
+}
 //print_r($enrolled_courses);exit();
 $enrolled_course_ids = array();
 foreach ($enrolled_courses as $enrolled_course) {
