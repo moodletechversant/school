@@ -80,9 +80,10 @@ class createteacher_form extends moodleform {
         $mform->addElement('textarea', 'address', 'Address');
         $mform->addRule('address', 'address missing', 'required', null);
 
-        $mform->addElement('text', 'no', 'Mobile no.','maxlength="10"'); 
-        $mform->addRule('no', 'Mobile no missing', 'required', null);
 
+        $mform->addElement('text', 'no', 'Mobile no.', array('maxlength' => 10));
+        $mform->addRule('no', 'Mobile number must be exactly 10 characters long', 'rangelength', array(10, 10));
+        $mform->addRule('no', 'Mobile number is required', 'required', null);
         // $mform->addElement('text', 'fname', 'Name of Father'); 
         // $mform->addRule('fname', 'father name missing', 'required', null);
 
@@ -137,7 +138,7 @@ class createteacher_form extends moodleform {
             $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
             $enteredBloodGroup = strtoupper($data['bg']);
         if (!in_array($enteredBloodGroup, $validBloodGroups)) {
-        $errors['bg'] = "Invalid blood group";
+        $errors['bg'] = "Invalid blood group.The blood groups are 'A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-' ";
         }
         }
         return $errors;
