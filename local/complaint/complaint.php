@@ -26,6 +26,21 @@ else if ($formdata = $mform->get_data()) {
     $complaintdata->date = $current_date;
 
     $user_id = $USER->id;
+    $sid = $DB->get_record_sql("SELECT user_id FROM {student} WHERE user_id = ?", array($user_id));
+    $pid = $DB->get_record_sql("SELECT user_id FROM {parent} WHERE user_id = ?", array($user_id));
+    //print_r($pid);exit();
+    if ($sid) {
+        // User is a student
+        $urlto = $CFG->wwwroot.'/local/complaint/view_complaint.php';
+    } elseif ($pid) {
+        // User is a parent
+        $urlto = $CFG->wwwroot.'/local/complaint/parent_view.php';
+    } else {
+        // User is neither a student nor a parent, handle this case as needed
+        // For example, redirect to an error page or display an error message
+        redirect($returnurl, 'Error: User not recognized.');
+        exit;
+    }
     $user_record = $DB->get_record('user', array('id' => $user_id));
     $complaintdata->user_id = $user_id; 
     //print_r($user_record);exit();
@@ -33,7 +48,9 @@ else if ($formdata = $mform->get_data()) {
     $complaintdata->complaint = $formdata->cmessage;    
 
     $DB->insert_record('complaint',$complaintdata);
-    $urlto = $CFG->wwwroot.'/local/complaint/view_complaint.php';
+    
+
+   // $urlto = $CFG->wwwroot.'/local/complaint/view_complaint.php';
     redirect($urlto, 'Data Saved Successfully '); 
   
 
