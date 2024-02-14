@@ -93,22 +93,31 @@ class createstudent_form extends moodleform {
         $mform->addElement('text', 'fname', 'Name of Father'); 
         $mform->addRule('fname', 'father name missing', 'required', null);
 
-        $mform->addElement('text', 'fno', 'Mobile no.','maxlength="10"'); 
-        $mform->addRule('fno', 'Mobile no.missing', 'required', null);
+        $mform->addElement('text', 'fno', 'Mobile no.', array('maxlength' => 10));
+        $mform->addRule('fno', 'Mobile number must be exactly 10 characters long', 'rangelength', array(10, 10));
+        $mform->addRule('fno', 'Mobile number is required', 'required', null);
+
  
  
         $mform->addElement('text', 'mname', 'Name of Mother'); 
         $mform->addRule('mname', 'mother name missing', 'required', null);
 
-        $mform->addElement('text', 'mno', 'Mobile no.','maxlength="10"'); 
-        $mform->addRule('mno', 'Mobile no.missing', 'required', null);
+        $mform->addElement('text', 'mno', 'Mobile no.', array('maxlength' => 10));
+        $mform->addRule('mno', 'Mobile number must be exactly 10 characters long', 'rangelength', array(10, 10));
+        $mform->addRule('mno', 'Mobile number is required', 'required', null);
+
+       
  
  
         $mform->addElement('text', 'gname', 'Name of Gurdian'); 
         $mform->addRule('gname', 'Gurdian name missing', 'required', null);
 
-        $mform->addElement('text', 'gno', 'Mobile no.','maxlength="10"'); 
-        $mform->addRule('gno', 'Mobile no.missing', 'required', null);
+        $mform->addElement('text', 'gno', 'Mobile no.', array('maxlength' => 10));
+        $mform->addRule('gno', 'Mobile number must be exactly 10 characters long', 'rangelength', array(10, 10));
+        $mform->addRule('gno', 'Mobile number is required', 'required', null);
+
+
+       
  
 
         $mform->addElement('text', 'bg', 'Blood group'); 
@@ -166,7 +175,7 @@ class createstudent_form extends moodleform {
         $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
         $enteredBloodGroup = strtoupper($data['bg']);
         if (!in_array($enteredBloodGroup, $validBloodGroups)) {
-        $errors['bg'] = "Invalid blood group";
+        $errors['bg'] = "Invalid blood group. The blood groups are 'A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-'";
         }
         }
         return $errors;
