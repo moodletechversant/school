@@ -277,6 +277,12 @@ margin-bottom: 5px;
   width: 10px;
   height: 10px;
 }
+.progress-card h1 {
+  margin: -20px;
+  padding: 30px;
+  text-align: center;
+  background: #6646bd36;
+}
 
 /* Track */
 .custom-table::-webkit-scrollbar-track {
