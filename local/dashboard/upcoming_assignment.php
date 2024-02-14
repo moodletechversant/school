@@ -34,8 +34,6 @@ $userid = $USER->id;
 $current_date = time();
 $enrolled_courses = enrol_get_users_courses($userid);
 $context = context_user::instance($USER->id, MUST_EXIST);
-
-
 $pid = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id = ?", array($userid));
 
 if ($pid) {
