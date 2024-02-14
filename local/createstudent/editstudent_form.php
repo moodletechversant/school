@@ -124,24 +124,26 @@ class editstudent_form extends moodleform {
         $mform->addElement('radio', 'gender', '', 'others', 'others');
 
 
-        $options = array();
-        $options ['Alappuzha'] = 'Alappuzha';
-        $options ['Ernakulam'] = 'Ernakulam';
-        $options ['Idukki'] = 'Idukki';
-        $options ['Kannur'] = 'Kannur';
-        $options ['Kasargod'] = 'Kasargod';
-        $options ['Kollam'] = 'Kollam';
-        $options ['Kottayam'] = 'Kottayam';
-        $options ['Kozhikode'] = 'Kozhikode';
-        $options ['Malappuram'] = 'Malappuram';
-        $options ['Palakkad'] = 'Palakkad';
-        $options ['Pathanamthitta'] = 'Pathanamthitta';
-        $options ['Thiruvanandapuram'] = 'Thiruvanandapuram';
-        $options ['Thrissur'] = 'Thrissur';
-        $options ['Wayanad'] = 'Wayanad';
+        $options = array(
+            '' => 'Select a district', // Initial option
+            'Alappuzha' => 'Alappuzha',
+            'Ernakulam' => 'Ernakulam',
+            'Idukki' => 'Idukki',
+            'Kannur' => 'Kannur',
+            'Kasargod' => 'Kasargod',
+            'Kollam' => 'Kollam',
+            'Kottayam' => 'Kottayam',
+            'Kozhikode' => 'Kozhikode',
+            'Malappuram' => 'Malappuram',
+            'Palakkad' => 'Palakkad',
+            'Pathanamthitta' => 'Pathanamthitta',
+            'Thiruvanandapuram' => 'Thiruvanandapuram',
+            'Thrissur' => 'Thrissur',
+            'Wayanad' => 'Wayanad'
+        );
         
         $mform->addElement('select', 'district', 'District', $options);
-
+        $mform->addRule('district', 'District is required', 'required', null);
         if (empty($sid_data)){
             $classes  = $DB->get_records('class');
             $options1 = array();

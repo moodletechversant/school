@@ -65,7 +65,7 @@ class createteacher_form extends moodleform {
         // $mform->addRule('email', 'email missing', 'required', null);
         $mform->addElement('text', 'email', 'Email Address');
         $mform->addRule('email', 'Enter a valid email', 'email', null, 'client');
-        $mform->addRule('email', 'Email is required', 'required', null, 'client');
+        //$mform->addRule('email', 'Email is required', 'required', null, 'client');
 
         $mform->addElement('passwordunmask', 'password', get_string('password'), 'size="20"');
         $mform->addRule('password', 'Password field missing', 'required', null);
@@ -92,35 +92,40 @@ class createteacher_form extends moodleform {
         // $mform->addRule('mname', 'mother name missing', 'required', null);
 
         $mform->addElement('text', 'bg', 'Blood group');
- 
+        $mform->addRule('bg', 'Blood group is required', 'required', null);
+
         $mform->addElement('text', 'qln', 'Qualification'); 
-        $mform->addRule('mname', 'Qualification missing', 'required', null);
+        $mform->addRule('qln', 'Qualification missing', 'required', null);
 
         $mform->addElement('text', 'exp', 'Experience'); 
-        
+        $mform->addRule('exp', ' Experience is required', 'required', null);
 
-        $mform->addElement('radio', 'gender', 'Gender', 'Male', 'male');
+
+            $mform->addElement('radio', 'gender', 'Gender', 'Male', 'male');
             $mform->addElement('radio', 'gender', '', 'Female', 'female');
             $mform->addElement('radio', 'gender', '', 'others', 'others');
- 
+            $mform->addRule('gender', ' Gender is required', 'required', null);
 
-            $options = array();
-            $options ['Alappuzha'] = 'Alappuzha';
-            $options ['Ernakulam'] = 'Ernakulam';
-            $options ['Idukki'] = 'Idukki';
-            $options ['Kannur'] = 'Kannur';
-            $options ['Kasargod'] = 'Kasargod';
-            $options ['Kollam'] = 'Kollam';
-            $options ['Kottayam'] = 'Kottayam';
-            $options ['Kozhikode'] = 'Kozhikode';
-            $options ['Malappuram'] = 'Malappuram';
-            $options ['Palakkad'] = 'Palakkad';
-            $options ['Pathanamthitta'] = 'Pathanamthitta';
-            $options ['Thiruvanandapuram'] = 'Thiruvanandapuram';
-            $options ['Thrissur'] = 'Thrissur';
-            $options ['Wayanad'] = 'Wayanad';
+            $options = array(
+                '' => 'Select a district', // Initial option
+                'Alappuzha' => 'Alappuzha',
+                'Ernakulam' => 'Ernakulam',
+                'Idukki' => 'Idukki',
+                'Kannur' => 'Kannur',
+                'Kasargod' => 'Kasargod',
+                'Kollam' => 'Kollam',
+                'Kottayam' => 'Kottayam',
+                'Kozhikode' => 'Kozhikode',
+                'Malappuram' => 'Malappuram',
+                'Palakkad' => 'Palakkad',
+                'Pathanamthitta' => 'Pathanamthitta',
+                'Thiruvanandapuram' => 'Thiruvanandapuram',
+                'Thrissur' => 'Thrissur',
+                'Wayanad' => 'Wayanad'
+            );
             
-            $mform->addElement('select', 'district', 'Select Your District', $options);
+            $mform->addElement('select', 'district', 'District', $options);
+            $mform->addRule('district', 'District is required', 'required', null);
 
         $mform->addElement('html', '</div>');
         $this->add_action_buttons();

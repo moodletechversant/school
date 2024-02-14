@@ -75,36 +75,41 @@ class editteacher_form extends moodleform {
 
 
         $mform->addElement('text', 'bg', 'Blood group');
- 
+        $mform->addRule('bg', 'Blood group is required', 'required', null);
+
         $mform->addElement('text', 'qln', 'Qualification'); 
         $mform->addRule('qln', 'Qualification missing', 'required', null);
 
         $mform->addElement('text', 'exp', 'Experience'); 
-        
+        $mform->addRule('exp', ' Experience is required', 'required', null);
+
 
         $mform->addElement('radio', 'gender', 'Gender', 'Male', 'male');
             $mform->addElement('radio', 'gender', '', 'Female', 'female');
             $mform->addElement('radio', 'gender', '', 'others', 'others');
- 
+            $mform->addRule('gender', ' Gender is required', 'required', null);
 
-            $options = array();
-            $options ['Alappuzha'] = 'Alappuzha';
-            $options ['Ernakulam'] = 'Ernakulam';
-            $options ['Idukki'] = 'Idukki';
-            $options ['Kannur'] = 'Kannur';
-            $options ['Kasargod'] = 'Kasargod';
-            $options ['Kollam'] = 'Kollam';
-            $options ['Kottayam'] = 'Kottayam';
-            $options ['Kozhikode'] = 'Kozhikode';
-            $options ['Malappuram'] = 'Malappuram';
-            $options ['Palakkad'] = 'Palakkad';
-            $options ['Pathanamthitta'] = 'Pathanamthitta';
-            $options ['Thiruvanandapuram'] = 'Thiruvanandapuram';
-            $options ['Thrissur'] = 'Thrissur';
-            $options ['Wayanad'] = 'Wayanad';
+            $options = array(
+                '' => 'Select a district', // Initial option
+                'Alappuzha' => 'Alappuzha',
+                'Ernakulam' => 'Ernakulam',
+                'Idukki' => 'Idukki',
+                'Kannur' => 'Kannur',
+                'Kasargod' => 'Kasargod',
+                'Kollam' => 'Kollam',
+                'Kottayam' => 'Kottayam',
+                'Kozhikode' => 'Kozhikode',
+                'Malappuram' => 'Malappuram',
+                'Palakkad' => 'Palakkad',
+                'Pathanamthitta' => 'Pathanamthitta',
+                'Thiruvanandapuram' => 'Thiruvanandapuram',
+                'Thrissur' => 'Thrissur',
+                'Wayanad' => 'Wayanad'
+            );
             
             $mform->addElement('select', 'district', 'District', $options);
-    
+            $mform->addRule('district', 'District is required', 'required', null);
+
 
         $editdata=$DB->get_record('teacher',array('id'=>$id));
  
