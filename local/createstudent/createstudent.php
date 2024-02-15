@@ -155,10 +155,21 @@ function(event)
 });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    var saveButton = document.getElementById('id_submitbutton'); 
+    var errorGenderMale = document.getElementById('id_error_gender_male');
 
+    if (saveButton && errorGenderMale) {
+        saveButton.addEventListener('click', function() {
+            errorGenderMale.style.display = 'none';
+        });
+    }
+});
 
 </script>
 <style>
+
+
     .container{
         padding-left : 20%;
         padding-top : 50px;

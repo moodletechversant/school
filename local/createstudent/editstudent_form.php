@@ -82,8 +82,9 @@ class editstudent_form extends moodleform {
         $mform->addElement('text', 'username', 'Username'); 
         $mform->addRule('username', 'Username missing', 'required', null);
 
-        $mform->addElement('text', 'email', 'Email Address'); 
-        $mform->addRule('email', 'email missing', 'required', null);
+        $mform->addElement('text', 'email', 'Email Address');
+        $mform->addRule('email', 'Enter a valid email', 'email','client');
+        $mform->addRule('email', 'Email address is required', 'required', null);
 
         $mform->addElement('passwordunmask', 'password', get_string('password'), 'size="20"');
         $mform->addRule('password', 'Password field missing', 'required', null);

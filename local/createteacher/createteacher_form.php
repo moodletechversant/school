@@ -64,7 +64,8 @@ class createteacher_form extends moodleform {
         // $mform->addElement('text', 'email', 'Email Address'); 
         // $mform->addRule('email', 'email missing', 'required', null);
         $mform->addElement('text', 'email', 'Email Address');
-        $mform->addRule('email', 'Enter a valid email', 'email', null, 'client');
+        $mform->addRule('email', 'Enter a valid email', 'email','client');
+        $mform->addRule('email', 'Email address is required', 'required', null);
         //$mform->addRule('email', 'Email is required', 'required', null, 'client');
 
         $mform->addElement('passwordunmask', 'password', get_string('password'), 'size="20"');
