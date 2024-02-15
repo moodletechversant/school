@@ -11,6 +11,7 @@ global $class,$CFG,$USER;
 $context = context_system::instance();
 $user=$USER->id;
 $template = file_get_contents($CFG->dirroot . '/local/profileview/template/profile.mustache');
+$template2 = file_get_contents($CFG->dirroot . '/local/profileview/template/parentviewprofile.mustache');
 
 $linkurl = new moodle_url('/local/profileview/viewprofile.php');
 $css_link = new moodle_url('/local/css/style.css');
@@ -28,11 +29,71 @@ $PAGE->set_context($context);
 $strnewclass= 'Profile';
 
 $PAGE->set_url('/local/profileview/viewprofile.php');
-;
+
 $PAGE->set_title($strnewclass);
 
 echo $OUTPUT->header();
 
+$pid = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id = ?", array($user));
+    //  print_r($pid);exit();
+    if ($pid->child_id) {
+      $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$pid->child_id");
+      //print_r($student);exit();
+      $sprofile = array(); 
+      $scourses1 = array(); 
+      
+      $studentt = $DB->get_record_sql("SELECT * FROM {student_assign} WHERE user_id=$pid->child_id");
+      if(!empty($studentt)){
+      $s_division = $studentt->s_division;
+      $value=$DB->get_record_sql("SELECT * FROM {division} WHERE id=$s_division");
+      $value1=$DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id=$value->div_teacherid");
+      $clstcher1=$value1->t_fname;
+      }
+          $sname = $student->s_ftname;
+          $smname = $student->s_mlname;
+          $slame = $student->s_lsname;
+          $fname=$sname." ".$smname." ".$slame; 
+          $email = $student->s_email;
+          $dob = $student->s_dob;
+          $dob1 = date("d-m-Y", $dob);
+         
+          $address = $student->s_address;
+          $no = $student->s_gno;
+      
+          $rec2 = $DB->get_record_sql("SELECT d.div_class, d.div_name, d.div_teacherid, t.t_fname, c.class_name
+          FROM {student_assign} sa
+          INNER JOIN {division} d ON sa.s_division = d.id
+          INNER JOIN {teacher} t ON d.div_teacherid = t.user_id
+          INNER JOIN {class} c ON d.div_class = c.id
+          WHERE sa.user_id = $pid->child_id");
+          //  print_r($rec2);exit();
+      
+        $rec1 = $DB->get_records_sql("SELECT {course}.fullname,{course}.id FROM {course} JOIN {enrol} ON
+          {enrol}.courseid = {course}.id JOIN {user_enrolments}
+          ON {user_enrolments}.enrolid = {enrol}.id where {user_enrolments}.userid=$user");
+            foreach ($rec1 as $course) {
+              $cid = $course->id;
+              $subjects1 = $course->fullname;
+              $teacher_assignments = $DB->get_records_sql("SELECT * FROM {teacher_assign} WHERE t_subject = ?", array($cid));
+          // print_r($teacher_assignments);exit();
+              foreach ($teacher_assignments as $teacher_assignment) {
+                  $teacher1 = $teacher_assignment->user_id;
+                  $teacher_info = $DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id = ?", array($teacher1));
+                  $teachername = $teacher_info->t_fname.''.$teacher_info->t_mname.' '.$teacher_info->t_lname;
+                  // Now you can use $teachername for further processing.
+              }
+                $subjects[] = array('subjects' => $subjects1,'id' =>$cid,'teacher' => $teachername);
+            }
+          $sprofile[] = array('name' => $fname, 'email' => $email, 'dob' => $dob1, 'address' => $address, 'no' => $no,'classname'=>$rec2->class_name ,'divisionname'=>$rec2->div_name,'classteacher' =>$clstcher1, 'subjects' =>$subjects);
+          $scourses1=array('courses' => $subjects,'empty_course'=>!empty($rec1));
+        $sprofile1 = array('students' => $sprofile);
+      $mustache = new Mustache_Engine();
+      $mergedArray = array_merge($scourses1, $sprofile1,['css_link'=>$css_link,'img_link1'=>$img_link1,'img_link2'=>$img_link2,'img_link'=>$img_link,'course_view'=>$course_view,'img_link3'=>$img_link3,'img_link4'=>$img_link4,'img_link5'=>$img_link5]);
+      echo $mustache->render($template2,$mergedArray);
+      echo $OUTPUT->footer();
+
+
+    }
 $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$user");
 // print_r($student);exit();
 $sprofile = array(); 
