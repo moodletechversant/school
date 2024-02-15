@@ -155,15 +155,16 @@ function(event)
 });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    var saveButton = document.getElementById('id_submitbutton'); 
-    var errorGenderMale = document.getElementById('id_error_gender_male');
 
-    if (saveButton && errorGenderMale) {
-        saveButton.addEventListener('click', function() {
-            errorGenderMale.style.display = 'none';
-        });
-    }
+$(document).ready(function() {
+    $('#id_error_gender_male').remove();
+    $('#id_error_gender_female').remove();
+
+    $('#id_gender_female, #id_gender_male, #id_gender_others').on('change', function() {
+        if ($('#id_gender_female, #id_gender_male, #id_gender_others').length > 0) {
+            // $('#id_error_gender_others').remove();
+        }
+    });
 });
 
 </script>

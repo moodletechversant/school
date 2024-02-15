@@ -187,7 +187,8 @@ class editstudent_form extends moodleform {
         $mform->setDefault('bg',$editdata->s_bg);
         $mform->setDefault('gender',$editdata->s_gender);
         $mform->setDefault('class',$editdata->s_class);
-        
+        $mform->setDefault('district',$editdata->s_district);
+
         $mform->addElement('html', '</div>');
         
 
@@ -205,7 +206,7 @@ class editstudent_form extends moodleform {
         $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
         $enteredBloodGroup = strtoupper($data['bg']);
         if (!in_array($enteredBloodGroup, $validBloodGroups)) {
-        $errors['bg'] = "Invalid blood group";
+        $errors['bg'] = "Invalid blood group. The blood groups are 'A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-'";
         }
         }
         return $errors;

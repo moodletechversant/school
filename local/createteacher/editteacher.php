@@ -241,4 +241,14 @@ function(event)
     }
 }
 );
+$(document).ready(function() {
+    $('#id_error_gender_male').remove();
+    $('#id_error_gender_female').remove();
+
+    $('#id_gender_female, #id_gender_male, #id_gender_others').on('change', function() {
+        if ($('#id_gender_female, #id_gender_male, #id_gender_others').length > 0) {
+            // $('#id_error_gender_others').remove();
+        }
+    });
+});
 </script>

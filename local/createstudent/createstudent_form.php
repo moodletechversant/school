@@ -127,9 +127,13 @@ class createstudent_form extends moodleform {
 
 
         $mform->addElement('radio', 'gender', 'Gender', 'Male', 'male');
-        $mform->addElement('radio', 'gender', '', 'Female', 'female');
-        $mform->addElement('radio', 'gender', '', 'Others', 'others');
         
+        $mform->addElement('radio', 'gender', '', 'Female', 'female');
+        
+        $mform->addElement('radio', 'gender', '', 'Others', 'others');
+       
+    
+
         $mform->addRule('gender', 'Please select a gender', 'required', null);
         
 
