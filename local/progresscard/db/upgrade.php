@@ -23,29 +23,36 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+ defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__.'/upgradelib.php');
+ require_once(__DIR__.'/upgradelib.php');
+ 
+ function xmldb_local_progresscard_upgrade($oldversion) {
+     global $DB;
+ 
+   
 
-/**
- * Execute local_progresscard upgrade from the given old version.
- *
- * @param int $oldversion
- * @return bool
- */
-function xmldb_local_progresscard_upgrade($oldversion) {
-    global $DB;
 
-    $dbman = $DB->get_manager();
 
-    if ($oldversion < 2024021600) {
-        // Report_user_logins savepoint reached.
-   upgrade_plugin_savepoint(true, 2024021604, 'local', 'progress_card');
-   }
-    // For further information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
-    //
-    // You will also have to create the db/install.xml file by using the XMLDB Editor.
-    // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
+ $dbman = $DB->get_manager();
 
-    return true;
+
+
+     if ($oldversion < 2024021607) {
+         $table = new xmldb_table('type_of_exam');
+         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
+         $table->add_field('course_id', XMLDB_TYPE_CHAR, '15', null, XMLDB_NOTNULL, null, '');
+         $table->add_field('typeofexam', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
+        
+         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+         if (!$dbman->table_exists($table)) {
+             $dbman->create_table($table);
+         }
+         }
+        upgrade_plugin_savepoint(true,2024021607,'local','progress_card');
+
+
+
+
+ return true;
 }
