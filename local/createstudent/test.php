@@ -194,4 +194,50 @@ if (isset($_POST['c_id'])) {
 
     echo $var;
 }
+
+//--------Parent section--------//
+
+if(isset($_POST['p_id'])){
+  $pid = $_POST['p_id'];
+  $models = $DB->get_records_sql("SELECT * FROM {parent} WHERE user_id='$pid'");
+  // $text_data = 'Existing children: &nbsp;';
+  $first = true; 
+  
+  foreach($models as $model){
+      $details = $DB->get_records_sql("SELECT * FROM {user} WHERE id={$model->child_id}");
+      
+      foreach($details as $detail){
+          $full_info = $detail->firstname . ' ' . $detail->lastname;
+          if (!$first) {
+              $text_data .= ', '; 
+          } else {
+              $first = false; 
+          }
+          $text_data .= $full_info;
+      }
+  }
+  echo '<div style="padding-bottom: 30px;">'; 
+  echo '<p>Existing children:&nbsp; <span style="font-weight: normal;">' . $text_data . '</span></p>';
+  // echo '<p><span style="font-weight: normal;">' . $text_data . '</span></p>';
+  echo '<input type="checkbox" id="confirm_checkbox" name="confirm_checkbox" required>';
+  echo '<label for="confirm_checkbox"><i>I hereby confirm that the above given details are correct</i></label>';
+  echo '</div>';
+}
+//--------End of parent section--------//
 ?>
+
+<script type='text/javascript'>
+
+  //--------Confirmation in parent section--------//
+
+    document.getElementById('confirm_checkbox').addEventListener('change', function() {
+        if(this.checked) {
+            if(!confirm('Are you sure you want to proceed?')) {
+                this.checked = false;
+            }
+        }
+    });
+
+   //--------End--------// 
+
+</script>

@@ -172,30 +172,115 @@ class createstudent_form extends moodleform {
               $mform->addElement('select', 'class','Select Class you applying',$options1);
               $mform->addRule('class', 'Class is required', 'required', null);
 
+        //--------Parent section--------//
+
+        $mform->addElement('html', '<h4>Parent details</h4>'); 
+        $radioButtons = array();
+        $radioButtons[] = $mform->createElement('radio', 'existing', '', 'Yes', 'yes');
+        $radioButtons[] = $mform->createElement('radio', 'existing', '', 'No', 'no');
+        $select = $mform->addGroup($radioButtons, 'existing_group', 'Are you a registered parent?', array(' '), false);
+
+        $mform->addElement('html', '<div class="suboption" style="display: none;">'); 
+        $parents = $DB->get_records_sql("SELECT * FROM {parent}");
+        $subOptions = array('');
+        foreach ($parents as $parent) {
+            $user_id = $parent->user_id;
+            $user_records = $DB->get_records_sql("SELECT * FROM {user} WHERE id = ?", array($user_id));
+            foreach ($user_records as $user_record) {
+                $label = $user_record->firstname . ' (' . $user_record->email . ')';
+                $subOptions[$user_record->id] = $label;
+            }
+        }
+        $subselect = $mform->addElement('autocomplete', 'subselect','' , $subOptions, array('placeholder' => 'Search parent'));
+
+        //--------div for existing children--------//
+        $mform->addElement('html', '<div id="details_container">'); 
+        $mform->addElement('html', '</div>'); 
+        //--------end of div--------//
+
+        // Add a checkbox element to the form
+        //$mform->addElement('advcheckbox', 'confirm_checkbox', 'The above given details are correct');
+
+
+        $mform->addElement('html', '</div>'); 
+
+        //--------Adding the text box to the form--------//
+        //$mform->addElement('text', 'child', '', array('value' => $textbox_value, 'disabled' => 'disabled'));
+        //-----------------------------------------------//
+
+
+        // Add onchange attribute to individual radio buttons
+        $radioButtons[0]->updateAttributes(array('onchange' => 'showSubDropdown(this)'));
+        $radioButtons[1]->updateAttributes(array('onchange' => 'showSubDropdown(this)'));
+
+        //Parent details
+        $mform->addElement('html', '<div class="parent_details" style="display: none;">'); 
+        $mform->addElement('text', 'p_fstname', 'Parent first name'); 
+
+        $mform->addElement('text', 'p_surname', 'Parent surname'); 
+        $mform->addRule('p_surname', ' Surname missing', null);
+
+        $mform->addElement('text', 'p_lsname', 'Parent last name'); 
+
+        $mform->addElement('text', 'p_mno', 'Mobile no.','maxlength="10"'); 
+
+        $mform->addElement('text', 'p_email', 'Email Address');
+        $mform->addRule('p_email', 'Enter a valid email', 'email', null, 'client');
+
+        $mform->addElement('text', 'p_username', 'Username'); 
+
+        $mform->addElement('passwordunmask', 'p_password', get_string('password'), 'size="20"');
+        $mform->disabledIf('p_password', 'auth', 'in', $cannotchangepass);
+
+        $mform->addElement('html', '</div>');   
+
+        //--------End of parent section--------//
+
         $mform->addElement('html', '</div>');
-      
+
         $this->add_action_buttons();
+        
         $mform->addElement('html','<a href = "'.$returnurl.'" style="text-decoration:none">');
         $mform->addElement('button', 'btn', 'View students'); 
         $mform->addElement('html','</a>');
-        $mform->addElement('html', '</div>');
+        $mform->addElement('html', '</div>'); 
+   
     }
 
-    public function validation($data, $files) {
-        global $DB;
-        $errors = parent::validation($data, $files);
-        if (!empty($data['bg'])) {
+//--------Validation for parent section and blood group--------//
+
+ public function validation($data, $files) {
+     global $DB;
+     $errors = parent::validation($data, $files);
+
+    //  if ($data['existing'] == 'no') {
+    //      if (empty($data['p_fstname'])) $errors['p_fstname'] = get_string('required');
+    //      if (empty($data['p_surname'])) $errors['p_surname'] = get_string('required');
+    //      if (empty($data['p_lsname'])) $errors['p_lsname'] = get_string('required');
+    //      // if (empty($data['p_address'])) $errors['p_address'] = get_string('required');
+    //      if (empty($data['p_mno'])) $errors['p_mno'] = get_string('required');
+    //      if (empty($data['p_email'])) $errors['p_email'] = get_string('required');
+    //      if (empty($data['p_username'])) $errors['p_username'] = get_string('required');
+    //      if (empty($data['p_password'])) $errors['p_password'] = get_string('required');
+    //  }else{
+    //      if (empty($data['subselect'])) $errors['subselect'] = get_string('required');
+
+    //  }
+
+     if (!empty($data['bg'])) {
         $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
         $enteredBloodGroup = strtoupper($data['bg']);
         if (!in_array($enteredBloodGroup, $validBloodGroups)) {
         $errors['bg'] = "Invalid blood group. The blood groups are 'A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-'";
         }
         }
-        return $errors;
-        }
 
-      
+     return $errors;
+ }  
 
-    }
+}
+ 
+
+
     
 

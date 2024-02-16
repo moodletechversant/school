@@ -70,6 +70,36 @@ else if ($formdata = $mform->get_data()) {
     $stddata->user_id =$id->id;
     // Create the user account in custom student table.
     $DB->insert_record('student',$stddata);
+
+    if($formdata->existing == 'no'){
+        $parentdata= new stdclass();
+        $parentdata->firstname=$formdata->p_fstname;
+        $parentdata->surname=$formdata->p_surname;
+        $parentdata->lastname=$formdata->p_lsname;
+        $parentdata->username=$formdata->p_username;
+        $parentdata->email=$formdata->p_email;
+        $parentdata->password=$formdata->p_password;
+        // $parentdata->address=$formdata->p_address;
+        $parentdata->phone1=$formdata->p_mno;
+        
+        if(isset($parentdata->firstname)&&isset($parentdata->surname)&&isset($parentdata->lastname)&&isset($parentdata->username)&&isset($parentdata->password)&&isset($parentdata->email)&&isset($parentdata->phone1)){
+        user_create_user($parentdata);
+        //print_r($parentdata->firstname);exit();
+        $id1= $DB->get_record_sql('SELECT id FROM mdl_user ORDER BY id DESC LIMIT 1');
+        $parentdata_user= new stdclass();
+        $parentdata_user->user_id =$id1->id;
+        $parentdata_user->child_id =$id->id;
+
+        // Create the user account in custom student table.
+        $DB->insert_record('parent',$parentdata_user);
+        }
+    }
+    else{
+        $parentdata_user->user_id=$formdata->subselect;
+        $parentdata_user->child_id =$id->id;
+        $DB->insert_record('parent',$parentdata_user);
+        
+    }
     $urlto = $CFG->wwwroot.'/local/createstudent/createstudent.php';
     redirect($urlto, 'Data Saved Successfully '); 
   
@@ -81,7 +111,7 @@ echo $OUTPUT->footer();
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    $('input[name="fstname"],input[name="midlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"]').blur(function() {
+    $('input[name="fstname"],input[name="midlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"],input[name="p_fstname"],input[name="p_surname"],input[name="p_lsname"]').blur(function() {
 
 
 var currVal = $(this).val();
@@ -98,7 +128,7 @@ $(this).val(currVal.toLowerCase());
 });
 
 //only alphabets
-$('input[name="ftname"],input[name="mlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"]').on("keydown", function(event){
+$('input[name="ftname"],input[name="mlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"],input[name="p_fstname"],input[name="p_surname"],input[name="p_lsname"]').on("keydown", function(event){
 	// Allow controls such as backspace, tab etc.
 	var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
 	
@@ -118,7 +148,7 @@ $('input[name="ftname"],input[name="mlname"],input[name="lsname"],input[name="fn
 
 
 //only numeric value
-$('input[name="fno"],input[name="mno"],input[name="gno"]').keypress
+$('input[name="fno"],input[name="mno"],input[name="gno"],input[name="p_mno"]').keypress
 (
 function(event)
 {
@@ -155,6 +185,89 @@ function(event)
 });
 });
 
+//--------Function for parent section--------//
+
+function showSubDropdown(selectElement) {
+        //var subselectElement = document.getElementById('id_subselect');
+        //var radioElement = document.getElementById('fgroup_id_existing_group');
+        var suboptionDiv = document.querySelector('.suboption');
+        var parentDetailsDiv = document.querySelector('.parent_details');
+
+
+        if (selectElement.value == 'yes') {
+            //subselectElement.style.display = 'block';
+            //radioElement.style.display = 'none';
+            suboptionDiv.style.display = 'block';
+            parentDetailsDiv.style.display = 'none';
+
+        } else {
+            //subselectElement.style.display = 'none';
+            suboptionDiv.style.display = 'none';
+            parentDetailsDiv.style.display = 'block';
+
+        }
+    }
+
+//--------End of function parent section--------//
+
+//--------Ajax code for autocomplete--------//
+
+$(document).ready(function() {
+    $("#id_subselect").change(function() {
+        var brand_id = $(this).val();
+        if(brand_id != ""){
+            $.ajax({
+                url:"test.php",
+                data:{p_id:brand_id},
+                type:'POST',
+                success: function(data){
+                    $("#details_container").html(data);
+                }
+            });
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    $("#id_submitbutton").click(function() {
+        var radioButton = document.getElementById("id_existing_yes");
+    if (radioButton.checked) {
+        var selectedValue = $("#id_subselect").val();
+
+if (selectedValue == 0) {
+    alert("No option has been selected.");
+    event.preventDefault();
+} 
+  } 
+   
+  });
+    document.querySelector("input[type=submit]").addEventListener("click", function(event) {
+        var radioValue = document.querySelector('input[name="existing"]:checked').value;
+        var formValid = true;
+
+        // Checking form elements based on radio button selection
+        if (radioValue === 'no') {
+            var parentFirstName = document.querySelector('input[name="p_fstname"]').value;
+            var parentSurname = document.querySelector('input[name="p_surname"]').value;
+            var parentLastName = document.querySelector('input[name="p_lsname"]').value;
+            var parentMobileNo = document.querySelector('input[name="p_mno"]').value;
+            var parentEmail = document.querySelector('input[name="p_email"]').value;
+            var parentUsername = document.querySelector('input[name="p_username"]').value;
+            var parentPassword = document.querySelector('input[name="p_password"]').value;
+
+            // Check if any of the fields are empty
+            if (parentFirstName === '' || parentSurname === '' || parentLastName === '' || parentMobileNo === '' || parentEmail === '' || parentUsername === '' || parentPassword === '') {
+                formValid = false;
+            }
+        } 
+        
+        // Show alert if form is invalid
+        if (!formValid) {
+            alert("Please fill all the form elements.");
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+});
 
 $(document).ready(function() {
     $('#id_error_gender_male').remove();
@@ -166,8 +279,11 @@ $(document).ready(function() {
         }
     });
 });
+    
+//--------End of ajax code--------//
 
 </script>
+
 <style>
 
 
