@@ -41,8 +41,8 @@ $enquiry = new moodle_url('/local/enquiry/view_enquiry.php');
 $image11 = new moodle_url('/local/img/ic-31.svg');
 $teacherassign = new moodle_url('/local/teacherassign/teacherlearningpath.php');
 $image12 = new moodle_url('/local/img/ic-32.svg');
-
-
+$chat =  new moodle_url('/local/parent_teacher_questioning/view_teacherchat_1.php');
+$image13 = new moodle_url('/local/img/ic-33.svg');
 
 $PAGE->set_context($context);
 $strnewclass= 'Teacher Dashboard';
@@ -142,7 +142,7 @@ echo $mustache->render($template4,['data'=>$data,'css_link'=>$css_link,'profile_
 'image3'=>$image3,'leaverequest'=>$leaverequest,'image4'=>$image4,'promotion'=>$promotion,
 'image5'=>$image5,'holiday'=>$holiday,'image6'=>$image6,'upcoming'=>$upcoming,
 'image7'=>$image7,'new_timetable'=>$new_timetable,'image8'=>$image8,'diary'=>$diary,'image10'=>$image10,
-'enquiry'=>$enquiry,'image11'=>$image11,'teacherassign'=>$teacherassign,'image12'=>$image12]);
+'enquiry'=>$enquiry,'image11'=>$image11,'teacherassign'=>$teacherassign,'image12'=>$image12,'chat'=>$chat,'image13'=>$image13]);
 
 
 echo $OUTPUT->footer();
