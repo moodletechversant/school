@@ -73,6 +73,8 @@ else if ($formdata = $mform->get_data()) {
 
     if($formdata->existing == 'no'){
         $parentdata= new stdclass();
+        $parentdata->confirmed = 1;
+        $parentdata->mnethostid = $CFG->mnet_localhost_id;
         $parentdata->firstname=$formdata->p_fstname;
         $parentdata->surname=$formdata->p_surname;
         $parentdata->lastname=$formdata->p_lsname;
