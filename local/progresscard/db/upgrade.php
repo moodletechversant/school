@@ -40,7 +40,7 @@ function xmldb_local_progresscard_upgrade($oldversion) {
 
     if ($oldversion < 2024021600) {
         // Report_user_logins savepoint reached.
-   upgrade_plugin_savepoint(true, 2024021601, 'local', 'email_reminder');
+   upgrade_plugin_savepoint(true, 2024021604, 'local', 'progress_card');
    }
     // For further information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
     //
