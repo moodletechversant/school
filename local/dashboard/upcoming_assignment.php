@@ -35,7 +35,8 @@ $current_date = time();
 $enrolled_courses = enrol_get_users_courses($userid);
 $context = context_user::instance($USER->id, MUST_EXIST);
 $pid = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id = ?", array($userid));
-
+$sid = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id = ?", array($userid));
+//print_r($sid);exit();
 if ($pid) {
     $penrolled_courses = enrol_get_users_courses($pid->child_id);
     $enrolled_course_ids = array();
@@ -85,20 +86,14 @@ $in_clause = implode(',', array_fill(0, count($enrolled_course_ids), '?'));
        
     ];
     
-   // echo $view_icon;
-    // echo html_writer::table($table);
-    // $backurl = new moodle_url('/local/dashboard/dashboard.php');
-    // $backbutton = html_writer::link($backurl, '< Back');
-    // echo $backbutton;
 }
 $output = $mustache->render($template2, ['tableRows' => $tableRows,'csspath'=>$csspath,'dashboard'=>$dashboard]);
 echo $output;
-   
-}
 
-
-//print_r($enrolled_courses);exit();
-$enrolled_course_ids = array();
+} elseif ($sid) {
+    $enrolled_courses = enrol_get_users_courses($sid->user_id);
+    //print_r($enrolled_courses);exit();
+    $enrolled_course_ids = array();
 foreach ($enrolled_courses as $enrolled_course) {
     $enrolled_course_ids[] = $enrolled_course->id;
 }
@@ -162,6 +157,9 @@ $output = $mustache->render($template, ['tableRows' => $tableRows,'csspath'=>$cs
 echo $output;
 }
 
+} else {
+    echo "No valid parent or student record found.";
+}
 
 echo $OUTPUT->footer();
 ?>
