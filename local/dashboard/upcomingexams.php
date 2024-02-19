@@ -70,7 +70,7 @@ else{
 $error= "There are no upcoming exams.";
 $tableRows[] = [
  
- 'Submission_date' => $error,
+ 'Start_date' => $error,
 
 ];
 }
