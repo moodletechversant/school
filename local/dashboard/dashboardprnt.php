@@ -15,7 +15,7 @@ $PAGE->set_context($context);
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template, $mustacheData);
+echo $mustache->render($template);
 echo $OUTPUT->footer();
 }
 else{

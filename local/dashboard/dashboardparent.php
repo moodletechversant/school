@@ -41,15 +41,15 @@ $current_timestamp = strtotime('now');
 //  print_r($data2);exit();
 
 
-$data = array(
-    'myarray1' => array(),
-    'diary_entries' => array(),
-    'user_d_content' => array(
-        'length' => count($data2),
-        'is_read_more' => (count($data2) > 1),
-        'user_d_content' => '',
-    ),
-);
+// $data = array(
+//     'myarray1' => array(),
+//     'diary_entries' => array(),
+//     'user_d_content' => array(
+//         'length' => count($data2),
+//         'is_read_more' => (count($data2) > 1),
+//         'user_d_content' => '',
+//     ),
+// );
 
 // $lastEntry = end($data2); // Get the last entry from $data2
 // if ($lastEntry) {
@@ -148,7 +148,7 @@ $data = array(
 // );
 // print_r($mustacheData);exit();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template, $mustacheData);
+echo $mustache->render($template);
 
 echo $OUTPUT->footer();
 

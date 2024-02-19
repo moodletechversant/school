@@ -1380,7 +1380,7 @@ class global_navigation extends navigation_node {
                         'key' => 'myhome',
                         'type' => navigation_node::TYPE_SYSTEM,
                         'text' => get_string('myhome'),
-                        'action' => new moodle_url('/local/dashboard/dashboardparent.php?id='.$tid->user_id),
+                        'action' => new moodle_url('/local/dashboard/dashboardparent.php?id='.$pid->user_id),
                         'icon' => new pix_icon('i/dashboard', '')
                     );
                 }
