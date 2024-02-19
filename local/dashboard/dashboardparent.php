@@ -11,6 +11,7 @@ $linktext = "Dashboard";
 $dashboard= new moodle_url('/local/dashboard/dashboardprnt.php');
 $linkurl = new moodle_url('/local/dashboard/dashboardparent.php');
 $child_img=new moodle_url('/local/img/ic-5.svg');
+$css_link=new moodle_url('/local/css/style.css');
 $PAGE->set_context($context);
 echo $OUTPUT->header();
 
@@ -150,7 +151,7 @@ $current_timestamp = strtotime('now');
 // );
 // print_r($mustacheData);exit();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template,['dashboard'=>$dashboard,'child_img'=>$child_img]);
+echo $mustache->render($template,['dashboard'=>$dashboard,'child_img'=>$child_img,'css_link'=>$css_link]);
 
 echo $OUTPUT->footer();
 
