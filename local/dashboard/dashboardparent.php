@@ -8,7 +8,9 @@ $template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/parent
 global $class, $CFG;
 $context = context_system::instance();
 $linktext = "Dashboard";
+$dashboard= new moodle_url('/local/dashboard/dashboardprnt.php');
 $linkurl = new moodle_url('/local/dashboard/dashboardparent.php');
+$child_img=new moodle_url('/local/img/ic-5.svg');
 $PAGE->set_context($context);
 echo $OUTPUT->header();
 
@@ -148,7 +150,7 @@ $current_timestamp = strtotime('now');
 // );
 // print_r($mustacheData);exit();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template);
+echo $mustache->render($template,['dashboard'=>$dashboard,'child_img'=>$child_img]);
 
 echo $OUTPUT->footer();
 
