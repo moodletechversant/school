@@ -15,8 +15,6 @@ $PAGE->set_title($strnewclass);
 $mform=new createstudent_form();
 echo $OUTPUT->header();
 
-
-
 //hi
 $returnurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
 if ($mform->is_cancelled()) {
@@ -45,9 +43,6 @@ else if ($formdata = $mform->get_data()) {
     $stddata->s_district=$formdata->district;
     $stddata->s_class=$formdata->class;
 
-
-
-
 //MOODLE USER CREATION IN USER TABLE
     $user = new stdClass();
     $user->confirmed = 1;
@@ -70,7 +65,8 @@ else if ($formdata = $mform->get_data()) {
     $stddata->user_id =$id->id;
     // Create the user account in custom student table.
     $DB->insert_record('student',$stddata);
-
+    
+//PARENT CREATION IN USER TABLE AND PARENT TABLE
     if($formdata->existing == 'no'){
         $parentdata= new stdclass();
         $parentdata->confirmed = 1;
@@ -181,32 +177,22 @@ function(event)
         	$("#id_class").html(data);
         	}
         });
-    }
-    
-   
+    }     
 });
 });
 
 //--------Function for parent section--------//
 
 function showSubDropdown(selectElement) {
-        //var subselectElement = document.getElementById('id_subselect');
-        //var radioElement = document.getElementById('fgroup_id_existing_group');
         var suboptionDiv = document.querySelector('.suboption');
         var parentDetailsDiv = document.querySelector('.parent_details');
 
-
         if (selectElement.value == 'yes') {
-            //subselectElement.style.display = 'block';
-            //radioElement.style.display = 'none';
             suboptionDiv.style.display = 'block';
             parentDetailsDiv.style.display = 'none';
-
         } else {
-            //subselectElement.style.display = 'none';
             suboptionDiv.style.display = 'none';
             parentDetailsDiv.style.display = 'block';
-
         }
     }
 

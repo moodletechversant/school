@@ -179,6 +179,8 @@ class createstudent_form extends moodleform {
         $radioButtons[] = $mform->createElement('radio', 'existing', '', 'Yes', 'yes');
         $radioButtons[] = $mform->createElement('radio', 'existing', '', 'No', 'no');
         $select = $mform->addGroup($radioButtons, 'existing_group', 'Are you a registered parent?', array(' '), false);
+        $mform->addRule('existing_group', 'This field is required', 'required', null);
+
 
         $mform->addElement('html', '<div class="suboption" style="display: none;">'); 
         $parents = $DB->get_records_sql("SELECT * FROM {parent}");
@@ -247,25 +249,11 @@ class createstudent_form extends moodleform {
    
     }
 
-//--------Validation for parent section and blood group--------//
+//--------Validation for blood group--------//
 
  public function validation($data, $files) {
      global $DB;
      $errors = parent::validation($data, $files);
-
-    //  if ($data['existing'] == 'no') {
-    //      if (empty($data['p_fstname'])) $errors['p_fstname'] = get_string('required');
-    //      if (empty($data['p_surname'])) $errors['p_surname'] = get_string('required');
-    //      if (empty($data['p_lsname'])) $errors['p_lsname'] = get_string('required');
-    //      // if (empty($data['p_address'])) $errors['p_address'] = get_string('required');
-    //      if (empty($data['p_mno'])) $errors['p_mno'] = get_string('required');
-    //      if (empty($data['p_email'])) $errors['p_email'] = get_string('required');
-    //      if (empty($data['p_username'])) $errors['p_username'] = get_string('required');
-    //      if (empty($data['p_password'])) $errors['p_password'] = get_string('required');
-    //  }else{
-    //      if (empty($data['subselect'])) $errors['subselect'] = get_string('required');
-
-    //  }
 
      if (!empty($data['bg'])) {
         $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
