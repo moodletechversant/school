@@ -21,12 +21,12 @@ $img_13=new moodle_url('/local/img/ic-13.svg');
 $img_17=new moodle_url('/local/img/ic-17.svg');
 $img_14=new moodle_url('/local/img/ic-14.svg');
 $img_18=new moodle_url('/local/img/ic-18.svg');
-
+$img_8=new moodle_url('/local/img/ic-8.svg');
 $PAGE->set_context($context);
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template,['css_link'=>$css_link,'img_12'=>$img_12,'img_5'=>$img_5,'img_2'=>$img_2,'img_6'=>$img_6,'img_28'=>$img_28,'img_7'=>$img_7,'img_13'=>$img_13,'img_17'=>$img_17,'img_14'=>$img_14,'img_18'=>$img_18]);
+echo $mustache->render($template,['css_link'=>$css_link,'img_12'=>$img_12,'img_5'=>$img_5,'img_2'=>$img_2,'img_6'=>$img_6,'img_28'=>$img_28,'img_7'=>$img_7,'img_13'=>$img_13,'img_17'=>$img_17,'img_14'=>$img_14,'img_18'=>$img_18,'img_8'=>$img_8]);
 echo $OUTPUT->footer();
 }
 else{
