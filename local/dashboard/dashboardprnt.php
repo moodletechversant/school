@@ -6,16 +6,17 @@ $userid=$USER->id;
 $pid= $DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$userid'");  
 if(!empty($pid) && $pid->user_id==$userid){
 $template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/dashboardprnt.mustache');
-
 global $class, $CFG;
 $context = context_system::instance();
 $linktext = "Dashboard Parent";
 $linkurl = new moodle_url('/local/dashboard/dashboardprnt.php');
+$css_link= new moodle_url('/local/css/style.css');
+
 $PAGE->set_context($context);
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template);
+echo $mustache->render($template,['css_link'=>$css_link]);
 echo $OUTPUT->footer();
 }
 else{
