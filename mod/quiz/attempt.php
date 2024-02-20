@@ -162,14 +162,26 @@ var userid=<?php echo $userid; ?>;
 var quizid=<?php echo $quizid; ?>;
 var ws;
 const video = document.querySelector('video');
-alert(video);
+// alert(video);
 // roomName should be unique user_name or user_id
 
 var roomName =userid+'_'+quizid;
 //alert(roomName);
 console.log(roomName);
 // request access to webcam
-navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+// navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+
+navigator.mediaDevices.getUserMedia({ video: { width: 426, height: 240 }, audio: true })
+    .then((stream) => {
+        // Create a new MediaStream object with only the video track
+        const videoStream = new MediaStream([stream.getVideoTracks()[0]]);
+        video.srcObject = videoStream;
+    })
+    .catch((error) => {
+        // Microphone access denied or some other error occurred
+        console.error('Error accessing microphone:', error);
+    });
+
 // alert('hey!');exit();
 
 // returns a frame encoded in base64
