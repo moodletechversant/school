@@ -10,6 +10,7 @@ require_login();
 $template = file_get_contents($CFG->dirroot . '/local/progresscard/template/progresscard.mustache');
 $linkurl = new moodle_url('/local/subject/progresscard.php'); 
 // Print the page header.
+$css_link = new moodle_url('/local/css/style.css');
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
 // $PAGE->set_pagelayout('admin');
@@ -89,7 +90,7 @@ $profile2[] = array('fname'=>$fname,'classname' => $classname,'division'=>$divis
 //print_r($profile2);exit();
 }
  $mustache = new Mustache_Engine();
- echo $mustache->render($template,['profile2'=>$profile2]);
+ echo $mustache->render($template,['profile2'=>$profile2,'css_link'=>$css_link]);
  echo $OUTPUT->footer();
  ?>
 

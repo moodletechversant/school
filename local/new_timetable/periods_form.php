@@ -156,6 +156,19 @@ class periods_form extends moodleform {
 
         //$this->add_action_buttons();
     }
+
+        //--------VALIDATION FOR NUMBER OF PERIODS--------//
+
+    public function validation($data, $files) {
+        $errors = parent::validation($data, $files);
+    
+            $enteredPeriods = intval($data['periods']); 
+            if ($enteredPeriods < 1 || $enteredPeriods > 12) { 
+                $errors['periods'] = "Invalid number of periods. Please enter a number between 1 and 12.";
+        }
+    
+        return $errors;
+    }
 }
 ?>
 </body>
