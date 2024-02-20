@@ -13,6 +13,9 @@ require_login();
 
 $linktext = "Reply Message";
 $linkurl = new moodle_url('/local/reply/view_reply.php');
+$css_link = new moodle_url('/local/css/style.css');
+$view_reply = new moodle_url('/local/complaint/view_complaint.php');
+
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);                                                                  
@@ -31,7 +34,7 @@ if (!empty($data)) {
       
        $options1[] = array('date' =>  $value->date, 'reply' => $value->replymsg,'delete'=>$value->id);
       }
-      $output = $mustache->render($template, ['reply_delete' => $options1]);
+      $output = $mustache->render($template, ['reply_delete' => $options1,'css_link'=>$css_link,'view_reply'=>$view_reply]);
 } 
 else{
   echo "No reply found in the database"; 
