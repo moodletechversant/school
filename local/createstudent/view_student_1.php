@@ -37,7 +37,7 @@ foreach ($academic as $academic1) {
 
 $templateData = array(
     'startYearOptions' => $options1,
-    'endYearOptions' => $options2,
+    'endYearOptions' => $options1,
 );
 
 
