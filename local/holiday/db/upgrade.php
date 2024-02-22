@@ -37,18 +37,27 @@ function xmldb_local_holiday_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
-    if ($oldversion < 2023033025) {
+    if ($oldversion < 2023033026) {
     $table = new xmldb_table('addholiday');
     $table->add_field('id', XMLDB_TYPE_INTEGER, '10',null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
     $table->add_field('from_date', XMLDB_TYPE_CHAR, '20',null, XMLDB_NOTNULL,null);
     $table->add_field('to_date', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, '');
     $table->add_field('holiday_name', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
     $table->add_Key('primary', XMLDB_KEY_PRIMARY,array('id'));
-    if (!$dbman->table_exists($table)) {
-         $dbman->create_table($table);
-    }
-    }
-    upgrade_plugin_savepoint(true,2023033025,'local','addholiday');
-           
+    
+if (!$dbman->table_exists($table)) {
+    $dbman->create_table($table);
+}
+}
+// $table5 = new xmldb_table('user');
+$divfield = new xmldb_field('academic_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+if (!$dbman->field_exists($table, $divfield)) {
+$dbman->add_field($table, $divfield);
+}
+upgrade_plugin_savepoint(true,2023033026,'local','addholiday');
+
+
     return true;
 }
+

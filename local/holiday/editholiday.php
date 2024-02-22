@@ -23,6 +23,9 @@ else if ($formdata = $mform->get_data()) {
     
     $holidaydata = new stdClass();
     $holidaydata->id= $formdata->id;
+    	
+    $holidaydata->academic_id = $formdata->academic;
+
     $holidaydata->from_date = $formdata->fromdate;
     $holidaydata->to_date = $formdata->todate;
     $holidaydata->holiday_name = $formdata->holidayname;
