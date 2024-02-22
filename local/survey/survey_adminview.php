@@ -31,7 +31,8 @@ $PAGE->set_title($linktext);
 
 echo $OUTPUT->header();
 $data = array();
-$rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey}");
+$rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY id DESC");
+//$rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY survey_to	 DESC");
 
 $mustache = new Mustache_Engine();
 
