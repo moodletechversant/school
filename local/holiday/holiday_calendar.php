@@ -32,7 +32,6 @@ $PAGE->set_title($linktext);
     $rec=$DB->get_records_sql("SELECT * FROM {addholiday} ORDER BY from_date ASC");
     //echo $addholiday;
 
-    
     $table = new html_table();
     
     $table->head = array("Start Date","End Date","Holiday",'Edit','Delete');
