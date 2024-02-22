@@ -53,11 +53,17 @@ $PAGE->set_title($linktext);
        $date2 = date("d-m-Y", $enddate);
 
        $holiday =$records->holiday_name;
+
+       // Check if start date is in the past
+   $isPastDate = (time() > $startdate) ? true : false;
+//    print_r($isPastDate);
+   $pastDateClass = $isPastDate ? 'past-date' : ''; // Add class 'past-date' if it's a past date
+// print_r($pastDateClass);exit();
     
        $edit = '<a href="'.$editholiday.'='.$id.'"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
        $delete = '<a href="'.$deleteholiday.'='.$id.'"><i class="fa fa-trash" style="font-size:24px;color:#0055ff"></i></a>';
         
-       $tableRows[] =  ['date1' => $date1,'date2' => $date2,'holiday' => $holiday,'day'=>$day,'month'=>$month,'dayName'=>$dayName]; 
+       $tableRows[] =  ['date1' => $date1,'date2' => $date2,'holiday' => $holiday,'day'=>$day,'month'=>$month,'dayName'=>$dayName,'pastDateClass' => $pastDateClass]; 
     //    echo $mustache->render($template1,$data); 
    
     }
