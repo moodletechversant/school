@@ -29,9 +29,42 @@ $PAGE->set_title($linktext);
 
 
     echo $OUTPUT->header();
-    $rec=$DB->get_records_sql("SELECT * FROM {addholiday} ORDER BY from_date ASC");
-    //echo $addholiday;
 
+    $academic = $DB->get_records('academic_year');
+    $current_year = date("Y");
+    
+        //print_r($rec);exit();
+
+//$options1 = array();
+
+    // $options1[] = array('' => '---- Select academic_year ----');
+    $academic = $DB->get_records('academic_year');
+    $current_year = date("Y");
+    $options1 = array();
+    
+    $rec = $DB->get_records_sql("SELECT * FROM {addholiday} WHERE YEAR(FROM_UNIXTIME(from_date)) = ?", array($current_year));
+$options1 = array();
+$academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
+
+
+    
+    foreach ($academic_id as $academic) {
+        $timestart = $academic->start_year;
+        $timeend = $academic->end_year;
+        
+        $timestart1 = date("d/m/Y", $timestart);
+        $timeend1 = date("d/m/Y", $timeend);
+        
+        $options1[] = array('value' => $academic->id, 'label' => $timestart1 . '-' . $timeend1);
+    }
+
+
+//print_r($options1);exit();
+
+    //print_r($options1);exit();
+    
+    //print_r($options1);exit();
+    $templateData = array('startYearOptions' => $options1);
     $table = new html_table();
     
     $table->head = array("Start Date","End Date","Holiday",'Edit','Delete');
@@ -66,8 +99,8 @@ $PAGE->set_title($linktext);
     //    echo $mustache->render($template1,$data); 
    
     }
-    echo $mustache->render($template1, ['tableRows' => $tableRows ,'css_link' =>$css_link]);
-    // <input type="submit" name="edit" value="edit">
+    echo $mustache->render($template1, ['tableRows' => $tableRows, 'css_link' => $css_link, 'templateData' => $templateData]);
+        // <input type="submit" name="edit" value="edit">
 
 echo $OUTPUT->footer();
 
