@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-eAubMY/SUmBbGzxBT+2fS8xDwQCgFQYMyZc+R9jK7+UaD6Ugk6hvqlxjv73qV+qjK0bSw5Z+XrlvJ0CpdqLEfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+      integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
+      crossorigin="anonymous"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Averia Serif Libre' rel='stylesheet'>
+</head>
+<style>
+.sub{
+  font-family: 'Averia Serif Libre';
+}
+p{
+  font-family: 'Averia Serif Libre';
+}
+li{
+    font-family: 'Averia Serif Libre';
+    font-size:large;
+
+}
+.button-container {
+    display: inline-block;
+}
+
+</style>
+
+  <body>
+    <header><h1 class="title">Survey</h1></header>
+     <a href="{{answer}}={{id}}">
+        <button type="button" class="btn btn-outline-secondary del">Go Back</button>
+    </a>
+   <div class="row mt-5">
+      <div class="col-12">
+          {{#survey}}
+              <div class="note">
+             
+                
+                {{#disabled2}}
+                    <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>              
+                    <p style="color:green;">{{survey_from}} - {{survey_to}}</p>
+                      <div class="hide">   
+                      <ol>              
+                          {{#q_survey}}                                                     
+                                 <li>{{survey_question}}</li>                  
+                          {{/q_survey}}
+                           </ol>
+                     
+
+                      </div>
+                      <div class="icon-d">
+                           <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
+                     </div>  
+             {{/disabled2}}                
+         </div>
+         <br>
+       {{/survey}}
+    </div>     
+</div>
+ 
+  </body>
+</html>
