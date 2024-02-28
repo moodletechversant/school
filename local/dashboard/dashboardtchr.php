@@ -47,7 +47,7 @@ $image13 = new moodle_url('/local/img/ic-33.svg');
 $PAGE->set_context($context);
 $strnewclass= 'Teacher Dashboard';
 
-$PAGE->set_url('/local/dashboard/dashboardtchr.php');
+//$PAGE->set_url('/local/dashboard/dashboardtchr.php');
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($strnewclass);
 
