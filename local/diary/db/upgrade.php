@@ -45,7 +45,7 @@ function xmldb_local_diary_upgrade($oldversion) {
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
 
-        if ($oldversion < 2023033101) {
+        if ($oldversion < 2023033102) {
             $table = new xmldb_table('diary');
             $table->add_field('id', XMLDB_TYPE_INTEGER, '10',null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
             $table->add_field('user_id', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
@@ -68,7 +68,7 @@ function xmldb_local_diary_upgrade($oldversion) {
             if (!$dbman->field_exists($table, $divfield)) {
             $dbman->add_field($table, $divfield);
             }
-           upgrade_plugin_savepoint(true,2023033101,'local','diary');
+           upgrade_plugin_savepoint(true,2023033102,'local','diary');
 
     return true;
 }
