@@ -30,7 +30,8 @@ $current_date = time();
 $enrolled_courses = enrol_get_users_courses($userid);
 $pid = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id = ?", array($userid));
 $sid = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id = ?", array($userid));
-
+$tid= $DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id= ?", array($userid));
+//print_r($tid);exit();
 
 if ($pid) {
     $penrolled_courses = enrol_get_users_courses($pid->child_id);
@@ -132,7 +133,62 @@ echo $output;
     $output = $mustache->render($template, ['tableRows' => $tableRows,'csspath' => $csspath,'dashboard'=>$dashboard]);
     echo $output;
 
-} else {
+} 
+elseif ($tid) {
+    $enrolled_courses = enrol_get_users_courses($tid->user_id);
+    $enrolled_course_ids = array();
+    foreach ($enrolled_courses as $enrolled_course) {
+        $enrolled_course_ids[] = $enrolled_course->id;
+    }
+    
+    if (!empty($enrolled_course_ids)) {
+        $in_clause = implode(',', array_fill(0, count($enrolled_course_ids), '?'));
+        $params = array_merge($enrolled_course_ids, array($current_date));
+    
+        $data = $DB->get_records_sql("SELECT * FROM {quiz} WHERE course IN ($in_clause) AND timeclose >= ?", $params);
+        //print_r($data);exit();
+        $mustache = new Mustache_Engine();
+        $tableRows = [];
+        if (!empty($data)) {
+    
+        foreach ($data as $value) {
+            $cmid = $value->id;
+            $cm = get_coursemodule_from_instance('quiz', $cmid, 0, false, MUST_EXIST);
+            $view = $CFG->wwwroot.'/mod/quiz/view.php?id='.$cm->id;
+    
+            $dates1=date('d-m-Y',$value->timeopen);
+            $dates=date('d-m-Y',$value->timeclose);
+            $exam_name=$value->name;
+            $view_icon=html_writer::link(
+                $view,
+                '<span class="custom-icon" aria-label="' . get_string('view') . '">👁️</span>'
+            );
+            $tableRows[] = [
+                'id'=> $id,
+                'Submission_date' => $dates1,
+                'End_date' => $dates,
+                'Exam_name' => $exam_name,
+                'View'=>$view_icon,
+            ];
+        }
+    }
+    else{
+            
+        $error= "There are no upcoming exams for your enrolled courses.";
+        $tableRows[] = [
+         
+         'Submission_date' => $error,
+        
+     ];
+    }
+    } else {
+        echo "You are not enrolled in any courses.";
+       
+    }
+    $output = $mustache->render($template, ['tableRows' => $tableRows,'csspath' => $csspath,'dashboard'=>$dashboard]);
+    echo $output;
+
+}else {
     echo "No valid parent or student record found.";
 }
 
