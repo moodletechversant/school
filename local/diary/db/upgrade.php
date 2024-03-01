@@ -58,19 +58,17 @@ function xmldb_local_diary_upgrade($oldversion) {
             $table->add_field('d_endtime', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
             $table->add_field('d_option', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
             $table->add_field('d_suboption', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
-        
-            
             $table->add_Key('primary', XMLDB_KEY_PRIMARY,array('id'));
             if (!$dbman->table_exists($table)) {
                 $dbman->create_table($table);
             }
             }
+
+            $divfield = new xmldb_field('d_diary_created', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+            if (!$dbman->field_exists($table, $divfield)) {
+            $dbman->add_field($table, $divfield);
+            }
            upgrade_plugin_savepoint(true,2023033101,'local','diary');
-
-
-
-
-
 
     return true;
 }
