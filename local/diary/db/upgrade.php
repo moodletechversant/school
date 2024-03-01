@@ -36,7 +36,7 @@ require_once(__DIR__.'/upgradelib.php');
 function xmldb_local_diary_upgrade($oldversion) {
     global $DB;
 
-    $dbman = $DB->ged_manager();
+    $dbman = $DB->get_manager();
 
    
 
