@@ -10,6 +10,7 @@ Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/survey/templates/viewanswer.mustache');
 $delete = new moodle_url('/local/survey/deletesurvey.php?id');
 $answer = new moodle_url('/local/survey/viewsurveyanswer.php');
+$back = new moodle_url('/local/survey/survey_adminview.php');
 // require_once($CFG->dirroot.'/local/createstudent/demo.html');
 global $class,$CFG;
 $context = context_system::instance();
@@ -79,7 +80,7 @@ foreach ($rec1 as $record1) {
      
 }
 
-$surveyname = array('survey' => $data,'delete' => $delete,'answer' =>$answer);
+$surveyname = array('survey' => $data,'delete' => $delete,'answer' =>$answer,'back' =>$back);
 echo $mustache->render($template, $surveyname);
 
 
