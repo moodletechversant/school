@@ -118,6 +118,7 @@ $bnamesCount = 1; // Counter for names
 $showMore = false; // Flag to indicate if more names are available
 // $sname1="click view all";
 foreach ($data1 as $record) {
+  if (!empty($record)) {
   $sname = $record->s_name;
   $firstLetter = substr($sname, 0, 1); // Extract the first letter
 
@@ -128,8 +129,10 @@ foreach ($data1 as $record) {
       $showMore = true; // Set the flag if more names are available
       break; // Exit the loop as we only need 4 names
   }
+}}
+if (empty($data['myarray1'])) {
+  $data['myarray2'] = true; 
 }
-
 // Add the dot entry if more names are available
 if ($showMore) {
   $data['myarray1'][] = array('initial' => '.....');
