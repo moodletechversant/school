@@ -118,7 +118,22 @@ class editstudent_form extends moodleform {
         $mform->addRule('gno', 'Mobile no.missing', 'required', null);
  
 
-        $mform->addElement('text', 'bg', 'Blood group'); 
+        $bloodgroup = array(
+            '' => 'Select a blood group', 
+            'A+' => 'A+',
+            'A-' => 'A-',
+            'B+' => 'B+',
+            'B-' => 'B-',
+            'AB+' => 'AB+',
+            'AB-' => 'AB-',
+            'O+' => 'O+',
+            'O-' => 'O-',
+            
+        );
+        
+        $mform->addElement('select', 'bg', 'Blood group', $bloodgroup);
+        $mform->addRule('bg', 'Blood group is required', 'required', null);
+
 
         $mform->addElement('radio', 'gender', 'Gender', 'Male', 'male');
         $mform->addElement('radio', 'gender', '', 'Female', 'female');
@@ -199,18 +214,18 @@ class editstudent_form extends moodleform {
         $mform->addElement('html', '</div>');
       
     }
-    public function validation($data, $files) {
-        global $DB;
-        $errors = parent::validation($data, $files);
-        if (!empty($data['bg'])) {
-        $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
-        $enteredBloodGroup = strtoupper($data['bg']);
-        if (!in_array($enteredBloodGroup, $validBloodGroups)) {
-        $errors['bg'] = "Invalid blood group. The blood groups are 'A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-'";
-        }
-        }
-        return $errors;
-        }
+    // public function validation($data, $files) {
+    //     global $DB;
+    //     $errors = parent::validation($data, $files);
+    //     if (!empty($data['bg'])) {
+    //     $validBloodGroups = array('A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-');
+    //     $enteredBloodGroup = strtoupper($data['bg']);
+    //     if (!in_array($enteredBloodGroup, $validBloodGroups)) {
+    //     $errors['bg'] = "Invalid blood group. The blood groups are 'A-','A+' ,'B+', 'AB+','AB-' ,'O+','O-'";
+    //     }
+    //     }
+    //     return $errors;
+    //     }
 
       
 
