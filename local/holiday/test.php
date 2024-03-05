@@ -11,9 +11,12 @@ require_login();
     $year1=$_POST['year1'];
     $year2=$_POST['year2'];
     // echo "Both year and status are set.";
+    $aca = $DB->get_record_sql("SELECT * FROM {academic_year} WHERE YEAR(FROM_UNIXTIME(start_year)) = $year1");
+    
+$aca_id=$aca->id;
+
     $rec = $DB->get_records_sql(
-        "SELECT * FROM {addholiday} WHERE YEAR(FROM_UNIXTIME(from_date)) = ? OR YEAR(FROM_UNIXTIME(to_date)) = ?",
-        array($year1, $year2)
+        "SELECT * FROM {addholiday} WHERE academic_id=$aca_id"
     );
     
   
