@@ -383,7 +383,7 @@ $mustache = new Mustache_Engine();
 // echo $mustache->render($template, ['Promotion' => $data1]);
 if (isset($_POST['submit'])) {
 
-      $date = $_POST['date'];
+      //$date = $_POST['date'];
         // $attendance = $_POST['attendance'];
       ////////////////////PASSED STUDENTS///////////////////////////////
       $academic = $_POST['academic'];
@@ -398,22 +398,63 @@ if (isset($_POST['submit'])) {
       // $attendance = $_POST['attendance'];
 
       $attendance = $_POST['attendance'];
+      $alert_displayed = false; // Initialize flag
 
       foreach ($attendance as $student_id => $status) {
 
         if($status == 'pass')
         {
-            
-          $record = new stdClass();
-          // $record->status = $status;
-          $record->s_class = $class;
-          $record->s_division = $division;
-          $record->user_id=$student_id;
-      // print_r( $record->status );
-      // exit();
-          $DB->insert_record('student_assign', $record, false);
+            // Check if a record already exists for the student in the specified class and division within the same academic year
+            $existing_record = $DB->get_record_sql("
+                SELECT sa.*
+                FROM {student_assign} sa
+                JOIN {division} d ON sa.s_division = d.id
+                JOIN {class} c ON sa.s_class = c.id
+                WHERE sa.user_id = ? 
+                AND c.academic_id = ?",
+                [$student_id, $academic]
+            );
+            //print_r($existing_record);
+        
+            if ($existing_record && !$alert_displayed) {
+              // If the record already exists and the alert has not been displayed yet, display the alert message
+              echo "<script>alert('The user is already assigned to this class and division in the same academic year.');</script>";
+              $alert_displayed = true; // Set the flag to true to indicate that the alert has been displayed
+              break; // Exit the loop
+          }   
+          else {
+                // Insert a new record for the student in the specified class and division
+                $record = new stdClass();
+                // $record->status = $status;
+                $record->s_class = $class;
+                $record->s_division = $division;
+                $record->user_id=$student_id;
+            // print_r( $record->status );exit();
+            // exit();
+                $DB->insert_record('student_assign', $record, false);
+            }
+        
+
+
         }
         elseif ($status == 'fail') {
+
+          $existing_record = $DB->get_record_sql("
+          SELECT sa.*
+          FROM {student_assign} sa
+          JOIN {division} d ON sa.s_division = d.id
+          JOIN {class} c ON sa.s_class = c.id
+          WHERE sa.user_id = ? 
+          AND c.academic_id = ?",
+          [$student_id, $academic]
+      );
+      if ($existing_record && !$alert_displayed) {
+        // If the record already exists and the alert has not been displayed yet, display the alert message
+        echo "<script>alert('The user is already assigned to this class and division in the same academic year.');</script>";
+        $alert_displayed = true; // Set the flag to true to indicate that the alert has been displayed
+        break; // Exit the loop
+    } 
+    else {
           $record = new stdClass();
           // $record->status = $status;
           $record->s_class = $class1;
@@ -422,6 +463,7 @@ if (isset($_POST['submit'])) {
       // print_r( $record->status );
       // exit();
           $DB->insert_record('student_assign', $record, false);
+    }
         }  
       }
 
@@ -440,6 +482,9 @@ if (isset($_POST['submit'])) {
 ?>
 
 <script>
+function displayPopup(message) {
+    alert(message); // You can use any popup library or custom modal here
+}
   function promotion() {
 //   const selectedAttendance = {};
 // // alert("fdgdf");exit();
