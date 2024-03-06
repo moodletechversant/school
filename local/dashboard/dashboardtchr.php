@@ -131,7 +131,7 @@ foreach ($data1 as $record) {
   }
 }}
 if (empty($data['myarray1'])) {
-  $data['myarray2'] = true; 
+  $data['myarray3'] = true; 
 }
 // Add the dot entry if more names are available
 if ($showMore) {
