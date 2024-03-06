@@ -60,12 +60,14 @@ if(isset($_POST['option'])){
                                 </td>
                                 <?php if($break_ftime != NULL) { ?>
                                             <td class="break-bg">
-                                                <div class="margin-10px-top font-size14 break-color"><?php  echo $break_type; ?><br><?php  echo $break_ftime." to ".$break_ttime; ?></div>
-                                            </td>
-                                            
+                                                <div class="margin-10px-top font-size14 break-color"><?php  echo $break_type; ?><br><?php  echo $break_ftime." to ".$break_ttime; ?></div> 
+                                           
+                                              </td>
+                                          
+                                          
                                 
                                 <?php } 
-                            } ?>
+                            } ?> 
                          </tr>
 
                     <?php } ?>

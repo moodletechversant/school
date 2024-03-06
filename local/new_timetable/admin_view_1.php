@@ -49,8 +49,31 @@ echo $OUTPUT->footer();
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <script type="text/javascript">
+  
 //  $(document).ready(function() {
-   
+  function deletetimetable(id)
+    {      
+        var confirmation = confirm("Are you sure you want to delete this item?");
+        if (confirmation) {   
+        
+        var divisionn = document.getElementById("division").value; 
+         
+            if (divisionn != "") {
+                // alert(id);
+                $.ajax({
+                
+                    url: "adminajax_1.php",
+                    data: {option: divisionn,delete:id},
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        $("#demo").html(data); // Corrected ID
+                    }
+                });
+            }
+    }
+}
+  
 function deleteassign(id)
     {      
         var confirmation = confirm("Are you sure you want to delete this item?");
