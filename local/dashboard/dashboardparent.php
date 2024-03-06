@@ -18,10 +18,20 @@ echo $OUTPUT->header();
 $current_time = time(); 
 //print_r($current_time);exit();
 
-
+$data=array();
 $current_userid = $USER->id;
 // print_r($current_userid);exit();
+$child = $DB->get_records_sql("SELECT * FROM {parent} WHERE user_id=$current_userid");
+foreach($child as $children){
+    $record=$children->child_id;
+    // print_r($record);exit();
+$data[] = array('childid' => $record);
+    
+}
 
+// $childdata = array('data' => $data);
+
+// print_r($data);exit();
 
 $current_timestamp = strtotime('now');
 // $data1 = $DB->get_records_sql("SELECT s_name FROM {leave} WHERE (f_date <= '{$current_timestamp}' AND t_date >= '{$current_timestamp}')");
@@ -151,7 +161,9 @@ $current_timestamp = strtotime('now');
 // );
 // print_r($mustacheData);exit();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template,['dashboard'=>$dashboard,'child_img'=>$child_img,'css_link'=>$css_link]);
+echo $mustache->render($template,['dashboard'=>$dashboard,'child_img'=>$child_img,'css_link'=>$css_link, 'data' => $data]);
+// echo $template->render(array('data' => $data, 'dashboard' => $dashboard, 'child_img' => $child_img));
+// echo $mustache->render($template,$childdata);
 
 echo $OUTPUT->footer();
 
