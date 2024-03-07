@@ -45,6 +45,7 @@ else if($formdata = $mform->get_data()){
 
     //  $id= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE id='$formdata->student'");
      $studentassgn =  new stdclass();
+    //  $studentassgn->academic_id = $formdata->academicyear;
      $studentassgn->s_class  = $formdata->class;
      $studentassgn->s_division = $formdata->division;
      // Loop through each student and insert a separate record for each
