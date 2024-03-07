@@ -119,16 +119,24 @@
 
 <script>
 function onYearChange() {
-    var selectedYear = $('#yearDropdown').val();
     var selectedstatus = $('#id_status').val();
-   // 
+      var selectedYear = $('#yearDropdown').val();
+    
+    year = selectedYear.split('-')
+    year1 = year[0].split('/')
+    year2 = year[1].split('/')
+    //alert(year1[2]+" "+year2[2])
+year3=year1[2]
+year4=year2[2]
+  //  alert("year 1 :"+year[0]+" year 2 :"+year[1])
+    
     $.ajax({
      
         type: 'POST',
         url: 'teacher_view.php',
-        data: {year: selectedYear ,statuss:selectedstatus  },
+        data: {date1: year[0], date2: year[1], statuss:selectedstatus  },
         success: function(response) {
-         //alert(response );
+        // alert(year3 +""+selectedstatus);
           //$("#demo").html(response);
             $('#leaveTable').html(response);
         },
@@ -138,4 +146,5 @@ function onYearChange() {
     });
 }
 </script>
+
 </body>

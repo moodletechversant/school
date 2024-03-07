@@ -14,22 +14,46 @@ $img1=new moodle_url('/local/img/tick.svg');
 $img2=new moodle_url('/local/img/untick.svg');
 $current_time = time(); 
 
-if(!empty($_POST['year']) && !empty($_POST['statuss'])){
-  $year=$_POST['year'];
-  $status=$_POST['statuss'];
+
+
+if(!empty($_POST['date1']) && !empty($_POST['date2']) && !empty($_POST['statuss'])){
+  //  echo "[".$_POST['date1']."][".$_POST['date2']."]";
+
+  $timestamp1 = DateTime::createFromFormat('d/m/Y', $_POST['date1']);
+  $timestamp2 = DateTime::createFromFormat('d/m/Y', $_POST['date2']);
+
+      $stamp1 = $timestamp1->getTimestamp();
+      $stamp2 = $timestamp2->getTimestamp();
+      $status=$_POST['statuss'];
+
+// echo $stamp1."-".$stamp2;
+
+//$leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE f_date BETWEEN '$stamp1' AND '$stamp2' AND t_date BETWEEN '$stamp1' AND '$stamp2' AND l_status = '$status'");
+// echo ("SELECT * FROM {leave} WHERE f_date BETWEEN $stamp1 AND $stamp2 AND t_date BETWEEN $stamp1 AND $stamp2 AND l_status = '$status'");
+$leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE f_date BETWEEN $stamp1 AND $stamp2 AND t_date BETWEEN $stamp1 AND $stamp2 AND l_status = '$status'");
+
+  // 
   // echo "Both year and status are set.";
-  $leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE YEAR(FROM_UNIXTIME(f_date))=$year AND l_status='$status'");
+  //$leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE YEAR(FROM_UNIXTIME(f_date))=$year AND l_status='$status'");
 
 }
-elseif(isset($_POST['year']) && empty($_POST['statuss'])){
-  $year=$_POST['year'];
+
+elseif(!empty($_POST['date1']) && !empty($_POST['date2']) &&  empty($_POST['statuss'])){
+  $timestamp1 = DateTime::createFromFormat('d/m/Y', $_POST['date1']);
+  $timestamp2 = DateTime::createFromFormat('d/m/Y', $_POST['date2']);
+
+      $stamp1 = $timestamp1->getTimestamp();
+      $stamp2 = $timestamp2->getTimestamp();
+      $status=$_POST['statuss'];
   // echo "Only year is set.";
-  $leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE YEAR(FROM_UNIXTIME(f_date))=$year");
+  $leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE f_date BETWEEN $stamp1 AND $stamp2 AND t_date BETWEEN $stamp1 AND $stamp2 ");
 
 }
-elseif(empty($_POST['year']) && !empty($_POST['statuss'])){
+elseif(empty($_POST['date1']) && empty($_POST['date2']) && !empty($_POST['statuss'])) {
+   
   $status=$_POST['statuss'];
-  //echo "Only status is set."
+  // echo $status;
+  // echo "Only status is set.";
   $leave = $DB->get_records_sql("SELECT * FROM {leave} WHERE  l_status='$status'");
 
 

@@ -38,17 +38,21 @@ $current_time = time();
 $mustache = new Mustache_Engine();
 $table = new html_table();
 
-$academic = $DB->get_records('academic_year');
-   
+
 $options1 = array();
-// $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
-foreach ($academic as $academic1) {
-    $timestart = $academic1->start_year;
-    $timestart1 = date("Y", $timestart);
-   // print_r($timestart1);exit();
-  
-    $options1[] = array('value' => $academic1->id, 'label' => $timestart1);
-}
+$academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
+
+
+    
+    foreach ($academic_id as $academic) {
+        $timestart = $academic->start_year;
+        $timeend = $academic->end_year;
+        
+        $timestart1 = date("d/m/Y", $timestart);
+        $timeend1 = date("d/m/Y", $timeend);
+        
+        $options1[] = array('value' => $academic->id, 'label' => $timestart1 . '-' . $timeend1);
+    }
 
 $templateData = array(
     'startYearOptions' => $options1,
