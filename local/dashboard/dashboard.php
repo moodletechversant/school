@@ -78,22 +78,29 @@ $data = array(
 
 $bnamesCount = 1; // Counter for names
 $showMore = false; // Flag to indicate if more names are available
-foreach ($data1 as $record) {
-    $sname = $record->s_name;
-    $firstLetter = substr($sname, 0, 1); // Extract the first letter
 
-    if ($bnamesCount <= 4) {
-        $data['myarray1'][] = array('sname' => $sname, 'initial' => $firstLetter);
-        $bnamesCount++;
-    } else {
-        $showMore = true; // Set the flag if more names are available
-        break; // Exit the loop as we only need 4 names
-    }
+foreach ($data1 as $record) {
+    if (!empty($record)) { // Check if $record is not empty
+        $sname = $record->s_name;
+        $firstLetter = substr($sname, 0, 1); // Extract the first letter
+
+        if ($bnamesCount <= 4) {
+            $data['myarray1'][] = array('sname' => $sname, 'initial' => $firstLetter);
+            $bnamesCount++;
+        } else {
+            $showMore = true; // Set the flag if more names are available
+            break; // Exit the loop as we only need 4 names
+        }
+        $lastEntry = $record; // Update last entry
+    } 
 }
-// Add the dot entry if more names are available
+if (empty($data['myarray1'])) {
+    $data['myarray2'] = true; 
+}
 if ($showMore) {
     $data['myarray1'][] = array('initial' => '.....');
 }
+
 $index = 0;
 $lastEntry = null;
 

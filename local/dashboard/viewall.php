@@ -34,6 +34,9 @@ WHERE DATE(FROM_UNIXTIME(f_date)) <= CURDATE()
   AND DATE(FROM_UNIXTIME(t_date)) >= CURDATE()
   AND (l_status = 'approved' OR l_status = 'pending')";
 $data1 = $DB->get_records_sql($sql);
+if (empty($data1)) {
+  echo "Everyone is present today";
+} else {
 $table = new html_table();
     $mustache = new Mustache_Engine();
     $data = array();
@@ -48,7 +51,7 @@ foreach ($data1 as $rec1) {
     $leaves=array('leave' => $data);
     
     echo $mustache->render($template4, $leaves);
-   
+          }
     echo $OUTPUT->footer();
     ?>
 

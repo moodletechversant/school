@@ -826,7 +826,12 @@ width: 22px;
   border-color: #cb7cc0!important;
  
 }
-
+/* Add styles for past dates */
+.past-date .Holiday-box {
+  color: #999;
+  background-color: #f5f5f5;
+  /* Add more styling as needed */
+}
 
 .box {
   display: flex;

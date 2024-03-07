@@ -226,18 +226,3 @@ if(isset($_POST['p_id'])){
 //--------End of parent section--------//
 ?>
 
-<script type='text/javascript'>
-
-  //--------Confirmation in parent section--------//
-
-    document.getElementById('confirm_checkbox').addEventListener('change', function() {
-        if(this.checked) {
-            if(!confirm('Are you sure you want to proceed?')) {
-                this.checked = false;
-            }
-        }
-    });
-
-   //--------End--------// 
-
-</script>

@@ -62,16 +62,11 @@ echo '<script type="text/javascript" charset="utf8" src="https://code.jquery.com
 echo $OUTPUT->footer();
 
 ?>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
 <script>
-
 $(document).ready(function() {
     $('#id_class').empty().prepend("<option value='' selected='selected'>none</option>");
     $("#id_academic").prepend("<option value='' selected='selected' disabled>---Select academic year---</option>");
-
-
     $("#id_academic").change(function() {
     var brand_id = $(this).val();
     if(brand_id != ""){
@@ -84,15 +79,12 @@ $(document).ready(function() {
         	}
         });
     }
-    
-   
 });
 });
 
 $(document).ready(function() {
   $('#id_division').empty().prepend("<option value='' selected='selected'>none</option>");
   //$("#id_class").prepend("<option value='' selected='selected'>none</option>");
-
     $("#id_class").change(function() {
     var brand_id = $(this).val();
     if(brand_id != ""){

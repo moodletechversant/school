@@ -55,6 +55,13 @@ echo $html;
 // Retrieve the selected option value
 if(isset($_POST['option'])){
     $option3 = $_POST['option']; 
+    $period_id=$_POST['delete'];
+    
+    if( $period_id>0){
+        // echo $period_id;exit();
+        $DB->delete_records('new_timetable_periods', array('id'=> $period_id));
+        $DB->delete_records('new_timetable', array('period_id'=> $period_id));
+    }
     //print_r($option1);exit();
     ?>
     
@@ -71,7 +78,7 @@ if(isset($_POST['option'])){
                         $val = $records->t_day;
                         //print_r($val);exit();
                         $div_id=$records->id;
-                        //print_r($div_id);exit();
+                      
                         $value=$DB->get_record_sql("SELECT * FROM {days} WHERE id = $val");
                         $day=$value->days;
                         $daysid=$value->id;
@@ -81,13 +88,13 @@ if(isset($_POST['option'])){
                         
                         ?>
                         <tr>
-                        <th>
-                            <div class="uk-tile uk-tile-secondary uk-padding-small uk-margin-small uk-text-center">
-                            <div class="vertical-text">
-                                <h4> <?php echo $day; ?> </h4>
+                            <th>
+                                <div class="uk-tile uk-tile-secondary uk-padding-small uk-margin-small uk-text-center">
+                                <div class="vertical-text">
+                                    <h4> <?php echo $day; ?> </h4>
                                 </div>
-                            </div>
-                          </th>
+                                </div>
+                            </th>
                             <?php
                             foreach ($rec2 as $records1) {
                                 $period_id = $records1->period_id;
@@ -106,35 +113,33 @@ if(isset($_POST['option'])){
                                 $break_ftime=$records1->break_ftime;
                                 $break_ttime=$records1->break_ttime;
                                 $days_id=$records1->days_id;
-
                                 ?>
                                 <td>
-                                <div class="uk-tile uk-tile-primary uk-padding-small uk-margin-small">
-                                <h4 class="uk-margin-remove-bottom"><?php echo $t_subject; ?></h4>
-                                <p class="uk-margin-remove-top"><i><?php  echo $from_time." to ".$to_time; ?></i></p>
-                                <p><?php  echo "Teacher:".$t_teacher; ?> </p>
-                                </div>
+                                    <div class="uk-tile uk-tile-primary uk-padding-small uk-margin-small">
+                                    <h4 class="uk-margin-remove-bottom"><?php echo $t_subject; ?></h4>
+                                    <p class="uk-margin-remove-top"><i><?php  echo $from_time." to ".$to_time; ?></i></p>
+                                    <p><?php  echo "Teacher:".$t_teacher; ?> </p>
+                                    </div>
                                 </td>
                                 <?php if($break_ftime != NULL) { ?>
-                                    <td class="break-bg">
-                                                <div><?php  echo strtoupper($break_type); ?><br><?php  echo $break_ftime." to ".$break_ttime; ?></div>
-                                            </td>
-                                            
-                                            
-                                
+                                <td class="break-bg">
+                                    <div><?php  echo strtoupper($break_type); ?><br><?php  echo $break_ftime." to ".$break_ttime; ?></div>
+                                </td>
                                 <?php } 
+                              
                             } ?>
+                            <td>
+                           
+                                <a onclick="deletetimetable(<?php print_r($div_id); ?>)" href="#" class="action-table"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16 1.75V3h5.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H8V1.75C8 .784 8 .784 8 .784h.006C8 .784 8 .784 8 .784h4.5C15.216 0 16 .784 16 1.75Zm-6.5 0V3h5V1.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25ZM4.997 6.178a.75.75 0 1 0-1.493.144L4.916 20.92a1.75 1.75 0 0 0 1.742 1.58h10.684a1.75 1.75 0 0 0 1.742-1.581l1.413-14.597a.75.75 0 0 0-1.494-.144l-1.412 14.596a.25.25 0 0 1-.249.226H6.658a.25.25 0 0 1-.249-.226L4.997 6.178Z"></path><path d="M9.206 7.501a.75.75 0 0 1 .793.705l.5 8.5A.75.75 0 1 1 9 16.794l-.5-8.5a.75.75 0 0 1 .705-.793Zm6.293.793A.75.75 0 1 0 14 8.206l-.5 8.5a.75.75 0 0 0 1.498.088l.5-8.5Z"></path></svg> Delete</a>
+                   
+                        </td>
                          </tr>
-
                     <?php } ?>
-			
 			</tbody>
-		
 		    </table>
         </div>
     </div>
-		
-        <?php
+    <?php
 	}
     else{
 		

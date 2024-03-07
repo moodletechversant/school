@@ -33,10 +33,17 @@ li{
     font-size:large;
 
 }
+.button-container {
+    display: inline-block;
+}
+
 </style>
 
   <body>
     <header><h1 class="title">Survey</h1></header>
+      <a href="{{answer}}">
+        <button type="button" class="btn btn-outline-secondary del">View survey Answers</button>
+    </a>
    <div class="row mt-5">
       <div class="col-12">
           {{#survey}}
@@ -50,7 +57,13 @@ li{
                                  <li>{{survey_question}}</li>                   
                           {{/q_survey}}
                           </ol>
-                          <a href="{{delete}}={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
+                         <div class="button-container">
+    <a href="{{delete}}={{id}}" class="mr-3">
+        <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
+    </a>
+  
+</div>
+
                       </div>
                       <div class="icon-d">
                            <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
@@ -66,7 +79,13 @@ li{
                                  <li>{{survey_question}}</li>                   
                           {{/q_survey}}
                           </ol>
-                          <a href="{{delete}}={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
+                     <div class="button-container">
+    <a href="{{delete}}={{id}}" class="mr-3">
+        <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
+    </a>
+   
+</div>
+
                       </div>
                       <div class="icon-d">
                            <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
@@ -84,7 +103,13 @@ li{
                                  <li>{{survey_question}}</li>                  
                           {{/q_survey}}
                            </ol>
-                          <a href="{{delete}}={{id}}"><button type="button" class="btn btn-outline-secondary del ml-5 mt-3">Delete survey</button></a></p>
+                        <div class="button-container">
+    <a href="{{delete}}={{id}}" class="mr-3">
+        <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
+    </a>
+   
+</div>
+
                       </div>
                       <div class="icon-d">
                            <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>

@@ -38,7 +38,7 @@
 
 
 
-     if ($oldversion < 2024021607) {
+     if ($oldversion < 2024021609) {
          $table = new xmldb_table('type_of_exam');
          $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
          $table->add_field('course_id', XMLDB_TYPE_CHAR, '15', null, XMLDB_NOTNULL, null, '');
@@ -48,8 +48,19 @@
          if (!$dbman->table_exists($table)) {
              $dbman->create_table($table);
          }
-         }
-        upgrade_plugin_savepoint(true,2024021607,'local','progress_card');
+         
+        // Create table custom_quiz
+        $table2 = new xmldb_table('custom_quiz');
+        $table2->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table2->add_field('quiz_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table2->add_field('type_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table2->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+        if (!$dbman->table_exists($table2)) {
+            $dbman->create_table($table2);
+        }
+    }
+
+        upgrade_plugin_savepoint(true,2024021609,'local','progress_card');
 
 
 

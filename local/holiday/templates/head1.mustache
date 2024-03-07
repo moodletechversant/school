@@ -10,37 +10,82 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href={{css_link}} />
+
 </head>
   <body>
+ <div class="form-group">
+              <label for="selectYear">Select Year</label>
+              <select class="form-select" aria-label="Select Start Year" id="yearDropdown" onchange="onYearChange()" style="width:500px;">
+                  <option value="" id="" selected>------------ Select Year ------------</option>
+                  {{#templateData}}
+                      {{#startYearOptions}}
+                          <option value="{{label}}">{{label}}</option>
+                      {{/startYearOptions}}
+                  {{/templateData}}
+              </select>
+            </div>
 
-<div class="form-wrap">
+            <br><br><br>
+<div class="form-wrap" id="leaveholiday">
     <div class="cointainer">
         <div class="col-md-10 col-10 mx-auto col-lg-6">
             <div class="form-card card">
                 <h4 class="mb-3">Holiday Calendar</h4>
                
-               <div class="row holiday-wrap" ">
-                {{#tableRows}}
-                    <div class="col-md-6" >
-                        <div class="Holiday-box" >
-                            <div class="hday-lt">
-                            <p>{{month}}</p>
-                            <h5>{{day}}</h5>
-                            </div>
-                            <div class="hday-txt">
-                            <h4>{{holiday}}</h4>
-                            <p>{{dayName}}</p>
+               <div class="row holiday-wrap" id="leaveholiday">
+                 {{#tableRows}}
+                        <div class="col-md-6 {{pastDateClass}}">
+                            <div class="Holiday-box">
+                                <div class="hday-lt">
+                                    <p>{{month}}</p>
+                                    <h5>{{day}}</h5>
+                                </div>
+                                <div class="hday-txt">
+                                    <h4>{{holiday}}</h4>
+                                    <p>{{dayName}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {{/tableRows}}
+                        {{/tableRows}}
                </div>
-          
+                    <div id="demo">
+
                </div>
         </div>
        
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+<script>
+function onYearChange() {
+    var selectedYear = $('#yearDropdown').val();
+    
+    year = selectedYear.split('-')
+    year1 = year[0].split('/')
+    year2 = year[1].split('/')
+    //alert(year1[2]+" "+year2[2])
+year3=year1[2]
+year4=year2[2]
+   // 
+    $.ajax({
+     
+        type: 'POST',
+        url: 'test.php',
+        data: {year1: year3, year2:year4 },
+        success: function(response) {
+         //alert(response );
+          //$("#demo").html(response);
+            $('#leaveholiday').html(response);
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr);
+        }
+    });
+}
+</script>
+
   </body>
 </html>
