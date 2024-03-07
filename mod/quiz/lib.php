@@ -86,6 +86,7 @@ require_once(__DIR__ . '/deprecatedlib.php');
  */
 function quiz_add_instance($quiz) {
     global $DB;
+    // print_r($quiz);exit();
     $cmid = $quiz->coursemodule;
 
     // Process the options from the form.
@@ -97,7 +98,16 @@ function quiz_add_instance($quiz) {
 
     // Try to store it in the database.
     $quiz->id = $DB->insert_record('quiz', $quiz);
-
+//techversant
+//edited by Abhin
+//purpose:insert values to table named custom quiz (/quiz/setting/type of exam)
+///////////////////////////////////////
+    $typeofexamid=$quiz->selectexamname;
+$DB->execute("INSERT INTO {custom_quiz} (type_id,quiz_id) values( $typeofexamid,$quiz->id)");
+///////////////////////////////////////
+///end
+//
+//
     // Create the first section for this quiz.
     $DB->insert_record('quiz_sections', array('quizid' => $quiz->id,
             'firstslot' => 1, 'heading' => '', 'shufflequestions' => 0));

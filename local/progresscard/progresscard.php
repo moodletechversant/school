@@ -24,18 +24,16 @@ echo $OUTPUT->header();
 $childids=$DB->get_record_sql("SELECT child_id FROM {parent} WHERE user_id=$user_id");
 $childid=$childids->child_id;
 $student_details=array();
-$student_details=$DB->get_records_sql("SELECT user_id,s_ftname,s_mlname,s_lsname FROM {student} WHERE user_id=$childid");
+$student_details=$DB->get_record_sql("SELECT user_id,s_ftname,s_mlname,s_lsname FROM {student} WHERE user_id=$childid");
 //print_r($student_details);exit();
 
-foreach($student_details as $student){
-
-    $sname = $student->s_ftname;
-    $smname = $student->s_mlname;
-    $slame = $student->s_lsname;
+    $sname = $student_details->s_ftname;
+    $smname = $student_details->s_mlname;
+    $slame = $student_details->s_lsname;
     $fname=$sname." ".$smname." ".$slame; 
-    $val1 =$student->user_id;
+    $val1 =$student_details->user_id;
 
-    //print_r($fname);exit();
+    //print_r($val1);exit();
 
 $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacherid, t.t_fname, c.academic_id, c.class_name
     FROM {student_assign} sa
@@ -51,8 +49,7 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     $classteacher=$rec1->t_fname;
     $academic_id=$rec1->academic_id;
 
-  $rec2= $DB->get_records_sql("SELECT * FROM {academic_year} WHERE id=$academic_id"); 
-  foreach($rec2 as $data){
+  $data= $DB->get_record_sql("SELECT * FROM {academic_year} WHERE id=$academic_id"); 
     $startyear=$data->start_year;
     $endyear=$data->end_year; 
     $startyear1=date("d-m-Y", $startyear);
@@ -60,37 +57,25 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     $academic_year=$startyear1."  to  ".$endyear1;
     //print_r($academic_year);exit();
   
-  
-$subject=$DB->get_records_sql("SELECT course_id FROM {subject} WHERE sub_division=$division_id");
-//print_r($subject);exit();
-foreach($subject as $sub){
- $course_id=$sub->course_id;
- $coursename=$DB->get_record_sql("SELECT fullname FROM {course} WHERE id=$course_id");
- $course_name=$coursename->fullname;
- 
- $demo = $DB->get_records_sql("SELECT q.name, q.sumgrades AS quiz_sumgrades, q.grade AS quiz_grade, qa.sumgrades AS attempt_sumgrades, qg.grade AS grade
-FROM {quiz} q 
-INNER JOIN {quiz_attempts} qa ON q.id = qa.quiz 
-INNER JOIN {quiz_grades} qg ON qa.quiz = qg.quiz 
-WHERE qg.userid = $val1 AND q.course = $course_id");
-foreach($demo as $row){
-    $exam_name=$row->name;
-    $marktotal=$row->quiz_sumgrades;
-    $gradetotal=$row->quiz_grade;
-    $markgained=$row->attempt_sumgrades;
-    $gradegained=$row->grade;
 
-$exam[] = array('exam_name' => $exam_name,'marktotal' => $marktotal,'gradetotal'=>$gradetotal,'markgained'=>$markgained,'gradegained'=>$gradegained);
-}
-$profile[] = array('course_name' => $course_name,'exam'=>$exam);
-}
-$profile1[] = array('academic_year' => $academic_year,'profile'=>$profile);
-}
-$profile2[] = array('fname'=>$fname,'classname' => $classname,'division'=>$division,'classteacher'=>$classteacher,'academic_year'=>$academic_year,'profile1'=>$profile1);
-//print_r($profile2);exit();
-}
- $mustache = new Mustache_Engine();
- echo $mustache->render($template,['profile2'=>$profile2,'css_link'=>$css_link]);
+    $typeofexam = $DB->get_records('type_of_exam');
+   
+    $options1 = array();
+    $options1[] = array('value' => '', 'label' => '---- Select Type of Exam ----');
+    foreach ($typeofexam as $nameofexam){
+        $type_of_exam = $nameofexam->typeofexam;
+        $typeid = $nameofexam->id;
+        // print_r($typeid);exit();
+        $c_id = $nameofexam->course_id;      
+        $options1[] = array('value' => $typeid, 'label' => $type_of_exam);
+    }
+    //  print_r($typeid);exit();
+    $templateData = array(
+        'startYearOptions' => $options1
+    );
+     $mustache = new Mustache_Engine();
+    $output = $mustache->render($template, ['division_id'=>$division_id,'childid'=>$childid,'css_link'=>$css_link,'templateData'=>$templateData,'academic_year' => $academic_year,'fname'=>$fname,'classname' => $classname,'division'=>$division,'classteacher'=>$classteacher,'academic_year'=>$academic_year]);
+    echo $output;
+
  echo $OUTPUT->footer();
  ?>
-
