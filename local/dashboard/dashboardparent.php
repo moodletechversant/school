@@ -21,17 +21,27 @@ $current_time = time();
 $data=array();
 $current_userid = $USER->id;
 // print_r($current_userid);exit();
-$child = $DB->get_records_sql("SELECT * FROM {parent} WHERE user_id=$current_userid");
+$child = $DB->get_records_sql("SELECT p.child_id, s.s_ftname 
+FROM {parent} p 
+LEFT JOIN {student} s 
+ON p.child_id = s.user_id 
+WHERE p.user_id = ?", array($current_userid));
+//  print_r($child);exit();
+
 foreach($child as $children){
     $record=$children->child_id;
-    // print_r($record);exit();
-$data[] = array('childid' => $record);
+    $record2=$children->s_ftname;
+    //  print_r($record2);exit();
+$data[] = array(
+    'childid' => $record, 
+    's_ftname' => $record2, 
+);
     
 }
 
 // $childdata = array('data' => $data);
 
-// print_r($data);exit();
+//  print_r($data);exit();
 
 $current_timestamp = strtotime('now');
 // $data1 = $DB->get_records_sql("SELECT s_name FROM {leave} WHERE (f_date <= '{$current_timestamp}' AND t_date >= '{$current_timestamp}')");
