@@ -1023,6 +1023,21 @@ $string['totalquestionsinrandomqcategory'] = 'Total of {$a} questions in categor
 $string['true'] = 'True';
 $string['truefalse'] = 'True/false';
 $string['type'] = 'Type';
+///
+///
+////Techversant
+/////Edited by Abhin
+//////purpose: to setting named "Types of exam" field in quiz settings
+///////
+$string['typeofexam'] = 'Type of exam';
+$string['typeofexamhelp']='Type of exam is ...';
+$string['selectexamname']='Exam Types';
+///////
+//////
+////
+//
+//
+//
 $string['unfinished'] = 'open';
 $string['ungraded'] = 'Ungraded';
 $string['unit'] = 'Unit';

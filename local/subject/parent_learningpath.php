@@ -26,10 +26,11 @@ $PAGE->set_title($linktext);
 
 echo $OUTPUT->header();
 $current_user_id = $USER->id;
+$user1= optional_param('id', 0, PARAM_INT);
 // print_r($current_user_id);exit();
 // $recs=$DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$current_user_id");
 // print_r($recs);exit();
-$parent = $DB->get_record('parent', array('user_id' => $current_user_id));
+$parent = $DB->get_record('parent', array('child_id' => $user1));
 
 $data = array();
 // $rec1=$DB->get_records_sql("SELECT *
@@ -38,7 +39,7 @@ $data = array();
 $rec1=$DB->get_records_sql("SELECT {course}.*
 FROM {enrol} JOIN {user_enrolments} ON
 {user_enrolments}.enrolid = {enrol}.id JOIN {course}
-  ON {course}.id = {enrol}.courseid where {user_enrolments}.userid=$parent->child_id");
+  ON {course}.id = {enrol}.courseid where {user_enrolments}.userid=$user1");
  // print_r($rec1);exit();
 $mustache = new Mustache_Engine();
 foreach($rec1 as $record1){

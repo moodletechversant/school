@@ -16,7 +16,7 @@ $PAGE->set_heading($linktext);
 echo $OUTPUT->header();
 
 $current_user_id = $USER->id;
-
+$user1= optional_param('id', 0, PARAM_INT);
 // Assuming there is a table named mdl_parent with a field user_id
 $parent = $DB->get_record('parent', array('user_id' => $current_user_id));
 //print_r($parent);exit();
@@ -27,7 +27,7 @@ if ($parent) {
         FROM {new_timetable_periods}
         INNER JOIN {student_assign} ON {student_assign}.s_division = {new_timetable_periods}.t_division
         WHERE {student_assign}.user_id = :child_user_id
-    ", ['child_user_id' => $parent->child_id]);
+    ", ['child_user_id' => $user1]);
     
 //print_r($rec1);exit();
     $mustache = new Mustache_Engine();

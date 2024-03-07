@@ -41,7 +41,6 @@
      if ($oldversion < 2024021609) {
          $table = new xmldb_table('type_of_exam');
          $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
-         $table->add_field('course_id', XMLDB_TYPE_CHAR, '15', null, XMLDB_NOTNULL, null, '');
          $table->add_field('typeofexam', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
         
          $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));

@@ -68,7 +68,7 @@ class mod_quiz_mod_form extends moodleform_mod {
 
         // Name.
         $mform->addElement('text', 'name', get_string('name'), array('size'=>'64'));
-        if (!empty($CFG->formatstringstriptags)) {
+        if (!empty($CFG-director>formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
             $mform->setType('name', PARAM_CLEANHTML);
@@ -293,7 +293,29 @@ class mod_quiz_mod_form extends moodleform_mod {
 
         // Any other rule plugins.
         quiz_access_manager::add_settings_form_fields($this, $mform);
-
+        //----------------------------------------------------------------------
+        /////Techversant
+        ///////Edited by Abhin
+        ///////purpose:to add type of exam names in quiz settings for progress card
+        $mform->addElement('header', 'typeofexam', get_string('typeofexam', 'quiz'));
+        $mform->addHelpButton('typeofexam','typeofexamhelp','quiz');
+        $examnames = array();
+        $examnames= $DB->get_records_sql("SELECT * FROM {type_of_exam}");
+        $names=array();
+        $id=array();
+        foreach ($examnames as $obj) {
+            $id[] = $obj->id;
+        }
+        foreach ($examnames as $obj) {
+            $names[] = $obj->typeofexam;
+        }
+        $combined_array = array_combine($id,$names);
+        // print_r($combined_array);exit();
+        
+        $mform->addElement('select', 'selectexamname', get_string('selectexamname', 'quiz'),$combined_array);
+        ////////
+        //////
+        ////
         // -------------------------------------------------------------------------------
         $mform->addElement('header', 'overallfeedbackhdr', get_string('overallfeedback', 'quiz'));
         $mform->addHelpButton('overallfeedbackhdr', 'overallfeedback', 'quiz');

@@ -10,10 +10,11 @@ global $DB, $USER, $OUTPUT, $PAGE;
 
 $context = context_system::instance();
 require_login();
+$user1= optional_param('id', 0, PARAM_INT);
 
 $linkurl = new moodle_url('/local/event/upcoming_events.php');
 $csspath = new moodle_url('/local/css/style.css');
-$dashboard = new moodle_url('/local/dashboard/upcoming.php');
+$dashboard = new moodle_url('/local/dashboard/upcoming.php', array('child_id' => $user1));
 
 
 // Print the page header.

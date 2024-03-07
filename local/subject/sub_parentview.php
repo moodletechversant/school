@@ -24,8 +24,10 @@ $PAGE->set_title($linktext);
 echo $OUTPUT->header();
 
 $current_user_id = $USER->id;
+$user1= optional_param('id', 0, PARAM_INT);
+
 // Assuming there is a table named mdl_parent with a field user_id
-$parent = $DB->get_record('parent', array('user_id' => $current_user_id));
+$parent = $DB->get_record('parent', array('child_id' => $user1));
 if ($parent) {
 $rec1 = $DB->get_records_sql("
     SELECT {course}.*
@@ -35,7 +37,7 @@ $rec1 = $DB->get_records_sql("
     JOIN {student} ON {student}.user_id = {user_enrolments}.userid
     JOIN {parent} ON {parent}.child_id = {student}.user_id
     WHERE {parent}.child_id = :current_user_id
-", ['current_user_id' =>  $parent->child_id]);
+", ['current_user_id' =>  $user1]);
 
 
 //print_r($rec1);exit();

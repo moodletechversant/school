@@ -10,6 +10,8 @@ Mustache_Autoloader::register();
 global $class,$CFG,$USER;
 $context = context_system::instance();
 $user=$USER->id;
+$user1= optional_param('id', 0, PARAM_INT);
+// print_r($user);exit();
 $template = file_get_contents($CFG->dirroot . '/local/profileview/template/profile.mustache');
 $template2 = file_get_contents($CFG->dirroot . '/local/profileview/template/parentviewprofile.mustache');
 
@@ -39,12 +41,12 @@ $sid = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id = ?", array($u
 
     //  print_r($pid);exit();
     if ($pid->child_id) {
-      $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$pid->child_id");
+      $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$user1");
       //print_r($student);exit();
       $sprofile = array(); 
       $scourses1 = array(); 
       
-      $studentt = $DB->get_record_sql("SELECT * FROM {student_assign} WHERE user_id=$pid->child_id");
+      $studentt = $DB->get_record_sql("SELECT * FROM {student_assign} WHERE user_id=$user1");
       if(!empty($studentt)){
       $s_division = $studentt->s_division;
       $value=$DB->get_record_sql("SELECT * FROM {division} WHERE id=$s_division");
@@ -67,7 +69,7 @@ $sid = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id = ?", array($u
           INNER JOIN {division} d ON sa.s_division = d.id
           INNER JOIN {teacher} t ON d.div_teacherid = t.user_id
           INNER JOIN {class} c ON d.div_class = c.id
-          WHERE sa.user_id = $pid->child_id");
+          WHERE sa.user_id = $user1");
           //  print_r($rec2);exit();
       
         $rec1 = $DB->get_records_sql("SELECT {course}.fullname,{course}.id FROM {course} JOIN {enrol} ON

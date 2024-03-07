@@ -14,12 +14,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.17/css/uikit.min.css" />
         <link rel="stylesheet" href={{css_link}} />
 </head>
-<body>
 <div class="dashboard-wrap pt-5">
- {{#profile2}}  
  <div class="container">
      <div class="cards progress-card col-md-10 mx-auto" style="height: auto;">
         <h1><b>PROGRESS CARD</b></h1>
+          
          <div class="row mt-5">
              <div class="col-md-6">
                 <div class="form-group">
@@ -47,55 +46,52 @@
                     <h4 class="mt-0 ">{{division}}</h4>
                   </div>
                </div>
-       </div>
-
-        <div class="row" style="    padding: 10px;
-        margin-top: 30px;">
-            <table class="table table-striped" style="border: 1px solid #b5b5b5;">
-                <thead>
-                  <tr>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Mark</th>
-                    <th scope="col">Mark</th>
-                    <th scope="col">Mark</th>
-                    <th scope="col">Mark</th>
-                    <th scope="col">Total Marks</th>
-                    <th scope="col">Grade</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#profile1}}
-                  {{#profile}}
-                  <tr>
-                    <td>{{course_name}}</td>
-                    <td>60</td>
-                    <td>60</td>
-                    <td>60</td>
-                    <td>60</td>
-                    <td>60</td>
-                    <td>B+</td>
-                  </tr>             
-                 {{/profile}}
-                 {{/profile1}}
-                </tbody>
-             </table>
+          </div>
+       <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="form-group">
+               <label>Select Type Of Exam</label>
+               <select class="form-select" aria-label="Select Type of Exam" id="typeofexam" style="width: 1030px;">
+               <option value="" selected>Select</option>
+               {{#templateData}}
+               {{#startYearOptions}}
+              <option value={{value}}>{{label}}</option>
+              {{/startYearOptions}}
+              {{/templateData}}
+              </select>
+            </div>
+          </div>
         </div>
+        <div id="demo">
+
+        </div>     
+        
 
     </div>
   </div>
-{{/profile2}}   
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.17/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.17/js/uikit-icons.min.js"></script>
-   
-  
-</body>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-</html>
+<script>
+    $(document).ready(function() {
+        $("#typeofexam").change(function() { // Corrected ID
+            var examtype = $(this).val();
+            var idofchild={{childid}};
+            var division_id={{division_id}};
+            if (examtype != "") {
+                $.ajax({
+                    url: "test.php",
+                    data: { exam_id: examtype,idofchild: idofchild,division_id: division_id},
+                    type: 'POST',
+                    success: function(data) {
+                        $("#demo").html(data); // Corrected ID
+                    }
+                });
+            }
+        });
+    });
+</script>

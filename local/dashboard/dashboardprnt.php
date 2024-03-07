@@ -3,6 +3,8 @@ require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 $userid=$USER->id;
+$child_id  = optional_param('child_id', 0, PARAM_INT);
+// print_r($child_id);exit();
 $pid= $DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$userid'");  
 if(!empty($pid) && $pid->user_id==$userid){
 $template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/dashboardprnt.mustache');
@@ -27,7 +29,7 @@ $subject=new moodle_url('/local/subject/sub_parentview.php');
 $learningpath=new moodle_url('/local/subject/parent_learningpath.php');
 $attendance=new moodle_url('/local/attendance/viewattendstd.php');
 $progresscard=new moodle_url('/local/progresscard/progresscard.php');
-$upcoming=new moodle_url('/local/dashboard/upcoming.php');
+$upcoming=new moodle_url('/local/dashboard/upcoming.php', array('child_id' => $child_id));
 $parentview=new moodle_url('/local/new_timetable/parentview.php');
 $survey=new moodle_url('/local/survey/survey_studentview.php');
 $diary=new moodle_url('/local/diary/studentview_diary.php');
@@ -39,7 +41,7 @@ $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
 echo $mustache->render($template,['css_link'=>$css_link,'img_12'=>$img_12,'img_5'=>$img_5,'img_2'=>$img_2,'img_6'=>$img_6,'img_28'=>$img_28,'img_7'=>$img_7,'img_13'=>$img_13,'img_17'=>$img_17,'img_14'=>$img_14,'img_18'=>$img_18,'img_8'=>$img_8
-,'profile'=>$profile,'subject'=>$subject,'learningpath'=>$learningpath,'attendance'=>$attendance,'progresscard'=>$progresscard,'upcoming'=>$upcoming,'parentview'=>$parentview,'survey'=>$survey,'diary'=>$diary,'chat'=>$chat,'holiday'=>$holiday]);
+,'profile'=>$profile,'subject'=>$subject,'learningpath'=>$learningpath,'attendance'=>$attendance,'progresscard'=>$progresscard,'upcoming'=>$upcoming,'parentview'=>$parentview,'survey'=>$survey,'diary'=>$diary,'chat'=>$chat,'holiday'=>$holiday,'child_id'=>$child_id]);
 echo $OUTPUT->footer();
 }
 else{
