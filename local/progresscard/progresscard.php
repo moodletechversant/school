@@ -65,11 +65,9 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     foreach ($typeofexam as $nameofexam){
         $type_of_exam = $nameofexam->typeofexam;
         $typeid = $nameofexam->id;
-        // print_r($typeid);exit();
         $c_id = $nameofexam->course_id;      
         $options1[] = array('value' => $typeid, 'label' => $type_of_exam);
     }
-    //  print_r($typeid);exit();
     $templateData = array(
         'startYearOptions' => $options1
     );

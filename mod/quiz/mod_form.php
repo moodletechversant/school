@@ -296,7 +296,7 @@ class mod_quiz_mod_form extends moodleform_mod {
         //----------------------------------------------------------------------
         /////Techversant
         ///////Edited by Abhin
-        ///////purpose:to add type of exam names in quiz settings
+        ///////purpose:to add type of exam names in quiz settings for progress card
         $mform->addElement('header', 'typeofexam', get_string('typeofexam', 'quiz'));
         $mform->addHelpButton('typeofexam','typeofexamhelp','quiz');
         $examnames = array();

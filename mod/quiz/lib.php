@@ -101,10 +101,10 @@ function quiz_add_instance($quiz) {
 //techversant
 //edited by Abhin
 //purpose:insert values to table named custom quiz (/quiz/setting/type of exam)
-///////////////////////////////////////
+//////////////////////////////////////////
     $typeofexamid=$quiz->selectexamname;
 $DB->execute("INSERT INTO {custom_quiz} (type_id,quiz_id) values( $typeofexamid,$quiz->id)");
-///////////////////////////////////////
+///////////////////////////////////////////
 ///end
 //
 //
