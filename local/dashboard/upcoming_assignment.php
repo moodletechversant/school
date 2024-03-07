@@ -14,10 +14,11 @@ $context = context_system::instance();
 require_login();
 
 //$linktext = "Upcoming Assignment";
+$user1= optional_param('id', 0, PARAM_INT);
 
 $linkurl = new moodle_url('/local/dashboard/upcoming_assignment.php');
 $csspath = new moodle_url('/local/css/style.css');
-$dashboard = new moodle_url('/local/dashboard/upcoming.php');
+$dashboard = new moodle_url('/local/dashboard/upcoming.php', array('child_id' => $user1));
 
 
 // Print the page header.
@@ -31,16 +32,18 @@ $PAGE->set_heading($linktext);
 
 echo $OUTPUT->header();
 $userid = $USER->id;
+// print_r($user1);exit();
 $current_date = time();
 $enrolled_courses = enrol_get_users_courses($userid);
 $context = context_user::instance($USER->id, MUST_EXIST);
-$pid = $DB->get_record_sql("SELECT * FROM {parent} WHERE user_id = ?", array($userid));
+//$pid = $DB->get_record_sql("SELECT user_id FROM {parent} WHERE child_id = ?", array($user1));
+// print_r($pid);exit();
 $sid = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id = ?", array($userid));
 $tid= $DB->get_record_sql("SELECT * FROM {teacher} WHERE user_id= ?", array($userid));
 
 //print_r($sid);exit();
-if ($pid) {
-    $penrolled_courses = enrol_get_users_courses($pid->child_id);
+if ($user1) {
+    $penrolled_courses = enrol_get_users_courses($user1);
     $enrolled_course_ids = array();
 foreach ($penrolled_courses as $enrolled_course) {
     $enrolled_course_ids[] = $enrolled_course->id;

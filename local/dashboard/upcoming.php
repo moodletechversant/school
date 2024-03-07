@@ -17,7 +17,8 @@ global $class,$CFG,$USER;
 $context = context_system::instance();
 require_login();
 // $classid = $class->id;
-
+$child_id  = optional_param('child_id', 0, PARAM_INT);
+// print_r($child_id);exit();
 $linkurl = new moodle_url('/local/dashboard/upcoming.php');
 $csspath = new moodle_url('/local/css/style.css');
 $calendar = new moodle_url('/calendar/view.php');
@@ -48,7 +49,7 @@ if (has_capability('moodle/site:config', $context)) {
 } else {
     // User is a regular user, display user template
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateUser,['csspath'=>$csspath,'upcoming_events'=>$upcoming_events,'upcoming_assignment'=>$upcoming_assignment,'upcomingexams'=>$upcomingexams,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3]);
+    echo $mustache->render($templateUser,['csspath'=>$csspath,'upcoming_events'=>$upcoming_events,'upcoming_assignment'=>$upcoming_assignment,'upcomingexams'=>$upcomingexams,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3,'child_id'=>$child_id]);
 }
 
 echo $OUTPUT->footer();
