@@ -90,13 +90,11 @@
                   <div class="form-group">
     <label>Status</label>
     <select class="form-select" aria-label="Select status" id="id_status" onchange="onYearChange()">
-       
-          <option value="" id="" selected>------------ Select Status ------------</option>
-            <option value="approved" id="approved">approved</option>
-            <option value="pending" id="pending">pending</option>
-            <option value="denied" id="denied">denied</option>
-
-    </select>
+                    <option value="" id="" selected>------------ Select Status ------------</option>
+                    <option value="approved" id="approved">approved</option>
+                    <option value="pending" id="pending">pending</option>
+                    <option value="denied" id="denied">denied</option>
+              </select>
 </div>
 
         
@@ -211,6 +209,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
 function onYearChange() {
@@ -240,6 +240,15 @@ year4=year2[2]
         }
     });
 }
+$(document).ready(function() {
+
+ $("#id_status").prop("disabled", "disabled");
+});
+
+$("#yearDropdown").change(function() {
+$("#id_status").removeAttr("disabled");
+});
+
 </script>
 
 

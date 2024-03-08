@@ -37,7 +37,26 @@ $current_time = time();
 
 $mustache = new Mustache_Engine();
 $table = new html_table();
-
+if (isset($_POST['b_id'])) {
+    $selectedYear = $_POST['b_id'];
+   echo $selectedYear; 
+    // Check if a year is selected
+    if ($selectedYear != "") {
+        
+        $options = '
+            <option value="" selected disabled>------------ Select Status ------------</option>
+            <option value="approved">approved</option>
+            <option value="pending">pending</option>
+            <option value="denied">denied</option>
+        ';
+        
+        // Output the options
+        echo $options;
+    } else {
+        // If no year is selected, return an empty string
+        echo '';
+    }
+}
 
 $options1 = array();
 $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
