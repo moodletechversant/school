@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_progresscard';
 $plugin->release = '0.1.0';
-$plugin->version = 2024021609;
+$plugin->version = 2024021611;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_ALPHA;

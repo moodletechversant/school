@@ -38,7 +38,7 @@
 
 
 
-     if ($oldversion < 2024021609) {
+     if ($oldversion < 2024021611) {
          $table = new xmldb_table('type_of_exam');
          $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
          $table->add_field('typeofexam', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
@@ -59,7 +59,7 @@
         }
     }
 
-        upgrade_plugin_savepoint(true,2024021609,'local','progress_card');
+        upgrade_plugin_savepoint(true,2024021611,'local','progress_card');
 
 
 

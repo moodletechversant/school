@@ -18,16 +18,13 @@ $PAGE->set_title($linktext);
 // Set the page heading.
 // $PAGE->set_heading($linktext);
 $PAGE->navbar->add('progresscard', new moodle_url($CFG->wwwroot.'/local/progresscard/progresscard.php'));
-$user_id=optional_param('id', 0, PARAM_INT);
-// print_r($user_id);exit();
+$user_id=$USER->id;
 echo $OUTPUT->header();
-// $user1= optional_param('id', 0, PARAM_INT);
-//$childids=$DB->get_record_sql("SELECT child_id FROM {parent} WHERE user_id=$user_id");
-// print_r($childids);exit();
 
+$childids=$DB->get_record_sql("SELECT child_id FROM {parent} WHERE user_id=$user_id");
 $childid=$childids->child_id;
 $student_details=array();
-$student_details=$DB->get_record_sql("SELECT user_id,s_ftname,s_mlname,s_lsname FROM {student} WHERE user_id=$user_id");
+$student_details=$DB->get_record_sql("SELECT user_id,s_ftname,s_mlname,s_lsname FROM {student} WHERE user_id=$childid");
 //print_r($student_details);exit();
 
     $sname = $student_details->s_ftname;
@@ -68,9 +65,11 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     foreach ($typeofexam as $nameofexam){
         $type_of_exam = $nameofexam->typeofexam;
         $typeid = $nameofexam->id;
+        // print_r($typeid);exit();
         $c_id = $nameofexam->course_id;      
         $options1[] = array('value' => $typeid, 'label' => $type_of_exam);
     }
+    //  print_r($typeid);exit();
     $templateData = array(
         'startYearOptions' => $options1
     );
