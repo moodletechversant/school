@@ -1030,7 +1030,7 @@ $string['type'] = 'Type';
 //////purpose: to setting named "Types of exam" field in quiz settings
 ///////
 $string['typeofexam'] = 'Type of exam';
-$string['typeofexamhelp']='Type of exam is ...';
+$string['typeofexamhelp']='This field helps to categorize the quiz and ensures accurate classification';
 $string['selectexamname']='Exam Types';
 ///////
 //////
