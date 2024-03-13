@@ -63,6 +63,10 @@ if (isset($_POST['submit'])) {
 
     foreach($radioVal as $x => $val) { 
 
+        $existing_record = $DB->get_records_sql("SELECT * FROM {attendance} WHERE stud_name = ? AND tdate = ? AND div_id = ?", array($x, $timestamp, $division));
+//print_r($existing_record);exit();
+
+if (!$existing_record) {
         $record = new stdClass();
         $record->stud_name=$x;
         $record->tdate= $timestamp;
@@ -77,6 +81,14 @@ if (isset($_POST['submit'])) {
         }
         $DB->insert_record('attendance',$record);
     }
+    else { // If a record already exists, set flag to true
+        $duplicate_found = true;
+    }
+}
+if ($duplicate_found) { // Show alert only if duplicate found
+    echo '<script>alert("Attendance for this user on the selected date already exists!");</script>';
+}
+
 
     echo '</div>';
     $urlto = $CFG->wwwroot.'/local/attendance/viewattend.php';

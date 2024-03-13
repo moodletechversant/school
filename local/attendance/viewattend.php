@@ -12,17 +12,47 @@ $mark_attendance = new moodle_url('/local/attendance/attendance.php');
 
 
 $PAGE->set_context($context);
+require_login();
 $PAGE->set_url('/local/attendance/viewattend.php');
 $PAGE->set_title('Attendance');
 
 echo $OUTPUT->header();
+$teacher_id = $USER->id;
+
 $mustache = new Mustache_Engine();
+
+$recs=$DB->get_record_sql("SELECT * FROM {division} WHERE div_teacherid=$teacher_id");
+if(empty($recs))
+{
+echo "you are not assigned to the class incharge of any class ...you can't mark attendance of any student";
+}
+else{
+    $division=$recs->id;
+    $rec1=$DB->get_records_sql("SELECT * FROM {student_assign} WHERE s_division=$division");
+    $datas=array();
+    foreach ($rec1 as $studentid) {
+        $student = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$studentid->user_id");  
+
+        $id=$student->user_id;
+        $ftname=$student->s_ftname;
+        $mlname=$student->s_mlname;
+        $lsname=$student->s_lsname;
+
+        $datas[] = [ 'id'=>$id,'ftname'=>$ftname,'mlname'=>$mlname,'lsname'=>$lsname];
+        //print_r($data1);exit();
+    }
+           // print_r($data1);
+
+   }
+
+
 
 $selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : date();
 $selected_date_timestamp = strtotime($selected_date);
+$data1_ids = array_column($datas, 'id'); // Extracting student IDs from $data1
+$where_clause = "tdate='$selected_date_timestamp' AND stud_name IN (" . implode(',', $data1_ids) . ")";
 
-$rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE tdate='$selected_date'");
-// print_r($selected_date_timestamp);exit();
+$rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE $where_clause");
 
 $table = new html_table();
 echo '<form method="POST">
@@ -33,6 +63,7 @@ echo '<form method="POST">
               </div></div></div>';
 //echo '<input type="date" id="db_picker_attend" name="attendance_date" value="' . $selected_date . '" onchange="this.form.submit()">';
 echo '</form>';
+// print_r($rec);exit();
 
 $data1 = [];
 foreach ($rec as $value) {
