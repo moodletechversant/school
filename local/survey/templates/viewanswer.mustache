@@ -1,76 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Main Style Sheet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-eAubMY/SUmBbGzxBT+2fS8xDwQCgFQYMyZc+R9jK7+UaD6Ugk6hvqlxjv73qV+qjK0bSw5Z+XrlvJ0CpdqLEfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css" />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
-      integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
-      crossorigin="anonymous"
-    />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Averia Serif Libre' rel='stylesheet'>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assigned Students List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href={{css_link}} />
 </head>
-<style>
-.sub{
-  font-family: 'Averia Serif Libre';
-}
-p{
-  font-family: 'Averia Serif Libre';
-}
-li{
-    font-family: 'Averia Serif Libre';
-    font-size:large;
+<body>
 
-}
-.button-container {
-    display: inline-block;
-}
-
-</style>
-
-  <body>
-    <header><h1 class="title">Survey</h1></header>
-     <a href="{{back}}">
-        <button type="button" class="btn btn-outline-secondary del">Go Back</button>
-    </a>
-   <div class="row mt-5">
-      <div class="col-12">
-          {{#survey}}
-              <div class="note">
-             
-                
-                {{#disabled2}}
-                    <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}</h3>              
-                    <p style="color:green;">{{survey_from}} - {{survey_to}}</p>
-                      <div class="hide">   
-                      <ol>              
-                          {{#q_survey}}                                                     
-                                 <li>{{survey_question}}</li>                  
-                          {{/q_survey}}
-                           </ol>
+  <div class="form-wrap">
+    <div class="container">
+      <div class="col-md-11 col-11 mx-auto col-lg-11">
+        <div class="form-card card">
+          <div class="d-flex mb-3" style="align-items: center;">
+            <a href="/school/local/studentassign/assign_student.php" class="ml-auto" style="text-decoration:none">
+              <!--<button class="btn-primary btn ml-auto" style="width: auto; margin-right: inherit;">+ ADD NEW</button>-->
+            </a>
+          </div>
+          <div class="table-filter mb-3">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="cards-bx"> 
+                 
+                  <div class="d-flex listing-top">
+                    <div class="form-group">
+                      <label>Academic Year</label>
+                      <select class="form-select" aria-label="Select Start Year" id="academic-year">
+                       
+                        {{#templateData}}
+                            {{#startYearOptions}}
+                            <option value="{{value}}">{{label}}</option>
+                            {{/startYearOptions}}
+                        {{/templateData}}
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Class</label>
+                      <select class="form-select" aria-label="Select End Year" id="class">
+                      <option selected>---- Select Class ----</option>
+                      </select>
+                    </div>
+                     <div class="form-group">
+                      <label>Division</label>
+                      <select class="form-select" aria-label="Select End Year" id="division">
+                        <option selected>---- Select Division ----</option>
+                      </select>
+                    </div>
                      
+                  </div>
+                  <div class="d-flex listing-top">
+                  <div class="form-group">
+                      <label>survey</label>
+                      <select class="form-select" aria-label="Select survey" id="survey">
+                      <option selected>---- Select survey ----</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <div id="demo">
 
-                      </div>
-                      <div class="icon-d">
-                           <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
-                     </div>  
-             {{/disabled2}}                
-         </div>
-         <br>
-       {{/survey}}
-    </div>     
-</div>
- 
-  </body>
+          <div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#academic-year").change(function() { // Corrected ID
+            var option = $(this).val();
+            //alert(option)
+            $("#demo").html(""); 
+                 $.ajax({
+                    url: "test.php",
+                    data: { option: option },
+                    type: 'POST',
+                    success: function(response) {
+                        $("#class").html(response); // Corrected ID
+
+                     }
+                 }); 
+         });
+       
+   
+   
+        $("#class").change(function() { // Corrected ID
+            var option1 = $(this).val();
+            $("#demo").html(""); 
+                $.ajax({
+                    url: "test.php",
+                    data: {option1: option1},
+                    type: 'POST',
+                    success: function(response) {
+                       $("#division").html(response); // Corrected ID
+                    }
+                 });
+            });
+       
+  
+     $("#division").change(function() { 
+    var academicYearOption = $("#academic-year").val(); // Get the value of academic year option
+
+    $.ajax({
+        url: "test.php",
+        data: {
+            academicYearOption: academicYearOption // Add academic year option value to data
+        },
+        type: 'POST',
+        success: function(response) {
+            $("#survey").html(response);
+        }
+    });
+});
+
+
+$("#survey").change(function() {
+    var option4 = $(this).val();
+    var academic = $("#academic-year").val();
+    var classValue = $("#class").val(); // Renamed variable to classValue
+    var division = $("#division").val();
+    var option3 = $("#survey").val();
+    //alert(option4 +" " +academic + " "+classValue + " "+division + " " +option3)
+    $.ajax({
+        type: "POST",
+        url: "test_survey.php", 
+        data: {survey: option4 ,academic:academic,classValue:classValue,division:division,surveyvalue:option3 },
+        success: function(response){ 
+            $("#demo").html(response); 
+            $("#demo").css("display", "block")
+        }
+    });
+});
+
+
+
+    });
+
+
+</script>
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
