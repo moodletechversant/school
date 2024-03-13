@@ -18,11 +18,11 @@ $PAGE->set_title('Attendance');
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
 
-$selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : date('Y-m-d');
-//$selected_date_timestamp = strtotime($selected_date);
+$selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : date();
+$selected_date_timestamp = strtotime($selected_date);
 
 $rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE tdate='$selected_date'");
-//print_r($rec);exit();
+// print_r($selected_date_timestamp);exit();
 
 $table = new html_table();
 echo '<form method="POST">

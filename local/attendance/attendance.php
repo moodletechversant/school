@@ -53,13 +53,19 @@ if (isset($_POST['submit'])) {
 
     $radioVal = $_POST["attendance"];
     $tdate = $_POST["atdate"];
+    // Create DateTime object from date string
+    $date = new DateTime($tdate);
+    // Get timestamp
+    $timestamp = $date->getTimestamp();
+
+    // print($tdate);
     $division = $_POST["division"];
 
     foreach($radioVal as $x => $val) { 
 
         $record = new stdClass();
         $record->stud_name=$x;
-        $record->tdate= $tdate;
+        $record->tdate= $timestamp;
         $record->div_id= $division;
         if($val == 'P')
         {
