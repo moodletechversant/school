@@ -65,10 +65,16 @@
               </div>
             </div>
           </div> 
-          <div id="demo">
+          <div id="myModal" class="modal">
 
-          <div>
-          
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closex">&times;</span>
+    <div id="modaldata"> </div>
+  </div>
+
+</div>
+        <div id="demo"> </div>
         </div>
       </div>
     </div>
@@ -139,11 +145,19 @@ $("#survey").change(function() {
         data: {survey: option4 ,academic:academic,classValue:classValue,division:division,surveyvalue:option3 },
         success: function(response){ 
             $("#demo").html(response); 
-            $("#demo").css("display", "block")
+          
         }
     });
 });
 
+$(".closex").click(function(){
+  $(".modal").css('display','none')
+})
+
+ 
+
+
+  
 
 
     });

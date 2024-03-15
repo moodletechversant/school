@@ -4,6 +4,7 @@ global $DB,$CFG;
 require_login();
 $view_reply=new moodle_url('/local/reply/reply.php?id');
 
+
 if (isset($_POST['division'])) {
   $did = $_POST['division'];
 
@@ -19,11 +20,9 @@ if (isset($_POST['division'])) {
                 <div class="wrap-t">Name</div>
               </th>
               <th scope="col">
-                <div class="wrap-t">Question</div>
+                <div class="wrap-t">Question-Answer</div>
               </th>
-              <th scope="col">
-                <div class="wrap-t">Answers</div>
-              </th>
+              
             </tr>
           </thead>
           <tbody>';
@@ -35,51 +34,66 @@ if (isset($_POST['division'])) {
         
             if ($userdata) {
                 $name = $userdata->s_ftname;
-        
+                
                 if (isset($_POST['survey'])) {
                     $sid = $_POST['survey'];
                 } else {
                     $sid = '';
                 }
         
-                $surveydata = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $sid");
-                foreach ($surveydata as $surveydata1) {
-                    $qust_id = $surveydata1->id;
-                    $s_question = $surveydata1->survey_question;
-                }
-        
-                $answer = $DB->get_record_sql("SELECT * FROM {student_answers} WHERE user_id = $user_id AND q_id = $qust_id");
-
-                if ($answer === null) {
-                    $answer = "No answer found for user_id $user_id and question ID $qust_id";
-                }
-        
-                $a_id = $answer->a_id;
-
-                $answeremoji = $DB->get_record_sql("SELECT * FROM {customsurvey_answer} WHERE id = $a_id");               
-
-                $ans = $answeremoji->survey_answer;
-
-        
+                // $surveydata = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $sid");
+                $s_question="";
                 $var .= '
                 <tr>
                     <td><div class="wrap-t">' . $name . '</div></td>
-                    <td><div class="wrap-t">' . $s_question . $ans . '</div></td>
-                    <td>
-                        <div class="wrap-t">
-                            <a href="complaint_details.php?id=' . $id . '">
-                                <button style="font-size: 14px; background-color: #5e4ec2; color: white; border: none; padding: 8px 16px; text-align: center; text-decoration: none; display: inline-block; cursor: pointer;">View</button>
-                            </a>
-                        </div>
-                    </td>
-                </tr>';
+                   
+            <td><button onclick="viewname()" id='. $user_id.'_'. $sid.' class="view_answer" >View Answer</a></button></td>
+            </tr>';
+              //   foreach ($surveydata as $surveydata1) {
+              //     $qust_id = $surveydata1->id;
+              //     // $s_question = $surveydata1->survey_question;
+                
+
+
+              //     $s_question.=" ".$surveydata1->survey_question;
+              //     $answer = $DB->get_record_sql("SELECT * FROM {student_answers} WHERE user_id = $user_id AND q_id = $qust_id");
+              
+              // $a_id = $answer->a_id;
+                           
+              
+              // if($a_id=="")
+              //{
+               
+                // }
+
+//               else{
+// $survey_answer = $DB->get_record_sql("SELECT * FROM {customsurvey_answer} WHERE id = $a_id");
+
+//               $survey_answer_value = $survey_answer->survey_answer;
+             
+
+        
+//                 $var .= '
+//                 <tr>
+//                     <td><div class="wrap-t">' . $name . '</div></td>
+//                     <td><div class="wrap-t">' . ($s_question)  . ' - '.  $survey_answer_value. '</div></td>
+
+//                 </tr>';
+                
+//               }
+
+              
+              // $s_question="";
+              // $name="";
+             
+
+              // }
+             
+             
             }
         }
         
-        $var .= '
-          </tbody>
-        </table>
-      </div>';
+       
   }
 
 else {
@@ -88,17 +102,45 @@ else {
     
     echo $var;
 }
+// print_r();exit();
 
 
 ?>
- <!-- 
- <td><div class="wrap-t">'.$complaint.'</div></td>  
- <td><div class="wrap-t"><a href="'.$view_reply.'='.$id.'" class="action-table" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                        <path
-                          d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251 .93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
-                        </path>
-                      </svg>Reply</a>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+      <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script>
+     
+      $(document).ready(function() {
+  
 
-                    </div>
-                </td> -->
-                
+        $(".view_answer").click(function(){
+          id = $(this).attr("id").toString();
+          idmain = id.split("_")
+          userid = idmain[0];
+          surveryid = idmain[1]
+      //  alert(userid+" "+surveryid)
+        
+       $.ajax({
+        type: "POST",
+        url: "test_survey1.php", 
+        data: {userid: userid, surveryid:surveryid },
+        success: function(response){ 
+        //  alert(response)
+          
+         $("#modaldata").html(response)
+          
+
+        $(".modal").css('display','block')
+            
+        }
+        
+      });
+  })
+  
+})
+  
+  
+      
+                  
+  </script>

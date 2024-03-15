@@ -34,7 +34,7 @@ $current_time = time();
 $imagePaths = $DB->get_records_sql("SELECT * FROM {customsurvey_answer}");
 
 $dataa['imagePaths'] = array();
-if(!empty($customsurvey_question)){
+if(empty($customsurvey_question)){
     echo "no new survey available";
 
 }
