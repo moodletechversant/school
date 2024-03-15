@@ -76,7 +76,7 @@ foreach ($rec as $value) {
   $name1 = $rec1->s_ftname;
 
   $data1[] = [
-    'id' => $id, 'rollno' => $rollno, 'name1' => $name1, 'status' => $status, 'edit' => $edit, 'delete' => $delete, 'selected_date' => $selected_date
+    'id' => $id, 'rollno' => $rollno, 'name1' => $name1, 'status' => $status, 'edit' => $edit, 'selected_date' => $selected_date
 
   ];
 }

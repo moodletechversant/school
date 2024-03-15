@@ -42,7 +42,6 @@ class attendanceedit_form  extends moodleform {
         //print_r($id);exit();
         $mform->addElement('hidden','id',$id);
         
-        $mform->addElement('hidden','id',$id);
         $rec=$DB->get_records_sql("SELECT * FROM {student}");       
 }
 

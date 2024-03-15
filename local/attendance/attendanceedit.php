@@ -16,16 +16,21 @@ $PAGE->set_title($strnewclass);
 
 echo $OUTPUT->header();
 $id  = optional_param('id', 0, PARAM_INT);
-
+// print_r($id);exit();
 $rec1 = $DB->get_records_sql("SELECT * FROM {attendance} WHERE id=$id");
- 
+$Datetime=$rec1[$id]->tdate;
+// print_r($Datetime);exit();
+$tdate_readable = date('Y-m-d', $Datetime);
+// print_r($tdate_readable);exit();
+
 // $rec = $DB->get_record_sql("SELECT * FROM {student} WHERE user_id=$rec1->stud_name");
 
 echo "<form method='post'>";
 echo "<input type='hidden' name='id' value='$id'>";
 
 echo "<table height='500' width='800'>";
-echo "<td colspan='4'><input type='date' name='atdate'></td>";
+echo "<td colspan='4'><input type='date' name='atdate' value='" . $tdate_readable . "'></td>";
+// echo "<td>".$tdate_readable."</td>";
 echo "<tr><th>Roll no</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student name</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status</th></tr>";
 
 foreach ($rec1 as $student) {
@@ -48,7 +53,7 @@ if (isset($_POST['submit'])) {
 
     $id = $_POST["id"];
     $radioVal = $_POST["attendance"];
-    $tdate = $_POST["atdate"];
+    $tdate = $_POST["tdate_readable"];
 
     foreach ($radioVal as $x => $val) { 
         // Get the existing record
