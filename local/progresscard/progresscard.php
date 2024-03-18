@@ -15,16 +15,11 @@ $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
-// Set the page heading.
-// $PAGE->set_heading($linktext);
 $PAGE->navbar->add('progresscard', new moodle_url($CFG->wwwroot.'/local/progresscard/progresscard.php'));
-$user_id=$USER->id;
+$user_id=optional_param('id', 0, PARAM_INT);
 echo $OUTPUT->header();
-
-$childids=$DB->get_record_sql("SELECT child_id FROM {parent} WHERE user_id=$user_id");
-$childid=$childids->child_id;
 $student_details=array();
-$student_details=$DB->get_record_sql("SELECT user_id,s_ftname,s_mlname,s_lsname FROM {student} WHERE user_id=$childid");
+$student_details=$DB->get_record_sql("SELECT user_id,s_ftname,s_mlname,s_lsname FROM {student} WHERE user_id=$user_id");
 //print_r($student_details);exit();
 
     $sname = $student_details->s_ftname;
@@ -74,7 +69,7 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
         'startYearOptions' => $options1
     );
      $mustache = new Mustache_Engine();
-    $output = $mustache->render($template, ['division_id'=>$division_id,'childid'=>$childid,'css_link'=>$css_link,'templateData'=>$templateData,'academic_year' => $academic_year,'fname'=>$fname,'classname' => $classname,'division'=>$division,'classteacher'=>$classteacher,'academic_year'=>$academic_year]);
+    $output = $mustache->render($template, ['division_id'=>$division_id,'childid'=>$user_id,'css_link'=>$css_link,'templateData'=>$templateData,'academic_year' => $academic_year,'fname'=>$fname,'classname' => $classname,'division'=>$division,'classteacher'=>$classteacher,'academic_year'=>$academic_year]);
     echo $output;
 
  echo $OUTPUT->footer();
