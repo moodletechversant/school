@@ -18,6 +18,7 @@ $linktext = "Survey";
 // Set the url.
 $linkurl = new moodle_url('/local/survey/editsurvey.php');
 
+
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);

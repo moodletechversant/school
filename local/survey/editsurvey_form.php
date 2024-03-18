@@ -34,6 +34,7 @@ class editsurvey_form extends moodleform {
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
         
+        
 
         $mform = $this->_form;
         // $editorclasslist = null;

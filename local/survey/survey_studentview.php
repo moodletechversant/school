@@ -23,6 +23,7 @@ echo $OUTPUT->header();
 $data = array();
 $rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey}");
 
+
 $customsurvey_question = $DB->get_records_sql("SELECT sa.* FROM {student_answers} sa JOIN {customsurvey_question} cq ON cq.id=sa.q_id
 JOIN {customsurvey} cs ON cs.id=cq.survey_id WHERE sa.user_id=$USER->id");
 

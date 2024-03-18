@@ -27,6 +27,7 @@ $PAGE->set_title($linktext);
 $PAGE->set_heading($linktext);
 $PAGE->navbar->add('Survey', new moodle_url($CFG->wwwroot.'/local/survey/survey.php'));
 
+
 echo $OUTPUT->header();
 $mform = new survey_form();
 

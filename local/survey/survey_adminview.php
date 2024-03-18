@@ -19,6 +19,7 @@ $linktext = "Survey";
 
 $linkurl = new moodle_url('/local/survey/survey_adminview.php');
 
+
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
 // $PAGE->set_pagelayout('admin');
