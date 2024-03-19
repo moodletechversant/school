@@ -42,11 +42,24 @@ li{
 
   <body>
     <header><h1 class="title">Survey</h1></header>
+    <div class="form-group">
+              <label for="selectYear">Select Year</label>
+              <select class="form-select" aria-label="Select Start Year" id="yearDropdown" onchange="onYearChange()" style="width:500px;">
+                  <option value="" id="" selected>------------ Select Year ------------</option>
+                  {{#templateData}}
+                      {{#startYearOptions}}
+                          <option value="{{label}}">{{label}}</option>
+                      {{/startYearOptions}}
+                  {{/templateData}}
+              </select>
+            </div>
+
+            <br>
       <a href="{{answer}}">
         <button type="button" class="btn btn-outline-secondary del">View survey Answers</button>
     </a>
-   <div class="row mt-5">
-      <div class="col-12">
+   <div class="row mt-5"  id="surveytable">
+      <div class="col-12" >
           {{#survey}}
               <div class="note">
                 {{#disabled}}
@@ -124,5 +137,45 @@ li{
  <div class="text-center">
     <a href="survey.php"><button class="btn btn-secondary" type="submit">Add survey</button></a>
     </div>
+
+
+
+
+
+
+<script>
+function onYearChange() {
+    var selectedYear = $('#yearDropdown').val();
+    
+    year = selectedYear.split('-')
+    year1 = year[0].split('/')
+    year2 = year[1].split('/')
+    //alert(year1[2]+" "+year2[2])
+year3=year1[2]
+year4=year2[2]
+   // 
+    $.ajax({
+     
+        type: 'POST',
+        url: 'survey_test.php',
+        data: {year1: year3, year2:year4 },
+        success: function(response) {
+         //alert(response );
+          //$("#demo").html(response);
+            $('#surveytable').html(response);
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr);
+        }
+    });
+}
+
+
+      
+</script>
+
+
+
+
   </body>
 </html>

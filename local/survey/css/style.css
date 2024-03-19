@@ -137,6 +137,10 @@ display: block;
   display: none;
   font-size : medium;
   }
+  .hide1 {
+    display: none;
+    font-size : medium;
+    }
   .fa-pencil-alt{
     padding-left:0.5%;
   }
@@ -145,3 +149,7 @@ display: block;
   font-size: large;
 }
 
+
+  .rotate {
+    transform: rotate(180deg); /* Rotate the arrow icon */
+  }

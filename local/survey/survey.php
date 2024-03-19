@@ -40,7 +40,9 @@ if ($mform->is_cancelled()) {
     $surveydata->survey_name = $formdata->surname;
     $surveydata->survey_from = $formdata->surveyfrom;
     $surveydata->survey_to = $formdata->surveyto;
+    $surveydata->academic_id = $formdata->academicyear;
 
+    
     $surveyid = $DB->insert_record('customsurvey', $surveydata);
 // print_r($surveyid);exit();
     $questions = array($formdata->question1); 

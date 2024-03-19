@@ -10,11 +10,9 @@ Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/survey/templates/survey_adminview.mustache');
 $delete = new moodle_url('/local/survey/deletesurvey.php?id');
 $answer = new moodle_url('/local/survey/viewsurveyanswer.php');
-// require_once($CFG->dirroot.'/local/createstudent/demo.html');
 global $class,$CFG;
 $context = context_system::instance();
 require_login();
-// $classid = $class->id;
 $linktext = "Survey";
 
 $linkurl = new moodle_url('/local/survey/survey_adminview.php');
@@ -22,18 +20,30 @@ $linkurl = new moodle_url('/local/survey/survey_adminview.php');
 
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
-// $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
-// Set the page heading.
-//$PAGE->set_heading($linktext);
-// $PAGE->set_heading($SITE->fullname);
-// $PAGE->requires->html('/demo.html');
-// $addstudent='<button style="background:transparent;border:none;"><a href="/school/local/createstudent/createstudent.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>+</font></a></button>';
 
 echo $OUTPUT->header();
 $data = array();
 $rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY id DESC");
-//$rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY survey_to	 DESC");
+
+
+$options1 = array();
+$academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
+
+
+    
+    foreach ($academic_id as $academic) {
+        $timestart = $academic->start_year;
+        $timeend = $academic->end_year;
+        
+        $timestart1 = date("d/m/Y", $timestart);
+        $timeend1 = date("d/m/Y", $timeend);
+        
+        $options1[] = array('value' => $academic->id, 'label' => $timestart1 . '-' . $timeend1);
+    }
+
+
+    $templateData = array('startYearOptions' => $options1);
 
 $mustache = new Mustache_Engine();
 
@@ -110,7 +120,7 @@ foreach ($rec1 as $record1) {
   }
 }
 
-$surveyname = array('survey' => $data,'delete' => $delete,'answer' =>$answer);
+$surveyname = array('survey' => $data,'delete' => $delete,'answer' =>$answer,'templateData' => $templateData);
 echo $mustache->render($template, $surveyname);
 
         // print_r($data2);exit();
@@ -134,8 +144,11 @@ echo $mustache->render($template, $surveyname);
    
     </style>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script>
-    
+   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" ></script>
+  
+   <script>
+  
+
     const myIcons = document.querySelectorAll('.arrow');
     const myParagraphs = document.querySelectorAll('.hide');
 

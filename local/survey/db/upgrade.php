@@ -38,10 +38,21 @@ function xmldb_local_survey_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    // For further information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
-    //
-    // You will also have to create the db/install.xml file by using the XMLDB Editor.
-    // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
-
-    return true;
+    if ($oldversion < 2023070302) {
+        $table = new xmldb_table('customsurvey');
+        
+    if (!$dbman->table_exists($table)) {
+        $dbman->create_table($table);
+    }
+    }
+    // $table5 = new xmldb_table('user');
+    $divfield = new xmldb_field('academic_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    
+    if (!$dbman->field_exists($table, $divfield)) {
+    $dbman->add_field($table, $divfield);
+    }
+    upgrade_plugin_savepoint(true,2023070302,'local','survey');
+    
+    
+        return true;
 }

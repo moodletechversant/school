@@ -45,7 +45,23 @@ class survey_form extends moodleform {
         //-----------Form creation-----------
                   
              //Survey name
+             $academic  = $DB->get_records('academic_year');
+             $options1 = array();
+             $options1=array(''=>'---- Select academic year ----');
+             foreach($academic  as $academic1 ){
+                 $timestart = $academic1->start_year;
+                 $timeend = $academic1->end_year;
+             $timestart1 = date("d/m/Y", $timestart);
+             $timeend1 = date("d/m/Y", $timeend);
+             $options1 [$academic1->id] = $timestart1.'----'.$timeend1;
+             }
+     
+             $mform->addElement('select', 'academicyear','Academic start',$options1);
+             $mform->addRule('academicyear', 'academic year missing', 'required', null);
 
+
+
+             
              $mform->addElement('text', 'surname','Survey name',$attributes);
              $mform->addRule('surname', 'survey name missing', 'required', null);
 

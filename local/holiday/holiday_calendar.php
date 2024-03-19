@@ -77,11 +77,6 @@ $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
     }
 
 
-//print_r($options1);exit();
-
-    //print_r($options1);exit();
-    
-    //print_r($options1);exit();
     $templateData = array('startYearOptions' => $options1);
     $table = new html_table();
     

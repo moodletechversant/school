@@ -31,11 +31,12 @@ JOIN {customsurvey} cs ON cs.id=cq.survey_id WHERE sa.user_id=$USER->id");
 
 $mustache = new Mustache_Engine();
 $current_time = time();
+$current_date=date('d-m-Y');
 
 $imagePaths = $DB->get_records_sql("SELECT * FROM {customsurvey_answer}");
 
 $dataa['imagePaths'] = array();
-if(empty($customsurvey_question)){
+if(empty($rec1 )){
     echo "no new survey available";
 
 }
@@ -54,7 +55,7 @@ else{
         $surveyto = $record1->survey_to;
         $to = date("d-m-Y", $surveyto);
         $surveyto = strtotime($to);
-        if ($current_time >= $surveyfrom && $current_time <= $surveyto) {
+        if ($current_date >= $from && $current_date <= $to) {
             $surveyfromFormatted = date("d-m-Y", $surveyfrom);
             $surveytoFormatted = date("d-m-Y", $surveyto);
             $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
