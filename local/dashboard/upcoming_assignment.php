@@ -1,3 +1,19 @@
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $("#assign").DataTable( {
+            
+        } );
+    } );
+  </script>
+
 <?php
 
 require(__DIR__.'/../../config.php');
@@ -127,16 +143,30 @@ if (empty($enrolled_course_ids)) {
         $dates1=date('d-m-Y',$value->allowsubmissionsfromdate);
         $dates=date('d-m-Y',$value->duedate);
         $assign_name=$value->name;
+        $subject_name= $DB->get_field('course', 'fullname', ['id' =>$value->course], MUST_EXIST);
+            // print_r($subject_name);
+
         $view_icon=html_writer::link(
             $view,
             '<span class="custom-icon" aria-label="' . get_string('view') . '">👁️</span>'
         );
+
+        $status = '';
+    if ($current_date < $value->allowsubmissionsfromdate) {
+        $status = 'Not Started';
+    } elseif ($current_date >= $value->allowsubmissionsfromdate && $current_date <= $value->duedate) {
+        $status = 'In Progress';
+    } elseif ($current_date > $value->duedate) {
+        $status = 'Late';
+    }
          $tableRows[] = [
             'id'=> $id,
             'Submission_date' => $dates1,
             'Due_date' => $dates,
+            'Subject' => $subject_name,
             'Assignment_name' => $assign_name,
             'View'=>$view_icon,
+            'Status' => $status // Adding the status to the table row
         ];
         
 
@@ -198,12 +228,25 @@ if (empty($enrolled_course_ids)) {
             $view,
             '<span class="custom-icon" aria-label="' . get_string('view') . '">👁️</span>'
         );
+
+        $status = '';
+        if ($current_date < $value->allowsubmissionsfromdate) {
+            $status = 'Not Started';
+        } elseif ($current_date >= $value->allowsubmissionsfromdate && $current_date <= $value->duedate) {
+            $status = 'In Progress';
+        } elseif ($current_date > $value->duedate) {
+            $status = 'Late';
+        }
+
+
          $tableRows[] = [
             'id'=> $id,
             'Submission_date' => $dates1,
             'Due_date' => $dates,
             'Assignment_name' => $assign_name,
             'View'=>$view_icon,
+            'Status' => $status // Adding the status to the table row
+
         ];
         
 

@@ -1,3 +1,18 @@
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $("#exam").DataTable( {
+            
+        } );
+    } );
+  </script>
 <?php
 
 require(__DIR__.'/../../config.php');
@@ -105,16 +120,33 @@ echo $output;
             $dates1=date('d-m-Y',$value->timeopen);
             $dates=date('d-m-Y',$value->timeclose);
             $exam_name=$value->name;
+            //$subject_id=$value->course;
+            $subject_name= $DB->get_field('course', 'fullname', ['id' =>$value->course], MUST_EXIST);
+            //print_r($subject_name);exit();
             $view_icon=html_writer::link(
                 $view,
                 '<span class="custom-icon" aria-label="' . get_string('view') . '">👁️</span>'
             );
+
+
+            // Set the status of the exam
+    $status = '';
+    if ($current_date < $value->timeopen) {
+        $status = 'Not Started';
+    } elseif ($current_date >= $value->timeopen && $current_date <= $value->timeclose) {
+        $status = 'In Progress';
+    } elseif ($current_date > $value->timeclose) {
+        $status = 'Late';
+    }
+
             $tableRows[] = [
                 'id'=> $id,
                 'Submission_date' => $dates1,
                 'End_date' => $dates,
                 'Exam_name' => $exam_name,
+                'Subject' => $subject_name,
                 'View'=>$view_icon,
+                'Status' => $status // Adding the status to the table row
             ];
         }
     }
@@ -164,12 +196,26 @@ elseif ($tid) {
                 $view,
                 '<span class="custom-icon" aria-label="' . get_string('view') . '">👁️</span>'
             );
+
+        // Set the status of the exam
+        $status = '';
+        if ($current_date < $value->timeopen) {
+            $status = 'Not Started';
+        } elseif ($current_date >= $value->timeopen && $current_date <= $value->timeclose) {
+            $status = 'In Progress';
+        } elseif ($current_date > $value->timeclose) {
+            $status = 'Late';
+        }
+
+
             $tableRows[] = [
                 'id'=> $id,
                 'Submission_date' => $dates1,
                 'End_date' => $dates,
                 'Exam_name' => $exam_name,
                 'View'=>$view_icon,
+                'Status' => $status // Adding the status to the table row
+
             ];
         }
     }

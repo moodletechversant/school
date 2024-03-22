@@ -27,7 +27,7 @@
           </div>
        
           <div class="table-responsive custom-table">
-            <table class="table mb-0">
+            <table class="table mb-0" id="exam">
               <thead>
                 <tr>
                   <th scope="col">
@@ -37,7 +37,13 @@
                     <div class="wrap-t">End Date</div>
                   </th>
                   <th scope="col">
+                    <div class="wrap-t">Subject</div>
+                  </th>
+                  <th scope="col">
                     <div class="wrap-t">Exam Name</div>
+                  </th>
+                  <th scope="col">
+                    <div class="wrap-t">Status</div>
                   </th>
                   <th scope="col">
                     <div class="wrap-t">View</div>
@@ -49,7 +55,9 @@
                 <tr>
                   <td><div class="wrap-t">{{Submission_date}}</div></td>
                   <td><div class="wrap-t">{{End_date}}</div></td>
+                  <td><div class="wrap-t">{{Subject}}</div></td>
                   <td><div class="wrap-t">{{Exam_name}}</div></td>
+                  <td><div class="wrap-t">{{Status}}</div></td>
                   <td><div class="wrap-t">{{{View}}}</div></td>
                 </tr>
                 {{/tableRows}}
