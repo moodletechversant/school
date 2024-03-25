@@ -38,10 +38,29 @@ function xmldb_local_schoolreg_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    // For further information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
-    //
-    // You will also have to create the db/install.xml file by using the XMLDB Editor.
-    // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
 
-    return true;
-}
+        if ($oldversion < 2024032501) {
+            $table = new xmldb_table('school_reg');
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('sch_name', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, null);
+            $table->add_field('sch_shortname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
+            $table->add_field('sch_address', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
+            $table->add_field('sch_district', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
+            $table->add_field('sch_state', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
+            $table->add_field('sch_pincode', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
+            $table->add_field('sch_phone', XMLDB_TYPE_CHAR, '200', null, XMLDB_NOTNULL, null, '');
+
+            $table->add_field('sch_logo', XMLDB_TYPE_CHAR, '200', null, null, null, '');
+
+             
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+            
+            if (!$dbman->table_exists($table)) {
+                $dbman->create_table($table);
+            }
+        }
+        
+        upgrade_plugin_savepoint(true, 2024032501, 'local', 'schoolreg');
+        
+        return true;
+    }      
