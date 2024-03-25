@@ -27,7 +27,7 @@ $PAGE->set_title($linktext);
 $PAGE->navbar->add('School', new moodle_url($CFG->wwwroot.'/local/schoolreg/schoolreg.php'));
 
 echo $OUTPUT->header();
-$mform = new subject_form();
+$mform = new school_form();
 
 if($mform->is_cancelled()){
     $cancelurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
@@ -37,7 +37,7 @@ if($mform->is_cancelled()){
 // exit;
    $schooldata =  new stdclass();
    
-    $schooldata->sch_name  = $formdata->schoolname;
+    $schooldata->sch_name1  = $formdata->schoolname;
     $schooldata->sch_shortname = $formdata->shortname;
     $schooldata->sch_address = $formdata->address;
     $schooldata->sch_district = $formdata->district;

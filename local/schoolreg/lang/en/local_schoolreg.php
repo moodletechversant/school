@@ -26,3 +26,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'school_registration';
+$string['file'] = 'Pick a logo';
