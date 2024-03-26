@@ -40,7 +40,7 @@ if($mform->is_cancelled()){
       $stddata =  new stdclass();
 
      $stddata->id=$formdata->id;
-          $schooldata->sch_name  = $formdata->schoolname;
+          $schooldata->sch_name1  = $formdata->schoolname;
             $schooldata->sch_shortname = $formdata->shortname;
             $schooldata->sch_address = $formdata->address;
             $schooldata->sch_district = $formdata->district;
@@ -68,92 +68,10 @@ echo $OUTPUT->footer();
 
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $('input[name="fstname"],input[name="midlname"],input[name="lsname"],input[name="fname"],input[name="mname"],input[name="gname"]').blur(function() {
 
 
-var currVal = $(this).val();
-$(this).val(currVal.charAt(0).toUpperCase() + currVal.slice(1).toLowerCase());
 
 
-});
-
-//text full lowercase
-$('input[name="username"]').blur(function() {
-var currVal = $(this).val();
-$(this).val(currVal.toLowerCase());
-
-});
-
-//only alphabets
-$('input[name="fstname"],input[name="midlname"],input[name="lsname"]').on("keydown", function(event){
-// Allow controls such as backspace, tab etc.
-var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
-
-// Allow letters
-for(var i = 65; i <= 90; i++){
-  arr.push(i);
-}
-
-// Prevent default if not in array
-if(jQuery.inArray(event.which, arr) === -1){
-  event.preventDefault();
-}
-
-
-});
-
-
-//only numeric value
-$('input[name="fno"],input[name="mno"],input[name="gno"]').keypress
-(
-function(event)
-{
-    if (event.keyCode == 46 || event.keyCode == 8)
-    {
-    //do nothing
-    }
-    else 
-    {
-        if (event.keyCode < 48 || event.keyCode > 57 ) 
-        {
-            event.preventDefault();	
-        }	
-    }
-}
-);
-
-    ///---------------------------------------------/////
-    $(document).ready(function() {
-    $("#id_academicyear").change(function() {
-    var brand_id = $(this).val();
-    if(brand_id != ""){
-        $.ajax({
-            url:"test.php",
-            data:{b_id:brand_id},
-            type:'POST',
-            success: function(data){
-        	$("#id_class").html(data);
-        	}
-        });
-    }
-    
-   
-});
-});
-
-$(document).ready(function() {
-    $('#id_error_gender_male').remove();
-    $('#id_error_gender_female').remove();
-
-    $('#id_gender_female, #id_gender_male, #id_gender_others').on('change', function() {
-        if ($('#id_gender_female, #id_gender_male, #id_gender_others').length > 0) {
-            // $('#id_error_gender_others').remove();
-        }
-    });
-});
-
-</script>
 <style>
     .container{
         padding-left : 20%;

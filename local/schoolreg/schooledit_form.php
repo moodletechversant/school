@@ -93,15 +93,7 @@ class schooledit_form extends moodleform {
             $mform->addElement('filepicker', 'logo', get_string('file', 'schoolreg'));
             $mform->addRule('logo', 'logo missing', 'required', null);
     
-            $schooldata->sch_name  = $formdata->schoolname;
-            $schooldata->sch_shortname = $formdata->shortname;
-            $schooldata->sch_address = $formdata->address;
-            $schooldata->sch_district = $formdata->district;
-            $schooldata->sch_state = $formdata->state;
-            $schooldata->sch_pincode = $formdata->pincode;
-        
-            $schooldata->sch_phone = $formdata->phone;
-            $schooldata->sch_logo = $formdata->logo;
+         
     
         
 
