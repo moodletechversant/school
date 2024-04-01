@@ -38,7 +38,7 @@ echo $OUTPUT->header();
 
 
        $id = $records->id; 
-       $name = $records->sch_name1;
+       $name = $records->sch_name;
        $shortname = $records->sch_shortname;
     
        $address =$records->sch_address;

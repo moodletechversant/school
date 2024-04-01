@@ -101,7 +101,7 @@ class schooledit_form extends moodleform {
         $editschooldata=$DB->get_record('school_reg',array('id'=>$id));
  
       
-        $mform->setDefault('schoolname', $editschooldata->sch_name1);
+        $mform->setDefault('schoolname', $editschooldata->sch_name);
         $mform->setDefault('shortname', $editschooldata->sch_shortname );
         $mform->setDefault('address', $editschooldata->sch_address);
         $mform->setDefault('district', $editschooldata->sch_district);

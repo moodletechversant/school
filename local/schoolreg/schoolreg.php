@@ -37,7 +37,7 @@ if($mform->is_cancelled()){
 // exit;
    $schooldata =  new stdclass();
    
-    $schooldata->sch_name1  = $formdata->schoolname;
+    $schooldata->sch_name  = $formdata->schoolname;
     $schooldata->sch_shortname = $formdata->shortname;
     $schooldata->sch_address = $formdata->address;
     $schooldata->sch_district = $formdata->district;
