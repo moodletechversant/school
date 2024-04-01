@@ -37,10 +37,10 @@ if($mform->is_cancelled()){
     redirect($cancelurl);
 }else if($formdata = $mform->get_data()){ 
 //print_r($formdata);exit();
-      $stddata =  new stdclass();
+      $schooldata =  new stdclass();
 
-     $stddata->id=$formdata->id;
-          $schooldata->sch_name  = $formdata->schoolname;
+            $schooldata->id=$formdata->id;
+            $schooldata->sch_name  = $formdata->schoolname;
             $schooldata->sch_shortname = $formdata->shortname;
             $schooldata->sch_address = $formdata->address;
             $schooldata->sch_district = $formdata->district;
@@ -51,11 +51,11 @@ if($mform->is_cancelled()){
             $schooldata->sch_logo = $formdata->logo;
     
    
-        $update = $DB->update_record('school_reg', $stddata);
+        $update = $DB->update_record('school_reg', $schooldata);
         
     
      
-     $urlto = $CFG->wwwroot.'/local/createstudent/view_student_1.php';
+     $urlto = $CFG->wwwroot.'/local/schoolreg/viewschools.php';
      redirect($urlto, 'Data Saved Successfully '); 
 
 }

@@ -18,7 +18,7 @@ $edit_school = new moodle_url('/local/schoolreg/schooledit.php?id');
 $delete_school = new moodle_url('/local/schoolreg/deleteschool.php?id');
 
 $PAGE->set_context($context);
-$strnewclass= get_string('schoolcreation');
+$strnewclass= 'schoolcreation';
 
 $PAGE->set_url('/local/schoolreg/viewschools.php');
 // $PAGE->set_pagelayout('admin');

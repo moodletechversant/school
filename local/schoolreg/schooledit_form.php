@@ -33,22 +33,21 @@ require_login();
 
 class schooledit_form extends moodleform {
     function definition() {
-
         $urlto=$CFG->wwwroot.'/local/schoolreg/schooledit.php';
+
         global $USER, $CFG, $COURSE, $DB;
 
         $id  = optional_param('id', 0, PARAM_INT);
         
 
-       
+        $mform = $this->_form;
+
         $mform->addElement('html', '<h2 class="text-center heading mb-5">School Creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
-       
+        $mform->addElement('hidden','id',$id);
 
-        $attributes = 'size="30"';
-
-        
+             $attributes = 'size="30"';
 
              $mform->addElement('text', 'schoolname','School Name',$attributes);
              $mform->addRule('schoolname', 'school name missing', 'required', null);
@@ -90,8 +89,9 @@ class schooledit_form extends moodleform {
 
             $mform->addElement('text', 'phone','Phone number',$attributes);
             $mform->addRule('phone', 'Phone number missing', 'required', null);
-            $mform->addElement('filepicker', 'logo', get_string('file', 'schoolreg'));
-            $mform->addRule('logo', 'logo missing', 'required', null);
+            $mform->addElement('filepicker', 'logo', 'Add your logo');
+            $mform->addRule('logo', 'Logo missing', 'required', null);
+
     
          
     

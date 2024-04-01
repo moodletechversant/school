@@ -86,9 +86,8 @@ class schoolreg_form extends moodleform {
 
             $mform->addElement('text', 'phone','Phone number',$attributes);
             $mform->addRule('phone', 'Phone number missing', 'required', null);
-            $mform->addElement('filepicker', 'logo', get_string('file', 'schoolreg'));
-            $mform->addRule('logo', 'logo missing', 'required', null);
-
+            $mform->addElement('filepicker', 'logo', 'Add your logo');
+            $mform->addRule('logo', 'Logo missing', 'required', null);
             $mform->addElement('html', '</div>');
              
              $this->add_action_buttons();
