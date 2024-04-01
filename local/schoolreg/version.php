@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_schoolreg';
 $plugin->release = '0.1.0';
-$plugin->version = 2024032502;
+$plugin->version = 2024032508;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_ALPHA;
