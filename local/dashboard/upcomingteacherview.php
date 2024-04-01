@@ -32,7 +32,7 @@ $img3 = new moodle_url('/local/img/ic-22.svg');
 
 //$upcoming_events = new moodle_url('/local/dashboard/upcoming_events.php');
 $upcomingexams = new moodle_url('/local/dashboard/classteacherexamview.php');
-$upcomingsubjectexam= new moodle_url('/local/dashboard/upcoming_assignment.php');
+$upcomingsubjectexam= new moodle_url('/local/dashboard/upcomingexams.php');
 
  
 $PAGE->set_context($context);
@@ -52,7 +52,7 @@ if (has_capability('moodle/site:config', $context)) {
 } else {
     // User is a regular user, display user template
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateTeacher,['csspath'=>$csspath,'upcomingexams'=>$upcomingexams,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3,'child_id'=>$userid]);
+    echo $mustache->render($templateTeacher,['csspath'=>$csspath,'upcomingexams'=>$upcomingexams,'upcomingsubjectexam'=>$upcomingsubjectexam,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3,'child_id'=>$userid]);
 }
 
 echo $OUTPUT->footer();

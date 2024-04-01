@@ -40,7 +40,7 @@ $upcomingteacherview = new moodle_url('/local/dashboard/upcomingteacherview.php'
  
 $PAGE->set_context($context);
 
-$strnewclass= 'Student Dashboard';
+$strnewclass= 'Dashboard';
 
 $PAGE->set_url('/local/dashboard/upcoming.php');
 // $PAGE->set_pagelayout('admin');
@@ -57,7 +57,7 @@ if (has_capability('moodle/site:config', $context)) {
 
 elseif ($tid && !empty($tid)) {
     $mustache = new Mustache_Engine();
-    echo $mustache->render($templateTeacher, ['csspath'=>$csspath,'upcomingteacherview'=>$upcomingteacherview,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3,'child_id'=>$userid]);
+    echo $mustache->render($templateTeacher, ['csspath'=>$csspath,'upcomingteacherview'=>$upcomingteacherview,'upcomingexams'=>$upcomingexams,'calendar'=>$calendar,'assignment'=>$assignment,'img1'=>$img1,'img2'=>$img2,'img3'=>$img3,'child_id'=>$userid]);
 
 }
 
