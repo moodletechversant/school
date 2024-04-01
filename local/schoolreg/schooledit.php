@@ -30,7 +30,7 @@ echo $OUTPUT->header();
 $id  = optional_param('id', 0, PARAM_INT);
 $editdata=$DB->get_record('school_reg',array('id'=>$id));
 
-$mform = new editstudent_form ();
+$mform = new schooledit_form ();
 
 if($mform->is_cancelled()){
     $cancelurl = $CFG->wwwroot.'/local/schoolreg/viewschools.php';
