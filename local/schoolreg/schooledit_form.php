@@ -89,12 +89,22 @@ class schooledit_form extends moodleform {
 
             $mform->addElement('text', 'phone','Phone number',$attributes);
             $mform->addRule('phone', 'Phone number missing', 'required', null);
-            $mform->addElement('filepicker', 'logo', 'Add your logo');
-            $mform->addRule('logo', 'Logo missing', 'required', null);
-
-    
-         
-    
+        
+            $acceptedtypes = (new \core_form\filetypes_util)->normalize_file_types($CFG->courseoverviewfilesext);
+            if (in_array('*', $acceptedtypes) || empty($acceptedtypes)) {
+                $acceptedtypes = '*';
+            }
+        
+            $overviewfilesoptions = array(
+                'maxbytes' => 0,                
+                'maxfiles' => 2,  
+             
+                'accepted_types' => $acceptedtypes            );
+            
+            $mform->addElement('filemanager', 'logo', 'Add a logo', null, $overviewfilesoptions);
+            $mform->addRule('logo', 'Logo is missing', 'required', null);
+            
+            $summaryfields .= ',logo';
         
 
 
