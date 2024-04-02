@@ -85,12 +85,24 @@ $in_clause = implode(',', array_fill(0, count($enrolled_course_ids), '?'));
         $dates1=date('d-m-Y',$value->allowsubmissionsfromdate);
         $dates=date('d-m-Y',$value->duedate);
         $assign_name=$value->name;
-        
+        $subject_name= $DB->get_field('course', 'fullname', ['id' =>$value->course], MUST_EXIST);
+
+        $status = '';
+        if ($current_date < $value->allowsubmissionsfromdate) {
+            $status = 'Not Started';
+        } elseif ($current_date >= $value->allowsubmissionsfromdate && $current_date <= $value->duedate) {
+            $status = 'In Progress';
+        } elseif ($current_date > $value->duedate) {
+            $status = 'Late';
+        }
          $tableRows[] = [
             'id'=> $id,
             'Submission_date' => $dates1,
             'Due_date' => $dates,
             'Assignment_name' => $assign_name,
+            'Subject' => $subject_name,
+            'Status' => $status // Adding the status to the table row
+
            // 'View'=>$view_icon,
         ];
         

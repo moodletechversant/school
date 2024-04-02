@@ -72,12 +72,24 @@ foreach ($data as $value) {
     $dates1=date('d-m-Y',$value->timeopen);
     $dates=date('d-m-Y',$value->timeclose);
     $exam_name=$value->name;
-    
+    $subject_name= $DB->get_field('course', 'fullname', ['id' =>$value->course], MUST_EXIST);
+
+    $status = '';
+    if ($current_date < $value->timeopen) {
+        $status = 'Not Started';
+    } elseif ($current_date >= $value->timeopen && $current_date <= $value->timeclose) {
+        $status = 'In Progress';
+    } elseif ($current_date > $value->timeclose) {
+        $status = 'Late';
+    }
     $tableRows[] = [
         'id'=> $id,
+        'Subject' => $subject_name,
         'Start_date' => $dates1,
         'End_date' => $dates,
         'Exam_name' => $exam_name,
+        'Status' => $status // Adding the status to the table row
+
         // 'View'=>$view_icon,
     ];
 }
