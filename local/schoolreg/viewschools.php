@@ -47,10 +47,8 @@ echo $OUTPUT->header();
        $pincode =$records->sch_pincode;
 
        $number =$records->sch_phone;
-       $logo =$records->sch_logo;
       $edit='<button style="border-radius: 5px; padding: 4px 18px;background-color: #0055ff;"><a href="/school/local/schoolreg/schooledit.php?id='.$id.'" style="text-decoration:none;color: white; ">Edit</a></button>';
       $delete='<button style="border-radius: 5px; padding: 4px 20px;background-color: #0055ff;"><a href="/school/local/schoolreg/deleteschool.php?id='.$id.'" style="text-decoration:none;color: white; ">Delete</a></button>';
-      $file_url = $logo ;
 
       // Display the image in the table cell.
      
@@ -63,7 +61,6 @@ echo $OUTPUT->header();
          'number' => $number,
          'state' => $state,
          'pincode' => $pincode,
-         'logo' => $logo,
          'editButton' => $edit,
          'deleteButton' => $delete
      ];
