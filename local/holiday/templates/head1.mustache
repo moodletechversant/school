@@ -32,22 +32,40 @@
             <div class="form-card card">
                 <h4 class="mb-3">Holiday Calendar</h4>
                
-               <div class="row holiday-wrap" id="leaveholiday">
-                 {{#tableRows}}
-                        <div class="col-md-6 {{pastDateClass}}">
-                            <div class="Holiday-box">
-                                <div class="hday-lt">
-                                    <p>{{month}}</p>
-                                    <h5>{{day}}</h5>
-                                </div>
-                                <div class="hday-txt">
-                                    <h4>{{holiday}}</h4>
-                                    <p>{{dayName}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        {{/tableRows}}
-               </div>
+              <div class="row holiday-wrap" id="leaveholiday">
+    {{#tableRows}}
+        {{#holiday}}
+            <div class="col-md-6 {{pastDateClass}}">
+                <div class="Holiday-box">
+                    <div class="hday-lt">
+                        <p>{{month}}</p>
+                        <h5>{{day}}</h5>
+                    </div>
+                    <div class="hday-txt">
+                        <h4>{{holiday}}</h4>
+                        <p>{{dayName}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/holiday}}
+        {{#vacation}}
+            <div class="col-md-6">
+                           
+
+                  <div class="hday-txt">
+                        <h5>{{vacation}}</h5>
+                    </div>
+                                       
+
+                        
+                       
+                   
+             
+            </div>
+        {{/vacation}}
+    {{/tableRows}}
+</div>
+
                     <div id="demo">
 
                </div>

@@ -60,6 +60,7 @@ INNER JOIN {academic_year} AS ay ON ah.academic_id = ay.id
 WHERE YEAR(FROM_UNIXTIME(ay.start_year)) = $current_year
 OR YEAR(FROM_UNIXTIME(ay.end_year)) = $current_year
 ");
+$current_date = date("Y-m-d");
 
 $options1 = array();
 $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
@@ -83,35 +84,60 @@ $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
     $table->head = array("Start Date","End Date","Holiday",'Edit','Delete');
     $mustache = new Mustache_Engine();
     // echo $mustache->render($template);
-    foreach ($rec1 as $records) {
-       
-       
-       $id = $records->id; 
-       $startdate = $records->from_date;
-       $date1 = date("d-m-Y", $startdate);
-
-       $day = date("d", $startdate);   // Extract the day
-       $month = date("M", $startdate); // Extract the month
-       $dayName = date("l", $startdate);
-
-       $enddate = $records->to_date;
-       $date2 = date("d-m-Y", $enddate);
-
-       $holiday =$records->holiday_name;
-
-       // Check if start date is in the past
-   $isPastDate = (time() > $startdate) ? true : false;
-//    print_r($isPastDate);
-   $pastDateClass = $isPastDate ? 'past-date' : ''; // Add class 'past-date' if it's a past date
-// print_r($pastDateClass);exit();
+    if (!empty($rec1)) {
+        $hasHoliday = false; // Flag to check if any holidays exist
     
-       $edit = '<a href="'.$editholiday.'='.$id.'"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
-       $delete = '<a href="'.$deleteholiday.'='.$id.'"><i class="fa fa-trash" style="font-size:24px;color:#0055ff"></i></a>';
+        foreach ($rec1 as $records) {
+            $id = $records->id; 
+            $startdate = strtotime($records->from_date);
+            $enddate = strtotime($records->to_date);
+    
+            $date1 = date("d-m-Y", $startdate);
+            $day = date("d", $startdate);   
+            $month = date("M", $startdate); 
+            $dayName = date("l", $startdate);
+    
+            $date2 = date("d-m-Y", $enddate);
+            $holiday = $records->holiday_name;
+    
+            $isPastDate = (time() > $startdate) ? true : false;
+            $pastDateClass = $isPastDate ? 'past-date' : ''; 
+            
+            if (time() >= $startdate && time() <= $enddate) {
+                $tableRows[] =  [
+                    'holiday' => $holiday,
+                    'day' => $day,
+                    'month' => $month,
+                    'dayName' => $dayName,
+                    'pastDateClass' => $pastDateClass
+                ]; 
+                $hasHoliday = true; // Set the flag to true if a holiday exists in the date range
+                break; // Exit the loop as soon as a holiday is found
+            }
+        }
+        $currentMonth = date('m');
+
+       
+        $currentMonthName = date('F', mktime(0, 0, 0, $currentMonth, 1));
         
-       $tableRows[] =  ['date1' => $date1,'date2' => $date2,'holiday' => $holiday,'day'=>$day,'month'=>$month,'dayName'=>$dayName,'pastDateClass' => $pastDateClass]; 
-    //    echo $mustache->render($template1,$data); 
-   
+       
+        $nextMonth = date('m', strtotime('+1 month'));
+        
+       
+        $nextMonthName = date('F', mktime(0, 0, 0, $nextMonth, 1));
+        
+        // If no holiday is found, add a single vacation entry
+        if (!$hasHoliday) {
+            $vacation = 'Summer vacation: ' .  $currentMonthName . ' - ' . $nextMonthName;
+                        $tableRows[] = [
+                'vacation' => $vacation,
+               
+            ];
+        }
     }
+    
+    
+    
     echo $mustache->render($template1, ['tableRows' => $tableRows, 'css_link' => $css_link, 'templateData' => $templateData]);
         // <input type="submit" name="edit" value="edit">
 
