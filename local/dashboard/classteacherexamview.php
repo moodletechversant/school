@@ -3,12 +3,15 @@ require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
-$template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/exam_view.mustache');
+$template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/classteacherview.mustache');
 
 global $USER;
 
 $context = context_system::instance();
 require_login();
+$userid = $USER->id;
+$current_date = time();
+// print_r($current_date);exit();
 
 // Correct the navbar .
 // Set the name for the page.
@@ -29,54 +32,39 @@ $PAGE->navbar->add('Upcoming Exam', new moodle_url($CFG->wwwroot.'local/dashboar
 
 echo $OUTPUT->header();
 
-$data  = $DB->get_records_sql("SELECT * FROM {subject}");
+// $sql = "SELECT s.*
+//         FROM {subject} s
+//         JOIN {division} d ON s.sub_division = d.id
+//         WHERE d.div_teacherid = :userid";
+// $subjects = $DB->get_records_sql($sql, ['userid' => $userid]);
+
+$sql = "SELECT s.*
+        FROM {subject} s
+        JOIN {division} d ON s.sub_division = d.id
+        JOIN {class} c ON d.div_class = c.id
+        JOIN {academic_year} a ON c.academic_id = a.id
+        WHERE d.div_teacherid = :userid
+        AND a.start_year >= :current_date";
+    $subjects = $DB->get_records_sql($sql, ['userid' => $userid,'current_date' => $current_date]);
+
+// print_r($subjects);exit();
 $mustache = new Mustache_Engine();
 
-$academic = $DB->get_records('academic_year');
+//$academic = $DB->get_records('academic_year');
    
 $options1 = array();
-$options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
-foreach ($academic as $academic1) {
-    $timestart = $academic1->start_year;
-    $timestart1 = date("d/m/Y", $timestart);
-    $timeend = $academic1->end_year;
-    $timeend1 = date("d/m/Y", $timeend);
-    $options1[] = array('value' => $academic1->id, 'label' => $timestart1.'--'.$timeend1);
+$options1[] = array('value' => '', 'label' => '---- Select Subject----');
+foreach ($subjects as $subjects1) {
+    $subject_name= $subjects1->sub_name;
+    $options1[] = array('value' => $subjects1->course_id, 'label' => $subject_name);
 }
+    // print_r($options1);exit();
 
 $templateData = array(
-    'startYearOptions' => $options1,
+    'subjectOptions' => $options1,
 );
 
 $output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'back'=>$back]);
 echo $output;
 echo $OUTPUT->footer();
 ?>
-<script type="text/javascript">
-//  $(document).ready(function() {
-   
-function deletesubject(id)
-    {     
-
-        var confirmation = confirm("Are you sure you want to delete this item?");
-        if (confirmation) {
-            var divisionn = document.getElementById("division").value; 
-            if (divisionn != "") {
-              
-                $.ajax({
-                
-                    url: "test.php",
-                    data: { d_id: divisionn,delete:id},
-                    type: 'POST',
-                    success: function(data) {
-                        // alert(data);
-                        $("#demo").html(data); // Corrected ID
-                    }
-                });
-            }
-        
-        } 
-        
-    }
-// });
-    </script>
