@@ -24,8 +24,16 @@ $PAGE->set_title($linktext);
 
 echo $OUTPUT->header();
 $data = array();
-$rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY id DESC");
-
+// $rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY id DESC");
+$current_year = date("Y");
+ 
+$rec1 = $DB->get_records_sql("
+SELECT cs.*, ay.start_year, ay.end_year
+FROM {customsurvey} AS cs
+INNER JOIN {academic_year} AS ay ON cs.academic_id = ay.id
+WHERE YEAR(FROM_UNIXTIME(ay.start_year)) = $current_year
+OR YEAR(FROM_UNIXTIME(ay.end_year)) = $current_year
+");
 
 $options1 = array();
 $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
