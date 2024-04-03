@@ -27,7 +27,7 @@ $img_8=new moodle_url('/local/img/ic-8.svg');
 $profile=new moodle_url('/local/profileview/viewprofile.php');
 $subject=new moodle_url('/local/subject/sub_parentview.php');
 $learningpath=new moodle_url('/local/subject/parent_learningpath.php');
-$attendance=new moodle_url('/local/attendance/viewattendstd.php');
+$attendance=new moodle_url('/local/attendance/viewattendanceparent.php');
 $progresscard=new moodle_url('/local/progresscard/progresscard.php');
 $upcoming=new moodle_url('/local/dashboard/upcoming.php', array('child_id' => $child_id));
 $parentview=new moodle_url('/local/new_timetable/parentview.php');
