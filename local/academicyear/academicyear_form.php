@@ -65,6 +65,16 @@ class academicyear_form extends moodleform {
             'timezone'  => 99,
             'optional'  => false
         ));
+        
+        $school  = $DB->get_records('school_reg');
+            $options1 = array();
+            $options1=array(''=>'---- Select School ----');
+            foreach($school as $schools){
+            $options1 [$schools->id] = $schools->sch_name;
+            }
+
+            $mform->addElement('select', 'schools','School',$options1);
+
       
         $mform->addElement('html', '</div>');
 

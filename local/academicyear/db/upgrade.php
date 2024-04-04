@@ -31,17 +31,21 @@ require_once(__DIR__.'/upgradelib.php');
  * Execute local_academicyear upgrade from the given old version.
  *
  * @param int $oldversion
- * @return bool
+ * @return bool  
  */
 function xmldb_local_academicyear_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
+    if ($oldversion < 2023071901) {
+        $table = new xmldb_table('academic_year');
+        $divfield = new xmldb_field('school', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+    
+    if (!$dbman->field_exists($table, $divfield)) {
+    $dbman->add_field($table, $divfield);
+    }
+    upgrade_plugin_savepoint(true,2023071901,'local','academicyear');
 
-    // For further information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
-    //
-    // You will also have to create the db/install.xml file by using the XMLDB Editor.
-    // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
-
+    }
     return true;
 }
