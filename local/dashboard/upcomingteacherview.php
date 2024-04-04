@@ -32,7 +32,7 @@ $img3 = new moodle_url('/local/img/ic-22.svg');
 
 //$upcoming_events = new moodle_url('/local/dashboard/upcoming_events.php');
 $upcomingexams = new moodle_url('/local/dashboard/classteacherexamview.php');
-$upcomingsubjectexam= new moodle_url('/local/dashboard/classteacherexamview.php');
+$upcomingsubjectexam= new moodle_url('/local/dashboard/subteacherexamview.php');
 
  
 $PAGE->set_context($context);
