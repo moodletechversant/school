@@ -37,15 +37,23 @@ function xmldb_local_academicyear_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
-    if ($oldversion < 2023071901) {
+    if ($oldversion < 2023071902) {
         $table = new xmldb_table('academic_year');
-        $divfield = new xmldb_field('school', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
-    
-    if (!$dbman->field_exists($table, $divfield)) {
-    $dbman->add_field($table, $divfield);
-    }
-    upgrade_plugin_savepoint(true,2023071901,'local','academicyear');
 
+        $fields = [
+            'school' => new xmldb_field('school', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null),
+            'vacation_s_year' => new xmldb_field('vacation_s_year', XMLDB_TYPE_CHAR, '255', null, null, null, null),
+            'vacation_e_year' => new xmldb_field('vacation_e_year', XMLDB_TYPE_CHAR, '255', null, null, null, null)
+        ];
+
+        foreach ($fields as $fieldname => $field) {
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+
+        upgrade_plugin_savepoint(true, 2023071902, 'local', 'academicyear');
     }
+
     return true;
 }

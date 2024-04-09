@@ -62,7 +62,28 @@ class editacademic_form extends moodleform {
             'optional'  => false
         ));
 
-        
+
+        $mform->addElement('date_selector', 'vacationstart', 'Vacation start',array(
+            'startyear' => 2004, 
+            'stopyear'  => 2050,
+            'timezone'  => 99,
+            'optional'  => false
+        ));
+        $mform->addElement('date_selector', 'vacationend', 'Vacation end',array(
+            'startyear' => 2005, 
+            'stopyear'  => 2055,
+            'timezone'  => 99,
+            'optional'  => false
+        ));
+         $school  = $DB->get_records('school_reg');
+            $options1 = array();
+            $options1=array(''=>'---- Select School ----');
+            foreach($school as $schools){
+            $options1 [$schools->id] = $schools->sch_name;
+            }
+
+            $mform->addElement('select', 'schools','School',$options1);
+
  
         $editdata=$DB->get_record('academic_year',array('id'=>$id));
  
@@ -70,6 +91,10 @@ class editacademic_form extends moodleform {
         $mform->setDefault('timestart',$editdata->start_year);
         $mform->setDefault('timefinish',$editdata->end_year);
         
+        $mform->setDefault('vacationstart',$editdata->vacation_s_year);
+        $mform->setDefault('vacationend',$editdata->vacation_e_year);
+        $mform->setDefault('schools',$editdata->school);
+
       
         $mform->addElement('html', '</div>');
 
