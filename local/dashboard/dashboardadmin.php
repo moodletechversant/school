@@ -52,7 +52,20 @@ $PAGE->set_url('/local/dashboard/dashboardadmin.php');
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
-echo $mustache->render($template4,['csspath' => $csspath,'schoolreg_view'=>$schoolreg_view,'academicyr_view'=>$academicyr_view,
+$schools = $DB->get_records('school_reg');
+   
+    $options1 = array();
+    $options1[] = array('value' => '', 'label' => '---- Select school ----');
+    foreach ($schools as $school) {
+        $options1[] = array('value' => $school->id, 'label' =>  $school->sch_name);
+    }
+    // print_r($options1);
+    $templateData = array(
+        'schoolOptions' => $options1
+        
+    );
+    
+echo $mustache->render($template4,['csspath' => $csspath,'templateData'=>$templateData,'schoolreg_view'=>$schoolreg_view,'academicyr_view'=>$academicyr_view,
 'class_view'=>$class_view,'div_view'=>$div_view,'subject_view'=>$subject_view,'teacher_view'=>$teacher_view,
 'student_view'=>$student_view,'assign_view'=>$assign_view,'timetable_view'=>$timetable_view,
 'holidays_view'=>$holidays_view,'survey_view'=>$survey_view,'complaint_view'=>$complaint_view,
