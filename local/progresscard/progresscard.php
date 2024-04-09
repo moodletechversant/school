@@ -50,7 +50,6 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     $startyear1=date("d-m-Y", $startyear);
     $endyear1=date("d-m-Y", $endyear);
     $academic_year=$startyear1."  to  ".$endyear1;
-    //print_r($academic_year);exit();
   
 
     $typeofexam = $DB->get_records('type_of_exam');

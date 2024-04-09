@@ -59,7 +59,7 @@
         }
     }
 
-        upgrade_plugin_savepoint(true,2024021611,'local','progress_card');
+        upgrade_plugin_savepoint(true,2024021611,'local','progress_card'); 
 
 
 

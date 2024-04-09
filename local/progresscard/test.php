@@ -31,7 +31,6 @@ if(isset($_POST['exam_id'])){
        $type[] = $record->quiz_id; // Add the 'id' to the $quiz_ids array
       }
     }
-// print_r($type);exit();
 $commonElements = array_intersect($quiz_ids, $type);
 
 if(!empty($commonElements)){
