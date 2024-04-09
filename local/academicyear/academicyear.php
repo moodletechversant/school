@@ -23,13 +23,15 @@ else if ($formdata = $mform->get_data()) {
 
         $start_year = $formdata->timestart;
         $end_year = $formdata->timefinish;
-    
+        $school = $formdata->schools;
 
         // Check if end year is greater than start year
         if ($end_year > $start_year) {
             $academicdata = new stdClass();
             $academicdata->start_year = $start_year;
             $academicdata->end_year = $end_year;
+            $academicdata->school = $school;
+
             
             // Insert record into the 'academic_year' table
             $DB->insert_record('academic_year', $academicdata);

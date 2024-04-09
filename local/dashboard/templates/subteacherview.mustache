@@ -24,23 +24,29 @@
                 <div class="d-flex listing-top">
                   
                 <div class="form-group">
-                    <label>Subject</label>
-                    <select class="form-select" aria-label="Select Start Year" id="subject">                    
+                    <label>Class</label>
+                    <select class="form-select" aria-label="Select Class" id="class" data-user-id="{{userId}}">                    
                       {{#templateData}}
-                          {{#subjectOptions}}
+                          {{#classOptions}}
                           <option value="{{value}}">{{label}}</option>
-                          {{/subjectOptions}}
+                          {{/classOptions}}
                       {{/templateData}}
-                    </select>
-                 
+                    </select>     
                 </div>
 
-                  <div class="form-group" display="none" style="display: none;">
-                    <label>End Year</label>
-                    <select class="form-select" aria-label="Select End Year" id="academicyear1">
-                      <option selected>Select</option>                    
-                    </select>
-                  </div>
+                <div class="form-group">
+                      <label>Division</label>
+                      <select class="form-select" aria-label="Select division" id="division">
+                        <option selected>---- Select Division ----</option>
+                      </select>
+                </div>
+
+                <div class="form-group">
+                      <label>Subject</label>
+                      <select class="form-select" aria-label="Select subject" id="subject">
+                      <option selected>---- Select Subject ----</option>
+                      </select>
+                </div>
 
                 </div>
               </div>
@@ -60,32 +66,69 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
-<script>
-  
-     $(document).ready(function() {
-        $("#subject").change(function() { // Corrected ID
-            var subjectData = $(this).val();
-            if (subjectData != "") {
-                $.ajax({
 
+<script>
+    $(document).ready(function() {
+        $("#class").change(function() { // Corrected ID
+            var classData = $(this).val();
+            $("#demo").html(""); 
+            if (classData != "") {
+                $.ajax({
                     url: "test.php",
-                    data: { f_id: subjectData},
+                    data: { h_id: classData},
                     type: 'POST',
-                    success: function(data) {
-                  
-                        $("#demo").html(data); // Corrected ID
+                    success: function(data) {      
+              
+                        $("#division").html(data); // Corrected ID
+                      
                     }
                 });
             }
         });
-    });
    
+  
+     
+        $("#division").change(function() { // Corrected ID
+            var divisionn = $(this).val();
+
+            $("#demo").html(""); 
+            if (divisionn != "") {
+                $.ajax({
+                    url: "test.php",
+                    data: { j_id: divisionn},
+                    type: 'POST',
+                    success: function(data) {
+                      
+
+                        $("#subject").html(data); // Corrected ID
+                        
+                    }
+                });
+            }
+        });
+
+
+
+        $("#subject").change(function() { // Corrected ID
+          var subjectt = $(this).val();
+          if (subjectt != "") {
+              $.ajax({
+                  url: "test.php",
+                  data: { k_id: subjectt},
+                  type: 'POST',
+                  success: function(data) {
+                    
+                      $("#demo").html(data); // Corrected ID
+                  }
+              });
+          }
+      });
+
+
+    });
+
+
 </script>
-
-
-
-
-
 
 
 

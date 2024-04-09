@@ -38,7 +38,7 @@ function xmldb_local_schoolreg_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2024032509) {
+    if ($oldversion < 2024032510) {
         $table = new xmldb_table('school_reg');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
         $table->add_field('sch_name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
@@ -65,7 +65,7 @@ function xmldb_local_schoolreg_upgrade($oldversion) {
     }
 
    
-    upgrade_plugin_savepoint(true, 2024032509, 'local', 'schoolreg');
+    upgrade_plugin_savepoint(true, 2024032510, 'local', 'schoolreg');
     
     return true;
 }
