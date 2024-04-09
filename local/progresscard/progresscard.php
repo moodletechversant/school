@@ -28,7 +28,7 @@ $student_details=$DB->get_record_sql("SELECT user_id,s_ftname,s_mlname,s_lsname 
     $fname=$sname." ".$smname." ".$slame; 
     $val1 =$student_details->user_id;
 
-    //print_r($val1);exit();
+    // print_r($val1);exit();
 
 $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacherid, t.t_fname, c.academic_id, c.class_name
     FROM {student_assign} sa
