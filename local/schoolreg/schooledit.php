@@ -67,8 +67,97 @@ echo '<script type="text/javascript" charset="utf8" src="https://code.jquery.com
 echo $OUTPUT->footer();
 
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('input[name="schoolname"]').blur(function() {
+
+
+var currVal = $(this).val();
+$(this).val(currVal.charAt(0).toUpperCase() + currVal.slice(1).toLowerCase());
+
+
+});
+
+//text full lowercase
+$('input[name="shortname"]').blur(function() {
+var currVal = $(this).val();
+$(this).val(currVal.toLowerCase());
+
+});
+
+//only alphabets
+$('input[name="schoolname"],input[name="shortname"]').on("keydown", function(event){
+	// Allow controls such as backspace, tab etc.
+	var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
+	
+	// Allow letters
+	for(var i = 65; i <= 90; i++){
+	arr.push(i);
+	}
+	
+	// Prevent default if not in array
+	if(jQuery.inArray(event.which, arr) === -1){
+	event.preventDefault();
+	}
+	
+	
+	});
+
+
+
+//only numeric value
+$('input[name="pincode"],input[name="phone"]').keypress
+(
+function(event)
+{
+    if (event.keyCode == 46 || event.keyCode == 8)
+    {
+    //do nothing
+    }
+    else 
+    {
+        if (event.keyCode < 48 || event.keyCode > 57 ) 
+        {
+            event.preventDefault();	
+        }	
+    }
+
+
+
+   
+}
+);
+$('input[name="pincode"]').keypress(function(event) {
+    // Get the current value of the input field
+    var currentValue = $(this).val();
+
+    // Get the total number of digits in the input
+    var totalDigits = currentValue.length;
+
+    // Check if the maximum number of digits has been reached
+    if (totalDigits >= 6) {
+        event.preventDefault();
+        return;
+    }
+});
+
+$('input[name="phone"]').keypress(function(event) {
+    // Get the current value of the input field
+    var currentValue = $(this).val();
+
+    // Get the total number of digits in the input
+    var totalDigits = currentValue.length;
+
+    // Check if the maximum number of digits has been reached
+    if (totalDigits >= 14) {
+        event.preventDefault();
+        return;
+    }
+});
+
+
+</script>
 
 
 

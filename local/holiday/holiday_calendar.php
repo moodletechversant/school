@@ -135,13 +135,8 @@ $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
             ];
         }
     }
-    
-    
-    
     echo $mustache->render($template1, ['tableRows' => $tableRows, 'css_link' => $css_link, 'templateData' => $templateData]);
-        // <input type="submit" name="edit" value="edit">
-
-echo $OUTPUT->footer();
+    echo $OUTPUT->footer();
 
 
 ?>

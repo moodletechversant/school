@@ -17,6 +17,7 @@ $var = '
       </tr>
     </thead>
     <tbody>';
+    
 if (isset($_POST['userid']) && isset($_POST['surveryid'])) {
     $userid = $_POST['userid'];
     $surveryid = $_POST['surveryid'];

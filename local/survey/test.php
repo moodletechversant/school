@@ -48,6 +48,7 @@ global $DB, $USER;
   }
 
 
+  
   if(isset($_POST['academicYearOption'])){
     $bid = $_POST['academicYearOption']; // Retrieve 'option2' value
     $models = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE id='$bid'");

@@ -72,7 +72,9 @@ if (!empty($rec1)) {
          elseif ($current_date > $surveytoFormatted) {
             $status_message = 'This survey is no longer available';
             $status_color = ' #867c7c'; 
+        // print_r($current_date.'-'.$surveytoFormatted);exit();
         } 
+
         
         elseif ($current_date < $surveyfromFormatted) {
             $status_message = 'This will be available from '.$surveyfromFormatted;

@@ -10,6 +10,7 @@ if (isset($_POST['division'])) {
 
   $models = $DB->get_records_sql("SELECT * FROM {student_assign} WHERE s_division='$did'");
  
+  
   if (!empty($models)) {
       $var = '
       <div class="table-responsive custom-table">
