@@ -30,29 +30,10 @@ $PAGE->set_title($linktext);
 
     echo $OUTPUT->header();
 
-    $academic = $DB->get_records('academic_year');
-  
-    $current_year = date("Y"); // Get the current year using PHP date() function
-
-$rec1 = $DB->get_records_sql("
-    SELECT ah.*, ay.start_year, ay.end_year
-    FROM {addholiday} AS ah
-    INNER JOIN {academic_year} AS ay ON ah.academic_id = ay.id
-    WHERE YEAR(FROM_UNIXTIME(ay.start_year)) = $current_year
-    OR YEAR(FROM_UNIXTIME(ay.end_year)) = $current_year
-");
-
-       //print_r($rec1);exit();
-
-//$options1 = array();
-
     // $options1[] = array('' => '---- Select academic_year ----');
     $academic = $DB->get_records('academic_year');
     $current_year = date("Y");
     $options1 = array();
-    
-    $rec = $DB->get_records_sql("SELECT * FROM {addholiday} WHERE YEAR(FROM_UNIXTIME(from_date)) = ?", array($current_year));
-   
 $rec1 = $DB->get_records_sql("
 SELECT ah.*, ay.start_year, ay.end_year
 FROM {addholiday} AS ah
@@ -65,9 +46,7 @@ $current_date = date("Y-m-d");
 $options1 = array();
 $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
 
-
-    
-    foreach ($academic_id as $academic) {
+foreach ($academic_id as $academic) {
         $timestart = $academic->start_year;
         $timeend = $academic->end_year;
         
@@ -76,12 +55,7 @@ $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
         
         $options1[] = array('value' => $academic->id, 'label' => $timestart1 . '-' . $timeend1);
     }
-
-
     $templateData = array('startYearOptions' => $options1);
-    $table = new html_table();
-    
-    $table->head = array("Start Date","End Date","Holiday",'Edit','Delete');
     $mustache = new Mustache_Engine();
     // echo $mustache->render($template);
     if (!empty($rec1)) {
