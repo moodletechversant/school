@@ -56,7 +56,7 @@ $linktext = "View teachers";
 
 $linkurl = new moodle_url('/local/createteacher/view_teacher.php');
 $css_link = new moodle_url('/local/css/style.css');
-$create_teacher = new moodle_url('/local/createteacher/createteacher.php');
+$create_teacher = new moodle_url('/local/createteacher/createteacher.php?id');
 $edit_teacher = new moodle_url('/local/createteacher/editteacher.php?id');
 $delete_teacher = new moodle_url('/local/createteacher/deleteteacher.php?id');
 
@@ -69,7 +69,8 @@ $PAGE->set_title($strnewclass);
 // $PAGE->set_heading($SITE->fullname);
 
 echo $OUTPUT->header();
-    $rec=$DB->get_records_sql("SELECT * FROM {teacher}");
+    $school_id  = optional_param('id', 0, PARAM_INT);
+    $rec=$DB->get_records_sql("SELECT * FROM {teacher} where school_id=$school_id");
     $mustache = new Mustache_Engine();
 
     //echo $mustache->render($template);
@@ -113,7 +114,7 @@ echo $OUTPUT->header();
      ];
     }
     //print_r($tableRows);exit();
-    $output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'create_teacher'=>$create_teacher,'edit_teacher'=>$edit_teacher,'delete_teacher'=>$delete_teacher]);
+    $output = $mustache->render($template, ['school_id'=>$school_id,'tableRows' => $tableRows,'css_link'=>$css_link,'create_teacher'=>$create_teacher,'edit_teacher'=>$edit_teacher,'delete_teacher'=>$delete_teacher]);
     echo $output;
     // <input type="submit" name="edit" value="edit">
     //echo html_writer::table($table);

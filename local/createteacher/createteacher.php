@@ -22,6 +22,7 @@ if ($mform->is_cancelled()) {
 else if ($formdata = $mform->get_data()) {
    
     $tchrdata= new stdclass();
+    
     $tchrdata->t_fname=$formdata->fstname;
     $tchrdata->t_mname=$formdata->midlname;
     $tchrdata->t_lname=$formdata->lsname;
@@ -36,9 +37,9 @@ else if ($formdata = $mform->get_data()) {
     $tchrdata->t_bloodgrp=$formdata->bg;
     $tchrdata->t_qlificatn=$formdata->qln;
     $tchrdata->t_exp=$formdata->exp;
-
     $tchrdata->t_gender=$formdata->gender;
     $tchrdata->t_district=$formdata->district;
+    $tchrdata->school_id=$formdata->school_id;
    
     //print_r($tchrdata);exit();
 

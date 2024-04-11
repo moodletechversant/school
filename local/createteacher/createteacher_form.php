@@ -40,9 +40,9 @@ class createteacher_form extends moodleform {
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
-        $id  = optional_param('id', 0, PARAM_INT);
+        $school_id  = optional_param('id', 0, PARAM_INT);
 
-        $mform->addElement('hidden','id',$id);
+        $mform->addElement('hidden','school_id',$school_id);
 
 
         $mform->addElement('text', 'fstname', 'Teacher First Name'); 

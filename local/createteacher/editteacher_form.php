@@ -43,7 +43,9 @@ class editteacher_form extends moodleform {
 
         // $table = new html_table();
         $id  = optional_param('id', 0, PARAM_INT);
+        $school_id  = optional_param('school_id', 0, PARAM_INT);
         $mform->addElement('hidden','id',$id);
+        $mform->addElement('hidden','school_id',$school_id);
         $mform->addElement('text', 'fstname', 'Teacher First Name'); 
         $mform->addRule('fstname', 'First name  missing', 'required', null);
 

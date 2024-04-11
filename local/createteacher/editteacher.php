@@ -77,7 +77,7 @@ if($mform->is_cancelled()){
     $update=$DB->update_record('teacher',$tchrdata);
 
 
-     $urlto = $CFG->wwwroot.'/local/createteacher/view_teacher.php';
+     $urlto = $CFG->wwwroot.'/local/createteacher/view_teacher.php?id='.$formdata->school_id;
      redirect($urlto, 'Data Saved Successfully '); 
 
 }
