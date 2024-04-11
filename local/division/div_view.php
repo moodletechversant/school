@@ -7,10 +7,11 @@ $template = file_get_contents($CFG->dirroot . '/local/division/template/division
 global $class, $CFG;
 $context = context_system::instance();
 $linktext = "View divisions";
+$school_id=optional_param('id', 0, PARAM_INT);   
 
 $linkurl = new moodle_url('/local/division/div_view.php');
 $css_link = new moodle_url('/local/css/style.css');
-$div_creation = new moodle_url('/local/division/div_creation.php');
+$div_creation = new moodle_url('/local/division/div_creation.php', array('id' => $school_id));
 
 $PAGE->set_context($context);
 $strnewclass = get_string('divcreation');
@@ -29,7 +30,8 @@ $mustache = new Mustache_Engine();
 $tableRows = [];
 
 
-$academic = $DB->get_records('academic_year');
+// $academic  = $DB->get_records('academic_year'); 
+$academic = $DB->get_records('academic_year', array('school' => $school_id));
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');

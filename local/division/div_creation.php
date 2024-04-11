@@ -4,6 +4,7 @@ require_once($CFG->dirroot.'/local/division/div_creation_form.php');
 global $class,$CFG;
 $context = context_system::instance();
 // $classid = $class->id;
+$school_id  = optional_param('id', 0, PARAM_INT);   
 
 $linkurl = new moodle_url('/local/division/div_creation.php');
 $PAGE->set_context($context);
@@ -15,7 +16,7 @@ $PAGE->set_title($strnewclass);
 $mform=new div_creation_form();
 echo $OUTPUT->header();
 
-$returnurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
+$returnurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php?id='.$school_id;
 if ($mform->is_cancelled()) {
     redirect($returnurl);
 } 
@@ -30,7 +31,7 @@ else if ($formdata = $mform->get_data()) {
     $divdata->div_gstrength=$formdata->gstrength;
     $divdata->div_description=$formdata->description;
     $DB->insert_record('division',$divdata);
-    $urlto = $CFG->wwwroot.'/local/division/div_creation.php';
+    $urlto = $CFG->wwwroot.'/local/division/div_creation.php?id='.$school_id;
     redirect($urlto, 'Data Saved Successfully '); 
 
   

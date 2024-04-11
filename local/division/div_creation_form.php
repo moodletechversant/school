@@ -33,24 +33,26 @@ require_login();
 class div_creation_form extends moodleform {
     function definition() {
         global $USER, $CFG, $DB;
+        $school_id=optional_param('id', 0, PARAM_INT);   
 
         $mform = $this->_form;
-        $div_view=$CFG->wwwroot.'/local/division/div_view.php';
+        $div_view=$CFG->wwwroot.'/local/division/div_view.php?id='.$school_id;
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Division creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
-        $id  = optional_param('id', 0, PARAM_INT);   
-
+        $id= optional_param('id', 0, PARAM_INT);   
+// print_r($id);exit();
         $mform->addElement('hidden','id',$id);
 
-       
+       //$schoolid=1;
 //-----------Form creation-----------
 
          //Academic Year 
-       $academic  = $DB->get_records('academic_year');
-    //    $classes  = $DB->get_records('class');
+        //  $academic  = $DB->get_records('academic_year'); 
+         $academic = $DB->get_records('academic_year', array('school' => $id));
+             //    $classes  = $DB->get_records('class');
        $options1 = array();
        $options1=array(''=>'---- Select academic_year ----');
        foreach($academic as $academics){
