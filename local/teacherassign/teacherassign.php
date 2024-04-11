@@ -15,6 +15,8 @@ global $USER;
 $context = context_system::instance();
 require_login();
 $linktext = "Assign Teacher";
+$school_id= optional_param('id', 0, PARAM_INT);   
+// print_r($school_id);exit();
 //$linktext = get_string('plugin','new_plugin');
 $linkurl = new moodle_url('/local/teacherassign/teacherassign.php');
 
@@ -91,7 +93,7 @@ else if($formdata = $mform->get_data()){
 
 
      $DB->insert_record('teacher_assign',$teacherassign);
-     $urlto = $CFG->wwwroot.'/local/teacherassign/teacherassign.php';
+     $urlto = $CFG->wwwroot.'/local/teacherassign/teacherassign.php?id='.$formdata->school_id;
      redirect($urlto, 'Data Saved Successfully '); 
 
 }

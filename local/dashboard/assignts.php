@@ -13,11 +13,13 @@ $template = file_get_contents($CFG->dirroot . '/local/dashboard/templates/admina
 global $class,$CFG;
 $context = context_system::instance();
 // $classid = $class->id;
+$school_id=optional_param('id', 0, PARAM_INT);   
+
 $linktext = "View students";
 
 $linkurl = new moodle_url('/local/dashboard/assignts.php');
 $css_link = new moodle_url('/local/css/style.css');
-$view_tassign= new moodle_url('/local/teacherassign/view_tassign.php');
+$view_tassign= new moodle_url('/local/teacherassign/view_tassign.php?id='.$school_id);
 $clsteacher_assign= new moodle_url('/local/clsteacherassign/view_clsteacherassign.php');
 $student_assign= new moodle_url('/local/studentassign/view_sassign.php');
 

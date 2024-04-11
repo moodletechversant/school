@@ -34,10 +34,12 @@ class teacherassign_form extends moodleform {
     
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
+        $school_id=optional_param('id', 0, PARAM_INT);   
 
         $mform = $this->_form;
         // $editorclasslist = null;
         // $filemanagerclasslist = null;
+        $teacherassign_view=$CFG->wwwroot.'/local/teacherassign/view_tassign.php?id='.$school_id;
 
         $attributes = 'size="30"';
 
@@ -45,9 +47,10 @@ class teacherassign_form extends moodleform {
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Assign teacher</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
+        $mform->addElement('hidden','school_id',$school_id);
 
         //Academic Year 
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records('academic_year',array('school' => $school_id));
         $options1 = array();
         $options1=array(''=>'---- Select academic year ----');
         foreach($academic  as $academic1 ){
@@ -107,7 +110,7 @@ class teacherassign_form extends moodleform {
 
              $this->add_action_buttons();
 
-             $mform->addElement('html','<a href = "view_tassign.php" style="text-decoration:none">');
+             $mform->addElement('html','<a href = "'.$teacherassign_view.'" style="text-decoration:none">');
              $mform->addElement('button', 'btn', 'View Assign teacher'); 
              $mform->addElement('html','</a>');
 

@@ -42,16 +42,16 @@ class div_creation_form extends moodleform {
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
-        $id= optional_param('id', 0, PARAM_INT);   
+       // $id= optional_param('id', 0, PARAM_INT);   
 // print_r($id);exit();
-        $mform->addElement('hidden','id',$id);
+        $mform->addElement('hidden','school_id',$school_id);
 
        //$schoolid=1;
 //-----------Form creation-----------
 
          //Academic Year 
         //  $academic  = $DB->get_records('academic_year'); 
-         $academic = $DB->get_records('academic_year', array('school' => $id));
+         $academic = $DB->get_records('academic_year', array('school' => $school_id));
              //    $classes  = $DB->get_records('class');
        $options1 = array();
        $options1=array(''=>'---- Select academic_year ----');

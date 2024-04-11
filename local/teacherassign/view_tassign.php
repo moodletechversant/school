@@ -6,9 +6,10 @@ $template = file_get_contents($CFG->dirroot . '/local/teacherassign/template/ass
 
 global $class,$CFG, $DB;
 
+$school_id=optional_param('id', 0, PARAM_INT);   
 
 $css_link = new moodle_url('/local/css/style.css');
-$add_new = new moodle_url('/local/teacherassign/teacherassign.php');
+$add_new = new moodle_url('/local/teacherassign/teacherassign.php?id='.$school_id);
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "admin_view";
@@ -26,7 +27,7 @@ $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
 
-$academic = $DB->get_records('academic_year');
+$academic = $DB->get_records('academic_year',array('school' => $school_id));
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
