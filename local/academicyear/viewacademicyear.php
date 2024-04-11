@@ -16,8 +16,9 @@ $PAGE->set_title($strnewacademic);
 
 echo $OUTPUT->header();
 
-$rec = $DB->get_records_sql("SELECT * FROM {academic_year} ORDER BY start_year ASC");
+
 $mustache = new Mustache_Engine();
+$id  = optional_param('id', 0, PARAM_INT);
 
 $csspath = new moodle_url("/local/css/style.css");
 $addnew_academic = new moodle_url("/local/academicyear/academicyear.php");
@@ -26,7 +27,7 @@ $academic_yr_delete = new moodle_url("/local/academicyear/delete.php");
 
 
 $tableRows = [];
-
+$rec = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$id ORDER BY start_year ASC  ");
 foreach ($rec as $records) {
     $id = $records->id;
     $timestart = $records->start_year;
