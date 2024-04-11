@@ -16,6 +16,7 @@ $linktext = "Assign Class Teacher";
 //$linktext = get_string('plugin','new_plugin');
 // Set the url.
 $linkurl = new moodle_url('/local/clsteacherassign/assignclsteacher.php');
+$school_id= optional_param('id', 0, PARAM_INT);   
 
 // Print the page header.
 $PAGE->set_context($context);
@@ -38,7 +39,7 @@ if($mform->is_cancelled()){
      $var1=$formdata->class;
      $var2=$formdata->division;
      $DB->execute("UPDATE mdl_division SET div_teacherid=$div_teacherid WHERE div_class = $var1 AND id =$var2");
-     $urlto = $CFG->wwwroot.'/local/clsteacherassign/assignclsteacher.php';
+     $urlto = $CFG->wwwroot.'/local/clsteacherassign/assignclsteacher.php?id='.$formdata->school_id;
      redirect($urlto, 'Data Saved Successfully '); 
 
 }

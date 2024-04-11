@@ -11,6 +11,6 @@
       $editdata = $DB->get_record_sql("SELECT * FROM {customsurvey_question} WHERE id='$id'");
       $id1=$editdata->survey_id;
     $DB->delete_records('customsurvey_question', array('id'=>$id));
-    header("Location:/school/local/survey/editsurvey.php?id= $id1");
+    header("Location:/school/?id= $id1");
 
 ?>

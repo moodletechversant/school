@@ -7,9 +7,11 @@ $template = file_get_contents($CFG->dirroot . '/local/clsteacherassign/template/
 
 global $class, $CFG, $DB, $USER;
 $css_link = new moodle_url('/local/css/style.css');
-$add_new = new moodle_url('/local/clsteacherassign/assignclsteacher.php');
+
 $context = context_system::instance();
 require_login();
+$school_id=optional_param('id', 0, PARAM_INT);   
+$add_new = new moodle_url('/local/clsteacherassign/assignclsteacher.php?id='.$school_id);
 
 $linktext = "Assigned Teacher List";
 
@@ -32,8 +34,8 @@ $assigned_teachers = $DB->get_records_sql("
 
 // print_r($assigned_teachers);exit();
 $mustache = new Mustache_Engine();
-$academic = $DB->get_records('academic_year');
-   
+$academic = $DB->get_records('academic_year',array('school' => $school_id));
+
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
 foreach ($academic as $academic1) {

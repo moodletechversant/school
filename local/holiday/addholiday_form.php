@@ -53,7 +53,6 @@ class addholiday_form extends moodleform {
              $timeend1 = date("d/m/Y", $timeend);
              $options1 [$academics->id] =$timestart1.'-'.$timeend1;
              }
- 
              $mform->addElement('select', 'academic','Academic Year',$options1);
         //From date
         $mform->addElement('date_selector', 'fromdate','From Date');

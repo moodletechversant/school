@@ -34,22 +34,28 @@ class assignclsteacher_form extends moodleform {
 
     public function definition() {
         global $DB, $USER, $CFG, $COURSE;
-        $clsteacher_assign=$CFG->wwwroot.'/local/clsteacherassign/view_clsteacherassign.php';
+        $school_id=optional_param('id', 0, PARAM_INT);   
+
 
         $mform = $this->_form;
+        $clsteacher_assign=$CFG->wwwroot.'/local/clsteacherassign/view_clsteacherassign.php?id='.$school_id;
+
+        
+        
+        $attributes = 'size="30"';
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Assign Class Teacher</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
+        $mform->addElement('hidden','school_id',$school_id);
 
         // $editorclasslist = null;
         // $filemanagerclasslist = null;
 
-        $attributes = 'size="30"';
 
         //-----------Form creation-----------
         //Academic Year 
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records('academic_year',array('school' => $school_id));
         //    $classes  = $DB->get_records('class');
             $options1 = array();
             $options1=array(''=>'---- Select academic_year ----');

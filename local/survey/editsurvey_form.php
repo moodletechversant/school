@@ -43,17 +43,19 @@ class editsurvey_form extends moodleform {
         $attributes = 'size="30"';
 
         $id  = optional_param('id', 0, PARAM_INT);
-        // $id1  = optional_param('id', 0, PARAM_INT);
-        // print_r($id1);exit();
-
-
+       
              //-----------Form creation-----------
 
              //ID
              $mform->addElement('hidden','id',$id);
                   
              //Survey name
-             $academic  = $DB->get_records('academic_year');
+             $school_id  = optional_param('schoolid', 0, PARAM_INT);
+             $mform->addElement('hidden','school_id',$school_id);
+   
+             $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id");
+        // print_r($academic);exit();
+
              $options1 = array();
              $options1=array(''=>'---- Select academic year ----');
              foreach($academic  as $academic1 ){

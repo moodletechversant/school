@@ -16,7 +16,6 @@ $linktext = "View students";
 
 $linkurl = new moodle_url('/local/dashboard/dashboardadmin.php');
 $csspath = new moodle_url('/local/css/style.css');
-
 $academicyr_view = new moodle_url('/local/academicyear/viewacademicyear.php?id');
 $schoolreg_view = new moodle_url('/local/schoolreg/viewschools.php?id');
 $class_view = new moodle_url('/local/class/classview.php?id');

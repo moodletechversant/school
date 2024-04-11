@@ -52,6 +52,14 @@ echo $OUTPUT->header();
 
       // Display the image in the table cell.
      
+            
+      if ($isSuspended == 1) {
+        $iconClass = 'fa-eye-slash';
+        $actionText = 'Unsuspend';
+      } else {
+        $iconClass = 'fa-eye';
+        $actionText = 'Suspend';
+      }
         $tableRows[] = [
          'id' =>$id,
          'name' => $name,

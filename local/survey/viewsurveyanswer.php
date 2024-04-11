@@ -20,7 +20,9 @@ $PAGE->set_title($strnewclass);
 $teacher_id = $USER->id;
 echo $OUTPUT->header(); 
 $mustache = new Mustache_Engine();
-$academic = $DB->get_records('academic_year'); 
+$school_id  = optional_param('id', 0, PARAM_INT);
+$academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id");
+
 
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '-- Select Academic Year --');

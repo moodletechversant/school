@@ -20,7 +20,7 @@ $linktext = "View students";
 $linkurl = new moodle_url('/local/dashboard/assignts.php');
 $css_link = new moodle_url('/local/css/style.css');
 $view_tassign= new moodle_url('/local/teacherassign/view_tassign.php?id='.$school_id);
-$clsteacher_assign= new moodle_url('/local/clsteacherassign/view_clsteacherassign.php');
+$clsteacher_assign= new moodle_url('/local/clsteacherassign/view_clsteacherassign.php?id='.$school_id);
 $student_assign= new moodle_url('/local/studentassign/view_sassign.php');
 
 $view_tassign_img= new moodle_url('/local/img/academic.svg');
