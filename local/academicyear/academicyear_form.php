@@ -49,7 +49,7 @@ class academicyear_form extends moodleform {
         // $table = new html_table();
         $school_id  = optional_param('id', 0, PARAM_INT);
 
-        $mform->addElement('hidden','id',$school_id);
+        $mform->addElement('hidden','school_id',$school_id);
         // $mform->addElement('hidden', 'id'); 
         
         $mform->addElement('date_selector', 'timestart', 'Academic start',array(

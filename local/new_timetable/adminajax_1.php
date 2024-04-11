@@ -117,13 +117,13 @@ if(isset($_POST['option'])){
                                 <td>
                                     <div class="uk-tile uk-tile-primary uk-padding-small uk-margin-small">
                                     <h4 class="uk-margin-remove-bottom"><?php echo $t_subject; ?></h4>
-                                    <p class="uk-margin-remove-top"><i><?php  echo $from_time." to ".$to_time; ?></i></p>
+                                    <p class="uk-margin-remove-top"><i><b>TIME:</b><?php  echo date('h:i A',$from_time)." to ".date('h:i A',$to_time); ?></i></p>
                                     <p><?php  echo "Teacher:".$t_teacher; ?> </p>
                                     </div>
                                 </td>
                                 <?php if($break_ftime != NULL) { ?>
                                 <td class="break-bg">
-                                    <div><?php  echo strtoupper($break_type); ?><br><?php  echo $break_ftime." to ".$break_ttime; ?></div>
+                                    <div><?php  echo strtoupper($break_type); ?><br><b>TIME:</b><?php  echo date('h:i A',$break_ftime)." to ".date('h:i A',$break_ttime); ?></div>
                                 </td>
                                 <?php } 
                               
