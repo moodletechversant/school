@@ -18,15 +18,15 @@ echo $OUTPUT->header();
 
 
 $mustache = new Mustache_Engine();
-$id  = optional_param('id', 0, PARAM_INT);
+$school_id  = optional_param('id', 0, PARAM_INT);
 
 $csspath = new moodle_url("/local/css/style.css");
-$addnew_academic = new moodle_url("/local/academicyear/academicyear.php");
+$addnew_academic = new moodle_url("/local/academicyear/academicyear.php?id");
 $academic_yr_edit = new moodle_url("/local/academicyear/editacademic.php?id");
 $academic_yr_delete = new moodle_url("/local/academicyear/delete.php");
 
 $tableRows = []; // Initialize an empty array to store the table rows
-$rec = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$id ORDER BY start_year ASC  ");
+$rec = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id ORDER BY start_year ASC  ");
 foreach ($rec as $records) {
     $id = $records->id;
     $timestart = $records->start_year;
@@ -58,7 +58,7 @@ foreach ($rec as $records) {
 }
 
 
-$output = $mustache->render($template, ['tableRows' => $tableRows,'csspath' => $csspath,'addnew_academic' => $addnew_academic,'academic_yr_edit' => $academic_yr_edit,'academic_yr_delete'=>$academic_yr_delete]);
+$output = $mustache->render($template, ['school_id'=>$school_id,'tableRows' => $tableRows,'csspath' => $csspath,'addnew_academic' => $addnew_academic,'academic_yr_edit' => $academic_yr_edit,'academic_yr_delete'=>$academic_yr_delete]);
 echo $output;
 
 echo $OUTPUT->footer();

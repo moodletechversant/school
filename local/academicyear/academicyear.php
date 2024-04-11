@@ -25,7 +25,7 @@ else if ($formdata = $mform->get_data()) {
         $end_year = $formdata->timefinish;
         $vacation_start_year = $formdata->vacationstart;
         $vacation_end_year = $formdata->vacationend;
-        $school = $formdata->schools;
+        $school = $formdata->id;
 
         // Check if end year is greater than start year
         if ($end_year > $start_year) {

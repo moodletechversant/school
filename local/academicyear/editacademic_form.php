@@ -38,16 +38,14 @@ class editacademic_form extends moodleform {
         global $USER, $CFG, $COURSE, $DB;
         $mform = $this->_form;
 
+        $id  = optional_param('id', 0, PARAM_INT);
+        $school_id  = optional_param('school_id', 0, PARAM_INT);
+
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Academic Year Creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
-        
-        // $table = new html_table();
-        $id  = optional_param('id', 0, PARAM_INT);
-        // print_r($id);exit();
-
         $mform->addElement('hidden','id',$id);
-        // $mform->addElement('hidden', 'id'); 
+        $mform->addElement('hidden','school_id',$school_id);
         
         $mform->addElement('date_selector', 'timestart', 'Academic start',array(
             'startyear' => 2004, 
@@ -61,8 +59,6 @@ class editacademic_form extends moodleform {
             'timezone'  => 99,
             'optional'  => false
         ));
-
-
         $mform->addElement('date_selector', 'vacationstart', 'Vacation start',array(
             'startyear' => 2004, 
             'stopyear'  => 2050,
@@ -75,30 +71,22 @@ class editacademic_form extends moodleform {
             'timezone'  => 99,
             'optional'  => false
         ));
-         $school  = $DB->get_records('school_reg');
-            $options1 = array();
-            $options1=array(''=>'---- Select School ----');
-            foreach($school as $schools){
-            $options1 [$schools->id] = $schools->sch_name;
-            }
+        //  $school  = $DB->get_records('school_reg');
+        //     $options1 = array();
+        //     $options1=array(''=>'---- Select School ----');
+        //     foreach($school as $schools){
+        //     $options1 [$schools->id] = $schools->sch_name;
+        //     }
 
-            $mform->addElement('select', 'schools','School',$options1);
-
- 
+        //     $mform->addElement('select', 'schools','School',$options1);
         $editdata=$DB->get_record('academic_year',array('id'=>$id));
- 
-    
+
         $mform->setDefault('timestart',$editdata->start_year);
         $mform->setDefault('timefinish',$editdata->end_year);
-        
         $mform->setDefault('vacationstart',$editdata->vacation_s_year);
         $mform->setDefault('vacationend',$editdata->vacation_e_year);
         $mform->setDefault('schools',$editdata->school);
-
-      
         $mform->addElement('html', '</div>');
-
-
         $this->add_action_buttons();
         $mform->addElement('html', '</div>');
        

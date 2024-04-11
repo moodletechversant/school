@@ -28,9 +28,6 @@ $PAGE->navbar->add('Academic year  Details', new moodle_url($CFG->wwwroot.'/loca
 echo $OUTPUT->header();
 $mform = new editacademic_form();
 
-    
-
-    
 if($mform->is_cancelled()){
     $cancelurl = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
     redirect($cancelurl);
@@ -38,25 +35,21 @@ if($mform->is_cancelled()){
 
     $academicdata =  new stdclass();
     $academicdata->id = $formdata->id; 
-   
     $academicdata->start_year=$formdata->timestart;
     $academicdata->end_year=$formdata->timefinish;
     $academicdata->vacation_s_year=$formdata->vacationstart;
     $academicdata->vacation_e_year=$formdata->vacationend;
-    $academicdata->school=$formdata->schools;
+    $academicdata->school=$formdata->school_id;
 
 //left table fieldname right file fieldname 
 
 $DB->update_record('academic_year',$academicdata);
-$urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
+$urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php?id='.$formdata->school_id;
 redirect($urlto, 'Data Saved Successfully ', 8); 
 
 exit();
 }
-
-
 $mform->display();
-
 echo $OUTPUT->footer();
 
 ?>

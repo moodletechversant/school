@@ -47,10 +47,9 @@ class academicyear_form extends moodleform {
         $mform->addElement('html', '<div class="form-class">');
         
         // $table = new html_table();
-        $id  = optional_param('id', 0, PARAM_INT);
-        // print_r($id);exit();
+        $school_id  = optional_param('id', 0, PARAM_INT);
 
-        $mform->addElement('hidden','id',$id);
+        $mform->addElement('hidden','id',$school_id);
         // $mform->addElement('hidden', 'id'); 
         
         $mform->addElement('date_selector', 'timestart', 'Academic start',array(
@@ -80,14 +79,14 @@ class academicyear_form extends moodleform {
         ));
         
 
-        $school  = $DB->get_records('school_reg');
-            $options1 = array();
-            $options1=array(''=>'---- Select School ----');
-            foreach($school as $schools){
-            $options1 [$schools->id] = $schools->sch_name;
-            }
+        // $school  = $DB->get_records('school_reg');
+        //     $options1 = array();
+        //     $options1=array(''=>'---- Select School ----');
+        //     foreach($school as $schools){
+        //     $options1 [$schools->id] = $schools->sch_name;
+        //     }
 
-            $mform->addElement('select', 'schools','School',$options1);
+        //     $mform->addElement('select', 'schools','School',$options1);
 
       
         $mform->addElement('html', '</div>');
