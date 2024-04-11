@@ -19,9 +19,10 @@ class periods_form extends moodleform {
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Time-table creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
+        $school_id  = optional_param('id', 0, PARAM_INT);
+        $mform->addElement('hidden','school_id',$school_id);
 
-
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records('academic_year',array('school' => $school_id));
         $options1 = array();
         //$options1=array(''=>'---- Select academic_year ----');
         foreach($academic as $academics){

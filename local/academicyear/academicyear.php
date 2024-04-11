@@ -25,7 +25,7 @@ else if ($formdata = $mform->get_data()) {
         $end_year = $formdata->timefinish;
         $vacation_start_year = $formdata->vacationstart;
         $vacation_end_year = $formdata->vacationend;
-        $school = $formdata->id;
+        $school = $formdata->school_id;
 
         // Check if end year is greater than start year
         if ($end_year > $start_year) {
@@ -40,7 +40,7 @@ else if ($formdata = $mform->get_data()) {
             // Insert record into the 'academic_year' table
             $DB->insert_record('academic_year', $academicdata);
             
-            $urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
+            $urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php?id='.$formdata->school_id;
             redirect($urlto, 'Data Saved Successfully '); 
         } else {
             

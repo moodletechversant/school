@@ -10,7 +10,7 @@ $linktext = "View assigned students";
 $linkurl = new moodle_url('/local/new_timetable/admin_view_1.php');
 
 $css_link = new moodle_url('/local/css/style.css');
-$periods = new moodle_url('/local/new_timetable/periods.php');
+$periods = new moodle_url('/local/new_timetable/periods.php?id');
 
 $PAGE->set_context($context);
 $strnewclass = 'studentview';
@@ -20,10 +20,11 @@ $PAGE->set_title($strnewclass);
 //$addstudent = '<button style="background:transparent;border:none;"><a href="/school/local/studentassign/assign_student.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>+</font></a></button>';
 
 echo $OUTPUT->header();
+$school_id  = optional_param('id', 0, PARAM_INT);
 $mustache = new Mustache_Engine();
 $rec = $DB->get_records('student_assign');
 
-$academic = $DB->get_records('academic_year');
+$academic = $DB->get_records('academic_year',array('school' => $school_id));
 
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select Academic Year----');
@@ -39,7 +40,7 @@ $templateData = array(
     'startYearOptions' => $options1,
 );
 
-$output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'periods'=>$periods]);
+$output = $mustache->render($template, ['school_id'=>$school_id,'templateData'=>$templateData,'css_link'=>$css_link,'periods'=>$periods]);
 
 echo $output;
 
