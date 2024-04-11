@@ -63,3 +63,30 @@ echo $output;
 
 echo $OUTPUT->footer();
 ?>
+
+<script type="text/javascript">
+//  $(document).ready(function() {
+   
+function deleteacademic(id)
+    {      
+        var confirmation = confirm("Are you sure you want to delete this item?");
+        if (confirmation) {   
+        
+        var divisionn = document.getElementById("class").value; 
+         
+            if (divisionn != "") {
+                // alert(id);
+                $.ajax({
+                
+                    url: "test.php",
+                    data: {c_id: divisionn,delete:id},
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        $("#demo").html(data); // Corrected ID
+                    }
+                });
+            }
+    }
+}
+</script>

@@ -15,6 +15,7 @@ $PAGE->set_title($strnewclass);
 $mform=new addholiday_form();
 echo $OUTPUT->header();
 
+
 $returnurl = $CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
 if ($mform->is_cancelled()) {
     redirect($returnurl);
