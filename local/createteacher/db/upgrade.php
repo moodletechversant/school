@@ -43,7 +43,7 @@ function xmldb_local_createteacher_upgrade($oldversion) {
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
 
-        if ($oldversion < 2023010100) {
+        if ($oldversion < 2023010101) {
             $table = new xmldb_table('teacher');
             $table->add_field('id', XMLDB_TYPE_INTEGER, '10',null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
             $table->add_field('user_id', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
@@ -69,7 +69,12 @@ function xmldb_local_createteacher_upgrade($oldversion) {
                 $dbman->create_table($table);
             }
             }
-           upgrade_plugin_savepoint(true,2023010100,'local','createteacher');
+            $divfield = new xmldb_field('school_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    
+            if (!$dbman->field_exists($table, $divfield)) {
+            $dbman->add_field($table, $divfield);
+            }
+           upgrade_plugin_savepoint(true,2023010101,'local','createteacher');
 
 
 

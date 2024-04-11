@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_createteacher';
 $plugin->release = '0.1.0';
-$plugin->version = 2023010100;
+$plugin->version = 2023010101;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_ALPHA;
