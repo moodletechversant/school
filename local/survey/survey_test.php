@@ -14,8 +14,8 @@ $userid = $USER->id;
 
 // Get the current timestamp and date
 $current_time = time();
-$current_date = date('d-m-Y');
-
+$current_date = strtotime(date('d-m-Y'));
+// echo $current_date;
 // Get the values from the form
 if (!empty($_POST['year1']) || !empty($_POST['year2'])) {
     $year1 = $_POST['year1'];
@@ -47,7 +47,6 @@ if (!empty($rec1)) {
         // Format survey from and to dates
         $surveyfromFormatted = date("d-m-Y", $surveyfrom);
         $surveytoFormatted = date("d-m-Y", $surveyto);
-
         // Fetch survey questions
         $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = ?", [$id]);
 
@@ -64,21 +63,20 @@ if (!empty($rec1)) {
         
 
         // Determine survey status
-        if ($current_date >= $surveyfromFormatted && $current_date <= $surveytoFormatted) {
-            $status_message = $surveyfromFormatted.' - '.$surveytoFormatted;
+        if ($current_date >= $surveyfrom && $current_date <= $surveyto) {
+            $status_message = $surveyfromFormatted . ' - ' . $surveytoFormatted;
             $status_color = 'green'; 
         }
-          
-         elseif ($current_date > $surveytoFormatted) {
+        elseif ($current_date > $surveyto) {
             $status_message = 'This survey is no longer available';
-            $status_color = ' #867c7c'; 
-        // print_r($current_date.'-'.$surveytoFormatted);exit();
-        } 
-
+            $status_color = '#867c7c'; 
+            
+        }
+        elseif ($current_date < $surveyfrom) {
+            $status_message = 'This will be available from ' . $surveyfromFormatted;
+            $status_color = 'red';
+        }
         
-        elseif ($current_date < $surveyfromFormatted) {
-            $status_message = 'This will be available from '.$surveyfromFormatted;
-            $status_color = 'red'; }
         // Generate HTML for each survey record
         $html .= '<div class="row mt-5" id="surveytable">
             <div class="col-12">

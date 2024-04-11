@@ -41,7 +41,10 @@ if($mform->is_cancelled()){
    
     $academicdata->start_year=$formdata->timestart;
     $academicdata->end_year=$formdata->timefinish;
-  
+    $academicdata->vacation_s_year=$formdata->vacationstart;
+    $academicdata->vacation_e_year=$formdata->vacationend;
+    $academicdata->school=$formdata->schools;
+
 //left table fieldname right file fieldname 
 
 $DB->update_record('academic_year',$academicdata);

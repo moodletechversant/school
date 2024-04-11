@@ -23,6 +23,8 @@ else if ($formdata = $mform->get_data()) {
 
         $start_year = $formdata->timestart;
         $end_year = $formdata->timefinish;
+        $vacation_start_year = $formdata->vacationstart;
+        $vacation_end_year = $formdata->vacationend;
         $school = $formdata->schools;
 
         // Check if end year is greater than start year
@@ -30,9 +32,11 @@ else if ($formdata = $mform->get_data()) {
             $academicdata = new stdClass();
             $academicdata->start_year = $start_year;
             $academicdata->end_year = $end_year;
+            $academicdata->vacation_s_year = $vacation_start_year;
+            $academicdata->vacation_e_year  =  $vacation_end_year;
             $academicdata->school = $school;
-
             
+          
             // Insert record into the 'academic_year' table
             $DB->insert_record('academic_year', $academicdata);
             

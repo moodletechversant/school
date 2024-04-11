@@ -26,7 +26,7 @@ $academic_yr_edit = new moodle_url("/local/academicyear/editacademic.php?id");
 $academic_yr_delete = new moodle_url("/local/academicyear/delete.php");
 
 
-$tableRows = [];
+$tableRows = []; // Initialize an empty array to store the table rows
 $rec = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$id ORDER BY start_year ASC  ");
 foreach ($rec as $records) {
     $id = $records->id;
@@ -34,17 +34,27 @@ foreach ($rec as $records) {
     $timestart1 = date("d-m-Y", $timestart);
     $timeend = $records->end_year;
     $timeend1 = date("d-m-Y", $timeend);
+    $vacationstart = $records->vacation_s_year;
+    $vacationstart1 = date("d-m-Y", $vacationstart);
+    $vacationend = $records->vacation_e_year;
+    $vacationend1 = date("d-m-Y", $vacationend);
+    $sid = $records->school;
+    
+    $school = $DB->get_record('school_reg', ['id' => $sid]);
 
-    // $edit = $CFG->wwwroot . '/local/academicyear/editacademic.php?id=' . $records->id;
-    // $delete = $CFG->wwwroot . '/local/academicyear/delete.php?id=' . $records->id;
+    if ($school) {
+        $schoolname = $school->sch_name;
+    } else {
+        $schoolname = 'Unknown'; 
+    }
 
-    // $editing = '<button style="border-radius: 5px; padding: 4px 18px;background-color: #0055ff;"><a href="' . $edit . '" style="text-decoration:none;color: white; ">Edit</a></button>';
-    // $deleting = '<button style="border-radius: 5px; padding: 4px 20px;background-color: #0055ff;"><a href="' . $delete . '" style="text-decoration:none;color: white; ">Delete</a></button>';
-     $tableRows[] = [
-        'id'=> $id,
+    $tableRows[] = [
+        'id' => $id,
         'timestart' => $timestart1,
         'timeend' => $timeend1,
-        
+        'vacationstart' => $vacationstart1,
+        'vacationend' => $vacationend1,
+        'school' => $schoolname,
     ];
 }
 

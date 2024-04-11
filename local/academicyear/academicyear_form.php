@@ -65,7 +65,21 @@ class academicyear_form extends moodleform {
             'timezone'  => 99,
             'optional'  => false
         ));
+          
+        $mform->addElement('date_selector', 'vacationstart', 'Vacation start',array(
+            'startyear' => 2004, 
+            'stopyear'  => 2050,
+            'timezone'  => 99,
+            'optional'  => false
+        ));
+        $mform->addElement('date_selector', 'vacationend', 'Vacation end',array(
+            'startyear' => 2005, 
+            'stopyear'  => 2055,
+            'timezone'  => 99,
+            'optional'  => false
+        ));
         
+
         $school  = $DB->get_records('school_reg');
             $options1 = array();
             $options1=array(''=>'---- Select School ----');

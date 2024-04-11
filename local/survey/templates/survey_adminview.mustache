@@ -42,140 +42,115 @@ li{
 
   <body>
     <header><h1 class="title">Survey</h1></header>
-    <div class="form-group">
-              <label for="selectYear">Select Year</label>
-              <select class="form-select" aria-label="Select Start Year" id="yearDropdown" onchange="onYearChange()" style="width:500px;">
-                  <option value="" id="" selected>------------ Select Year ------------</option>
-                  {{#templateData}}
-                      {{#startYearOptions}}
-                          <option value="{{label}}">{{label}}</option>
-                      {{/startYearOptions}}
-                  {{/templateData}}
-              </select>
+            <div class="form-group">
+                      <label for="selectYear">Select Year</label>
+                      <select class="form-select" aria-label="Select Start Year" id="yearDropdown" onchange="onYearChange()" style="width:500px;">
+                          <option value="" id="" selected>------------ Select Year ------------</option>
+                          {{#templateData}}
+                              {{#startYearOptions}}
+                                  <option value="{{label}}">{{label}}</option>
+                              {{/startYearOptions}}
+                          {{/templateData}}
+                      </select>
             </div>
-
             <br>
-      <a href="{{answer}}">
-        <button type="button" class="btn btn-outline-secondary del">View survey Answers</button>
-    </a>
-   <div class="row mt-5"  id="surveytable">
-      <div class="col-12" >
-          {{#survey}}
-              <div class="note">
-                {{#disabled}}
-                    <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
-                    <p style="color: #867c7c;">This survey is no longer available</p>
-                    <div class="hide"> 
-                    <ol>                
-                          {{#q_survey}}                                                     
-                                 <li>{{survey_question}}</li>                   
-                          {{/q_survey}}
-                          </ol>
-                         <div class="button-container">
-    <a href="{{delete}}={{id}}" class="mr-3">
-        <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
-    </a>
-  
-</div>
-
-                      </div>
-                      <div class="icon-d">
-                           <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
-                     </div>  
-                {{/disabled}}
-
-                 {{#disabled1}}
-                    <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
-                    <p style="color: red;">This will be available from {{survey_from}}</p>
-                    <div class="hide"> 
-                    <ol>                
-                          {{#q_survey}}                                                     
-                                 <li>{{survey_question}}</li>                   
-                          {{/q_survey}}
-                          </ol>
-                     <div class="button-container">
-    <a href="{{delete}}={{id}}" class="mr-3">
-        <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
-    </a>
-   
-</div>
-
-                      </div>
-                      <div class="icon-d">
-                           <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
-                     </div>  
-                {{/disabled1}}
-
-
-                
-                {{#disabled2}}
-                    <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>              
-                    <p style="color:green;">{{survey_from}} - {{survey_to}}</p>
-                      <div class="hide">   
-                      <ol>              
-                          {{#q_survey}}                                                     
-                                 <li>{{survey_question}}</li>                  
-                          {{/q_survey}}
-                           </ol>
-                        <div class="button-container">
-    <a href="{{delete}}={{id}}" class="mr-3">
-        <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
-    </a>
-   
-</div>
-
-                      </div>
-                      <div class="icon-d">
-                           <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
-                     </div>  
-             {{/disabled2}}                
-         </div>
-         <br>
-       {{/survey}}
-    </div>     
-</div>
- <div class="text-center">
-    <a href="survey.php"><button class="btn btn-secondary" type="submit">Add survey</button></a>
-    </div>
-
-
-
-
-
-
-<script>
-function onYearChange() {
-    var selectedYear = $('#yearDropdown').val();
-    
-    year = selectedYear.split('-')
-    year1 = year[0].split('/')
-    year2 = year[1].split('/')
-    //alert(year1[2]+" "+year2[2])
-year3=year1[2]
-year4=year2[2]
-   // 
-    $.ajax({
-     
-        type: 'POST',
-        url: 'survey_test.php',
-        data: {year1: year3, year2:year4 },
-        success: function(response) {
-         //alert(response );
-          //$("#demo").html(response);
-            $('#surveytable').html(response);
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr);
+            <a href="{{answer}}">
+                <button type="button" class="btn btn-outline-secondary del">View survey Answers</button>
+            </a>
+            <div class="row mt-5"  id="surveytable">
+                <div class="col-12" >
+                    {{#survey}}
+                        <div class="note">
+                          {{#disabled}}
+                              <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
+                              <p style="color: #867c7c;">This survey is no longer available</p>
+                              <div class="hide"> 
+                                      <ol>                
+                                            {{#q_survey}}                                                     
+                                                  <li>{{survey_question}}</li>                   
+                                            {{/q_survey}}
+                                      </ol>
+                                      <div class="button-container">
+                                            <a href="{{delete}}={{id}}" class="mr-3">
+                                                <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
+                                            </a>
+                                      </div>
+                              </div>
+                              <div class="icon-d">
+                                    <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
+                              </div>  
+                          {{/disabled}}
+                          {{#disabled1}}
+                              <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
+                              <p style="color: red;">This will be available from {{survey_from}}</p>
+                              <div class="hide"> 
+                                    <ol>                
+                                          {{#q_survey}}                                                     
+                                                <li>{{survey_question}}</li>                   
+                                          {{/q_survey}}
+                                    </ol>
+                                    <div class="button-container">
+                                        <a href="{{delete}}={{id}}" class="mr-3">
+                                            <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
+                                        </a>
+                                    </div>
+                              </div>
+                              <div class="icon-d">
+                                    <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
+                              </div>  
+                          {{/disabled1}}
+                          {{#disabled2}}
+                              <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href="editsurvey.php?id={{id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>              
+                              <p style="color:green;">{{survey_from}} - {{survey_to}}</p>
+                                <div class="hide">   
+                                      <ol>              
+                                          {{#q_survey}}                                                     
+                                                <li>{{survey_question}}</li>                  
+                                          {{/q_survey}}
+                                      </ol>
+                                      <div class="button-container">
+                                            <a href="{{delete}}={{id}}" class="mr-3">
+                                                <button type="button" class="btn btn-outline-secondary del">Delete survey</button>
+                                            </a>
+                                      </div>
+                                </div>
+                                <div class="icon-d">
+                                      <i class='fas fa-angle-down arrow transition-button' style='font-size:24px'></i>
+                                </div>  
+                          {{/disabled2}}                
+                        </div><br>
+                    {{/survey}}
+                </div>     
+            </div>
+            <div class="text-center">
+                <a href="survey.php"><button class="btn btn-secondary" type="submit">Add survey</button></a>
+            </div>
+    <script>
+        function onYearChange() {
+            var selectedYear = $('#yearDropdown').val();
+            
+            year = selectedYear.split('-')
+            year1 = year[0].split('/')
+            year2 = year[1].split('/')
+            //alert(year1[2]+" "+year2[2])
+        year3=year1[2]
+        year4=year2[2]
+          // 
+            $.ajax({
+            
+                type: 'POST',
+                url: 'survey_test.php',
+                data: {year1: year3, year2:year4 },
+                success: function(response) {
+                //alert(response );
+                  //$("#demo").html(response);
+                    $('#surveytable').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr);
+                }
+            });
         }
-    });
-}
-
-
-      
-</script>
-
-
-
-
+    </script>
   </body>
 </html>

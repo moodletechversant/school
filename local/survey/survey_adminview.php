@@ -26,20 +26,21 @@ echo $OUTPUT->header();
 $data = array();
 // $rec1 = $DB->get_records_sql("SELECT * FROM {customsurvey} ORDER BY id DESC");
 $current_year = date("Y");
- 
+$current_month = date("m");
+$current_date = date("d");
+// print_r($current_month);exit();
+
 $rec1 = $DB->get_records_sql("
 SELECT cs.*, ay.start_year, ay.end_year
 FROM {customsurvey} AS cs
 INNER JOIN {academic_year} AS ay ON cs.academic_id = ay.id
-WHERE YEAR(FROM_UNIXTIME(ay.start_year)) = $current_year
-OR YEAR(FROM_UNIXTIME(ay.end_year)) = $current_year
+WHERE (YEAR(FROM_UNIXTIME(ay.start_year)) = $current_year AND MONTH(FROM_UNIXTIME(ay.start_year))<=$current_month AND DAY(FROM_UNIXTIME(ay.start_year))<=$current_date)
+OR (YEAR(FROM_UNIXTIME(ay.end_year)) = $current_year AND MONTH(FROM_UNIXTIME(ay.end_year)) >= $current_month AND DAY(FROM_UNIXTIME(ay.end_year)) >= $current_date)
 ");
+// print_r($rec1);exit();
 
 $options1 = array();
 $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
-
-
-    
     foreach ($academic_id as $academic) {
         $timestart = $academic->start_year;
         $timeend = $academic->end_year;
@@ -49,83 +50,83 @@ $academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
         
         $options1[] = array('value' => $academic->id, 'label' => $timestart1 . '-' . $timeend1);
     }
-
-
     $templateData = array('startYearOptions' => $options1);
-
-$mustache = new Mustache_Engine();
+    $mustache = new Mustache_Engine();
 
 $current_time =time();
 $current_date=date('d-m-Y');
 // print_r($current_time);exit();
+if (!empty($rec1)) {
+  // $hassurvey = false; // Flag to check if any survey exist
 
-foreach ($rec1 as $record1) {
-  $id = $record1->id;
-  $surname = $record1->survey_name;
+      foreach ($rec1 as $record1) {
+        $id = $record1->id;
+        $surname = $record1->survey_name;
 
-  $surveyfrom = $record1->survey_from;
-  $from = date("d-m-Y", $surveyfrom);
-  // $surveyfrom = strtotime($from);
+        $surveyfrom = $record1->survey_from;
+        $from = date("d-m-Y", $surveyfrom);
+        // $surveyfrom = strtotime($from);
 
-  $surveyto = $record1->survey_to;
-  $to = date("d-m-Y", $surveyto);
-  // $surveyto = strtotime($to);
+        $surveyto = $record1->survey_to;
+        $to = date("d-m-Y", $surveyto);
+        // $surveyto = strtotime($to);
 
-  if ($current_date >=$from && $current_date<= $to) {
-      $surveyfromFormatted = $from;
-      $surveytoFormatted = $to;
+        if ($current_date>=$from && $current_date<=$to) {
+            $surveyfromFormatted = $from;
+            $surveytoFormatted = $to;
 
-      // $surveyfromFormatted = date("d-m-Y", $surveyfrom);
-      // $surveytoFormatted = date("d-m-Y", $surveyto);
+            // $surveyfromFormatted = date("d-m-Y", $surveyfrom);
+            // $surveytoFormatted = date("d-m-Y", $surveyto);
 
-      $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
-      $survey_questions = array();
+            $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
+            $survey_questions = array();
 
-      foreach ($rec2 as $record2) {
-          $id2 = $record2->id;
-          $surveyid = $record2->survey_id;
-          $surquestion = $record2->survey_question;
+            foreach ($rec2 as $record2) {
+                $id2 = $record2->id;
+                $surveyid = $record2->survey_id;
+                $surquestion = $record2->survey_question;
 
-          $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
-      }
-      $disabled = true;
-      $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled2' =>  $disabled);
-    }
-      elseif($current_time >$surveyto) {
-        $surveyfromFormatted = date("d-m-Y", $surveyfrom);
-        $surveytoFormatted = date("d-m-Y", $surveyto);
-  
-        $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
-        $survey_questions = array();
-  
-        foreach ($rec2 as $record2) {
-            $id2 = $record2->id;
-            $surveyid = $record2->survey_id;
-            $surquestion = $record2->survey_question;
-  
-            $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
+                $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
+            }
+            $disabled = true;
+            $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled2' =>  $disabled);
+          }
+            elseif($current_time>$surveyto) {
+              $surveyfromFormatted = date("d-m-Y", $surveyfrom);
+              $surveytoFormatted = date("d-m-Y", $surveyto);
+        
+              $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
+              $survey_questions = array();
+        
+              foreach ($rec2 as $record2) {
+                  $id2 = $record2->id;
+                  $surveyid = $record2->survey_id;
+                  $surquestion = $record2->survey_question;
+        
+                  $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
+              }
+              $disabled = true;
+              $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled' =>  $disabled);
+          }
+
+        elseif($current_time<$surveyfrom ) {
+            $surveyfromFormatted = date("d-m-Y", $surveyfrom);
+            $surveytoFormatted = date("d-m-Y", $surveyto);
+
+            $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
+            $survey_questions = array();
+
+            foreach ($rec2 as $record2) {
+                $id2 = $record2->id;
+                $surveyid = $record2->survey_id;
+                $surquestion = $record2->survey_question;
+
+                $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
+            }
+            $disabled = true;
+            $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled1' =>  $disabled);
         }
-        $disabled = true;
-        $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled' =>  $disabled);
-    }
-
-  elseif($current_time < $surveyfrom ) {
-      $surveyfromFormatted = date("d-m-Y", $surveyfrom);
-      $surveytoFormatted = date("d-m-Y", $surveyto);
-
-      $rec2 = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = $id");
-      $survey_questions = array();
-
-      foreach ($rec2 as $record2) {
-          $id2 = $record2->id;
-          $surveyid = $record2->survey_id;
-          $surquestion = $record2->survey_question;
-
-          $survey_questions[] = array('id2' => $id2, 'survey_id' => $surveyid, 'survey_question' => $surquestion);
       }
-      $disabled = true;
-      $data[] = array('id' => $id, 'surname' => $surname, 'survey_from' => $surveyfromFormatted, 'survey_to' => $surveytoFormatted, 'q_survey' => $survey_questions, 'disabled1' =>  $disabled);
-  }
 }
 
 $surveyname = array('survey' => $data,'delete' => $delete,'answer' =>$answer,'templateData' => $templateData);
