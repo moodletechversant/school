@@ -25,6 +25,8 @@ $academic_yr_edit = new moodle_url("/local/academicyear/editacademic.php?id");
 $academic_yr_delete = new moodle_url("/local/academicyear/delete.php");
 
 
+
+
 $tableRows = []; // Initialize an empty array to store the table rows
 
 foreach ($rec as $records) {
