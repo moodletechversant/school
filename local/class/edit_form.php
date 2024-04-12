@@ -44,15 +44,14 @@ class edit_form extends moodleform {
         
         // $table = new html_table();
         $id  = optional_param('id', 0, PARAM_INT);
-        // print_r($id);exit();
+        $schoolid = optional_param('schoolid', 0, PARAM_INT);
 
         $mform->addElement('hidden','id',$id);
-        // $mform->addElement('hidden', 'id'); 
   
         $mform->addElement('text', 'name', 'Class Name'); 
         $mform->addRule('name', 'Class name missing', 'required', null);
   
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE id=$schoolid");
         $options1 = array();
         $options1=array(''=>'---- Select academic start year ----');
         foreach($academic  as $academic1 ){
