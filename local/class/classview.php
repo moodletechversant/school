@@ -38,7 +38,7 @@ echo $OUTPUT->header();
     // print_r($options1);
     $templateData = array(
         'startYearOptions' => $options1,
-        'endYearOptions' => $options2,
+        
     );
     
     $output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'class_creation'=>$class_creation]);
@@ -47,3 +47,26 @@ echo $OUTPUT->footer();
 
 
 ?>
+<script type="text/javascript">
+//  $(document).ready(function() {
+   
+function deleteclass(id)
+    {      
+        var confirmation = confirm("Are you sure you want to delete this item?");
+        if (confirmation) {   
+        var academic = document.getElementById("academic").value; 
+            if (academic != "") {
+                // alert(id);
+                $.ajax({
+                    url: "test.php",
+                    data: {c_id: academic,delete:id},
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        $("#demo").html(data); // Corrected ID
+                    }
+                });
+            }
+    }
+}
+</script>

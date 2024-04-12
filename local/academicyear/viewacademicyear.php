@@ -67,26 +67,35 @@ echo $OUTPUT->footer();
 <script type="text/javascript">
 //  $(document).ready(function() {
    
+
+ 
+
 function deleteacademic(id)
     {      
         var confirmation = confirm("Are you sure you want to delete this item?");
         if (confirmation) {   
-        
-        var divisionn = document.getElementById("class").value; 
-         
-            if (divisionn != "") {
-                // alert(id);
                 $.ajax({
                 
                     url: "test.php",
-                    data: {c_id: divisionn,delete:id},
+                    data: {delete:id},
                     type: 'POST',
                     success: function(data) {
-                        // console.log(data);
-                        $("#demo").html(data); // Corrected ID
+                        if (data == 'success') {
+                    // Remove the table row from the DOM
+                    $('#accademic_table tr[data-id="' + id + '"]').remove();
+                    // alert("Record deleted successfully!");
+                    $('#'+id+'_row').remove();
+                } else {
+                    alert("Failed to delete record.");
+                }
+
                     }
                 });
             }
-    }
+    // }
 }
+
+
+
+
 </script>

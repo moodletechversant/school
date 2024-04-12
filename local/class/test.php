@@ -28,8 +28,13 @@ if(isset($_POST['b_id'])){
 }
 
 if(isset($_POST['c_id'])){
-    $bid= $_POST['c_id'];
-    $models = $DB->get_records_sql(" SELECT * FROM {class} WHERE academic_id = $bid");
+    $aid= $_POST['c_id'];
+    $delete=$_POST['delete'];
+    //echo $delete;
+    if( $delete>0){
+        $DB->delete_records('class', array('id'=> $delete));
+    }
+    $models = $DB->get_records_sql(" SELECT * FROM {class} WHERE academic_id = $aid");
     if(!empty($models)){
  $var = '
  <div class="table-responsive custom-table">
@@ -63,7 +68,7 @@ if(isset($_POST['c_id'])){
 // WHERE c.academic_id = $bid");
 
 foreach ($models as $model) {
-$academic_year = $DB->get_record_sql(" SELECT * FROM {academic_year} WHERE id = $bid");
+$academic_year = $DB->get_record_sql(" SELECT * FROM {academic_year} WHERE id = $aid");
   $id = $model->id;
   $name = $model->class_name;
   $description = $model->class_description;
@@ -83,7 +88,7 @@ $academic_year = $DB->get_record_sql(" SELECT * FROM {academic_year} WHERE id = 
                     </path>
                   </svg> Edit</a>
                 
-                  <a href="'.$delete.'='.$id.'" class="action-table"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16 1.75V3h5.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H8V1.75C8 .784 8 .784 8 .784h.006C8 .784 8 .784 8 .784h4.5C15.216 0 16 .784 16 1.75Zm-6.5 0V3h5V1.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25ZM4.997 6.178a.75.75 0 1 0-1.493.144L4.916 20.92a1.75 1.75 0 0 0 1.742 1.58h10.684a1.75 1.75 0 0 0 1.742-1.581l1.413-14.597a.75.75 0 0 0-1.494-.144l-1.412 14.596a.25.25 0 0 1-.249.226H6.658a.25.25 0 0 1-.249-.226L4.997 6.178Z"></path><path d="M9.206 7.501a.75.75 0 0 1 .793.705l.5 8.5A.75.75 0 1 1 9 16.794l-.5-8.5a.75.75 0 0 1 .705-.793Zm6.293.793A.75.75 0 1 0 14 8.206l-.5 8.5a.75.75 0 0 0 1.498.088l.5-8.5Z"></path></svg> Delete</a>
+                  <a onclick="deleteclass('.$id.')" class="action-table"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16 1.75V3h5.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H8V1.75C8 .784 8 .784 8 .784h.006C8 .784 8 .784 8 .784h4.5C15.216 0 16 .784 16 1.75Zm-6.5 0V3h5V1.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25ZM4.997 6.178a.75.75 0 1 0-1.493.144L4.916 20.92a1.75 1.75 0 0 0 1.742 1.58h10.684a1.75 1.75 0 0 0 1.742-1.581l1.413-14.597a.75.75 0 0 0-1.494-.144l-1.412 14.596a.25.25 0 0 1-.249.226H6.658a.25.25 0 0 1-.249-.226L4.997 6.178Z"></path><path d="M9.206 7.501a.75.75 0 0 1 .793.705l.5 8.5A.75.75 0 1 1 9 16.794l-.5-8.5a.75.75 0 0 1 .705-.793Zm6.293.793A.75.75 0 1 0 14 8.206l-.5 8.5a.75.75 0 0 0 1.498.088l.5-8.5Z"></path></svg> Delete</a>
                 </div>
             </td>
           </tr>';
