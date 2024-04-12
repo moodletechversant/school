@@ -35,16 +35,16 @@ if($mform->is_cancelled()){
     redirect($cancelurl);
 }
 else if ($formdata = $mform->get_data()) {
-        // print_r($formdata);exit();
+    // echo "Academic Year: " . $formdata->academicyear;
 
     $surveydata = new stdClass();
     $surveydata->id = $formdata->id;
     $surveydata->survey_name = $formdata->surname;
     $surveydata->survey_from = $formdata->surveyfrom;
     $surveydata->survey_to = $formdata->surveyto;
-    $surveydata->academic_id = $formdata->academicyear;
-
+   // $surveydata->academic_id = $formdata->academicyear;
     $surveyid = $DB->update_record('customsurvey', $surveydata);
+    // print_r($surveydata);exit();
 
     // Retrieve existing survey questions
     $editdata = $DB->get_records_sql("SELECT * FROM {customsurvey_question} WHERE survey_id = ?", array($formdata->id));
@@ -68,7 +68,7 @@ else if ($formdata = $mform->get_data()) {
         $DB->insert_record('customsurvey_question', $questiondata);
         }
     }
-    $urlto = $CFG->wwwroot . '/local/survey/survey_adminview.php';
+    $urlto = $CFG->wwwroot . '/local/survey/survey_adminview.php?id='.$formdata->school_id;
     redirect($urlto, 'Data Saved Successfully');
 }
 $mform->display();

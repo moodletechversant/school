@@ -46,10 +46,10 @@ if($mform->is_cancelled()){
 
     $schooldata->sch_phone = $formdata->phone;
     $schooldata->sch_logo = $formdata->logo;
+    
+ 
+    $schooldata->sch_status = 0;
 
-    //$schooldata->sch_teachername = $formdata->teachname;
- 
- 
     $DB->insert_record('school_reg',  $schooldata);
     $urlto = $CFG->wwwroot.'/local/schoolreg/schoolreg.php';
     redirect($urlto, 'Data Saved Successfully '); 

@@ -9,7 +9,9 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/survey/templates/survey_adminview.mustache');
 $delete = new moodle_url('/local/survey/deletesurvey.php?id');
-$answer = new moodle_url('/local/survey/viewsurveyanswer.php');
+$answer = new moodle_url('/local/survey/viewsurveyanswer.php?id');
+$create_survey = new moodle_url('/local/survey/survey.php?id');
+$edit_survey = new moodle_url('local/survey/editsurvey.php?id');
 global $class,$CFG;
 $context = context_system::instance();
 require_login();
@@ -29,7 +31,7 @@ $current_year = date("Y");
 $current_month = date("m");
 $current_date = date("d");
 // print_r($current_month);exit();
-
+$school_id  = optional_param('id', 0, PARAM_INT);
 $rec1 = $DB->get_records_sql("
 SELECT cs.*, ay.start_year, ay.end_year
 FROM {customsurvey} AS cs
@@ -40,7 +42,7 @@ OR (YEAR(FROM_UNIXTIME(ay.end_year)) = $current_year AND MONTH(FROM_UNIXTIME(ay.
 // print_r($rec1);exit();
 
 $options1 = array();
-$academic_id = $DB->get_records_sql("SELECT * FROM {academic_year}");
+$academic_id = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id");
     foreach ($academic_id as $academic) {
         $timestart = $academic->start_year;
         $timeend = $academic->end_year;
@@ -129,7 +131,7 @@ if (!empty($rec1)) {
       }
 }
 
-$surveyname = array('survey' => $data,'delete' => $delete,'answer' =>$answer,'templateData' => $templateData);
+$surveyname = array('school_id'=>$school_id,'survey' => $data,'delete' => $delete,'answer' =>$answer,'templateData' => $templateData,'create_survey'=>$create_survey,'edit_survey'=>$edit_survey);
 echo $mustache->render($template, $surveyname);
 
         // print_r($data2);exit();

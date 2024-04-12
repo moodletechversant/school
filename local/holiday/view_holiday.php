@@ -28,7 +28,6 @@ $PAGE->set_title($linktext);
 //$addholiday='<button style="background:transparent;border:none;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>Add Holiday</font></a></button>';
 //$addholiday = '<a href="/school/local/holiday/addholiday.php"><i class="fa fa-plus-circle" style="font-size: 50px; color: #0f6cbf;"></i></a>';
 //$addholiday = '<a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:#0f6cbf;"><strong>Add Holiday</strong></a>';
-$addholiday = '<button style="float:right; margin-right: 20px;margin-bottom:20px; background-color: #0f6cbf; color: white; border: none; border-radius: 5px; padding: 10px 20px;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:white;"><strong>Add Holiday</strong></a></button>';
 
 echo $OUTPUT->header();
 $rec = $DB->get_records_sql("SELECT * FROM {addholiday}");
