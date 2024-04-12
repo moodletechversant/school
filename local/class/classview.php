@@ -5,6 +5,7 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/class/template/classview.mustache');
 global $class,$CFG;
+
 $context = context_system::instance();
 $linkurl = new moodle_url('/local/class/classview.php');
 $css_link = new moodle_url('/local/css/style.css');

@@ -33,6 +33,7 @@ require_login();
 
 class class_creation_form extends moodleform {
     function definition() {
+        
        // $userid  = optional_param('userid', 0, PARAM_INT);
         $urlto=$CFG->wwwroot.'/local/class/class_creation.php';
         global $USER, $CFG, $DB;
