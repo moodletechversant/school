@@ -8,7 +8,7 @@ global $class,$CFG;
 $context = context_system::instance();
 $linkurl = new moodle_url('/local/class/classview.php');
 $css_link = new moodle_url('/local/css/style.css');
-$class_creation = new moodle_url('/local/class/class_creation.php');
+$class_creation = new moodle_url('/local/class/class_creation.php?id');
 $PAGE->set_context($context);
 $strnewclass= get_string('classcreation');
 $PAGE->set_url('/local/class/classview.php');

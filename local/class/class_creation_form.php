@@ -37,10 +37,8 @@ class class_creation_form extends moodleform {
         $urlto=$CFG->wwwroot.'/local/class/class_creation.php';
         global $USER, $CFG, $DB;
         $classview=$CFG->wwwroot.'/local/class/classview.php';
-
-
         $table = new html_table();
-
+        $id  = optional_param('id', 0, PARAM_INT);
         $mform = $this->_form;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Class creation</h2>');
         $mform->addElement('html', '<div class="container">');
@@ -53,7 +51,7 @@ class class_creation_form extends moodleform {
 
      
 
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE id=$id");
         $options1 = array();
         $options1=array(''=>'---- Select academic start year ----');
         foreach($academic  as $academic1 ){
