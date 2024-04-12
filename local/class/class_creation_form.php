@@ -45,7 +45,6 @@ class class_creation_form extends moodleform {
         $mform->addElement('html', '<div class="form-class">');
 
      
-         // $mform->addElement('text', 'name', 'Class Name', 'maxlength="100" size="30"');
         $mform->addElement('text', 'name', 'Class Name'); 
         $mform->addRule('name', 'Class name missing', 'required', null); // Add elements to your form
 
