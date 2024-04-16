@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_adminreg';
 $plugin->release = '0.1.0';
-$plugin->version = 2024041505;
+$plugin->version = 2024041506;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_ALPHA;
