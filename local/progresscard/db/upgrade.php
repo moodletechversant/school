@@ -29,14 +29,7 @@
  
  function xmldb_local_progresscard_upgrade($oldversion) {
      global $DB;
- 
-   
-
-
-
- $dbman = $DB->get_manager();
-
-
+     $dbman = $DB->get_manager();
 
      if ($oldversion < 2024021611) {
          $table = new xmldb_table('type_of_exam');
@@ -59,10 +52,7 @@
         }
     }
 
-        upgrade_plugin_savepoint(true,2024021611,'local','progress_card'); 
-
-
-
+    upgrade_plugin_savepoint(true,2024021611,'local','progress_card'); 
 
  return true;
 }

@@ -48,9 +48,7 @@ foreach ($academic as $academic1) {
     $options1[] = array('value' => $academic1->id, 'label' => $timestart1.'--'.$timeend1);
 }
 
-$templateData = array(
-    'startYearOptions' => $options1,
-);
+$templateData = array('startYearOptions' => $options1,);
 
 $output = $mustache->render($template, ['templateData'=>$templateData,'css_link'=>$css_link,'subjectss'=>$subjectss]);
 echo $output;

@@ -29,10 +29,12 @@ $holidays_view = new moodle_url('/local/holiday/view_holiday.php?id');
 $survey_view = new moodle_url('/local/survey/survey_adminview.php?id');
 $complaint_view = new moodle_url('/local/complaint/view_complaint_1.php?id');
 $upcoming_view = new moodle_url('/local/dashboard/upcoming.php?id');
+$adminreg_view = new moodle_url('/local/adminreg/admin_registration.php?id');
 
 
 $academicyr_img = new moodle_url('/local/img/academic.svg');
-$schoolreg_img = new moodle_url('/local/img/schoolreg.svg');
+$schoolreg_img = new moodle_url('/local/img/school.png');
+$admin_img = new moodle_url('/local/img/admin.png');
 $class_img = new moodle_url('/local/img/ic-3.svg');
 $div_img = new moodle_url('/local/img/ic-4.svg');
 $subject_img = new moodle_url('/local/img/ic-5.svg');
@@ -89,7 +91,7 @@ echo $mustache->render($template4,['csspath' => $csspath,'templateData'=>$templa
 'teacher_img'=>$teacher_img,'student_img'=>$student_img,'assign_img'=>$assign_img,
 'timetable_img'=>$timetable_img,
 'holidays_img'=>$holidays_img,'survey_img'=>$survey_img,'complaint_img'=>$complaint_img,
-'upcoming_img'=>$upcoming_img,
+'upcoming_img'=>$upcoming_img,'admin_img'=>$admin_img,'adminreg_view'=>$adminreg_view
 
 
 ]);

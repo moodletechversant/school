@@ -9,7 +9,7 @@ global $class, $CFG;
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "Holiday List";
-
+$school_id=optional_param('id', 0, PARAM_INT);   
 
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
 $css_link = new moodle_url('/local/css/style.css');
@@ -24,15 +24,9 @@ $PAGE->set_url('/local/holiday/addholiday.php');
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 
-// $PAGE->set_heading($linktext);
-//$addholiday='<button style="background:transparent;border:none;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>Add Holiday</font></a></button>';
-//$addholiday = '<a href="/school/local/holiday/addholiday.php"><i class="fa fa-plus-circle" style="font-size: 50px; color: #0f6cbf;"></i></a>';
-//$addholiday = '<a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:#0f6cbf;"><strong>Add Holiday</strong></a>';
-
 echo $OUTPUT->header();
-$rec = $DB->get_records_sql("SELECT * FROM {addholiday}");
+$rec = $DB->get_records_sql("SELECT {addholiday}.* FROM {addholiday} JOIN {academic_year} ON {addholiday}.academic_id={academic_year}.id WHERE {academic_year}.school=$school_id");
 $mustache = new Mustache_Engine();
-
 
 $tableRows = [];
 
@@ -64,7 +58,6 @@ foreach ($rec as $records) {
         'deleteButton' => $delete,
     ];
 }
-
 $output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'addholidayy'=>$addholidayy]);
 echo $output;
 
