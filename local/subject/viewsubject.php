@@ -20,6 +20,8 @@ $css_link = new moodle_url('/local/css/style.css');
 $subjectss = new moodle_url('/local/subject/subject.php');
 $css_link = new moodle_url('/local/css/style.css');
 
+$school_id=optional_param('id', 0, PARAM_INT);   
+
 // Print the page header.
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
@@ -34,7 +36,7 @@ echo $OUTPUT->header();
 $data  = $DB->get_records_sql("SELECT * FROM {subject}");
 $mustache = new Mustache_Engine();
 
-$academic = $DB->get_records('academic_year');
+$academic = $DB->get_records('academic_year', array('school' => $school_id));
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
