@@ -17,7 +17,7 @@ $schoolid  = optional_param('id', 0, PARAM_INT);
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
-$academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE id=$schoolid");
+$academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$schoolid");
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
