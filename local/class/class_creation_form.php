@@ -51,7 +51,7 @@ class class_creation_form extends moodleform {
 
      
 
-        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$id");
+        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $id");
         $options1 = array();
         $options1=array(''=>'---- Select academic start year ----');
         foreach($academic  as $academic1 ){
