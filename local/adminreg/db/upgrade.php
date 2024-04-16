@@ -42,7 +42,7 @@ function xmldb_local_adminreg_upgrade($oldversion) {
     //
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
-        if ($oldversion < 2024041504) {
+        if ($oldversion < 2024041505) {
             // Report_user_logins savepoint reached.
             $table = new xmldb_table('admin_registration');
             $table->add_field('id', XMLDB_TYPE_INTEGER, '10',null, XMLDB_NOTNULL, XMLDB_SEQUENCE,null);
@@ -58,6 +58,6 @@ function xmldb_local_adminreg_upgrade($oldversion) {
                 $dbman->create_table($table);
             }
        }
-       upgrade_plugin_savepoint(true, 2024041504, 'local', 'adminreg');
+       upgrade_plugin_savepoint(true, 2024041505, 'local', 'adminreg');
     return true;
 }
