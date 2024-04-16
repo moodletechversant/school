@@ -12,6 +12,8 @@ require_login();
 
 $linktext = "Complaint List";
 
+$school_id=optional_param('id', 0, PARAM_INT);
+
 $linkurl = new moodle_url('/local/complaint/view_complaint_1.php');
 $css_link = new moodle_url('/local/css/style.css');
 
@@ -85,7 +87,7 @@ if (!empty($tid) && $tid->user_id == $userid) {
     }
 }
 
-$academic = $DB->get_records('academic_year');
+$academic = $DB->get_records('academic_year', array('school' => $school_id));
 
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '-- Select Academic Year --');
