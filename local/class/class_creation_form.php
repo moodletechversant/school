@@ -51,11 +51,11 @@ class class_creation_form extends moodleform {
 
      
 
-        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE id=$id");
+        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $id");
         $options1 = array();
         $options1=array(''=>'---- Select academic start year ----');
         foreach($academic  as $academic1 ){
-            $timestart = $academic1->start_year;
+        $timestart = $academic1->start_year;
         $timestart1 = date("d-m-Y", $timestart);
         $options1 [$academic1 ->id] = $timestart1;
         }
@@ -66,7 +66,7 @@ class class_creation_form extends moodleform {
         $options2 = array();
         $options2=array(''=>'---- Select academic end year ----');
         foreach($academic  as $academic2 ){
-            $timestart = $academic2->end_year;
+        $timestart = $academic2->end_year;
         $timestart1 = date("d-m-Y", $timestart);
         $options2 [$academic2 ->id] = $timestart1;
         }
