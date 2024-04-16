@@ -83,13 +83,21 @@
                 <td><div class="wrap-t">{{pincode}}</div></td>
               
                 
-                  <td><div class="wrap-t"><a href={{edit_school}}={{id}} class="action-table" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                  <td>
+                  
+                  <div class="wrap-t"><a href={{edit_school}}={{id}} class="action-table" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                           <path
                             d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
                           </path>
                         </svg> Edit</a>
 
                         <a href={{delete_school}}={{id}} class="action-table"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16 1.75V3h5.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H8V1.75C8 .784 8.784 0 9.75 0h4.5C15.216 0 16 .784 16 1.75Zm-6.5 0V3h5V1.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25ZM4.997 6.178a.75.75 0 1 0-1.493.144L4.916 20.92a1.75 1.75 0 0 0 1.742 1.58h10.684a1.75 1.75 0 0 0 1.742-1.581l1.413-14.597a.75.75 0 0 0-1.494-.144l-1.412 14.596a.25.25 0 0 1-.249.226H6.658a.25.25 0 0 1-.249-.226L4.997 6.178Z"></path><path d="M9.206 7.501a.75.75 0 0 1 .793.705l.5 8.5A.75.75 0 1 1 9 16.794l-.5-8.5a.75.75 0 0 1 .705-.793Zm6.293.793A.75.75 0 1 0 14 8.206l-.5 8.5a.75.75 0 0 0 1.498.088l.5-8.5Z"></path></svg> Delete</a>
+                         <a href="#" class="action-table button_eye " style="text-decoration:none">
+                <i onclick="suspend_eye({{id}})" class="fa   {{iconClass}}   button_eye" id="eye-{{id}}" style="cursor: pointer;">
+                      {{actionText}} 
+                </i>
+            </a>
+                     
                       </div>
                   </td>
 
@@ -110,9 +118,57 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1Z1eSd3qWzVnUVlTf1d9S5u0XwH7OuHfjI=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+   
+
+
+function suspend_eye(schoolid)
+    {     
+   
+                    var schoolid= schoolid;
+                   
+                    var icon = $('#eye-'+ schoolid);
+                    var isEyeVisible = icon.hasClass('fa-eye');
+                 //alert(schoolid)
+                    var action = isEyeVisible ? 'close' : 'open'; // Determine the action based on the current state
+                   //alert( action);
+                    // exit();
+                    $.ajax({
+                        url:  "test.php", // Your server-side script to handle the update
+                        data: { schoolid: schoolid, action: action},
+                        type: 'POST',
+                        success: function(response) 
+                        {
+                             //alert(schoolid)
+
+                                    if ($.trim(response)=='success')
+                                    {
+                                        if (action === 'close')
+                                        {
+                                            
+                                            icon.removeClass('fa-eye');
+                                            icon.addClass('fa-eye-slash');
+                                            icon.html('Enable');
+                                        } else {
+                                            
+                                            icon.removeClass('fa-eye-slash');
+                                            icon.addClass('fa-eye');
+                                            icon.html('Disable');
+                                        }
+                                    } 
+                                    else {
+                                        alert('Failed to update eye status.');
+                                    }
+                        }
+                    });
+               
+        } 
+        
+</script>
+
 </body>
 
 </html>

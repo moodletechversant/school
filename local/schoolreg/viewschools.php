@@ -49,17 +49,16 @@ echo $OUTPUT->header();
        $number =$records->sch_phone;
       $edit='<button style="border-radius: 5px; padding: 4px 18px;background-color: #0055ff;"><a href="/school/local/schoolreg/schooledit.php?id='.$id.'" style="text-decoration:none;color: white; ">Edit</a></button>';
       $delete='<button style="border-radius: 5px; padding: 4px 20px;background-color: #0055ff;"><a href="/school/local/schoolreg/deleteschool.php?id='.$id.'" style="text-decoration:none;color: white; ">Delete</a></button>';
-
-      // Display the image in the table cell.
-     
-            
-      if ($isSuspended == 1) {
+               $status=$records->sch_status;  
+      if ($status == 1) {
         $iconClass = 'fa-eye-slash';
-        $actionText = 'Unsuspend';
+        $actionText = 'Enable';
       } else {
         $iconClass = 'fa-eye';
-        $actionText = 'Suspend';
+        $actionText = 'Disable';
       }
+      // Display the image in the table cell.
+     
         $tableRows[] = [
          'id' =>$id,
          'name' => $name,
@@ -70,7 +69,11 @@ echo $OUTPUT->header();
          'state' => $state,
          'pincode' => $pincode,
          'editButton' => $edit,
-         'deleteButton' => $delete
+         'deleteButton' => $delete,
+         'id'=>$id,
+         'iconClass'=>$iconClass,
+         'actionText'=>$actionText,
+
      ];
     }
     //print_r($tableRows);exit();
