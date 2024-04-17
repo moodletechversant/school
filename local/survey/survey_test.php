@@ -82,7 +82,7 @@ if (!empty($rec1)) {
         $html .= '<div class="row mt-5" id="surveytable">
             <div class="col-12">
                 <div class="note">
-                    <h2 class="sub" style="text-decoration: underline;"><br>'.$surname.'<a href="editsurvey.php?id='.$id.'&schoolid='.$schoolid .'"><i class="fas fa-pencil-alt" style="font-size:20px"></i></a></h2>              
+                    <h2 class="sub" style="text-decoration: underline;"><br>'.$surname.'<a href="editsurvey.php?id='.$id.'"><i class="fas fa-pencil-alt" style="font-size:20px"></i></a></h2>              
                     <p style="color: '.$status_color.';">'.$status_message.'</p>
                     <div class="hide" id="hide'.$id.'"> 
                         <ol>'.$survey_questions.'</ol>

@@ -68,7 +68,7 @@ else if ($formdata = $mform->get_data()) {
         $DB->insert_record('customsurvey_question', $questiondata);
         }
     }
-    $urlto = $CFG->wwwroot . '/local/survey/survey_adminview.php?id='.$formdata->school_id;
+    $urlto = $CFG->wwwroot . '/local/survey/survey_adminview.php';
     redirect($urlto, 'Data Saved Successfully');
 }
 $mform->display();

@@ -1,9 +1,10 @@
 <?php
 require(__DIR__.'/../../config.php');
 require_once($CFG->dirroot.'/local/holiday/addholiday_form.php');
-global $class,$CFG;
+global $class,$CFG,$school_id;
 $context = context_system::instance();
 // $classid = $class->id;
+$school_id  =$SESSION->schoolid;
 
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
 $PAGE->set_context($context);

@@ -35,7 +35,9 @@ require_login();
 class editholiday_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
+        global $DB, $USER, $CFG, $COURSE,$SESSION;
+        $school_id  =$SESSION->schoolid;
+
         $urlto=$CFG->wwwroot.'local/holiday/editholiday.php';
 
         $mform = $this->_form;
@@ -47,7 +49,7 @@ class editholiday_form extends moodleform {
         //print_r($id);exit();
         $mform->addElement('hidden','id',$id);
          //Academic Year 
-         $academic  = $DB->get_records('academic_year');
+         $academic  = $DB->get_records('academic_year',array('school' => $school_id));
          //    $classes  = $DB->get_records('class');
              $options1 = array();
              $options1=array(''=>'---- Select academic_year ----');

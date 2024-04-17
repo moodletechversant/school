@@ -34,7 +34,8 @@ require_once($CFG->dirroot.'/user/lib.php');
 class addholiday_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
+        global $DB, $USER, $CFG, $COURSE,$SESSION;
+        $school_id  =$SESSION->schoolid;
 
         $mform = $this->_form;
 
@@ -42,7 +43,7 @@ class addholiday_form extends moodleform {
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
          //Academic Year 
-         $academic  = $DB->get_records('academic_year');
+         $academic  = $DB->get_records('academic_year',array('school' => $school_id));
          //    $classes  = $DB->get_records('class');
              $options1 = array();
              $options1=array(''=>'---- Select academic_year ----');
