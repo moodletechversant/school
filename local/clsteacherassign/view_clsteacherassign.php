@@ -5,13 +5,15 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/clsteacherassign/template/clsteacherassign.mustache');
 
-global $class, $CFG, $DB, $USER;
+global $class, $CFG, $DB, $USER,$SESSION;
 $css_link = new moodle_url('/local/css/style.css');
 
 $context = context_system::instance();
 require_login();
-$school_id=optional_param('id', 0, PARAM_INT);   
-$add_new = new moodle_url('/local/clsteacherassign/assignclsteacher.php?id='.$school_id);
+// $school_id=optional_param('id', 0, PARAM_INT);  
+$school_id  =$SESSION->schoolid;
+
+$add_new = new moodle_url('/local/clsteacherassign/assignclsteacher.php');
 
 $linktext = "Assigned Teacher List";
 
