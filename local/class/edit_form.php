@@ -35,7 +35,7 @@ class edit_form extends moodleform {
     function definition() {
 
         $urlto=$CFG->wwwroot.'/local/class/edit.php';
-        global $USER, $CFG, $COURSE, $DB;
+        global $USER, $CFG, $COURSE, $DB, $SESSION;
         $mform = $this->_form;
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Class creation</h2>');
@@ -44,7 +44,7 @@ class edit_form extends moodleform {
         
         // $table = new html_table();
         $id  = optional_param('id', 0, PARAM_INT);
-        $schoolid = optional_param('schoolid', 0, PARAM_INT);
+        $schoolid = $SESSION->schoolid;
 
         $mform->addElement('hidden','id',$id);
   
