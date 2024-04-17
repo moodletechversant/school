@@ -72,7 +72,6 @@ class edit_form extends moodleform {
         $options2 [$academic2 ->id] = $timestart1;
         }
         $mform->addElement('select', 'academicyear1','Academic end',$options2);
-        // $mform->addRule('academicyear1', 'academic year missing', 'required', null);
 
         $js = <<<JS
         document.addEventListener("DOMContentLoaded", function() {

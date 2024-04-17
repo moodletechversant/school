@@ -31,7 +31,6 @@ if(isset($_POST['c_id'])){
     $aid= $_POST['c_id'];
     $schoolid= $_POST['schoolid'];
     $delete=$_POST['delete'];
-    //echo $delete;
     if( $delete>0){
         $DB->delete_records('class', array('id'=> $delete));
     }
