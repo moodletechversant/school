@@ -1319,9 +1319,10 @@ class global_navigation extends navigation_node {
     public function __construct(moodle_page $page) {
         global $CFG, $SITE, $USER, $DB;
         $usr = $USER->id;
-        $sid= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE user_id= '$usr'");
-        $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$usr'");
-        $pid= $DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$usr'");
+        $sid= $DB->get_record_sql("SELECT user_id FROM {student} WHERE user_id= '$usr'");
+        $tid= $DB->get_record_sql("SELECT user_id FROM {teacher} WHERE user_id= '$usr'");
+        $pid= $DB->get_record_sql("SELECT user_id FROM {parent} WHERE user_id= '$usr'");
+        $aid= $DB->get_record_sql("SELECT userid FROM {admin_registration} WHERE userid= '$usr'");
 
 
         if (during_initial_install()) {
@@ -1381,6 +1382,16 @@ class global_navigation extends navigation_node {
                         'type' => navigation_node::TYPE_SYSTEM,
                         'text' => get_string('myhome'),
                         'action' => new moodle_url('/local/dashboard/dashboardparent.php?id='.$pid->user_id),
+                        'icon' => new pix_icon('i/dashboard', '')
+                    );
+                }
+                else if(!empty($aid) && $aid->userid==$usr){
+                    // We are using the users my moodle for the root element.
+                    $properties = array(
+                        'key' => 'myhome',
+                        'type' => navigation_node::TYPE_SYSTEM,
+                        'text' => get_string('myhome'),
+                        'action' => new moodle_url('/local/dashboard/dashboardadmin.php'),
                         'icon' => new pix_icon('i/dashboard', '')
                     );
                 }

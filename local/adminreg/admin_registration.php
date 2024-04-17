@@ -29,6 +29,22 @@ else if ($formdata = $mform->get_data()) {
     $admindata->password=$formdata->password;
     $admindata->number=$formdata->number;
     $admindata->school=$formdata->school;
+
+    $userdata= new stdclass();
+    $userdata->confirmed = 1;
+    $userdata->mnethostid = $CFG->mnet_localhost_id;
+    $userdata->firstname=$formdata->name;
+    $userdata->username=$formdata->username;
+    $userdata->email=$formdata->email; 
+    $userdata->password=$formdata->password;
+    $userdata->phone1=$formdata->number;
+
+
+    user_create_user($userdata);
+    //print_r($parentdata->firstname);exit();
+    $id1= $DB->get_record_sql('SELECT id FROM mdl_user ORDER BY id DESC LIMIT 1');
+    $admindata->userid=$id1->id;
+
     $DB->insert_record('admin_registration',$admindata);
     $urlto=$CFG->wwwroot.'/local/adminreg/admin_registration.php';
     redirect($urlto, 'Data Saved Successfully '); 

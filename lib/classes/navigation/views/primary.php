@@ -39,6 +39,7 @@ class primary extends view {
         $sid= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE user_id= '$usr'");
         $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$usr'");
         $pid=$DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$usr'");
+        $aid= $DB->get_record_sql("SELECT userid FROM {admin_registration} WHERE userid= '$usr'");
 
 
 
@@ -79,6 +80,10 @@ class primary extends view {
                     }
                     else if(!empty($pid) && $pid->user_id==$usr){
                         $this->add(get_string('myhome'), new \moodle_url('/local/dashboard/dashboardparent.php?id='.$pid->user_id),
+                        self::TYPE_SETTING, null, 'myhome', new \pix_icon('i/dashboard', ''));
+                    }
+                    else if(!empty($aid) && $aid->userid==$usr){
+                        $this->add(get_string('myhome'), new \moodle_url('/local/dashboard/dashboardadmin.php'),
                         self::TYPE_SETTING, null, 'myhome', new \pix_icon('i/dashboard', ''));
                     }
                     else{

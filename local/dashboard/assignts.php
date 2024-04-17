@@ -26,7 +26,7 @@ $student_assign= new moodle_url('/local/studentassign/view_sassign.php');
 
 $view_tassign_img= new moodle_url('/local/img/academic.svg');
 $clsteacher_assign_img= new moodle_url('/local/img/ic-3.svg');
-$student_assign_img= new moodle_url('/local/img/ic-4.svg');
+$student_assign_img= new moodle_url('/local/img/student-registration.png');
 
 $PAGE->set_context($context);
 $strnewclass= 'Admin Dasboard';

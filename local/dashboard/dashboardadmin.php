@@ -4,12 +4,15 @@ require_once(__DIR__ . '/../../config.php');
 // require_once(__DIR__ . '/../../lib/mustache/src/Mustache/Autoloader.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
-if(is_siteadmin()){
+global $class,$CFG,$SESSION,$USER;
+$aid= $DB->get_record_sql("SELECT * FROM {admin_registration} WHERE userid= $USER->id");
+
+if(is_siteadmin()|| !empty($aid)){
 
 $template4 = file_get_contents($CFG->dirroot . '/local/dashboard/templates/admin.mustache');
 
 // require_once($CFG->dirroot.'/local/createstudent/demo.html');
-global $class,$CFG,$SESSION;
+
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "View students";
@@ -58,11 +61,15 @@ $id  = optional_param('id', 0, PARAM_INT);
 $schools = $DB->get_records('school_reg');
 // $schools = $DB->get_record('school_reg', array(), '*', 'id ASC');
     $options1 = array();
-    
-if($id==0){
-  $schoolid =reset($schools)->id;
-}else{
-  $schoolid=$id;
+if(is_siteadmin()) {
+    if($id==0){
+      $schoolid =reset($schools)->id;
+    }else{
+      $schoolid=$id;
+    }
+}
+else if(!empty($aid)){
+    $schoolid=$aid->school;
 }
 
 if(isset($schoolid))
@@ -96,7 +103,7 @@ echo $mustache->render($template4,['csspath' => $csspath,'templateData'=>$templa
 'teacher_img'=>$teacher_img,'student_img'=>$student_img,'assign_img'=>$assign_img,
 'timetable_img'=>$timetable_img,
 'holidays_img'=>$holidays_img,'survey_img'=>$survey_img,'complaint_img'=>$complaint_img,
-'upcoming_img'=>$upcoming_img,'admin_img'=>$admin_img,'adminreg_view'=>$adminreg_view
+'upcoming_img'=>$upcoming_img,'admin_img'=>$admin_img,'adminreg_view'=>$adminreg_view,'admin'=>is_siteadmin()
 
 
 ]);

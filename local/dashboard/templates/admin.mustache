@@ -27,15 +27,16 @@
 
                 <div class="col-md-11 mx-auto">
                     <div class="row">
-                         <div class="form-group">
-                      <select class="form-select" onChange="doReload()" placeholder="select school" aria-label="Select Start Year" id="academic" style="width: 500px;">
-                        {{#templateData}}
-                            {{#schoolOptions}}
-                            <option value="{{value}}" {{#selected}}selected{{/selected}}>{{label}}</option>
-                            {{/schoolOptions}}
-                        {{/templateData}}
-                      </select>
-                    </div>
+                    {{#admin}}
+                        <div class="form-group">
+                            <select class="form-select" onChange="doReload()" placeholder="select school" aria-label="Select Start Year" id="academic" style="width: 500px;">
+                                {{#templateData}}
+                                    {{#schoolOptions}}
+                                    <option value="{{value}}" {{#selected}}selected{{/selected}}>{{label}}</option>
+                                    {{/schoolOptions}}
+                                {{/templateData}}
+                            </select>
+                         </div>
                         <div class="col" style="flex: 2">
                             <a href={{schoolreg_view}} style="color: inherit; text-decoration: none;">
                                <div class="cards">
@@ -75,6 +76,10 @@
                                </div>
                                </a>
                            </div>
+                        {{/admin}}
+                        {{^admin}}
+                        <div></div>
+                        {{/admin}}
 
 
                         <div class="col" style="flex: 2">

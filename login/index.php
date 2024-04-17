@@ -63,6 +63,7 @@ if ($testsession) {
         $sid= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE user_id= '$testsession'");
         $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$testsession'");
         $pid= $DB->get_record_sql("SELECT user_id FROM mdl_parent WHERE user_id= '$testsession'");
+        $aid= $DB->get_record_sql("SELECT userid FROM {admin_registration} WHERE userid= '$testsession'");
 
         if(!empty($tid) && $tid->user_id==$testsession){
 
@@ -79,6 +80,12 @@ if ($testsession) {
         if(!empty($pid) && $pid->user_id==$testsession)
         {            
             $surl=$CFG->wwwroot.'/local/dashboard/dashboardparent.php?id='.$sid->user_id;
+            redirect($surl);
+            
+        }
+        if(!empty($aid) && $aid->userid==$testsession)
+        {            
+            $surl=$CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
             redirect($surl);
             
         }
