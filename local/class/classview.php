@@ -4,19 +4,19 @@ require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/class/template/classview.mustache');
-global $class,$CFG;
+global $class,$CFG,$SESSION;
 
 $context = context_system::instance();
 $linkurl = new moodle_url('/local/class/classview.php');
 $css_link = new moodle_url('/local/css/style.css');
-$class_creation = new moodle_url('/local/class/class_creation.php?id');
+$class_creation = new moodle_url('/local/class/class_creation.php');
 $PAGE->set_context($context);
 $strnewclass= get_string('classcreation');
 $PAGE->set_url('/local/class/classview.php');
-$schoolid  = optional_param('id', 0, PARAM_INT);
+$schoolid  = $SESSION->schoolid;
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
-$mustache = new Mustache_Engine();
+$mustache = new Mustache_Engine(); 
 $academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $schoolid");
    
 $options1 = array();
