@@ -5,11 +5,12 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/holiday/templates/viewholiday.mustache');
 
-global $class, $CFG;
+global $class, $CFG,$SESSION;
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "Holiday List";
-$school_id=optional_param('id', 0, PARAM_INT);   
+// $school_id=optional_param('id', 0, PARAM_INT);   
+$school_id  =$SESSION->schoolid;
 
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
 $css_link = new moodle_url('/local/css/style.css');
