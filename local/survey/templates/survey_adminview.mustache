@@ -54,7 +54,7 @@ li{
                       </select>
             </div>
             <br>
-            <a href="{{answer}}={{school_id}}">
+            <a href="{{answer}}">
                 <button type="button" class="btn btn-outline-secondary del">View survey Answers</button>
             </a>
             <div class="row mt-5"  id="surveytable">
@@ -62,7 +62,7 @@ li{
                     {{#survey}}
                         <div class="note">
                           {{#disabled}}
-                              <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href={{edit_survey}}={{id}}&school_id={{school_id}}"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
+                              <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href={{edit_survey}}={{id}}&school_id"><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
                               <p style="color: #867c7c;">This survey is no longer available</p>
                               <div class="hide"> 
                                       <ol>                
@@ -81,7 +81,7 @@ li{
                               </div>  
                           {{/disabled}}
                           {{#disabled1}}
-                              <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href={{edit_survey}}={{id}}&school_id={{school_id}}><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
+                              <h2 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href={{edit_survey}}={{id}}&school_id><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h2>              
                               <p style="color: red;">This will be available from {{survey_from}}</p>
                               <div class="hide"> 
                                     <ol>                
@@ -100,7 +100,7 @@ li{
                               </div>  
                           {{/disabled1}}
                           {{#disabled2}}
-                              <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href={{edit_survey}}={{id}}&school_id={{school_id}}><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>              
+                              <h3 class="sub" style="text-decoration: underline;"><br>{{surname}}<a href={{edit_survey}}={{id}}&school_id><i class='fas fa-pencil-alt' style='font-size:20px'></i></a></h3>              
                               <p style="color:green;">{{survey_from}} - {{survey_to}}</p>
                                 <div class="hide">   
                                       <ol>              
@@ -123,7 +123,7 @@ li{
                 </div>     
             </div>
             <div class="text-center">
-                <a href={{create_survey}}={{school_id}}><button class="btn btn-secondary" type="submit">Add survey</button></a>
+                <a href={{create_survey}}><button class="btn btn-secondary" type="submit">Add survey</button></a>
             </div>
     <script>
         function onYearChange() {

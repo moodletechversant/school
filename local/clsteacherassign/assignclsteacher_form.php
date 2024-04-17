@@ -33,12 +33,14 @@ require_once($CFG->dirroot.'/user/lib.php');
 class assignclsteacher_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
-        $school_id=optional_param('id', 0, PARAM_INT);   
+        global $DB, $USER, $CFG, $COURSE,$SESSION ;
+        // $school_id=optional_param('id', 0, PARAM_INT); 
+   
+        $school_id  =$SESSION->schoolid;
 
 
         $mform = $this->_form;
-        $clsteacher_assign=$CFG->wwwroot.'/local/clsteacherassign/view_clsteacherassign.php?id='.$school_id;
+        $clsteacher_assign=$CFG->wwwroot.'/local/clsteacherassign/view_clsteacherassign.php';
 
         
         

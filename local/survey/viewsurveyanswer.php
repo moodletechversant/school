@@ -5,7 +5,7 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/survey/templates/viewanswer.mustache');
 
-global $class,$CFG, $DB;
+global $class,$CFG, $DB,$SESSION;
 $context = context_system::instance();
 $linktext = "Survey Answers ";
 $linkurl = new moodle_url('/local/survey/templates/viewanswer.mustache');
@@ -20,7 +20,9 @@ $PAGE->set_title($strnewclass);
 $teacher_id = $USER->id;
 echo $OUTPUT->header(); 
 $mustache = new Mustache_Engine();
-$school_id  = optional_param('id', 0, PARAM_INT);
+// $school_id  = optional_param('id', 0, PARAM_INT);
+$school_id  =$SESSION->schoolid;
+
 $academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id");
 
 

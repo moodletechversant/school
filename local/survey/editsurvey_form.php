@@ -32,7 +32,7 @@ require_once($CFG->dirroot.'/user/lib.php');
 class editsurvey_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
+        global $DB, $USER, $CFG, $COURSE,$SESSION;
         
         
 
@@ -50,7 +50,9 @@ class editsurvey_form extends moodleform {
              $mform->addElement('hidden','id',$id);
                   
              //Survey name
-             $school_id  = optional_param('schoolid', 0, PARAM_INT);
+            //  $school_id  = optional_param('schoolid', 0, PARAM_INT);
+            $school_id  =$SESSION->schoolid;
+
              $mform->addElement('hidden','school_id',$school_id);
    
              $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id");

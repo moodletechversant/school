@@ -9,10 +9,10 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/survey/templates/survey_adminview.mustache');
 $delete = new moodle_url('/local/survey/deletesurvey.php?id');
-$answer = new moodle_url('/local/survey/viewsurveyanswer.php?id');
-$create_survey = new moodle_url('/local/survey/survey.php?id');
-$edit_survey = new moodle_url('local/survey/editsurvey.php?id');
-global $class,$CFG;
+$answer = new moodle_url('/local/survey/viewsurveyanswer.php');
+$create_survey = new moodle_url('/local/survey/survey.php');
+$edit_survey = new moodle_url('local/survey/editsurvey.php');
+global $class,$CFG,$SESSION;
 $context = context_system::instance();
 require_login();
 $linktext = "Survey";
@@ -31,7 +31,9 @@ $current_year = date("Y");
 $current_month = date("m");
 $current_date = date("d");
 // print_r($current_month);exit();
-$school_id  = optional_param('id', 0, PARAM_INT);
+// $school_id  = optional_param('id', 0, PARAM_INT);
+$school_id  =$SESSION->schoolid;
+
 $rec1 = $DB->get_records_sql("
 SELECT cs.*, ay.start_year, ay.end_year
 FROM {customsurvey} AS cs
