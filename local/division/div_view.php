@@ -4,10 +4,10 @@ require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/division/template/divisionview.mustache');
-global $class, $CFG;
+global $class, $CFG,$SESSION;
 $context = context_system::instance();
 $linktext = "View divisions";
-$school_id=optional_param('id', 0, PARAM_INT);   
+$school_id=$SESSION->schoolid;   
 
 $linkurl = new moodle_url('/local/division/div_view.php');
 $css_link = new moodle_url('/local/css/style.css');
