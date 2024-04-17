@@ -33,7 +33,7 @@ require_once($CFG->dirroot.'/user/lib.php');
 class survey_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
+        global $DB, $USER, $CFG, $COURSE , $SESSION;
         
 
         $mform = $this->_form;
@@ -43,12 +43,13 @@ class survey_form extends moodleform {
         $attributes = 'size="30"';
 
         //-----------Form creation-----------
-            $school_id  = optional_param('id', 0, PARAM_INT);
-   
+            //$school_id  = optional_param('id', '', PARAM_TEXT);
+            //echo "SELECT * FROM {academic_year} WHERE school=$school_id";
+             $school_id  =$SESSION->schoolid;
              $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school=$school_id");
-
              $options1 = array();
-             $options1=array(''=>'---- Select academic year ----');
+             $options1 ['']='---- Select academic year ----';
+             //$options1=array(3=>3);
              foreach($academic  as $academic1 ){
                  $timestart = $academic1->start_year;
                  $timeend = $academic1->end_year;

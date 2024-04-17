@@ -35,7 +35,7 @@ if ($mform->is_cancelled()) {
     $cancelurl = $CFG->wwwroot . '/local/survey/survey_adminview.php';
     redirect($cancelurl);
 } else if ($formdata = $mform->get_data()) {
-    // print_r($formdata);exit();
+     print_r($formdata);exit();
     $surveydata = new stdclass();
     $surveydata->survey_name = $formdata->surname;
     $surveydata->survey_from = $formdata->surveyfrom;

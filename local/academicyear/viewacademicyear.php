@@ -5,7 +5,8 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/academicyear/template/academic.mustache');
 
-global $class, $CFG;
+global $class, $CFG ,$USER,$SESSION;
+//echo 'das'.$SESSION->schoolid;
 $context = context_system::instance();
 
 $linkurl = new moodle_url('/local/academicyear/viewacademicyear.php');

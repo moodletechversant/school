@@ -42,7 +42,7 @@ else if ($formdata = $mform->get_data()) {
     $surveydata->survey_name = $formdata->surname;
     $surveydata->survey_from = $formdata->surveyfrom;
     $surveydata->survey_to = $formdata->surveyto;
-   // $surveydata->academic_id = $formdata->academicyear;
+   $surveydata->academic_id = $formdata->academicyear;
     $surveyid = $DB->update_record('customsurvey', $surveydata);
     // print_r($surveydata);exit();
 
