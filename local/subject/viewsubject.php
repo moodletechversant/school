@@ -5,7 +5,7 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/subject/template/subject_view.mustache');
 
-global $USER;
+global $USER,$SESSION;
 
 $context = context_system::instance();
 require_login();
@@ -20,7 +20,7 @@ $css_link = new moodle_url('/local/css/style.css');
 $subjectss = new moodle_url('/local/subject/subject.php');
 $css_link = new moodle_url('/local/css/style.css');
 
-$school_id=optional_param('id', 0, PARAM_INT);   
+$school_id=$SESSION->schoolid; 
 
 // Print the page header.
 $PAGE->set_context($context);

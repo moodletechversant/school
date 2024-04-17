@@ -124,6 +124,9 @@ $('input[name="subname"]').on("keydown", function(event){
 
 
   });
+
+  $('#id_class').prop('disabled', true);
+  $('#id_division').prop('disabled', true);
  ///---------------------------------------------/////
  $(document).ready(function() {
     $("#id_academic").change(function() {
@@ -134,6 +137,7 @@ $('input[name="subname"]').on("keydown", function(event){
             data:{b_id:brand_id},
             type:'POST',
             success: function(data){
+                $('#id_class').prop('disabled', false);
         	$("#id_class").html(data);
         	}
         });
@@ -154,6 +158,7 @@ $(document).ready(function() {
             data:{c_id:brand_id},
             type:'POST',
             success: function(data){
+                $('#id_division').prop('disabled', false);
         	$("#id_division").html(data);
         	}
         });

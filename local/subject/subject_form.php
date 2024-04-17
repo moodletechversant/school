@@ -32,9 +32,9 @@ require_once($CFG->dirroot.'/user/lib.php');
 class subject_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
+        global $DB, $USER, $CFG, $COURSE,$SESSION;
         $var123=$CFG->wwwroot.'/local/subject/viewsubject.php';
-
+        $school_id=$SESSION->schoolid;
         $mform = $this->_form;
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Subject Creation</h2>');
@@ -47,7 +47,7 @@ class subject_form extends moodleform {
 
         //-----------Form creation-----------
         //Academic Year 
-            $academic  = $DB->get_records('academic_year');
+            $academic  = $DB->get_records('academic_year', array('school' => $school_id));
         //    $classes  = $DB->get_records('class');
             $options1 = array();
             $options1=array(''=>'---- Select academic_year ----');
@@ -80,6 +80,7 @@ class subject_form extends moodleform {
             $options2 [$division->id] = $division->div_name;
             }
             $mform->addElement('select', 'division','Division',$options2);
+
             //    print_r($options2);
             //    exit;
          //Subject name
