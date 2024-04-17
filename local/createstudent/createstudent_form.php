@@ -32,8 +32,9 @@ require_once($CFG->dirroot . '/user/editlib.php');
 require_login();
 class createstudent_form extends moodleform {
     function definition() {
-        global $USER, $CFG, $DB;
+        global $USER, $CFG, $DB, $SESSION;
         $returnurl = $CFG->wwwroot.'/local/createstudent/view_student_1.php';
+        $schoolid  = $SESSION->schoolid;
 
         $mform = $this->_form;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Student creation</h2>');
@@ -43,7 +44,7 @@ class createstudent_form extends moodleform {
 
         // $mform->addElement('hidden','id',$id);   
         //Academic Year 
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $schoolid");
         $options1 = array();
         $options1=array(''=>'---- Select academic year ----');
         foreach($academic  as $academic1 ){

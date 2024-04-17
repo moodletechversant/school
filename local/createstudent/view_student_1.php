@@ -5,7 +5,7 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/createstudent/templates/studview_1.mustache');
 
-global $class, $CFG;
+global $class, $CFG, $SESSION;
 $context = context_system::instance();
 $linktext = "View students";
 
@@ -15,7 +15,7 @@ $new_student = new moodle_url('/local/createstudent/createstudent.php');
 
 $PAGE->set_context($context);
 $strnewclass = get_string('studentview');
-
+$schoolid  = $SESSION->schoolid;
 $PAGE->set_url('/local/createstudent/view_student_1.php');
 $PAGE->set_title($strnewclass);
 
@@ -25,7 +25,7 @@ $mustache = new Mustache_Engine();
 
 
 $tableRows = [];
-$academic = $DB->get_records('academic_year');
+$academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $schoolid");
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
