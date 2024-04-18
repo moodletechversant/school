@@ -15,7 +15,7 @@ $current_date = time();
 
 // Correct the navbar .
 // Set the name for the page.
-$linktext = "View Upcoming Exams";
+$linktext = "View Upcoming Assignment";
 //$linktext = get_string('plugin','new_plugin');
 // Set the url.
 // $linkurl = new moodle_url('/local/subject/viewsubject.php');

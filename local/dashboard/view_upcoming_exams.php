@@ -9,7 +9,7 @@ global $USER;
 
 $context = context_system::instance();
 require_login();
-$school_id=optional_param('id', 0, PARAM_INT);   
+$schoolid  = $SESSION->schoolid;
 
 // Correct the navbar .
 // Set the name for the page.
@@ -18,7 +18,7 @@ $linktext = "View Upcoming Exams";
 // Set the url.
 // $linkurl = new moodle_url('/local/subject/viewsubject.php');
 $css_link = new moodle_url('/local/css/style.css');
-$back=new moodle_url('/local/dashboard/upcoming.php?id='.$school_id);
+$back=new moodle_url('/local/dashboard/upcoming.php');
 // Print the page header.
 $PAGE->set_context($context);
 //$PAGE->set_url($linkurl);
@@ -33,7 +33,7 @@ echo $OUTPUT->header();
 $data  = $DB->get_records_sql("SELECT * FROM {subject}");
 $mustache = new Mustache_Engine();
 
-$academic = $DB->get_records('academic_year', array('school' => $school_id));
+$academic = $DB->get_records('academic_year', array('school' => $schoolid));
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
