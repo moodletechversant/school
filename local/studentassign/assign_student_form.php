@@ -81,7 +81,7 @@ class assign_student_form extends moodleform {
          }
          $mform->addElement('select', 'division','Division',$options2);
 
-        // Auto complete......................................
+        // Auto complete...............................
 
         $students = $DB->get_records('student');
         $studentNames = array();

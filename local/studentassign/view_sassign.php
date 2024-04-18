@@ -6,7 +6,6 @@ require_login();
 Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/studentassign/template/viewassign.mustache');
 
-// $template = file_get_contents($CFG->dirroot . '/local/studentassign/template/assignedstudent.mustache');
 global $class, $CFG, $DB, $USER, $SESSION;
 $css_link = new moodle_url('/local/css/style.css');
 $add_new = new moodle_url('/local/studentassign/assign_student.php');
