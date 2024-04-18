@@ -35,21 +35,20 @@ require_once($CFG->dirroot.'/user/lib.php');
 class assign_student_form extends moodleform {
 
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
+        global $DB, $USER, $CFG, $COURSE, $SESSION;
 
         $mform = $this->_form;     
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Student Assign</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
-        // $editorclasslist = null;
-        // $filemanagerclasslist = null;
-
+      
+        $schoolid  = $SESSION->schoolid;
         $attributes = 'size="30"';
 
         //-----------Form creation-----------
         //Academic Year 
-        $academic  = $DB->get_records('academic_year');
+        $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $schoolid");
         $options1 = array();
         $options1=array(''=>'---- Select academic year ----');
         foreach($academic  as $academic1 ){

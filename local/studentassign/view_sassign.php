@@ -7,12 +7,13 @@ Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/studentassign/template/viewassign.mustache');
 
 // $template = file_get_contents($CFG->dirroot . '/local/studentassign/template/assignedstudent.mustache');
-global $class, $CFG, $DB, $USER;
+global $class, $CFG, $DB, $USER, $SESSION;
 $css_link = new moodle_url('/local/css/style.css');
 $add_new = new moodle_url('/local/studentassign/assign_student.php');
 $context = context_system::instance();
 $linktext = "View assigned students";
 $linkurl = new moodle_url('/local/studentassign/view_sassign.php');
+$schoolid  = $SESSION->schoolid;
 
 $PAGE->set_context($context);
 $strnewclass = 'studentview';
@@ -23,7 +24,7 @@ echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
 
 $rec = $DB->get_records('student_assign');
-$academic = $DB->get_records('academic_year');
+$academic = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $schoolid");
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
