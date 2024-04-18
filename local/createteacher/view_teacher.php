@@ -49,14 +49,14 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/createteacher/template/teacherview.mustache');
 
-global $class,$CFG;
+global $class,$CFG,$SESSION;
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "View teachers";
 
 $linkurl = new moodle_url('/local/createteacher/view_teacher.php');
 $css_link = new moodle_url('/local/css/style.css');
-$create_teacher = new moodle_url('/local/createteacher/createteacher.php?id');
+$create_teacher = new moodle_url('/local/createteacher/createteacher.php');
 $edit_teacher = new moodle_url('/local/createteacher/editteacher.php?id');
 $delete_teacher = new moodle_url('/local/createteacher/deleteteacher.php?id');
 
@@ -69,7 +69,7 @@ $PAGE->set_title($strnewclass);
 // $PAGE->set_heading($SITE->fullname);
 
 echo $OUTPUT->header();
-    $school_id  = optional_param('id', 0, PARAM_INT);
+    $school_id  =$SESSION->schoolid;
     $rec=$DB->get_records_sql("SELECT * FROM {teacher} where school_id=$school_id");
     $mustache = new Mustache_Engine();
 

@@ -33,7 +33,7 @@ require_login();
 
 class editteacher_form extends moodleform {
     function definition() {
-        global $USER, $CFG, $COURSE, $DB;
+        global $USER, $CFG, $COURSE, $DB,$SESSION;
         $urlto=$CFG->wwwroot.'/local/createteacher/editteacher.php';
      
         $mform = $this->_form;
@@ -43,7 +43,7 @@ class editteacher_form extends moodleform {
 
         // $table = new html_table();
         $id  = optional_param('id', 0, PARAM_INT);
-        $school_id  = optional_param('school_id', 0, PARAM_INT);
+        $school_id  =$SESSION->schoolid;
         $mform->addElement('hidden','id',$id);
         $mform->addElement('hidden','school_id',$school_id);
         $mform->addElement('text', 'fstname', 'Teacher First Name'); 

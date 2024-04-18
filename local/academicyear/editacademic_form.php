@@ -35,12 +35,11 @@ class editacademic_form extends moodleform {
     function definition() {
 
         $urlto=$CFG->wwwroot.'/local/academicyear/editacademic.php';
-        global $USER, $CFG, $COURSE, $DB;
+        global $USER, $CFG, $COURSE, $DB, $SESSION;
         $mform = $this->_form;
 
         $id  = optional_param('id', 0, PARAM_INT);
-        $school_id  = optional_param('school_id', 0, PARAM_INT);
-
+        $school_id  = $SESSION->schoolid;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Academic Year Creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');

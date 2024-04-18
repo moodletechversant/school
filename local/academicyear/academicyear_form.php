@@ -39,7 +39,7 @@ class academicyear_form extends moodleform {
         $urlto=$CFG->wwwroot.'/local/academicyear/academicyear.php';
         $view_academic_yr=new moodle_url('/local/academicyear/viewacademicyear.php');
 
-        global $USER, $CFG, $COURSE, $DB;
+        global $USER, $CFG, $COURSE, $DB,$SESSION;
         $mform = $this->_form;
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Academic Year Creation</h2>');
@@ -47,7 +47,7 @@ class academicyear_form extends moodleform {
         $mform->addElement('html', '<div class="form-class">');
         
         // $table = new html_table();
-        $school_id  = optional_param('id', 0, PARAM_INT);
+        $school_id  = $SESSION->schoolid;
 
         $mform->addElement('hidden','school_id',$school_id);
         // $mform->addElement('hidden', 'id'); 

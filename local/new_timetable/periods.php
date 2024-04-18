@@ -28,7 +28,7 @@ echo $OUTPUT->header();
 $mform = new periods_form();
 
 if($mform->is_cancelled()){
-    $cancelurl = $CFG->wwwroot.'/my';
+    $cancelurl = $CFG->wwwroot.'/local/new_timetable/admin_view_1.php';
     redirect($cancelurl);
 }else if($formdata = $mform->get_data()){ 
  //print_r($formdata);

@@ -32,7 +32,7 @@ require_once($CFG->dirroot . '/user/editlib.php');
 require_login();
 class createteacher_form extends moodleform {
     function definition() {
-        global $USER, $CFG, $DB;
+        global $USER, $CFG, $DB,$SESSION;
         $view_teacher = $CFG->wwwroot.'/local/createteacher/view_teacher.php';
         
         $mform = $this->_form;
@@ -40,7 +40,7 @@ class createteacher_form extends moodleform {
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
-        $school_id  = optional_param('id', 0, PARAM_INT);
+        $school_id  = $SESSION->schoolid;
 
         $mform->addElement('hidden','school_id',$school_id);
 

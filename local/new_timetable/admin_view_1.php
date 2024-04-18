@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
-
+global $CFG,$SESSION;
 $template = file_get_contents($CFG->dirroot . '/local/new_timetable/templates/admin_view_1.mustache');
 
 $context = context_system::instance();
@@ -10,7 +10,7 @@ $linktext = "View assigned students";
 $linkurl = new moodle_url('/local/new_timetable/admin_view_1.php');
 
 $css_link = new moodle_url('/local/css/style.css');
-$periods = new moodle_url('/local/new_timetable/periods.php?id');
+$periods = new moodle_url('/local/new_timetable/periods.php');
 
 $PAGE->set_context($context);
 $strnewclass = 'studentview';
@@ -20,7 +20,7 @@ $PAGE->set_title($strnewclass);
 //$addstudent = '<button style="background:transparent;border:none;"><a href="/school/local/studentassign/assign_student.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>+</font></a></button>';
 
 echo $OUTPUT->header();
-$school_id  = optional_param('id', 0, PARAM_INT);
+$school_id  = $SESSION->schoolid;
 $mustache = new Mustache_Engine();
 $rec = $DB->get_records('student_assign');
 

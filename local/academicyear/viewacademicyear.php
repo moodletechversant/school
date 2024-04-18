@@ -19,7 +19,7 @@ echo $OUTPUT->header();
 
 
 $mustache = new Mustache_Engine();
-$school_id  = optional_param('id', 0, PARAM_INT);
+$school_id  = $SESSION->schoolid;
 
 $csspath = new moodle_url("/local/css/style.css");
 $addnew_academic = new moodle_url("/local/academicyear/academicyear.php?id");

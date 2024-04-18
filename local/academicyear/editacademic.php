@@ -44,7 +44,7 @@ if($mform->is_cancelled()){
 //left table fieldname right file fieldname 
 
 $DB->update_record('academic_year',$academicdata);
-$urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php?id='.$formdata->school_id;
+$urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
 redirect($urlto, 'Data Saved Successfully ', 8); 
 
 exit();

@@ -40,7 +40,7 @@ else if ($formdata = $mform->get_data()) {
             // Insert record into the 'academic_year' table
             $DB->insert_record('academic_year', $academicdata);
             
-            $urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php?id='.$formdata->school_id;
+            $urlto = $CFG->wwwroot.'/local/academicyear/viewacademicyear.php';
             redirect($urlto, 'Data Saved Successfully '); 
         } else {
             
