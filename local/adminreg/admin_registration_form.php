@@ -37,7 +37,7 @@ class admin_registration_form extends moodleform {
        // $userid  = optional_param('userid', 0, PARAM_INT);
         $urlto=$CFG->wwwroot.'/local/adminreg/admin_registration.php';
         global $USER, $CFG, $DB;
-        $classview=$CFG->wwwroot.'/local/adminreg/admin_registration.php';
+        $adminview=$CFG->wwwroot.'/local/adminreg/adminview.php';
         $table = new html_table();
         $id  = optional_param('id', 0, PARAM_INT);
         $mform = $this->_form;
@@ -76,8 +76,8 @@ class admin_registration_form extends moodleform {
         $mform->addElement('html', '</div>');
         $this->add_action_buttons();
 
-        $mform->addElement('html','<a href ='. $classview.'  style="text-decoration:none">');
-        $mform->addElement('button', 'btn', 'View Class list'); 
+        $mform->addElement('html','<a href ='. $adminview.'  style="text-decoration:none">');
+        $mform->addElement('button', 'btn', 'View Admin list'); 
         $mform->addElement('html','</a>');
         $mform->addElement('html', '</div>');
         
