@@ -59,7 +59,7 @@ function delete_assignedstudent(id)
                     data: { d_id: divisionn,delete:id},
                     type: 'POST',
                     success: function(data) {
-                        $("#demo").html(data); // Corrected ID
+                        $("#demo").html(data); 
                     }
                 });
             }
