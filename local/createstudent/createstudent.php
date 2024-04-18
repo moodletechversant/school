@@ -66,6 +66,7 @@ else if ($formdata = $mform->get_data()) {
     // Create the user account in custom student table.
     $DB->insert_record('student',$stddata);
     
+
 //PARENT CREATION IN USER TABLE AND PARENT TABLE
     if($formdata->existing == 'no'){
         $parentdata= new stdclass();
@@ -343,6 +344,8 @@ $(document).ready(function() {
     }
 
 
+
+    
     </style>
     
 

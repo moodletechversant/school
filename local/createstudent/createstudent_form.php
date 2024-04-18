@@ -40,8 +40,7 @@ class createstudent_form extends moodleform {
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Student creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
-        // $id  = optional_param('id', 0, PARAM_INT);
-
+      
         // $mform->addElement('hidden','id',$id);   
         //Academic Year 
         $academic  = $DB->get_records_sql("SELECT * FROM {academic_year} WHERE school = $schoolid");
@@ -280,7 +279,12 @@ class createstudent_form extends moodleform {
 //      return $errors;
 //  }  
 
+
+
 }
+
+
+
  
 
 

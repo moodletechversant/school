@@ -24,8 +24,8 @@ $view_tassign= new moodle_url('/local/teacherassign/view_tassign.php');
 $clsteacher_assign= new moodle_url('/local/clsteacherassign/view_clsteacherassign.php');
 $student_assign= new moodle_url('/local/studentassign/view_sassign.php');
 
-$view_tassign_img= new moodle_url('/local/img/academic.svg');
-$clsteacher_assign_img= new moodle_url('/local/img/ic-3.svg');
+$view_tassign_img= new moodle_url('/local/img/teacher.png');
+$clsteacher_assign_img= new moodle_url('/local/img/teacherss.png');
 $student_assign_img= new moodle_url('/local/img/student-registration.png');
 
 $PAGE->set_context($context);
