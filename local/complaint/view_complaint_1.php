@@ -5,14 +5,14 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/complaint/template/viewcomplaint_1.mustache');
 
-global $DB, $USER, $CFG, $PAGE,$SESSION;
+global $DB, $USER, $CFG, $PAGE;
 
 $context = context_system::instance();
 require_login();
 
 $linktext = "Complaint List";
 
-$school_id=$SESSION->schoolid;
+$school_id=optional_param('id', 0, PARAM_INT);
 
 $linkurl = new moodle_url('/local/complaint/view_complaint_1.php');
 $css_link = new moodle_url('/local/css/style.css');

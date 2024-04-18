@@ -32,11 +32,11 @@ require_once($CFG->dirroot . '/user/editlib.php');
 require_login();
 class div_creation_form extends moodleform {
     function definition() {
-        global $USER, $CFG, $DB;
-        $school_id=optional_param('id', 0, PARAM_INT);   
+        global $USER, $CFG, $DB ,$SESSION;
+        $schoolid  = $SESSION->schoolid;
 
         $mform = $this->_form;
-        $div_view=$CFG->wwwroot.'/local/division/div_view.php?id='.$school_id;
+        $div_view=$CFG->wwwroot.'/local/division/div_view.php';
 
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Division creation</h2>');
         $mform->addElement('html', '<div class="container">');
@@ -51,7 +51,7 @@ class div_creation_form extends moodleform {
 
          //Academic Year 
         //  $academic  = $DB->get_records('academic_year'); 
-         $academic = $DB->get_records('academic_year', array('school' => $school_id));
+         $academic = $DB->get_records('academic_year', array('school' => $schoolid));
              //    $classes  = $DB->get_records('class');
        $options1 = array();
        $options1=array(''=>'---- Select academic_year ----');

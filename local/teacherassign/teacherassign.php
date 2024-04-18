@@ -10,12 +10,12 @@ require_once($CFG->dirroot . '/enrol/locallib.php');
 require_once($CFG->dirroot.'/enrol/manual/locallib.php');
 // require_once($CFG->dirroot . '/lib.php');
 
-global $USER;
+global $USER ,$SESSION;
 
 $context = context_system::instance();
 require_login();
 $linktext = "Assign Teacher";
-$school_id= optional_param('id', 0, PARAM_INT);   
+$schoolid  = $SESSION->schoolid;
 // print_r($school_id);exit();
 //$linktext = get_string('plugin','new_plugin');
 $linkurl = new moodle_url('/local/teacherassign/teacherassign.php');

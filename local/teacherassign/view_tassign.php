@@ -4,12 +4,12 @@ require_once($CFG->libdir . '/mustache/src/Mustache/Autoloader.php');
 Mustache_Autoloader::register();
 $template = file_get_contents($CFG->dirroot . '/local/teacherassign/template/assignteacher_view.mustache');
 
-global $class,$CFG, $DB;
+global $class,$CFG, $DB ,$SESSION;
 
-$school_id=optional_param('id', 0, PARAM_INT);   
+$schoolid  = $SESSION->schoolid;
 
 $css_link = new moodle_url('/local/css/style.css');
-$add_new = new moodle_url('/local/teacherassign/teacherassign.php?id='.$school_id);
+$add_new = new moodle_url('/local/teacherassign/teacherassign.php');
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "admin_view";
@@ -27,7 +27,7 @@ $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine();
 
-$academic = $DB->get_records('academic_year',array('school' => $school_id));
+$academic = $DB->get_records('academic_year',array('school' => $schoolid));
    
 $options1 = array();
 $options1[] = array('value' => '', 'label' => '---- Select academic start year ----');

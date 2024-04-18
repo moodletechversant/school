@@ -33,13 +33,13 @@ require_once($CFG->dirroot.'/user/lib.php');
 class teacherassign_form extends moodleform {
     
     public function definition() {
-        global $DB, $USER, $CFG, $COURSE;
-        $school_id=optional_param('id', 0, PARAM_INT);   
+        global $DB, $USER, $CFG, $COURSE ,$SESSION;
+        $schoolid  = $SESSION->schoolid;
 
         $mform = $this->_form;
         // $editorclasslist = null;
         // $filemanagerclasslist = null;
-        $teacherassign_view=$CFG->wwwroot.'/local/teacherassign/view_tassign.php?id='.$school_id;
+        $teacherassign_view=$CFG->wwwroot.'/local/teacherassign/view_tassign.php';
 
         $attributes = 'size="30"';
 
@@ -50,7 +50,7 @@ class teacherassign_form extends moodleform {
         $mform->addElement('hidden','school_id',$school_id);
 
         //Academic Year 
-        $academic  = $DB->get_records('academic_year',array('school' => $school_id));
+        $academic  = $DB->get_records('academic_year',array('school' => $schoolid));
         $options1 = array();
         $options1=array(''=>'---- Select academic year ----');
         foreach($academic  as $academic1 ){

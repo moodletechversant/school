@@ -11,7 +11,7 @@ $school_id=$SESSION->schoolid;
 
 $linkurl = new moodle_url('/local/division/div_view.php');
 $css_link = new moodle_url('/local/css/style.css');
-$div_creation = new moodle_url('/local/division/div_creation.php', array('id' => $school_id));
+$div_creation = new moodle_url('/local/division/div_creation.php');
 
 $PAGE->set_context($context);
 $strnewclass = get_string('divcreation');
