@@ -32,20 +32,20 @@ $PAGE->navbar->add('Upcoming Exam', new moodle_url($CFG->wwwroot.'local/dashboar
 
 echo $OUTPUT->header();
 
-// $sql = "SELECT s.*
-//         FROM {subject} s
-//         JOIN {division} d ON s.sub_division = d.id
-//         WHERE d.div_teacherid = :userid";
-// $subjects = $DB->get_records_sql($sql, ['userid' => $userid]);
-
 $sql = "SELECT s.*
         FROM {subject} s
         JOIN {division} d ON s.sub_division = d.id
-        JOIN {class} c ON d.div_class = c.id
-        JOIN {academic_year} a ON c.academic_id = a.id
-        WHERE d.div_teacherid = :userid
-        AND a.start_year >= :current_date";
-    $subjects = $DB->get_records_sql($sql, ['userid' => $userid,'current_date' => $current_date]);
+        WHERE d.div_teacherid = :userid";
+$subjects = $DB->get_records_sql($sql, ['userid' => $userid]);
+
+// $sql = "SELECT s.*
+//         FROM {subject} s
+//         JOIN {division} d ON s.sub_division = d.id
+//         JOIN {class} c ON d.div_class = c.id
+//         JOIN {academic_year} a ON c.academic_id = a.id
+//         WHERE d.div_teacherid = :userid
+//         AND a.start_year >= :current_date";
+//     $subjects = $DB->get_records_sql($sql, ['userid' => $userid,'current_date' => $current_date]);
 
 // print_r($subjects);exit();
 $mustache = new Mustache_Engine();

@@ -45,10 +45,9 @@ $sql = "SELECT c.*
         JOIN {division} d ON c.id = d.div_class
         JOIN {teacher_assign} ta ON d.id = ta.t_division
         JOIN {academic_year} a ON c.academic_id = a.id
-        WHERE ta.user_id = :userid
-        AND a.start_year >= :current_date";
+        WHERE ta.user_id = :userid";
 
-$classes = $DB->get_records_sql($sql, ['userid' => $userid, 'current_date' => $current_date]);
+$classes = $DB->get_records_sql($sql, ['userid' => $userid]);
 
 //print_r($classes);exit();
 $mustache = new Mustache_Engine();
