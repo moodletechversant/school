@@ -18,7 +18,10 @@ $mustache = new Mustache_Engine();
 $css_link = new moodle_url('/local/css/style.css');
 
 $selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : date('Y-m-d');
-$selected_date_formatted = date_format(date_create($selected_date), 'Y-m-d');
+//old line of code 
+// $selected_date_formatted = date_format(date_create($selected_date), 'Y-m-d');
+//2024 nov-8 updation
+$selected_date_formatted = strtotime($selected_date); // Converts to Unix timestamp
 
 $rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE tdate = ?", array($selected_date_formatted));
 // print_r($selected_date_formatted);exit();
