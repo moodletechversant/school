@@ -37,6 +37,8 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     INNER JOIN {class} c ON d.div_class = c.id
     WHERE sa.user_id = $val1");
 //    print_r($rec1);exit();
+if(!empty($rec1)){
+    $is_assigned_student=true;
 
     $classname=$rec1->class_name;
     $division=$rec1->div_name;
@@ -44,7 +46,7 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     $classteacher=$rec1->t_fname;
     $academic_id=$rec1->academic_id;
 
-  $data= $DB->get_record_sql("SELECT * FROM {academic_year} WHERE id=$academic_id"); 
+    $data= $DB->get_record_sql("SELECT * FROM {academic_year} WHERE id=$academic_id"); 
     $startyear=$data->start_year;
     $endyear=$data->end_year; 
     $startyear1=date("d-m-Y", $startyear);
@@ -67,8 +69,10 @@ $rec1 = $DB->get_record_sql("SELECT d.div_class,d.id, d.div_name, d.div_teacheri
     $templateData = array(
         'startYearOptions' => $options1
     );
+}
+
      $mustache = new Mustache_Engine();
-    $output = $mustache->render($template, ['division_id'=>$division_id,'childid'=>$user_id,'css_link'=>$css_link,'templateData'=>$templateData,'academic_year' => $academic_year,'fname'=>$fname,'classname' => $classname,'division'=>$division,'classteacher'=>$classteacher,'academic_year'=>$academic_year]);
+    $output = $mustache->render($template, ['is_assigned_student'=>$is_assigned_student,'division_id'=>$division_id,'childid'=>$user_id,'css_link'=>$css_link,'templateData'=>$templateData,'academic_year' => $academic_year,'fname'=>$fname,'classname' => $classname,'division'=>$division,'classteacher'=>$classteacher,'academic_year'=>$academic_year]);
     echo $output;
 
  echo $OUTPUT->footer();

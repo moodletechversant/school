@@ -28,6 +28,8 @@ echo '<form method="POST"><div class="row"><div class="col-md-4">
 </form>';
 $rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE FROM_UNIXTIME(tdate, '%Y-%m') = '".$selected_month."' AND stud_name='".$userid."'");
 $data1=[];
+if(!empty($rec)){
+  $is_assigned_student=true;
 foreach ($rec as $value) {
   $id = $value->id;
   $rollno = $value->stud_name;
@@ -37,8 +39,9 @@ foreach ($rec as $value) {
   $name1 = $rec1->s_ftname;
   $data1[] = ['id' => $id, 'rollno' => $rollno, 'name1' => $name1, 'status' => $status, 'date' =>$date];
 }  
+}
 $mustache = new Mustache_Engine();
-echo $mustache->render($template, ['viewattendprnt' => $data1, 'css_line' => $css_link]);
+echo $mustache->render($template, ['is_assigned_student'=>$is_assigned_student,'viewattendprnt' => $data1, 'css_line' => $css_link]);
 echo html_writer::table($table);
 echo $OUTPUT->footer();
 ?>

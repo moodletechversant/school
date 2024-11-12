@@ -10,6 +10,8 @@ $context = context_system::instance();
 $linkurl = new moodle_url('/local/adminreg/adminview.php');
 $css_link = new moodle_url('/local/css/style.css');
 $class_creation = new moodle_url('/local/adminreg/admin_registration.php');
+$admin_edit = new moodle_url("/local/adminreg/admin_edit.php?id");
+
 $PAGE->set_context($context);
 $strnewclass= "admincreation";
 $PAGE->set_url('/local/adminreg/adminview.php');
@@ -17,45 +19,15 @@ $schoolid  = $SESSION->schoolid;
 $PAGE->set_title($strnewclass);
 echo $OUTPUT->header();
 $mustache = new Mustache_Engine(); 
-$academic = $DB->get_records_sql("SELECT {school_reg}.* FROM {school_reg} JOIN WHERE school = $schoolid");
-   
-$options1 = array();
-$options1[] = array('value' => '', 'label' => '---- Select academic start year ----');
-    foreach ($academic as $academic1) {
-        $timestart = $academic1->start_year;
-        $timestart1 = date("d-m-Y", $timestart);
-        $options1[] = array('value' => $academic1->id, 'label' => $timestart1);
-    }
-$templateData = array(
-        'startYearOptions' => $options1,
-        
-    );
-$output = $mustache->render($template, ['schoolid'=>$schoolid,'templateData'=>$templateData,'css_link'=>$css_link,'class_creation'=>$class_creation]);
+$admin_details = $DB->get_record_sql("SELECT * FROM {admin_registration}  WHERE school = $schoolid");
+$id =$admin_details->id ;
+$name =$admin_details->name ;
+$username=$admin_details->username;
+$email=$admin_details->email;
+$mob_number=$admin_details->number;
+$output = $mustache->render($template,['css_link'=>$css_link,'id'=>$id,'name'=>$name,'username'=>$username,'email'=>$email,'mob_number'=>$mob_number,'admin_edit'=>$admin_edit]);
 echo $output;
 echo $OUTPUT->footer();
 
 
 ?>
-<script type="text/javascript">
-//  $(document).ready(function() {
-   
-function deleteclass(id)
-    {      
-        var confirmation = confirm("Are you sure you want to delete this item?");
-        if (confirmation) {   
-        var academic = document.getElementById("academic").value; 
-            if (academic != "") {
-                // alert(id);
-                $.ajax({
-                    url: "test.php",
-                    data: {c_id: academic,delete:id},
-                    type: 'POST',
-                    success: function(data) {
-                        // console.log(data);
-                        $("#demo").html(data); // Corrected ID
-                    }
-                });
-            }
-    }
-}
-</script>
