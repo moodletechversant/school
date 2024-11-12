@@ -5,29 +5,30 @@ Mustache_Autoloader::register();
 
 $template = file_get_contents($CFG->dirroot . '/local/holiday/templates/viewholiday.mustache');
 
-global $class, $CFG,$SESSION;
+global $class, $CFG;
 $context = context_system::instance();
 // $classid = $class->id;
 $linktext = "Holiday List";
-// $school_id=optional_param('id', 0, PARAM_INT);   
-$school_id  =$SESSION->schoolid;
 
 $linkurl = new moodle_url('/local/holiday/addholiday.php');
-$css_link = new moodle_url('/local/css/style.css');
-$editholiday = new moodle_url('/local/holiday/editholiday.php?id');
-$deleteholiday = new moodle_url('/local/holiday/deleteholiday.php?id');
-$addholidayy = new moodle_url('/local/holiday/addholiday.php');
 
 $PAGE->set_context($context);
 //$strnewclass= get_string('studentcreation');
 
-$PAGE->set_url('/local/holiday/addholiday.php');
+$PAGE->set_url('/local/holiday/view_holiday.php');
 // $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 
+// $PAGE->set_heading($linktext);
+//$addholiday='<button style="background:transparent;border:none;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none;"><font size="50px";color="#0f6cbf";>Add Holiday</font></a></button>';
+//$addholiday = '<a href="/school/local/holiday/addholiday.php"><i class="fa fa-plus-circle" style="font-size: 50px; color: #0f6cbf;"></i></a>';
+//$addholiday = '<a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:#0f6cbf;"><strong>Add Holiday</strong></a>';
+$addholiday = '<button style="float:right; margin-right: 20px;margin-bottom:20px; background-color: #0f6cbf; color: white; border: none; border-radius: 5px; padding: 10px 20px;"><a href="/school/local/holiday/addholiday.php" style="text-decoration:none; color:white;"><strong>Add Holiday</strong></a></button>';
+
 echo $OUTPUT->header();
-$rec = $DB->get_records_sql("SELECT {addholiday}.* FROM {addholiday} JOIN {academic_year} ON {addholiday}.academic_id={academic_year}.id WHERE {academic_year}.school=$school_id");
+$rec = $DB->get_records_sql("SELECT * FROM {addholiday}");
 $mustache = new Mustache_Engine();
+
 
 $tableRows = [];
 
@@ -47,8 +48,8 @@ foreach ($rec as $records) {
         $edit = '<a href="#" disabled><i class="fa fa-edit" style="font-size:24px;color:#ccc"></i></a>';
         $delete = '<a href="#" disabled><i class="fa fa-trash" style="font-size:24px;color:#ccc"></i></a>';
     } else {
-        $edit = '<a href="'.$editholiday.'=' . $id . '"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
-        $delete = '<a href="'.$deleteholiday.'=' . $id . '" style="color:blue;" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i style="font-size:24px" class="fa fa-trash-o" ></i><a>';
+        $edit = '<a href="/school/local/holiday/editholiday.php?id=' . $id . '"><i class="fa fa-edit" style="font-size:24px;color:#0055ff"></i></a>';
+        $delete = '<a href="/school/local/holiday/deleteholiday.php?id=' . $id . '" style="color:blue;" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i style="font-size:24px" class="fa fa-trash-o" ></i><a>';
     }
 
     $tableRows[] = [
@@ -59,7 +60,8 @@ foreach ($rec as $records) {
         'deleteButton' => $delete,
     ];
 }
-$output = $mustache->render($template, ['tableRows' => $tableRows,'css_link'=>$css_link,'addholidayy'=>$addholidayy]);
+
+$output = $mustache->render($template, ['tableRows' => $tableRows,'addholiday'=>$linkurl]);
 echo $output;
 
 echo $OUTPUT->footer();

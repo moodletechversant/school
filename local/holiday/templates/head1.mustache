@@ -64,7 +64,7 @@
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
 
-        <script>
+        {{! <script>
         function onYearChange() {
             var selectedYear = $('#yearDropdown').val();
             
@@ -74,7 +74,7 @@
                 //alert(year1[2]+" "+year2[2])
                 year3=year1[2]
                 year4=year2[2]
-                // 
+                //alert(year3)
             $.ajax({
             
                 type: 'POST',
@@ -90,7 +90,42 @@
                 }
             });
         }
+        </script> }}
+
+        <script>
+            function onYearChange() {
+                var selectedYear = $('#yearDropdown').val();
+                
+                var year = selectedYear.split('-');
+                var year1 = year[0].split('/');
+                var year2 = year[1].split('/');
+                
+                var year3 = year1[2]; // Start year
+                var month1 = year1[1]; // Start month
+                
+                var year4 = year2[2]; // End year
+                var month2 = year2[1]; // End month
+                
+                $.ajax({
+                    type: 'POST',
+                    url: 'test.php',
+                    data: {
+                        year1: year3,
+                        year2: year4,
+                        month1: month1, 
+                        month2: month2
+                    },
+                    success: function(response) {
+                        $('#leaveholiday').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
+            }
         </script>
+        
+
 
   </body>
 </html>

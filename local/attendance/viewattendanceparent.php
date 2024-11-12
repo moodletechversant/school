@@ -18,19 +18,30 @@ $PAGE->navbar->add('viewattendanceparent', new moodle_url($CFG->wwwroot.'/local/
 $userid = optional_param('id', 0, PARAM_INT);
 echo $OUTPUT->header();
  
+// Get the selected date from POST, defaulting to today's date if not set
 $selected_date = isset($_POST['attendance_date']) ? $_POST['attendance_date'] : date('Y-m-d');
-$selected_month = date('Y-m', strtotime($selected_date)); // Extracting year and month
-$table = new html_table();
-echo '<form method="POST"><div class="row"><div class="col-md-4">
-<div class="form-group">
-<input type="month" name="attendance_date" value="' . (isset($_POST['attendance_date']) ? $_POST['attendance_date'] : $selected_date) . '" onchange="this.form.submit()">
-</div></div></div>
-</form>';
-$rec = $DB->get_records_sql("SELECT * FROM {attendance} WHERE FROM_UNIXTIME(tdate, '%Y-%m') = '".$selected_month."' AND stud_name='".$userid."'");
-$data1=[];
+$selected_month = date('Y-m', strtotime($selected_date)); // Extracting year and month for the query
+
+// Display the month selection form
+echo '<form method="POST">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="month" name="attendance_date" value="' . htmlspecialchars($selected_month) . '" onchange="this.form.submit()">
+                </div>
+            </div>
+        </div>
+      </form>';
+
+// Fetch records from the attendance table for the selected month and user
+$sql = "SELECT * FROM {attendance} WHERE DATE_FORMAT(FROM_UNIXTIME(tdate), '%Y-%m') = :selected_month AND stud_name = :userid";
+$params = ['selected_month' => $selected_month, 'userid' => $userid];
+$rec = $DB->get_records_sql($sql, $params);
+
+$data1 = [];
 if(!empty($rec)){
-  $is_assigned_student=true;
 foreach ($rec as $value) {
+  $is_assigned_student=true;
   $id = $value->id;
   $rollno = $value->stud_name;
   $status = $value->attendance;
