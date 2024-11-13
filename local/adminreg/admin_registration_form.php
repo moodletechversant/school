@@ -36,16 +36,18 @@ class admin_registration_form extends moodleform {
         
        // $userid  = optional_param('userid', 0, PARAM_INT);
         $urlto=$CFG->wwwroot.'/local/adminreg/admin_registration.php';
-        global $USER, $CFG, $DB;
+        global $USER, $CFG, $DB,$SESSION;
         $adminview=$CFG->wwwroot.'/local/adminreg/adminview.php';
         $table = new html_table();
+        $schoolid  = $SESSION->schoolid;
         $id  = optional_param('id', 0, PARAM_INT);
         $mform = $this->_form;
         $mform->addElement('html', '<h2 class="text-center heading mb-5">Admin creation</h2>');
         $mform->addElement('html', '<div class="container">');
         $mform->addElement('html', '<div class="form-class">');
 
-     
+        $mform->addElement('hidden','school',$schoolid);
+
         $mform->addElement('text', 'name', 'Name'); 
         $mform->addRule('name', 'Admin name missing', 'required', null); // Add elements to your form
 
@@ -62,16 +64,16 @@ class admin_registration_form extends moodleform {
         $mform->addElement('text', 'number', 'phone number'); 
         $mform->addRule('number', 'Admin phone number missing', 'required', null); // Add elements to your form
 
-        $schools  = $DB->get_records_sql("SELECT * FROM {school_reg}");
-        $options1 = array();
-        $options1=array(''=>'---- Select school ----');
-        foreach($schools  as $school ){
-            $sch_name = $school->sch_name;
-        $options1 [$school ->id] = $sch_name;
-        }
+        // $schools  = $DB->get_records_sql("SELECT * FROM {school_reg}");
+        // $options1 = array();
+        // $options1=array(''=>'---- Select school ----');
+        // foreach($schools  as $school ){
+        //     $sch_name = $school->sch_name;
+        // $options1 [$school ->id] = $sch_name;
+        // }
 
-        $mform->addElement('select', 'school','school',$options1);
-        $mform->addRule('school', 'school missing', 'required', null);
+        // $mform->addElement('select', 'school','school',$options1);
+        // $mform->addRule('school', 'school missing', 'required', null);
 
         $mform->addElement('html', '</div>');
         $this->add_action_buttons();

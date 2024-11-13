@@ -81,19 +81,17 @@ function deleteacademic(id)
                     data: {delete:id},
                     type: 'POST',
                     success: function(data) {
-                        if (data == 'success') {
-                    // Remove the table row from the DOM
-                    $('#accademic_table tr[data-id="' + id + '"]').remove();
-                    // alert("Record deleted successfully!");
-                    $('#'+id+'_row').remove();
-                } else {
-                    alert("Failed to delete record.");
-                }
+                    if (data == 'success') {
+                        // Remove the table row from the DOM
+                        $('#accademic_table tr[data-id="' + id + '"]').remove();
+                        $('#'+id+'_row').remove();
+                    } else {
+                        alert("Failed to delete record.");
+                    }
 
                     }
                 });
             }
-    // }
 }
 
 

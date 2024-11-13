@@ -14,7 +14,7 @@
 
 
                   <div class="table-responsive custom-table">
-                    <table class="table mb-0">
+                    <table class="table mb-0" id="admin_table">
                       <thead>
                         <tr>
                           <th scope="col">
@@ -35,7 +35,8 @@
                         </tr>
                       </thead>
                        <tbody class="demo">
-                        <tr>
+                       {{#tableRows}}
+                        <tr id={{id}}_row>
                           <td><div class="wrap-t">{{name}}</div></td>
                           <td><div class="wrap-t">{{username}}</div></td>  
                           <td><div class="wrap-t">{{email}}</div></td>
@@ -50,6 +51,7 @@
                               </div>
                           </td>
                       </tr>
+                      {{/tableRows}}
                       </tbody>
                       </table>
                       </div>
@@ -60,27 +62,3 @@
   </div>
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script>
-function deleteadmin(id)
-    {   
-        var confirmation = confirm("Are you sure you want to delete this item?");
-        if (confirmation) {   
-    
-                // alert(id);
-                $.ajax({
-                
-                    url: "test.php",
-                    data: {admin_delete:id},
-                    type: 'POST',
-                    success: function(data) {
-                        // console.log(data);
-
-                        //$("#demo").html(data); // Corrected ID
-                    }
-                });
-            
-            location.reload(true) 
-    }
-}
-</script>
