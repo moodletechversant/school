@@ -298,6 +298,7 @@ class mod_quiz_mod_form extends moodleform_mod {
         ///////Edited by Abhin
         ///////purpose:to add type of exam names in quiz settings for progress card
         $mform->addElement('header', 'typeofexam', get_string('typeofexam', 'quiz'));
+
         $mform->addHelpButton('typeofexam','typeofexamhelp','quiz');
         $examnames = array();
         $examnames= $DB->get_records_sql("SELECT * FROM {type_of_exam}");
@@ -313,6 +314,7 @@ class mod_quiz_mod_form extends moodleform_mod {
         // print_r($combined_array);exit();
         
         $mform->addElement('select', 'selectexamname', get_string('selectexamname', 'quiz'),$combined_array);
+        $mform->addRule('selectexamname', 'type of exam missing', 'required', null);///////Edited by nikhila
         ////////
         //////
         ////
