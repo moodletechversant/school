@@ -59,6 +59,12 @@ if ($testsession) {
     if ($testsession == $USER->id) {
         // print_r($testsession);
         // exit();
+
+
+//techversant
+//edited by nikhila
+//purpose:redirect to custom index pages when login
+//////////////////////////////////////////
 //custom login condition//////////
         $sid= $DB->get_record_sql("SELECT user_id FROM mdl_student WHERE user_id= '$testsession'");
         $tid= $DB->get_record_sql("SELECT user_id FROM mdl_teacher WHERE user_id= '$testsession'");
@@ -87,14 +93,16 @@ if ($testsession) {
         {            
             $surl=$CFG->wwwroot.'/local/dashboard/dashboardadmin.php';
             redirect($surl);
-            
         }
-       
         else{
 
             redirect($CFG->wwwroot .'/local/dashboard/dashboardadmin.php');
         }
 //closed custom login condition///////////////
+///////////////////////////////////////////
+///end
+//
+//
 
 
 //////APRIL 5 2023 /////////

@@ -38,6 +38,7 @@ else if ($formdata = $mform->get_data()) {
     $userdata->email=$formdata->email; 
     $userdata->password=$formdata->password;
     $userdata->phone1=$formdata->number;
+    $userdata->lastname=$formdata->name;
 
 
     user_create_user($userdata);

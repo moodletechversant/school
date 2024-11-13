@@ -70,6 +70,7 @@ if(is_siteadmin()) {
 }
 else if(!empty($aid)){
     $schoolid=$aid->school;
+    $school_name = $DB->get_record('school_reg', array('id' => $schoolid));
 }
 
 if(isset($schoolid))
@@ -92,7 +93,8 @@ if(isset($schoolid))
         
     );
     // print_r($schoolid);
-echo $mustache->render($template4,['csspath' => $csspath,'templateData'=>$templateData,'schoolreg_view'=>$schoolreg_view,'academicyr_view'=>$academicyr_view,
+
+echo $mustache->render($template4,['school_name'=>$school_name->sch_name,'csspath' => $csspath,'templateData'=>$templateData,'schoolreg_view'=>$schoolreg_view,'academicyr_view'=>$academicyr_view,
 'class_view'=>$class_view,'div_view'=>$div_view,'subject_view'=>$subject_view,'teacher_view'=>$teacher_view,
 'student_view'=>$student_view,'assign_view'=>$assign_view,'timetable_view'=>$timetable_view,
 'holidays_view'=>$holidays_view,'survey_view'=>$survey_view,'complaint_view'=>$complaint_view,
